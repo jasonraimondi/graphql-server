@@ -1,17 +1,16 @@
 {
   "name": "graphql-typescript",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "author": "Jason Raimondi <jason@raimondi.us>",
+  "license": "UNLICENSED",
+  "private": true,
   "scripts": {
     "start": "ts-node-dev --respawn src/index.ts"
   },
-  "keywords": [],
-  "author": "Jason Raimondi <jason@raimondi.us>",
-  "license": "UNTITLED",
   "dependencies": {
     "apollo-server-express": "^2.9.4",
     "bcryptjs": "^2.4.3",
+    "class-validator": "^0.10.1",
     "express": "^4.17.1",
     "graphql": "^14.5.8",
     "pg": "^7.12.1",

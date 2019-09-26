@@ -1,23 +1,10 @@
-[
-  {
-    "name": "default",
-    "type": "sqlite",
-    "database": "tmp/sqlitedb.db",
-    "logging": true,
-    "synchronize": true,
-    "entities": [
-      "src/entity/*.*"
-    ]
-  },
-  {
-    "skip": true,
-    "name": "postgres",
-    "type": "postgres",
-    "host": "localhost",
-    "port": 5432,
-    "username": "test",
-    "password": "test",
-    "database": "test",
-    "logging": false
-  }
-]
+{
+  "name": "default",
+  "type": "sqlite",
+  "database": "tmp/sqlitedb.db",
+  "logging": true,
+  "synchronize": true,
+  "entities": [
+    "src/entity/*.*"
+  ]
+}
