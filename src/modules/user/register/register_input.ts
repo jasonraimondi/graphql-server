@@ -1,7 +1,7 @@
 import { Field, InputType } from "type-graphql";
 import { IsEmail, Length } from "class-validator";
 
-import { GuardAgainstExistingEmail } from "./GuardAgainstExistingEmail";
+import { GuardAgainstExistingEmail } from "@modules/user/register/guard_against_existing_email";
 
 @InputType()
 export class RegisterInput {

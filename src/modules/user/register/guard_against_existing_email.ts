@@ -4,7 +4,8 @@ import {
     ValidatorConstraint,
     ValidatorConstraintInterface,
 } from "class-validator";
-import { User } from "../../../entity/User";
+
+import { User } from "@entity/user";
 
 export function GuardAgainstExistingEmail(validationOptions?: ValidationOptions) {
     return (object: Object, propertyName: string) => {
