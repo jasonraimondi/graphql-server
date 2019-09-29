@@ -1,7 +1,7 @@
 import { Field, InputType } from "type-graphql";
 import { IsEmail, Length } from "class-validator";
 
-import { GuardAgainstExistingEmail } from "@modules/user/register/guard_against_existing_email";
+import { GuardAgainstDuplicateEmail } from "@modules/user/auth/guard_against_existing_email";
 
 @InputType()
 export class RegisterInput {
@@ -13,7 +13,7 @@ export class RegisterInput {
 
     @Field()
     @IsEmail()
-    @GuardAgainstExistingEmail({ message: "email already exists" })
+    @GuardAgainstDuplicateEmail({ message: "email already exists" })
     email: string;
 
     @Field()

@@ -7,20 +7,20 @@ import {
 
 import { User } from "@entity/user";
 
-export function GuardAgainstExistingEmail(validationOptions?: ValidationOptions) {
+export function GuardAgainstDuplicateEmail(validationOptions?: ValidationOptions) {
     return (object: Object, propertyName: string) => {
         registerDecorator({
             target: object.constructor,
             propertyName: propertyName,
             options: validationOptions,
             constraints: [],
-            validator: GuardAgainstExistingEmailConstraint,
+            validator: GuardAgainstDuplicateEmailConstraint,
         });
     };
 }
 
 @ValidatorConstraint({ async: true })
-class GuardAgainstExistingEmailConstraint implements ValidatorConstraintInterface {
+class GuardAgainstDuplicateEmailConstraint implements ValidatorConstraintInterface {
     validate(email: string) {
         return User.findOne({ where: { email } }).then(user => {
             return !user;

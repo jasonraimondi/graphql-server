@@ -1,5 +1,5 @@
-import {BaseEntity, Column, Entity, PrimaryColumn} from "typeorm";
-import {Field, ID, ObjectType, Root} from "type-graphql";
+import { BaseEntity, Column, Entity, PrimaryColumn } from "typeorm";
+import { Field, ID, ObjectType, Root } from "type-graphql";
 
 @ObjectType()
 @Entity()
@@ -27,4 +27,7 @@ export class User extends BaseEntity {
 
     @Column()
     password: string;
+
+    @Column("int", { default: 0 })
+    tokenVersion: number;
 }

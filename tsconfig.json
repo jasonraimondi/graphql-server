@@ -23,6 +23,7 @@
     "rootDir": "src",
     "paths": {
       "@entity/*": ["entity/*"],
+      "@handlers/*": ["handlers/*"],
       "@modules/*": ["modules/*"]
     }
   },
