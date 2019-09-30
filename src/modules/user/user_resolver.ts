@@ -1,25 +1,22 @@
 import { Arg, Query, Resolver, UseMiddleware } from "type-graphql";
 
 import { User } from "@entity/user";
-import { isAuth, ResolveTime } from "@modules/user/is_auth";
+import { isAuth } from "@modules/user/is_auth";
+import { UserRepository } from "../../repository_factory";
 
 @Resolver(User)
 export class UserResolver {
+    constructor(private readonly userRepository: UserRepository) {}
+
     @Query(() => User)
     @UseMiddleware(isAuth)
     async user(@Arg("uuid") uuid: string) {
-        return await User.findOne({ uuid });
-    }
-
-    @Query(() => [User])
-    @UseMiddleware(ResolveTime)
-    users() {
-        return User.find();
+        return await this.userRepository.findById(uuid);
     }
 
     @Query(() => [User])
     @UseMiddleware(isAuth)
-    alt() {
-        return User.find();
+    async users() {
+        return await this.userRepository.find();
     }
 }

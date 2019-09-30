@@ -1,8 +1,8 @@
 import {
-    registerDecorator,
     ValidationOptions,
     ValidatorConstraint,
     ValidatorConstraintInterface,
+    registerDecorator,
 } from "class-validator";
 
 import { User } from "@entity/user";
