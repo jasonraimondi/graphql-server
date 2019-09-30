@@ -11,9 +11,9 @@ import Express from "express";
 
 import { AuthResolver } from "@modules/user/auth_resolver";
 import { refreshToken } from "@handlers/refresh_token";
-import { MeResolver } from "@modules/user/me";
+import { MeResolver } from "@modules/user/me_resolver";
 import { UserResolver } from "@modules/user/user_resolver";
-import { ResolveTime } from "@modules/user/is_auth";
+import { ResolveTime } from "@modules/middlewares/resolve_time";
 
 (async () => {
     const app = Express();
