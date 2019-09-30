@@ -8,8 +8,9 @@ import { MyContext } from "@entity/types/my_context";
 export class MeResolver {
     @Query(() => User, { nullable: true })
     me(@Ctx() context: MyContext) {
+        console.log(!!context);
         const authorization = context.req.headers["authorization"];
-
+        console.log({authorization});
         if (!authorization) {
             return null;
         }

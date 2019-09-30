@@ -3,8 +3,9 @@ import { verify } from "jsonwebtoken";
 
 import { MyContext } from "@entity/types/my_context";
 
-export const isAuth: MiddlewareFn<MyContext> = ({ context }, next) => {
-    const authorization = context.req.headers["authorization"];
+export const isAuth: MiddlewareFn<MyContext> = (foo, next) => {
+    console.log(!!foo, foo);
+    const authorization = foo.context.req.headers["authorization"];
 
     if (!authorization) {
         throw new Error("not authenticated");
@@ -13,11 +14,17 @@ export const isAuth: MiddlewareFn<MyContext> = ({ context }, next) => {
     try {
         const token = authorization.split(" ")[1];
         const payload = verify(token, process.env.ACCESS_TOKEN_SECRET!);
-        context.payload = payload as any;
+        foo.context.payload = payload as any;
     } catch (err) {
-        console.log(err);
         throw new Error("not authenticated");
     }
 
     return next();
+};
+
+export const ResolveTime: MiddlewareFn = async ({ info }, next) => {
+    const start = Date.now();
+    await next();
+    const resolveTime = Date.now() - start;
+    console.log(`${info.parentType.name}.${info.fieldName} [${resolveTime} ms]`);
 };

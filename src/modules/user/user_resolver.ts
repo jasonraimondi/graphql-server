@@ -1,7 +1,7 @@
 import { Arg, Query, Resolver, UseMiddleware } from "type-graphql";
 
 import { User } from "@entity/user";
-import { isAuth } from "@modules/user/is_auth";
+import { isAuth, ResolveTime } from "@modules/user/is_auth";
 
 @Resolver(User)
 export class UserResolver {
@@ -12,13 +12,14 @@ export class UserResolver {
     }
 
     @Query(() => [User])
+    @UseMiddleware(ResolveTime)
     users() {
         return User.find();
     }
 
     @Query(() => [User])
     @UseMiddleware(isAuth)
-    usersb() {
+    alt() {
         return User.find();
     }
 }
