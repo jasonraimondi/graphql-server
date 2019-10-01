@@ -4,7 +4,7 @@ import { HttpLink } from "apollo-boost";
 const config = {
     link: new HttpLink({
         uri: "http://localhost:4000/graphql", // Server URL (must be absolute)
-        credentials: "same-origin", // Additional fetch() options like `credentials` or `headers`
+        credentials: "include", // Additional fetch() options like `credentials` or `headers`
     })
 };
 

@@ -7,8 +7,11 @@ const foo = () => {
   if (loading || !data) {
     return "loading..."
   }
-
-  return <p>Hi jason {JSON.stringify(data)}</p>
+  const {users} = data;
+  console.log(users);
+  return <ul>
+    {users.map(user => <li>{user.email}</li>)}
+  </ul>
 };
 
 export default withApollo(foo)
