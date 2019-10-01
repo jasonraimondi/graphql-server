@@ -1,4 +1,4 @@
-import { Arg, Ctx, Int, Mutation, Resolver } from "type-graphql";
+import { Arg, Ctx, Mutation, Resolver } from "type-graphql";
 import { compare, hash } from "bcryptjs";
 import { Repository } from "typeorm";
 import { v4 } from "uuid";
@@ -68,7 +68,7 @@ export class AuthResolver {
     }
 
     @Mutation(() => Boolean)
-    async revokeRefreshTokensForUser(@Arg("userId", () => Int) userId: string) {
+    async revokeRefreshTokensForUser(@Arg("userId", () => String) userId: string) {
         try {
             await this.userRepository.increment({ uuid: userId }, "tokenVersion", 1);
             return true;

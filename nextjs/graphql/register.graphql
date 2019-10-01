@@ -1,0 +1,13 @@
+input RegisterInput {
+    firstName: String!
+    lastName: String!
+    email: String!
+    password: String!
+}
+mutation Register($data: RegisterInput!) {
+    register(data: $data) {
+        uuid
+        email
+        name
+    }
+}
