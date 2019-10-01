@@ -4,9 +4,31 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "next",
+    "build": "next build",
+    "start": "next start",
+    "gen": "graphql-codegen --config codegen.yml"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@apollo/react-hooks": "^3.1.1",
+    "@apollo/react-ssr": "^3.1.1",
+    "apollo-boost": "^0.4.4",
+    "graphql": "^14.5.8",
+    "next": "^9.0.7",
+    "next-apollo": "^3.1.5",
+    "react": "^16.10.1",
+    "react-dom": "^16.10.1"
+  },
+  "devDependencies": {
+    "@graphql-codegen/cli": "^1.7.0",
+    "@types/node": "^12.7.8",
+    "@types/react": "^16.9.4",
+    "typescript": "^3.6.3",
+    "@graphql-codegen/typescript": "1.7.0",
+    "@graphql-codegen/typescript-operations": "1.7.0",
+    "@graphql-codegen/typescript-react-apollo": "1.7.0"
+  }
 }
