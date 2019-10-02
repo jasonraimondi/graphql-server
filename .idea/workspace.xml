@@ -2,12 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d8b5668b-a7e8-42f4-8c3e-4359178d4294" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/jason.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations/Dev_Server.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/register.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/register.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/tsconfig.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/server/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/modules/repository/repository_factory.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/modules/repository/repository_factory.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/modules/user/auth_resolver.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/modules/user/auth_resolver.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -27,6 +28,7 @@
   <component name="ProjectId" id="1RM2OtjDefpfs44HVUXUqidjXmh" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="add_unversioned_files" value="$PROJECT_DIR$/dist/index.js" />
     <property name="javascript.nodejs.core.library.configured.version" value="8.16.1" />
@@ -72,22 +74,12 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="npm.gen">
+  <component name="RunManager" selected="npm.Dev Server">
     <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
       <scripts>
         <script value="build" />
-      </scripts>
-      <node-interpreter value="project" />
-      <envs />
-      <method v="2" />
-    </configuration>
-    <configuration name="dev (1)" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/server/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="dev" />
       </scripts>
       <node-interpreter value="project" />
       <envs />
@@ -123,11 +115,18 @@
       <envs />
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="npm.Dev Server" />
+      <item itemvalue="npm.build" />
+      <item itemvalue="npm.dev" />
+      <item itemvalue="npm.dev (2)" />
+      <item itemvalue="npm.gen" />
+    </list>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.Dev Server" />
         <item itemvalue="npm.gen" />
         <item itemvalue="npm.dev (2)" />
-        <item itemvalue="npm.dev (1)" />
         <item itemvalue="npm.dev" />
         <item itemvalue="npm.build" />
       </list>
@@ -156,6 +155,7 @@
       <workItem from="1570045705505" duration="1973000" />
       <workItem from="1570056101816" duration="271000" />
       <workItem from="1570056384738" duration="448000" />
+      <workItem from="1570057894480" duration="1940000" />
     </task>
     <servers />
   </component>

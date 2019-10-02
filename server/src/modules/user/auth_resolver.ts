@@ -1,6 +1,5 @@
 import { Arg, Ctx, Mutation, Resolver } from "type-graphql";
 import { compare, hash } from "bcryptjs";
-import { Repository } from "typeorm";
 import { v4 } from "uuid";
 
 import { MyContext } from "@entity/types/my_context";
@@ -13,10 +12,16 @@ import { RegisterInput } from "@modules/user/auth/register_input";
 import { ForgotPasswordInput } from "@modules/user/auth/forgot_password_input";
 import { UserConfirmation } from "@entity/user_confirmation";
 import { RegisterResponse } from "@modules/user/auth/register_response";
+import { inject, injectable } from "inversify";
+import {TYPES, UserRepository} from "@modules/repository/repository_factory";
 
+@injectable()
 @Resolver(User)
 export class AuthResolver {
-    constructor(private readonly userRepository: Repository<User>) {
+    private readonly userRepository: UserRepository;
+
+    constructor(@inject(TYPES.UserRepository) _userRepository: UserRepository) {
+        this.userRepository = _userRepository;
     }
 
     @Mutation(() => LoginResponse)
@@ -53,7 +58,7 @@ export class AuthResolver {
     @Mutation(() => Boolean)
     async forgotPassword(@Arg("data") { email }: ForgotPasswordInput) {
         console.log("implement forgot password", email);
-        console.log(this.userRepository);
+        console.log(await this.userRepository.find());
         return true;
     }
 
@@ -81,13 +86,13 @@ export class AuthResolver {
         };
     }
 
-    @Mutation(() => Boolean)
-    async revokeRefreshTokensForUser(@Arg("userId", () => String) userId: string) {
-        try {
-            await this.userRepository.increment({ uuid: userId }, "tokenVersion", 1);
-            return true;
-        } catch {
-            return false;
-        }
-    }
+    // @Mutation(() => Boolean)
+    // async revokeRefreshTokensForUser(@Arg("userId", () => String) userId: string) {
+    //     try {
+    //         await this.userRepository.increment({ uuid: userId }, "tokenVersion", 1);
+    //         return true;
+    //     } catch {
+    //         return false;
+    //     }
+    // }
 }

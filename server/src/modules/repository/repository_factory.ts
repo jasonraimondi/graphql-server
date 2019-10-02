@@ -1,6 +1,13 @@
 import { Connection, Repository } from "typeorm";
 
 import { User } from "@entity/user";
+import { injectable } from "inversify";
+
+
+export const TYPES = {
+    AuthResolver: Symbol("AuthResolver"),
+    UserRepository: Symbol("UserRepository"),
+};
 
 export class RepositoryFactory {
     constructor(private readonly connection: Connection) {
@@ -11,6 +18,7 @@ export class RepositoryFactory {
     }
 }
 
+@injectable()
 export class UserRepository {
     constructor(private readonly repository: Repository<User>) {
     }
