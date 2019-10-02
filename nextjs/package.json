@@ -1,17 +1,14 @@
 {
   "name": "nextjs",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
   "scripts": {
     "dev": "next",
     "build": "next build",
     "start": "next start",
     "gen": "graphql-codegen --config codegen.yml"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Jason Raimondi <jason@raimondi.us>",
+  "license": "UNLICENSED",
+  "private": true,
   "dependencies": {
     "@apollo/react-hooks": "^3.1.1",
     "@apollo/react-ssr": "^3.1.1",
