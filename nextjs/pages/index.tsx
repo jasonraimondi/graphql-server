@@ -1,5 +1,5 @@
 import React from "react";
-import { useAppVersionLazyQuery, useAppVersionQuery, useUsersQuery } from "../generated/graphql";
+import { useAppVersionQuery, useUsersQuery } from "../generated/graphql";
 import withApollo from "../lib/apollo";
 
 const foo = () => {
@@ -9,7 +9,6 @@ const foo = () => {
     return "loading..."
   }
   const {users} = data;
-  console.log(users);
   return <div>
     <p>Version: {appVersion.data.version}</p>
     <ul>

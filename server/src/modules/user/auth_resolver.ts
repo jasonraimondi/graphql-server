@@ -10,6 +10,9 @@ import { sendRefreshToken } from "@handlers/send_refresh_token";
 import { LoginInput } from "@modules/user/auth/login_input";
 import { LoginResponse } from "@modules/user/auth/login_response";
 import { RegisterInput } from "@modules/user/auth/register_input";
+import { ForgotPasswordInput } from "@modules/user/auth/forgot_password_input";
+import { UserConfirmation } from "@entity/user_confirmation";
+import { RegisterResponse } from "@modules/user/auth/register_response";
 
 @Resolver(User)
 export class AuthResolver {
@@ -33,8 +36,6 @@ export class AuthResolver {
             throw new Error("bad password");
         }
 
-        // login successful
-
         sendRefreshToken(res, createRefreshToken(user));
 
         return {
@@ -49,22 +50,35 @@ export class AuthResolver {
         return true;
     }
 
+    @Mutation(() => Boolean)
+    async forgotPassword(@Arg("data") { email }: ForgotPasswordInput) {
+        console.log("implement forgot password", email);
+        console.log(this.userRepository);
+        return true;
+    }
 
-    @Mutation(() => User)
+    @Mutation(() => RegisterResponse)
     async register(
-        @Arg("data") { firstName, lastName, email, password }: RegisterInput,
-    ): Promise<User> {
+        @Arg("data") { uuid, firstName, lastName, email, password }: RegisterInput,
+    ): Promise<RegisterResponse> {
         const hashedPassword = await hash(password, 12);
-        const uuid = v4();
         const user = await User.create({
-            uuid,
+            uuid: uuid ? uuid : v4(),
             firstName,
             lastName,
             email,
             password: hashedPassword,
         });
+        const userConfirmation = await UserConfirmation.create({
+            uuid: v4(),
+            user,
+        });
         await user.save();
-        return user;
+        await userConfirmation.save();
+        return {
+            user,
+            userConfirmation
+        };
     }
 
     @Mutation(() => Boolean)

@@ -8,18 +8,13 @@ export class User extends BaseEntity {
     @PrimaryColumn("uuid")
     uuid: string;
 
-    @Field()
-    @Column()
-    firstName: string;
+    @Field({ nullable: true })
+    @Column({ nullable: true })
+    firstName?: string;
 
-    @Field()
-    @Column()
-    lastName: string;
-
-    @Field()
-    name(@Root() parent: User): string {
-        return `${parent.firstName} ${parent.lastName}`;
-    }
+    @Field({ nullable: true })
+    @Column({ nullable: true })
+    lastName?: string;
 
     @Field()
     @Column("text", { unique: true })
@@ -28,6 +23,15 @@ export class User extends BaseEntity {
     @Column()
     password: string;
 
+    @Field()
+    @Column("boolean", { default: false })
+    isVerified: boolean;
+
     @Column("int", { default: 0 })
     tokenVersion: number;
+
+    @Field()
+    name(@Root() parent: User): string {
+        return `${parent.firstName} ${parent.lastName}`;
+    }
 }

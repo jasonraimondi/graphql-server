@@ -5,11 +5,14 @@ import { ValidateAgainstDuplicateEmail } from "@modules/validator/validate_again
 
 @InputType()
 export class RegisterInput {
-    @Field()
-    firstName: string;
+    @Field({ nullable: true })
+    uuid?: string;
 
-    @Field()
-    lastName: string;
+    @Field({ nullable: true })
+    firstName?: string;
+
+    @Field({ nullable: true })
+    lastName?: string;
 
     @Field()
     @IsEmail()
