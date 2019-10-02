@@ -1,18 +1,18 @@
 import React from "react";
 import { Formik } from "formik";
-import { useRegisterMutation } from "../generated/graphql";
-import withApollo from "../lib/apollo";
+
+import { useRegisterMutation } from "@/generated/graphql";
 
 const foo = () => {
     const [register] = useRegisterMutation();
 
-    const onSubmit = async (data, { setSubmitting }) => {
+    const onSubmit = async (data: any, { setSubmitting }: any) => {
         await register({
             variables: { data },
         });
         setSubmitting(false);
     };
-    const validate = values => {
+    const validate = (values: any) => {
         let errors: any = {};
         if (!values.email) {
             errors.email = "Required";
