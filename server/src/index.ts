@@ -14,6 +14,7 @@ import { refreshToken } from "@handlers/refresh_token";
 import { MeResolver } from "@modules/user/me_resolver";
 import { UserResolver } from "@modules/user/user_resolver";
 import { ResolveTime } from "@modules/middlewares/resolve_time";
+import { AppResolver } from "@modules/app/app_resolver";
 
 (async () => {
     const app = Express();
@@ -28,6 +29,7 @@ import { ResolveTime } from "@modules/middlewares/resolve_time";
     app.post("/refresh_token", refreshToken);
 
     const resolvers = [
+        AppResolver,
         AuthResolver,
         MeResolver,
         UserResolver,
