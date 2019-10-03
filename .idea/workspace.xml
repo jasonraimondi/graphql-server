@@ -2,13 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d8b5668b-a7e8-42f4-8c3e-4359178d4294" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/jason.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations/Dev_Server.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations/NextJS__dev_.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nextjs/lib/access_token.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/modules/repository/repository_factory.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/modules/repository/repository_factory.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/modules/user/auth_resolver.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/modules/user/auth_resolver.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/lib/apollo.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/lib/apollo.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/server/package-lock.json" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -42,24 +42,24 @@
     <property name="node.js.selected.package.standard" value="" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
-    <property name="ts.external.directory.path" value="$PROJECT_DIR$/server/node_modules/typescript/lib" />
+    <property name="ts.external.directory.path" value="$PROJECT_DIR$/nextjs/node_modules/typescript/lib" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/server" />
       <recent name="$PROJECT_DIR$" />
-      <recent name="$PROJECT_DIR$/src/infrastructure" />
-      <recent name="$PROJECT_DIR$/src/modules/repository" />
-      <recent name="$PROJECT_DIR$/src/modules/validator" />
-      <recent name="$PROJECT_DIR$/src/modules/middlewares" />
+      <recent name="$PROJECT_DIR$/src/modules/user/auth" />
     </key>
     <key name="es6.move.members.recent.items">
       <recent name="$PROJECT_DIR$/src/modules/user/resolve_time.ts" />
       <recent name="$PROJECT_DIR$/src/repository_factory.ts" />
     </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/server" />
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/packages" />
       <recent name="$PROJECT_DIR$" />
-      <recent name="$PROJECT_DIR$/src/modules/user/auth" />
+      <recent name="$PROJECT_DIR$/src/infrastructure" />
+      <recent name="$PROJECT_DIR$/src/modules/repository" />
+      <recent name="$PROJECT_DIR$/src/modules/validator" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -75,60 +75,14 @@
     </option>
   </component>
   <component name="RunManager" selected="npm.Dev Server">
-    <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="build" />
-      </scripts>
-      <node-interpreter value="project" />
-      <envs />
-      <method v="2" />
-    </configuration>
-    <configuration name="dev (2)" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/nextjs/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="dev" />
-      </scripts>
-      <node-interpreter value="project" />
-      <envs />
-      <method v="2" />
-    </configuration>
-    <configuration name="dev" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="dev" />
-      </scripts>
-      <node-interpreter value="project" />
-      <envs />
-      <method v="2" />
-    </configuration>
-    <configuration name="gen" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/nextjs/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="gen" />
-      </scripts>
-      <node-interpreter value="project" />
-      <envs />
-      <method v="2" />
-    </configuration>
     <list>
       <item itemvalue="npm.Dev Server" />
-      <item itemvalue="npm.build" />
-      <item itemvalue="npm.dev" />
-      <item itemvalue="npm.dev (2)" />
-      <item itemvalue="npm.gen" />
+      <item itemvalue="npm.NextJS (dev)" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.NextJS (dev)" />
         <item itemvalue="npm.Dev Server" />
-        <item itemvalue="npm.gen" />
-        <item itemvalue="npm.dev (2)" />
-        <item itemvalue="npm.dev" />
-        <item itemvalue="npm.build" />
       </list>
     </recent_temporary>
   </component>
