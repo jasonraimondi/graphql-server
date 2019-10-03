@@ -1,15 +1,38 @@
 import React from "react";
 import { Formik } from "formik";
-import { useRegisterMutation } from "../generated/graphql";
+import { MeDocument, MeQuery, useLoginMutation } from "../generated/graphql";
 import { withApollo } from "../lib/apollo";
+import { setAccessToken } from "../lib/access_token";
+import Link from "next/link";
+// import Router from "next/router";
 
 const foo = () => {
-    const [register] = useRegisterMutation();
+    const [login] = useLoginMutation();
 
     const onSubmit = async (data: any, { setSubmitting }: any) => {
-        await register({
+        const response = await login({
             variables: { data },
+            // @ts-ignore
+            update: (store, { data }) => {
+                if (!data) {
+                    return null;
+                }
+                store.writeQuery<MeQuery>({
+                    query: MeDocument,
+                    data: {
+                        me: data.login.user
+                    }
+                });
+            }
         });
+
+        console.log(response);
+
+        if (response && response.data) {
+            setAccessToken(response.data.login.accessToken);
+        }
+
+        // await Router.push("/");
         setSubmitting(false);
     };
     const validate = (values: any) => {
@@ -24,7 +47,8 @@ const foo = () => {
         return errors;
     };
     return <div>
-        <p>Register Page</p>
+        <p>Login Page</p>
+        <Link href="/"><a>Home</a></Link>
         <Formik
             initialValues={{ email: 'jason@raimondi.us', password: '' }}
             validate={validate}

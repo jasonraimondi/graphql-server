@@ -1,7 +1,9 @@
 import { Arg, Query, Resolver } from "type-graphql";
 
 import { User } from "@entity/user";
+import { injectable } from "inversify";
 
+@injectable()
 @Resolver(User)
 export class UserResolver {
     @Query(() => User)

@@ -86,13 +86,13 @@ export class AuthResolver {
         };
     }
 
-    // @Mutation(() => Boolean)
-    // async revokeRefreshTokensForUser(@Arg("userId", () => String) userId: string) {
-    //     try {
-    //         await this.userRepository.increment({ uuid: userId }, "tokenVersion", 1);
-    //         return true;
-    //     } catch {
-    //         return false;
-    //     }
-    // }
+    @Mutation(() => Boolean)
+    async revokeRefreshTokensForUser(@Arg("userId", () => String) userId: string) {
+        try {
+            await this.userRepository.incrementToken(userId);
+            return true;
+        } catch {
+            return false;
+        }
+    }
 }

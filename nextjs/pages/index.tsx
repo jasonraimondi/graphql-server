@@ -1,6 +1,7 @@
 import React from "react";
 
-import {useUsersQuery} from "@/generated/graphql";
+import { useUsersQuery } from "../generated/graphql";
+import { withApollo } from "../lib/apollo";
 
 const foo = () => {
   const { data, loading } = useUsersQuery();
@@ -10,7 +11,7 @@ const foo = () => {
   const {users} = data;
   return <div>
     <ul>
-      {users.map((user: any) => <li>{user.email}</li>)}
+      {users.map((user) => <li key={user.uuid}>{user.email}</li>)}
     </ul>
   </div>
 };

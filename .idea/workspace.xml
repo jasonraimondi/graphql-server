@@ -2,13 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d8b5668b-a7e8-42f4-8c3e-4359178d4294" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations/NextJS__dev_.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/nextjs/lib/access_token.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nextjs/next.config.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nextjs/lib/apollo.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/lib/apollo.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nextjs/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nextjs/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/server/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/pages/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/tsconfig.json" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -74,13 +74,25 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="npm.Dev Server">
+  <component name="RunManager" selected="npm.gen">
+    <configuration name="gen" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/nextjs/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="gen" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
     <list>
       <item itemvalue="npm.Dev Server" />
       <item itemvalue="npm.NextJS (dev)" />
+      <item itemvalue="npm.gen" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.gen" />
         <item itemvalue="npm.NextJS (dev)" />
         <item itemvalue="npm.Dev Server" />
       </list>

@@ -4,7 +4,9 @@ import { Ctx, Query, Resolver, UseMiddleware } from "type-graphql";
 import { User } from "@entity/user";
 import { MyContext } from "@entity/types/my_context";
 import { isAuth } from "@modules/middlewares/is_auth";
+import { injectable } from "inversify";
 
+@injectable()
 @Resolver()
 export class MeResolver {
     @Query(() => User)

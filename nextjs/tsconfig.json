@@ -4,7 +4,11 @@
     "target": "es5",
     "module": "esnext",
     "moduleResolution": "node",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "baseUrl": ".",
     "isolatedModules": true,
@@ -12,11 +16,11 @@
     "noEmit": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,
-    "paths": {
-      "@/*": ["/*"]
-    }
+    "strict": false
   },
-  "exclude": ["node_modules"],
+  "exclude": [
+    "node_modules"
+  ],
   "include": [
     "next-env.d.ts",
     "**/*.ts",

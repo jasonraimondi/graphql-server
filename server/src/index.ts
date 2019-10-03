@@ -44,6 +44,9 @@ import {RepositoryFactory, TYPES, UserRepository} from "@modules/repository/repo
 
     const container = new Container();
     container.bind<AuthResolver>(AuthResolver).toSelf();
+    container.bind<AppResolver>(AppResolver).toSelf();
+    container.bind<MeResolver>(MeResolver).toSelf();
+    container.bind<UserResolver>(UserResolver).toSelf();
     container.bind<UserRepository>(TYPES.UserRepository).toConstantValue(repositoryFactory.userRepository);
 
     const globalMiddlewares = [];

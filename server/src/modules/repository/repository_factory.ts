@@ -34,4 +34,8 @@ export class UserRepository {
     find(): Promise<User[]> {
         return this.repository.find();
     }
+
+    incrementToken(userId: string) {
+        return this.repository.increment({ uuid: userId }, "tokenVersion", 1)
+    }
 }
