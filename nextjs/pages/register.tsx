@@ -1,9 +1,11 @@
 import React from "react";
 import { Formik } from "formik";
 import { useRegisterMutation } from "../generated/graphql";
+// @ts-ignore
+import {Layout} from "../components/layout";
 import { withApollo } from "../lib/apollo";
 
-const foo = () => {
+const page = () => {
     const [register] = useRegisterMutation();
 
     const onSubmit = async (data: any, { setSubmitting }: any) => {
@@ -23,7 +25,7 @@ const foo = () => {
         }
         return errors;
     };
-    return <div>
+    return <Layout>
         <p>Register Page</p>
         <Formik
             initialValues={{ email: 'jason@raimondi.us', password: '' }}
@@ -68,7 +70,7 @@ const foo = () => {
                 </form>
             )}
         </Formik>
-    </div>;
+    </Layout>;
 };
 
-export default withApollo(foo);
+export default withApollo(page);

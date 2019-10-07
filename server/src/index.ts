@@ -16,7 +16,7 @@ import { MeResolver } from "@modules/user/me_resolver";
 import { UserResolver } from "@modules/user/user_resolver";
 import { ResolveTime } from "@modules/middlewares/resolve_time";
 import { AppResolver } from "@modules/app/app_resolver";
-import {RepositoryFactory, TYPES, UserRepository} from "@modules/repository/repository_factory";
+import { RepositoryFactory, TYPES, UserRepository } from "@modules/repository/repository_factory";
 
 
 (async () => {
@@ -39,10 +39,12 @@ import {RepositoryFactory, TYPES, UserRepository} from "@modules/repository/repo
     ];
 
     const connection = await createConnection();
-    console.log(connection.isConnected);
-    const repositoryFactory = new RepositoryFactory(connection);
+    const isConnected = connection.isConnected;
+    console.log({ isConnected });
 
+    const repositoryFactory = new RepositoryFactory(connection);
     const container = new Container();
+
     container.bind<AuthResolver>(AuthResolver).toSelf();
     container.bind<AppResolver>(AppResolver).toSelf();
     container.bind<MeResolver>(MeResolver).toSelf();

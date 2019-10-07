@@ -1,28 +1,32 @@
 import React from "react";
-import { Formik } from "formik";
-import { MeDocument, MeQuery, useLoginMutation } from "../generated/graphql";
-import { withApollo } from "../lib/apollo";
-import { setAccessToken } from "../lib/access_token";
-import Link from "next/link";
-// import Router from "next/router";
+import {Formik} from "formik";
+import { useLoginMutation} from "../generated/graphql";
+import {setAccessToken} from "../lib/access_token";
+import Router from "next/router";
 
-const foo = () => {
+// @ts-ignore
+import {Layout} from "../components/layout";
+import { withApollo } from "../lib/apollo";
+
+const page = () => {
     const [login] = useLoginMutation();
 
-    const onSubmit = async (data: any, { setSubmitting }: any) => {
+    const onSubmit = async (data: any, {setSubmitting}: any) => {
+        console.log("form submitted");
         const response = await login({
-            variables: { data },
-            // @ts-ignore
-            update: (store, { data }) => {
+            variables: {data},
+            update: (store: any, {data}): any => {
                 if (!data) {
                     return null;
                 }
-                store.writeQuery<MeQuery>({
-                    query: MeDocument,
-                    data: {
-                        me: data.login.user
-                    }
-                });
+                console.log(store, data)
+
+                // store.writeQuery<MeQuery>({
+                //     query: MeDocument,
+                //     data: {
+                //         me: data.login.user
+                //     }
+                // });
             }
         });
 
@@ -32,8 +36,8 @@ const foo = () => {
             setAccessToken(response.data.login.accessToken);
         }
 
-        // await Router.push("/");
         setSubmitting(false);
+        await Router.push("/");
     };
     const validate = (values: any) => {
         let errors: any = {};
@@ -46,11 +50,10 @@ const foo = () => {
         }
         return errors;
     };
-    return <div>
+    return <Layout>
         <p>Login Page</p>
-        <Link href="/"><a>Home</a></Link>
         <Formik
-            initialValues={{ email: 'jason@raimondi.us', password: '' }}
+            initialValues={{email: 'jason@raimondi.us', password: ''}}
             validate={validate}
             onSubmit={onSubmit}
         >
@@ -64,26 +67,26 @@ const foo = () => {
                   isSubmitting,
               }) => (
                 <form onSubmit={handleSubmit}>
-                    <label style={{ display: "block" }}>
+                    <label style={{display: "block"}}>
                         Email
                         <input
-                        type="email"
-                        name="email"
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        value={values.email}
-                    />
+                            type="email"
+                            name="email"
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            value={values.email}
+                        />
                     </label>
                     {errors.email && touched.email && errors.email}
-                    <label style={{ display: "block" }}>
+                    <label style={{display: "block"}}>
                         Password
                         <input
-                        type="password"
-                        name="password"
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        value={values.password}
-                    />
+                            type="password"
+                            name="password"
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            value={values.password}
+                        />
                     </label>
                     {errors.password && touched.password && errors.password}
                     <button type="submit" disabled={isSubmitting}>
@@ -92,7 +95,7 @@ const foo = () => {
                 </form>
             )}
         </Formik>
-    </div>;
+    </Layout>;
 };
 
-export default withApollo(foo);
+export default withApollo(page);

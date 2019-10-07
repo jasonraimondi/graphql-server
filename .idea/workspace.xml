@@ -2,13 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d8b5668b-a7e8-42f4-8c3e-4359178d4294" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/nextjs/next.config.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nextjs/components/header.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nextjs/components/layout.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nextjs/lib/apollo.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nextjs/lib/redirect.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nextjs/pages/bye.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/lib/apollo.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/lib/apollo.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/lib/apollo.ts" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/nextjs/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nextjs/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/pages/_app.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/_app.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nextjs/pages/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/pages/login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/login.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/pages/register.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/register.tsx" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -41,8 +47,9 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.standard" value="" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
-    <property name="ts.external.directory.path" value="$PROJECT_DIR$/nextjs/node_modules/typescript/lib" />
+    <property name="ts.external.directory.path" value="$PROJECT_DIR$/server/node_modules/typescript/lib" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -74,7 +81,17 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="npm.gen">
+  <component name="RunManager" selected="npm.start">
+    <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/nextjs/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="build" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
     <configuration name="gen" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/nextjs/package.json" />
       <command value="run" />
@@ -85,16 +102,28 @@
       <envs />
       <method v="2" />
     </configuration>
+    <configuration name="start" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/nextjs/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="start" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
     <list>
       <item itemvalue="npm.Dev Server" />
       <item itemvalue="npm.NextJS (dev)" />
       <item itemvalue="npm.gen" />
+      <item itemvalue="npm.build" />
+      <item itemvalue="npm.start" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.start" />
+        <item itemvalue="npm.build" />
         <item itemvalue="npm.gen" />
-        <item itemvalue="npm.NextJS (dev)" />
-        <item itemvalue="npm.Dev Server" />
       </list>
     </recent_temporary>
   </component>
@@ -122,6 +151,8 @@
       <workItem from="1570056101816" duration="271000" />
       <workItem from="1570056384738" duration="448000" />
       <workItem from="1570057894480" duration="1940000" />
+      <workItem from="1570138396565" duration="1702000" />
+      <workItem from="1570140737283" duration="591000" />
     </task>
     <servers />
   </component>
