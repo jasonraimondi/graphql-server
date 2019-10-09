@@ -2,19 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d8b5668b-a7e8-42f4-8c3e-4359178d4294" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/nextjs/components/header.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/nextjs/components/layout.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/nextjs/lib/apollo.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/nextjs/lib/redirect.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/nextjs/pages/bye.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/lib/apollo.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/_app.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/_app.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/login.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/register.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/register.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -37,7 +28,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="add_unversioned_files" value="$PROJECT_DIR$/dist/index.js" />
-    <property name="javascript.nodejs.core.library.configured.version" value="8.16.1" />
+    <property name="javascript.nodejs.core.library.configured.version" value="12.11.1" />
     <property name="js.linters.configure.manually.selectedeslint" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/server" />
     <property name="node.js.detected.package.eslint" value="true" />
@@ -81,7 +72,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="npm.start">
+  <component name="RunManager" selected="npm.build">
     <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/nextjs/package.json" />
       <command value="run" />
@@ -121,8 +112,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.start" />
         <item itemvalue="npm.build" />
+        <item itemvalue="npm.start" />
         <item itemvalue="npm.gen" />
       </list>
     </recent_temporary>
@@ -153,6 +144,7 @@
       <workItem from="1570057894480" duration="1940000" />
       <workItem from="1570138396565" duration="1702000" />
       <workItem from="1570140737283" duration="591000" />
+      <workItem from="1570597179953" duration="492000" />
     </task>
     <servers />
   </component>
