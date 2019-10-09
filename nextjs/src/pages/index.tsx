@@ -1,7 +1,8 @@
 import React from "react";
-import {useUsersQuery} from "../generated/graphql";
-import {Layout} from "../components/layout";
-import { withApollo } from "../lib/apollo";
+
+import {useUsersQuery} from "@/generated/graphql";
+import {Layout} from "@/app/components/layout";
+import { withApollo } from "@/app/lib/apollo_next";
 
 let page = () => {
     const {data} = useUsersQuery({ fetchPolicy: "network-only"});

@@ -1,12 +1,11 @@
 import React from "react";
-import {Formik} from "formik";
-import { useLoginMutation} from "../generated/graphql";
-import {setAccessToken} from "../lib/access_token";
+import { Formik } from "formik";
 import Router from "next/router";
 
-// @ts-ignore
-import {Layout} from "../components/layout";
-import { withApollo } from "../lib/apollo";
+import { useLoginMutation } from "@/generated/graphql";
+import { Layout } from "@/app/components/layout";
+import { withApollo } from "@/app/lib/apollo_next";
+import { setAccessToken } from "@/app/lib/access_token";
 
 const page = () => {
     const [login] = useLoginMutation();

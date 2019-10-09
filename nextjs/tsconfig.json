@@ -1,22 +1,27 @@
 {
   "extends": "../tsconfig.json",
   "compilerOptions": {
-    "target": "es5",
+    "target": "esnext",
     "module": "esnext",
     "moduleResolution": "node",
     "lib": [
       "dom",
       "dom.iterable",
-      "esnext"
+      "esnext",
+      "es2017"
     ],
     "allowJs": true,
-    "baseUrl": ".",
+    "baseUrl": "./",
     "isolatedModules": true,
     "jsx": "preserve",
     "noEmit": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,
-    "strict": false
+    "strict": true,
+    "paths": {
+      "@/app/*": ["src/*"],
+      "@/generated/*": ["./generated/*"]
+    }
   },
   "exclude": [
     "node_modules"

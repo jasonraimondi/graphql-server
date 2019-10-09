@@ -1,9 +1,9 @@
 import React from "react";
 import { Formik } from "formik";
-import { useRegisterMutation } from "../generated/graphql";
-// @ts-ignore
-import {Layout} from "../components/layout";
-import { withApollo } from "../lib/apollo";
+
+import { Layout } from "@/app/components/layout";
+import { withApollo } from "@/app/lib/apollo_next";
+import { useRegisterMutation } from "@/generated/graphql";
 
 const page = () => {
     const [register] = useRegisterMutation();

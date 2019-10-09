@@ -1,22 +1,18 @@
+const { join } = require("path");
+const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
+
+console.log(join(__dirname, "src"));
+console.log(join(__dirname, "generated"));
+
 module.exports = {
-    // // enables scoped css
-    // // https://github.com/zeit/next-plugins/tree/master/packages/next-css#with-css-modules-and-options
-    // cssModules: true,
-    // cssLoaderOptions: {
-    //     importLoaders: 1,
-    //     localIdentName: "[local]___[hash:base64:5]",
-    // },
+    distDir: "dist",
     publicRuntimeConfig: {
-        API_URL: process.env.API_URL,
-        S3_HOST: process.env.S3_HOST,
-        S3_BUCKET: process.env.S3_BUCKET,
     },
     webpack(config, options) {
-        // Further custom configuration here
-        config.resolve.alias = {
-            ...(config.resolve.alias ? config.resolve.alias : {}),
-            '@': __dirname,
-        };
+        config.resolve.plugins = [
+            ...(config.resolve.plugins ? config.resolve.plugins : []),
+            new TsconfigPathsPlugin()
+        ];
         return config
     },
 };

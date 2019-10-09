@@ -1,8 +1,8 @@
 import React from "react";
 import Link from "next/link";
 
-import { useLogoutMutation } from "../generated/graphql";
-import { setAccessToken } from "../lib/access_token";
+import { useLogoutMutation } from "@/generated/graphql";
+import { setAccessToken } from "@/app/lib/access_token";
 
 interface Props {}
 
