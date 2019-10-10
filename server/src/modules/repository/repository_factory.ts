@@ -36,6 +36,6 @@ export class UserRepository {
     }
 
     incrementToken(userId: string) {
-        return this.repository.increment({ uuid: userId }, "tokenVersion", 1)
+        return this.repository.increment({ uuid: userId }, "tokenVersion", 1);
     }
 }

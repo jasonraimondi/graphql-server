@@ -46,8 +46,8 @@
     "typescript": "^3.6.3"
   },
   "_moduleAliases": {
-    "@entity": "src/entity",
-    "@handlers": "src/handlers",
-    "@modules": "src/modules"
+    "@entity": "dist/entity",
+    "@handlers": "dist/handlers",
+    "@modules": "dist/modules"
   }
 }

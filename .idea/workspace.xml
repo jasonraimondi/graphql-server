@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d8b5668b-a7e8-42f4-8c3e-4359178d4294" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -144,7 +141,8 @@
       <workItem from="1570057894480" duration="1940000" />
       <workItem from="1570138396565" duration="1702000" />
       <workItem from="1570140737283" duration="591000" />
-      <workItem from="1570597179953" duration="492000" />
+      <workItem from="1570597179953" duration="761000" />
+      <workItem from="1570654657786" duration="162000" />
     </task>
     <servers />
   </component>
