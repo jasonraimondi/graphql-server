@@ -5,7 +5,7 @@ import {
     registerDecorator,
 } from "class-validator";
 
-import { User } from "@entity/user";
+import { User } from "@/entity/user";
 
 export function ValidateAgainstDuplicateEmail(validationOptions?: ValidationOptions) {
     return (object: Object, propertyName: string) => {

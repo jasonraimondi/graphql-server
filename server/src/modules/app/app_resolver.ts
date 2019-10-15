@@ -1,6 +1,6 @@
 import { Query, Resolver } from "type-graphql";
 
-const { version } = require("../../../package.json");
+import { version } from "@root/package.json";
 
 @Resolver()
 export class AppResolver {

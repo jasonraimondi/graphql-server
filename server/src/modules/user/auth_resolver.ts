@@ -2,18 +2,18 @@ import { Arg, Ctx, Mutation, Resolver } from "type-graphql";
 import { compare, hash } from "bcryptjs";
 import { v4 } from "uuid";
 
-import { MyContext } from "@entity/types/my_context";
-import { User } from "@entity/user";
-import { createAccessToken, createRefreshToken } from "@handlers/auth";
-import { sendRefreshToken } from "@handlers/send_refresh_token";
-import { LoginInput } from "@modules/user/auth/login_input";
-import { LoginResponse } from "@modules/user/auth/login_response";
-import { RegisterInput } from "@modules/user/auth/register_input";
-import { ForgotPasswordInput } from "@modules/user/auth/forgot_password_input";
-import { UserConfirmation } from "@entity/user_confirmation";
-import { RegisterResponse } from "@modules/user/auth/register_response";
+import { MyContext } from "@/entity/types/my_context";
+import { User } from "@/entity/user";
+import { createAccessToken, createRefreshToken } from "@/handlers/auth";
+import { sendRefreshToken } from "@/handlers/send_refresh_token";
+import { LoginInput } from "@/modules/user/auth/login_input";
+import { LoginResponse } from "@/modules/user/auth/login_response";
+import { RegisterInput } from "@/modules/user/auth/register_input";
+import { ForgotPasswordInput } from "@/modules/user/auth/forgot_password_input";
+import { UserConfirmation } from "@/entity/user_confirmation";
+import { RegisterResponse } from "@/modules/user/auth/register_response";
 import { inject, injectable } from "inversify";
-import {TYPES, UserRepository} from "@modules/repository/repository_factory";
+import {TYPES, UserRepository} from "@/modules/repository/repository_factory";
 
 @injectable()
 @Resolver(User)

@@ -1,6 +1,6 @@
 import { Connection, Repository } from "typeorm";
 
-import { User } from "@entity/user";
+import { User } from "@/entity/user";
 import { injectable } from "inversify";
 
 
