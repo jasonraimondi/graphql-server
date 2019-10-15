@@ -1,8 +1,7 @@
-import { Connection, Repository } from "typeorm";
+import { Connection } from "typeorm";
 
 import { User } from "@/entity/user";
-import { injectable } from "inversify";
-
+import { UserRepository } from "@/modules/repository/user_repository";
 
 export const TYPES = {
     AuthResolver: Symbol("AuthResolver"),
@@ -15,27 +14,5 @@ export class RepositoryFactory {
 
     get userRepository(): UserRepository {
         return new UserRepository(this.connection.getRepository<User>(User));
-    }
-}
-
-@injectable()
-export class UserRepository {
-    constructor(private readonly repository: Repository<User>) {
-    }
-
-    findById(uuid: string): Promise<User> {
-        return this.repository.findOneOrFail({ where: { uuid } });
-    }
-
-    findByEmail(email: string): Promise<User> {
-        return this.repository.findOneOrFail({ where: { email } });
-    }
-
-    find(): Promise<User[]> {
-        return this.repository.find();
-    }
-
-    incrementToken(userId: string) {
-        return this.repository.increment({ uuid: userId }, "tokenVersion", 1);
     }
 }

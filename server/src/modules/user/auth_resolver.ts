@@ -1,6 +1,7 @@
 import { Arg, Ctx, Mutation, Resolver } from "type-graphql";
 import { compare, hash } from "bcryptjs";
 import { v4 } from "uuid";
+import { inject, injectable } from "inversify";
 
 import { MyContext } from "@/entity/types/my_context";
 import { User } from "@/entity/user";
@@ -12,16 +13,14 @@ import { RegisterInput } from "@/modules/user/auth/register_input";
 import { ForgotPasswordInput } from "@/modules/user/auth/forgot_password_input";
 import { UserConfirmation } from "@/entity/user_confirmation";
 import { RegisterResponse } from "@/modules/user/auth/register_response";
-import { inject, injectable } from "inversify";
-import {TYPES, UserRepository} from "@/modules/repository/repository_factory";
+import { TYPES} from "@/modules/repository/repository_factory";
+import { UserRepository } from "@/modules/repository/user_repository";
 
 @injectable()
 @Resolver(User)
 export class AuthResolver {
-    private readonly userRepository: UserRepository;
 
-    constructor(@inject(TYPES.UserRepository) _userRepository: UserRepository) {
-        this.userRepository = _userRepository;
+    constructor(@inject(TYPES.UserRepository) private userRepository: UserRepository) {
     }
 
     @Mutation(() => LoginResponse)
@@ -58,7 +57,7 @@ export class AuthResolver {
     @Mutation(() => Boolean)
     async forgotPassword(@Arg("data") { email }: ForgotPasswordInput) {
         console.log("implement forgot password", email);
-        console.log(await this.userRepository.find());
+        console.log(await this.userRepository.findByEmail(email));
         return true;
     }
 

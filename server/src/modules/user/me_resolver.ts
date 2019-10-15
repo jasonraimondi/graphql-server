@@ -1,14 +1,19 @@
 import { verify } from "jsonwebtoken";
 import { Ctx, Query, Resolver, UseMiddleware } from "type-graphql";
+import { inject, injectable } from "inversify";
 
-import { User } from "@/entity/user";
 import { MyContext } from "@/entity/types/my_context";
 import { isAuth } from "@/modules/middlewares/is_auth";
-import { injectable } from "inversify";
+import { TYPES } from "@/modules/repository/repository_factory";
+import { UserRepository } from "@/modules/repository/user_repository";
+import { User } from "@/entity/user";
 
 @injectable()
 @Resolver()
 export class MeResolver {
+    constructor(@inject(TYPES.UserRepository) private userRepository: UserRepository) {
+    }
+
     @Query(() => User)
     @UseMiddleware(isAuth)
     me(@Ctx() context: MyContext) {
@@ -19,6 +24,6 @@ export class MeResolver {
 
         const token = authorization.split(" ")[1];
         const payload: any = verify(token, process.env.ACCESS_TOKEN_SECRET!);
-        return User.findOne(payload.userId);
+        return this.userRepository.findById(payload.userId);
     }
 }

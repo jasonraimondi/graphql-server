@@ -30,8 +30,11 @@ export class User extends BaseEntity {
     @Column("int", { default: 0 })
     tokenVersion: number;
 
-    @Field()
-    name(@Root() parent: User): string {
-        return `${parent.firstName} ${parent.lastName}`;
+    @Field(() => String!, { nullable: true })
+    name(@Root() {firstName, lastName}: User): string|null {
+        const name = [];
+        if (firstName) name.push(firstName);
+        if (lastName) name.push(lastName);
+        return name.join(" ") || null;
     }
 }
