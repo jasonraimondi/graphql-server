@@ -4,12 +4,12 @@ import { inject, injectable } from "inversify";
 
 import { MyContext } from "@/entity/types/my_context";
 import { User } from "@/entity/user";
-import { createAccessToken, createRefreshToken } from "@/handlers/auth";
-import { sendRefreshToken } from "@/handlers/send_refresh_token";
+import { createAccessToken, createRefreshToken } from "@/lib/handlers/auth";
+import { sendRefreshToken } from "@/lib/handlers/send_refresh_token";
 import { LoginInput } from "@/modules/user/auth/login_input";
 import { LoginResponse } from "@/modules/user/auth/login_response";
-import { TYPES} from "@/modules/repository/repository_factory";
-import { UserRepository } from "@/modules/repository/user_repository";
+import { TYPES} from "@/lib/repository/repository_factory";
+import { UserRepository } from "@/lib/repository/user_repository";
 
 @injectable()
 @Resolver(User)

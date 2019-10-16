@@ -1,7 +1,7 @@
 import { injectable } from "inversify";
 import { Repository } from "typeorm";
 
-import { BaseRepository } from "@/modules/repository/base_repository";
+import { BaseRepository } from "@/lib/repository/base_repository";
 import { UserConfirmation } from "@/entity/user_confirmation";
 
 @injectable()

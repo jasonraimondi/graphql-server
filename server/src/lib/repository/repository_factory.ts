@@ -1,8 +1,8 @@
 import { Connection } from "typeorm";
 
 import { User } from "@/entity/user";
-import { UserRepository } from "@/modules/repository/user_repository";
-import { UserConfirmationRepository } from "@/modules/repository/user_confirmation_repository";
+import { UserRepository } from "@/lib/repository/user_repository";
+import { UserConfirmationRepository } from "@/lib/repository/user_confirmation_repository";
 import { UserConfirmation } from "@/entity/user_confirmation";
 
 export const TYPES = {

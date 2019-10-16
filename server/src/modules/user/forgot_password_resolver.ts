@@ -2,9 +2,9 @@ import { Arg, Mutation, Resolver } from "type-graphql";
 import { inject, injectable } from "inversify";
 
 import { ForgotPasswordInput } from "@/modules/user/auth/forgot_password_input";
-import { TYPES} from "@/modules/repository/repository_factory";
-import { UserRepository } from "@/modules/repository/user_repository";
-import { ForgotPasswordEmail } from "@/services/email/user/forgot_password_email";
+import { TYPES} from "@/lib/repository/repository_factory";
+import { UserRepository } from "@/lib/repository/user_repository";
+import { ForgotPasswordEmail } from "@/lib/services/email/user/forgot_password_email";
 
 @injectable()
 @Resolver()

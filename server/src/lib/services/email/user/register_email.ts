@@ -1,7 +1,7 @@
 import { inject, injectable } from "inversify";
 
-import { EmailService } from "@/services/email/email_service";
-import { TYPES } from "@/modules/repository/repository_factory";
+import { EmailService } from "@/lib/services/email/email_service";
+import { TYPES } from "@/lib/repository/repository_factory";
 import { UserConfirmation } from "@/entity/user_confirmation";
 
 @injectable()

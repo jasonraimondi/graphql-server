@@ -5,15 +5,15 @@ import { AppResolver } from "@/modules/app/app_resolver";
 import { ForgotPasswordResolver } from "@/modules/user/forgot_password_resolver";
 import { MeResolver } from "@/modules/user/me_resolver";
 import { UserResolver } from "@/modules/user/user_resolver";
-import { RepositoryFactory, TYPES } from "@/modules/repository/repository_factory";
-import { ForgotPasswordEmail } from "@/services/email/user/forgot_password_email";
-import { UserRepository } from "@/modules/repository/user_repository";
-import { ServiceFactory } from "@/services/service_factory";
-import { EmailService } from "@/services/email/email_service";
+import { RepositoryFactory, TYPES } from "@/lib/repository/repository_factory";
+import { ForgotPasswordEmail } from "@/lib/services/email/user/forgot_password_email";
+import { UserRepository } from "@/lib/repository/user_repository";
+import { ServiceFactory } from "@/lib/services/service_factory";
+import { EmailService } from "@/lib/services/email/email_service";
 import { UserConfirmationResolver } from "@/modules/user/user_confirmation_resolver";
-import { UserConfirmationRepository } from "@/modules/repository/user_confirmation_repository";
+import { UserConfirmationRepository } from "@/lib/repository/user_confirmation_repository";
 import { RegisterResolver } from "@/modules/user/register_resolver";
-import { RegisterEmail } from "@/services/email/user/register_email";
+import { RegisterEmail } from "@/lib/services/email/user/register_email";
 
 export class Container extends InversifyContainer {
     public constructor(

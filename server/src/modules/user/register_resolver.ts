@@ -5,10 +5,10 @@ import { inject, injectable } from "inversify";
 
 import { RegisterInput } from "@/modules/user/auth/register_input";
 import { RegisterResponse } from "@/modules/user/auth/register_response";
-import { TYPES } from "@/modules/repository/repository_factory";
-import { UserRepository } from "@/modules/repository/user_repository";
-import { UserConfirmationRepository } from "@/modules/repository/user_confirmation_repository";
-import { RegisterEmail } from "@/services/email/user/register_email";
+import { TYPES } from "@/lib/repository/repository_factory";
+import { UserRepository } from "@/lib/repository/user_repository";
+import { UserConfirmationRepository } from "@/lib/repository/user_confirmation_repository";
+import { RegisterEmail } from "@/lib/services/email/user/register_email";
 
 @injectable()
 @Resolver()

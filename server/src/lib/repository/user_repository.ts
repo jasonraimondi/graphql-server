@@ -1,7 +1,7 @@
 import { injectable } from "inversify";
 import { Repository } from "typeorm";
 import { User } from "@/entity/user";
-import { BaseRepository } from "@/modules/repository/base_repository";
+import { BaseRepository } from "@/lib/repository/base_repository";
 
 @injectable()
 export class UserRepository extends BaseRepository<User> {

@@ -3,9 +3,9 @@ import { Ctx, Query, Resolver, UseMiddleware } from "type-graphql";
 import { inject, injectable } from "inversify";
 
 import { MyContext } from "@/entity/types/my_context";
-import { isAuth } from "@/modules/middlewares/is_auth";
-import { TYPES } from "@/modules/repository/repository_factory";
-import { UserRepository } from "@/modules/repository/user_repository";
+import { isAuth } from "@/lib/middleware/is_auth";
+import { TYPES } from "@/lib/repository/repository_factory";
+import { UserRepository } from "@/lib/repository/user_repository";
 import { User } from "@/entity/user";
 
 @injectable()

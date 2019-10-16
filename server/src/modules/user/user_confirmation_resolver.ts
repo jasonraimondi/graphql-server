@@ -1,9 +1,9 @@
 import { inject, injectable } from "inversify";
 import { Arg, Mutation, Resolver } from "type-graphql";
 
-import { TYPES } from "@/modules/repository/repository_factory";
-import { UserRepository } from "@/modules/repository/user_repository";
-import { UserConfirmationRepository } from "@/modules/repository/user_confirmation_repository";
+import { TYPES } from "@/lib/repository/repository_factory";
+import { UserRepository } from "@/lib/repository/user_repository";
+import { UserConfirmationRepository } from "@/lib/repository/user_confirmation_repository";
 
 @injectable()
 @Resolver()

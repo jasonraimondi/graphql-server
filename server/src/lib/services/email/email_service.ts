@@ -1,7 +1,7 @@
 import { injectable } from "inversify";
 import Mail from "nodemailer/lib/mailer";
 
-import { Options } from "@/services/email/mailer";
+import { Options } from "@/lib/services/email/mailer";
 import { SentMessageInfo } from "nodemailer";
 
 @injectable()

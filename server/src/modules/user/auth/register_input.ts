@@ -1,7 +1,7 @@
 import { Field, InputType } from "type-graphql";
 import { IsEmail, Length } from "class-validator";
 
-import { ValidateAgainstDuplicateEmail } from "@/modules/validator/validate_against_existing_email";
+import { ValidateAgainstDuplicateEmail } from "@/lib/validators/validate_against_existing_email";
 
 @InputType()
 export class RegisterInput {

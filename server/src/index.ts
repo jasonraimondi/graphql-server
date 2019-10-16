@@ -10,11 +10,11 @@ import nodemailer from "nodemailer";
 import { buildSchema } from "type-graphql";
 import { createConnection } from "typeorm";
 
-import { refreshToken } from "@/handlers/refresh_token";
-import { RepositoryFactory } from "@/modules/repository/repository_factory";
-import { ResolveTime } from "@/modules/middlewares/resolve_time";
+import { refreshToken } from "@/lib/handlers/refresh_token";
+import { RepositoryFactory } from "@/lib/repository/repository_factory";
+import { ResolveTime } from "@/lib/middleware/resolve_time";
 import { Container } from "@/inversify";
-import { ServiceFactory } from "@/services/service_factory";
+import { ServiceFactory } from "@/lib/services/service_factory";
 
 if (!process.env.MAILER) throw new Error("process.env.MAILER is undefined");
 
