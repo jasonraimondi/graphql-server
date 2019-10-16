@@ -1,4 +1,4 @@
-import { DeepPartial, Repository } from "typeorm";
+import { DeepPartial, DeleteResult, Repository } from "typeorm";
 
 export abstract class BaseRepository<T> {
     protected constructor(protected readonly repository: Repository<T>) {
@@ -14,6 +14,10 @@ export abstract class BaseRepository<T> {
 
     create(entity: DeepPartial<T>): T {
         return this.repository.create(entity);
+    }
+
+    delete(uuid: string): Promise<DeleteResult> {
+        return this.repository.delete(uuid);
     }
 
     async save(entity: T): Promise<void> {

@@ -6,14 +6,14 @@ import { BaseRepository } from "@/modules/repository/base_repository";
 @injectable()
 export class UserRepository extends BaseRepository<User> {
     constructor(repository: Repository<User>) {
-        super(repository)
-    }
-
-    findByEmail(email: string): Promise<User> {
-        return this.repository.findOneOrFail({ where: { email } });
+        super(repository);
     }
 
     async incrementToken(userId: string): Promise<void> {
         await this.repository.increment({ uuid: userId }, "tokenVersion", 1);
+    }
+
+    findByEmail(email: string): Promise<User> {
+        return this.repository.findOneOrFail({ where: { email } });
     }
 }

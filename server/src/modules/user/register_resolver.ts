@@ -4,16 +4,21 @@ import { v4 } from "uuid";
 import { inject, injectable } from "inversify";
 
 import { RegisterInput } from "@/modules/user/auth/register_input";
-import { UserConfirmation } from "@/entity/user_confirmation";
 import { RegisterResponse } from "@/modules/user/auth/register_response";
-import { TYPES} from "@/modules/repository/repository_factory";
+import { TYPES } from "@/modules/repository/repository_factory";
 import { UserRepository } from "@/modules/repository/user_repository";
+import { UserConfirmationRepository } from "@/modules/repository/user_confirmation_repository";
+import { RegisterEmail } from "@/services/email/user/register_email";
 
 @injectable()
 @Resolver()
 export class RegisterResolver {
 
-    constructor(@inject(TYPES.UserRepository) private userRepository: UserRepository) {
+    constructor(
+        @inject(TYPES.UserRepository) private userRepository: UserRepository,
+        @inject(TYPES.UserConfirmationRepository) private userConfirmationRepository: UserConfirmationRepository,
+        @inject(TYPES.RegisterEmail) private registerEmail: RegisterEmail,
+    ) {
     }
 
     @Mutation(() => RegisterResponse)
@@ -28,12 +33,13 @@ export class RegisterResolver {
             email,
             password: hashedPassword,
         });
-        const userConfirmation = await UserConfirmation.create({
+        await user.save();
+        const userConfirmation = await this.userConfirmationRepository.create({
             uuid: v4(),
             user,
         });
-        await user.save();
-        await userConfirmation.save();
+        await this.userConfirmationRepository.save(userConfirmation);
+        await this.registerEmail.send(userConfirmation);
         return {
             user,
             userConfirmation

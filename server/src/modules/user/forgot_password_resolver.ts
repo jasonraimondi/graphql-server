@@ -4,7 +4,7 @@ import { inject, injectable } from "inversify";
 import { ForgotPasswordInput } from "@/modules/user/auth/forgot_password_input";
 import { TYPES} from "@/modules/repository/repository_factory";
 import { UserRepository } from "@/modules/repository/user_repository";
-import { ForgotPasswordEmail } from "@/services/email/forgot_password/forgot_password_email";
+import { ForgotPasswordEmail } from "@/services/email/user/forgot_password_email";
 
 @injectable()
 @Resolver()

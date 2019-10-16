@@ -10,7 +10,8 @@ export const TYPES = {
     UserRepository: Symbol("UserRepository"),
     EmailService: Symbol("EmailService"),
     ForgotPasswordEmail: Symbol("ForgotPasswordEmail"),
-    UserConfirmation: Symbol("UserConfirmation"),
+    UserConfirmationRepository: Symbol("UserConfirmationRepository"),
+    RegisterEmail: Symbol("RegisterEmail"),
 
 };
 

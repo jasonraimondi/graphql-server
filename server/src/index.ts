@@ -1,6 +1,7 @@
 import "dotenv/config";
 import "reflect-metadata";
 import "module-alias/register";
+
 import { ApolloServer } from "apollo-server-express";
 import { buildSchema } from "type-graphql";
 import { createConnection } from "typeorm";
@@ -15,6 +16,8 @@ import { ResolveTime } from "@/modules/middlewares/resolve_time";
 import { Container } from "@/inversify";
 import { ServiceFactory } from "@/services/service_factory";
 
+if (process.env.ENABLE_DEBUGGING) console.log("DEBUGGING ENABLED");
+
 (async () => {
     const app = Express();
     app.use(
@@ -24,30 +27,23 @@ import { ServiceFactory } from "@/services/service_factory";
         }),
     );
     app.use(cookieParser());
+
     app.get("/", (_req, res) => res.redirect("/graphql"));
     app.post("/refresh_token", refreshToken);
 
 
-    const connection = await createConnection();
-
-    const repositoryFactory = new RepositoryFactory(connection);
+    const repositoryFactory = new RepositoryFactory(
+        await createConnection()
+    );
     const serviceFactory = new ServiceFactory(
         nodemailer.createTransport(process.env.MAILER),
     );
     const container = new Container(repositoryFactory, serviceFactory);
 
-    const globalMiddlewares = [];
-    if (process.env.ENABLE_DEBUGGING) {
-        console.log({
-            debug: process.env.ENABLE_DEBUGGING,
-            isConnected: connection.isConnected,
-        });
-        globalMiddlewares.push(ResolveTime);
-    }
     const schema = await buildSchema({
-        resolvers: [__dirname + "/modules/**/*_resolver.ts"],
-        globalMiddlewares,
         container,
+        globalMiddlewares: middleware(),
+        resolvers: [__dirname + "/modules/**/*_resolver.ts"],
     });
 
     const apolloServer = new ApolloServer({
@@ -60,3 +56,8 @@ import { ServiceFactory } from "@/services/service_factory";
     app.listen(4000, () => "server started on localhost:4000");
 })();
 
+function middleware() {
+    const globalMiddlewares = [];
+    if (process.env.ENABLE_DEBUGGING) globalMiddlewares.push(ResolveTime);
+    return globalMiddlewares;
+}
