@@ -1,7 +1,7 @@
 import { injectable } from "inversify";
 import { Query, Resolver } from "type-graphql";
 
-import { version } from "@root/package.json";
+import { version } from "@root";
 
 @Resolver()
 @injectable()

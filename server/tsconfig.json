@@ -12,7 +12,7 @@
     "outDir": "dist",
     "paths": {
       "@/*": ["src/*"],
-      "@root/*": ["*"]
+      "@root": ["package.json"]
     }
   },
   "include": [

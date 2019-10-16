@@ -1,6 +1,5 @@
 import { Arg, Ctx, Mutation, Resolver } from "type-graphql";
-import { compare, hash } from "bcryptjs";
-import { v4 } from "uuid";
+import { compare } from "bcryptjs";
 import { inject, injectable } from "inversify";
 
 import { MyContext } from "@/entity/types/my_context";
@@ -9,10 +8,6 @@ import { createAccessToken, createRefreshToken } from "@/handlers/auth";
 import { sendRefreshToken } from "@/handlers/send_refresh_token";
 import { LoginInput } from "@/modules/user/auth/login_input";
 import { LoginResponse } from "@/modules/user/auth/login_response";
-import { RegisterInput } from "@/modules/user/auth/register_input";
-import { ForgotPasswordInput } from "@/modules/user/auth/forgot_password_input";
-import { UserConfirmation } from "@/entity/user_confirmation";
-import { RegisterResponse } from "@/modules/user/auth/register_response";
 import { TYPES} from "@/modules/repository/repository_factory";
 import { UserRepository } from "@/modules/repository/user_repository";
 
@@ -55,38 +50,7 @@ export class AuthResolver {
     }
 
     @Mutation(() => Boolean)
-    async forgotPassword(@Arg("data") { email }: ForgotPasswordInput) {
-        console.log("implement forgot password", email);
-        console.log(await this.userRepository.findByEmail(email));
-        return true;
-    }
-
-    @Mutation(() => RegisterResponse)
-    async register(
-        @Arg("data") { uuid, firstName, lastName, email, password }: RegisterInput,
-    ): Promise<RegisterResponse> {
-        const hashedPassword = await hash(password, 12);
-        const user = await User.create({
-            uuid: uuid ? uuid : v4(),
-            firstName,
-            lastName,
-            email,
-            password: hashedPassword,
-        });
-        const userConfirmation = await UserConfirmation.create({
-            uuid: v4(),
-            user,
-        });
-        await user.save();
-        await userConfirmation.save();
-        return {
-            user,
-            userConfirmation
-        };
-    }
-
-    @Mutation(() => Boolean)
-    async revokeRefreshTokensForUser(@Arg("userId", () => String) userId: string) {
+    async revokeRefreshToken(@Arg("userId", () => String) userId: string) {
         try {
             await this.userRepository.incrementToken(userId);
             return true;
