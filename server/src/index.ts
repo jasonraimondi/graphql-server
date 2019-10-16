@@ -3,18 +3,20 @@ import "reflect-metadata";
 import "module-alias/register";
 
 import { ApolloServer } from "apollo-server-express";
-import { buildSchema } from "type-graphql";
-import { createConnection } from "typeorm";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import Express from "express";
 import nodemailer from "nodemailer";
+import { buildSchema } from "type-graphql";
+import { createConnection } from "typeorm";
 
 import { refreshToken } from "@/handlers/refresh_token";
 import { RepositoryFactory } from "@/modules/repository/repository_factory";
 import { ResolveTime } from "@/modules/middlewares/resolve_time";
 import { Container } from "@/inversify";
 import { ServiceFactory } from "@/services/service_factory";
+
+if (!process.env.MAILER) throw new Error("process.env.MAILER is undefined");
 
 if (process.env.ENABLE_DEBUGGING) console.log("DEBUGGING ENABLED");
 

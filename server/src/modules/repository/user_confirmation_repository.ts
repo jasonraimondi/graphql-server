@@ -7,7 +7,7 @@ import { UserConfirmation } from "@/entity/user_confirmation";
 @injectable()
 export class UserConfirmationRepository extends BaseRepository<UserConfirmation> {
     constructor(repository: Repository<UserConfirmation>) {
-        super(repository)
+        super(repository);
     }
 
     findById(uuid: string): Promise<UserConfirmation> {

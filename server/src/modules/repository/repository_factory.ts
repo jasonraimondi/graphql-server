@@ -12,7 +12,6 @@ export const TYPES = {
     ForgotPasswordEmail: Symbol("ForgotPasswordEmail"),
     UserConfirmationRepository: Symbol("UserConfirmationRepository"),
     RegisterEmail: Symbol("RegisterEmail"),
-
 };
 
 export class RepositoryFactory {

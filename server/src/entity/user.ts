@@ -24,8 +24,16 @@ export class User extends BaseEntity {
     password: string;
 
     @Field()
+    @Column("boolean", { default: true })
+    isActive: boolean;
+
+    @Field()
     @Column("boolean", { default: false })
-    isVerified: boolean;
+    isEmailConfirmed: boolean;
+
+    @Field(() => Date!, { nullable: true })
+    @Column({ nullable: true })
+    lastLoginAt: Date;
 
     @Column("int", { default: 0 })
     tokenVersion: number;

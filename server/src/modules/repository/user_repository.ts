@@ -9,6 +9,11 @@ export class UserRepository extends BaseRepository<User> {
         super(repository);
     }
 
+    async incrementLastLoginAt(user: User): Promise<void> {
+        user.lastLoginAt = new Date();
+        await this.save(user);
+    }
+
     async incrementToken(userId: string): Promise<void> {
         await this.repository.increment({ uuid: userId }, "tokenVersion", 1);
     }

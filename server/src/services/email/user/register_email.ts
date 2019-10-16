@@ -14,8 +14,12 @@ export class RegisterEmail {
             to: user.email,
             from: "noreply@example.com",
             subject: `Register user ${user.email}?`,
-            text: `I'll help you find a new one ${userConfirmation.uuid} ${user.email}`,
-            html: `<strong>I'll Help you find a new one. ${user.email}</strong>`
+            text: `
+            verifyUserConfirmation(email:"${user.email}", uuid:"${userConfirmation.uuid}")
+            `,
+            html: `
+            <strong>verifyUserConfirmation(email:"${user.email}", uuid:"${userConfirmation.uuid}")</strong>
+            `
         });
     }
 }

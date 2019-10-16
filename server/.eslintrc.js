@@ -29,7 +29,7 @@ module.exports = {
             "error",
             "unix"
         ],
-        "no-unused-vars": "off",
+        "no-unused-vars": "error",
         "quotes": [
             "error",
             "double"

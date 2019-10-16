@@ -23,7 +23,7 @@ export class AuthResolver {
         @Arg("data") { email, password }: LoginInput,
         @Ctx() { res }: MyContext,
     ): Promise<LoginResponse> {
-        const user = await User.findOneOrFail({ where: { email } });
+        const user = await this.userRepository.findByEmail(email);
 
         if (!user) {
             throw new Error("could not find user");
@@ -36,6 +36,8 @@ export class AuthResolver {
         }
 
         sendRefreshToken(res, createRefreshToken(user));
+
+        await this.userRepository.incrementLastLoginAt(user);
 
         return {
             accessToken: createAccessToken(user),

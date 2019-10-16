@@ -18,7 +18,7 @@ export class UserConfirmation extends BaseEntity {
     @Field()
     @CreateDateColumn()
     createdAt: Date;
-
+    
     @Field()
     expiresAt(@Root() parent: UserConfirmation): Date {
         const created = new Date(parent.createdAt);

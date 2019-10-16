@@ -7,6 +7,6 @@ export class ServiceFactory {
     }
 
     get emailService() {
-        return new EmailService(this.mailer)
+        return new EmailService(this.mailer);
     }
 }

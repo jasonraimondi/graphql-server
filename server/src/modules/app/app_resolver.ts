@@ -3,8 +3,8 @@ import { Query, Resolver } from "type-graphql";
 
 import { version } from "@root";
 
-@Resolver()
 @injectable()
+@Resolver()
 export class AppResolver {
     @Query(() => String!)
     version() {
