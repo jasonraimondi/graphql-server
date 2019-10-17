@@ -1,8 +1,23 @@
 import { Field, InputType } from "type-graphql";
-import { IsEmail } from "class-validator";
+import { IsEmail, IsUUID, Length } from "class-validator";
 
 @InputType()
-export class ForgotPasswordInput {
+export class SendForgotPasswordInput {
+    @Field()
+    @IsEmail()
+    email: string;
+}
+
+@InputType()
+export class UpdatePasswordInput {
+    @Field()
+    @Length(5)
+    password: string;
+
+    @Field()
+    @IsUUID("4")
+    token: string;
+
     @Field()
     @IsEmail()
     email: string;

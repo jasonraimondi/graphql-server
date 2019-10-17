@@ -14,6 +14,7 @@ import { UserConfirmationResolver } from "@/modules/user/user_confirmation_resol
 import { UserConfirmationRepository } from "@/lib/repository/user_confirmation_repository";
 import { RegisterResolver } from "@/modules/user/register_resolver";
 import { RegisterEmail } from "@/lib/services/email/user/register_email";
+import { ForgotPasswordRepository } from "@/lib/repository/forgot_password_repository";
 
 export class Container extends InversifyContainer {
     public constructor(
@@ -42,6 +43,7 @@ export class Container extends InversifyContainer {
         this.bind<RegisterEmail>(TYPES.RegisterEmail).to(RegisterEmail);
 
         // repositories
+        this.bind<ForgotPasswordRepository>(TYPES.ForgotPasswordRepository).toConstantValue(this.repositoryFactory.forgotPasswordRepository);
         this.bind<UserRepository>(TYPES.UserRepository).toConstantValue(this.repositoryFactory.userRepository);
         this.bind<UserConfirmationRepository>(TYPES.UserConfirmationRepository).toConstantValue(this.repositoryFactory.userConfirmationRepository);
     }
