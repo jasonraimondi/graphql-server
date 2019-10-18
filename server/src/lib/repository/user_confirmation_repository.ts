@@ -10,6 +10,22 @@ export class UserConfirmationRepository extends BaseRepository<UserConfirmation>
         super(repository);
     }
 
+    findByEmail(email: string): Promise<UserConfirmation> {
+        return this.repository.findOneOrFail({
+            join: {
+                alias: "user_confirmation",
+                leftJoinAndSelect: {
+                    user: "user_confirmation.user",
+                }
+            },
+            where: {
+                "user.email = :email": {
+                    email
+                }
+            }
+        });
+    }
+
     findById(uuid: string): Promise<UserConfirmation> {
         return this.repository.findOneOrFail(uuid, {
             join: {

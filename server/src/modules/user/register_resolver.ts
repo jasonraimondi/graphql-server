@@ -9,6 +9,7 @@ import { TYPES } from "@/lib/repository/repository_factory";
 import { UserRepository } from "@/lib/repository/user_repository";
 import { UserConfirmationRepository } from "@/lib/repository/user_confirmation_repository";
 import { RegisterEmail } from "@/lib/services/email/user/register_email";
+import { User } from "@/entity/user";
 
 @injectable()
 @Resolver()
@@ -21,28 +22,45 @@ export class RegisterResolver {
     ) {
     }
 
+    @Mutation(() => Boolean!)
+    async resentConfirmEmail(
+        @Arg("email") email: string,
+    ): Promise<boolean> {
+        const userConfirmation = await this.userConfirmationRepository.findByEmail(email);
+        try {
+            await this.registerEmail.send(userConfirmation);
+            return true;
+        } catch(e) {
+            console.log(e);
+        }
+        return false;
+    }
+
     @Mutation(() => RegisterResponse)
     async register(
         @Arg("data") { uuid, firstName, lastName, email, password }: RegisterInput,
     ): Promise<RegisterResponse> {
-        const hashedPassword = await hash(password, 12);
-        const user = await this.userRepository.create({
-            uuid: uuid ? uuid : v4(),
-            firstName,
-            lastName,
-            email,
-            password: hashedPassword,
-        });
-        await user.save();
-        const userConfirmation = await this.userConfirmationRepository.create({
-            uuid: v4(),
-            user,
-        });
-        await this.userConfirmationRepository.save(userConfirmation);
-        await this.registerEmail.send(userConfirmation);
-        return {
-            user,
-            userConfirmation
-        };
+        const user = new User();
+        user.uuid = uuid ? uuid : v4();
+        user.firstName = firstName;
+        user.lastName = lastName;
+        user.email = email;
+        user.password = await hash(password, 12);
+        try {
+            await this.userRepository.save(user);
+            const userConfirmation = await this.userConfirmationRepository.create({
+                uuid: v4(),
+                user,
+            });
+            await this.userConfirmationRepository.save(userConfirmation);
+            await this.registerEmail.send(userConfirmation);
+            return {
+                user,
+                userConfirmation
+            };
+        } catch (e) {
+            console.log(e);
+        }
+        return {};
     }
 }
