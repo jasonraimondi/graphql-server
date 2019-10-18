@@ -20,6 +20,14 @@ if (!process.env.MAILER) throw new Error("process.env.MAILER is undefined");
 
 if (process.env.ENABLE_DEBUGGING) console.log("DEBUGGING ENABLED");
 
+
+const globalMiddlewares = (enableDebugging: boolean) => {
+    const result = [];
+    if (enableDebugging) result.push(ResolveTime);
+    return result;
+};
+
+
 (async () => {
     const app = Express();
     app.use(
@@ -44,7 +52,7 @@ if (process.env.ENABLE_DEBUGGING) console.log("DEBUGGING ENABLED");
 
     const schema = await buildSchema({
         container,
-        globalMiddlewares: middleware(),
+        globalMiddlewares: globalMiddlewares(!!process.env.ENABLE_DEBUGGING),
         resolvers: [__dirname + "/modules/**/*_resolver.ts"],
     });
 
@@ -57,9 +65,3 @@ if (process.env.ENABLE_DEBUGGING) console.log("DEBUGGING ENABLED");
 
     app.listen(4000, () => "server started on localhost:4000");
 })();
-
-function middleware() {
-    const globalMiddlewares = [];
-    if (process.env.ENABLE_DEBUGGING) globalMiddlewares.push(ResolveTime);
-    return globalMiddlewares;
-}

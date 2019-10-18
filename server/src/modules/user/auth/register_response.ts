@@ -4,8 +4,8 @@ import { UserConfirmation } from "@/entity/user_confirmation";
 
 @ObjectType()
 export class RegisterResponse {
-    @Field(() => User)
-    user: User;
-    @Field(() => UserConfirmation)
-    userConfirmation: UserConfirmation;
+    @Field(() => User, { nullable: true })
+    user?: User;
+    @Field(() => UserConfirmation, { nullable: true })
+    userConfirmation?: UserConfirmation;
 }

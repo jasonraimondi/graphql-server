@@ -2,8 +2,7 @@ import { Request, Response } from "express";
 import { verify } from "jsonwebtoken";
 
 import { User } from "@/entity/user";
-import { sendRefreshToken } from "@/lib/handlers/send_refresh_token";
-import { createAccessToken, createRefreshToken } from "@/lib/handlers/auth";
+import { createAccessToken, createRefreshToken, sendRefreshToken } from "@/lib/services/auth/auth_service";
 
 const FAILED_TO_REFRESH = { success: false, accessToken: "" };
 

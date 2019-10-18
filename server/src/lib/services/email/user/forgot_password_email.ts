@@ -15,7 +15,10 @@ export class ForgotPasswordEmail {
             I'll help you find a new ${uuid} ${user.email} ${forgotPassword.expiresAt(forgotPassword)}}
         `;
         const html = `
-            <strong>I'll Help you find a new one ${uuid} ${user.email} ${forgotPassword.expiresAt(forgotPassword)}</strong>
+<div>
+    <p>Forgot your password?</p>
+    <p>I'll Help you find a new one ${uuid} ${user.email} ${forgotPassword.expiresAt(forgotPassword)}</p>
+</div>
         `;
         await this.emailService.send({
             to: user.email,

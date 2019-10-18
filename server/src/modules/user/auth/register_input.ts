@@ -20,6 +20,6 @@ export class RegisterInput {
     email: string;
 
     @Field()
-    @Length(5, 255)
+    @Length(5)
     password: string;
 }
