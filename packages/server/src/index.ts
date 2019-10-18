@@ -58,7 +58,7 @@ const globalMiddlewares = (enableDebugging: boolean) => {
 
     const apolloServer = new ApolloServer({
         schema,
-        context: ({req, res}) => ({req, res}),
+        context: ({req, res}) => ({req, res, container}),
     });
 
     apolloServer.applyMiddleware({app, cors: false});

@@ -24,7 +24,6 @@ export class MeResolver {
 
         const token = authorization.split(" ")[1];
         const payload: any = verify(token, process.env.ACCESS_TOKEN_SECRET!);
-        const user = await this.userRepository.findById(payload.userId);
-        return user;
+        return await this.userRepository.findById(payload.userId);
     }
 }
