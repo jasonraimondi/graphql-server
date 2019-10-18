@@ -2,13 +2,13 @@ import { Arg, Ctx, Mutation, Resolver } from "type-graphql";
 import { compare } from "bcryptjs";
 import { inject, injectable } from "inversify";
 
-import { MyContext } from "@/entity/types/my_context";
 import { User } from "@/entity/user";
 import { LoginInput } from "@/modules/user/auth/login_input";
 import { LoginResponse } from "@/modules/user/auth/login_response";
 import { TYPES} from "@/lib/repository/repository_factory";
 import { UserRepository } from "@/lib/repository/user_repository";
 import { createAccessToken, createRefreshToken, sendRefreshToken } from "@/lib/services/auth/auth_service";
+import { MyContext } from "@/lib/types/my_context";
 
 @injectable()
 @Resolver(User)
@@ -26,9 +26,10 @@ export class AuthResolver {
 
         if (!user) {
             throw new Error("could not find user");
-        } else if (!user.isEmailConfirmed || !user.isActive) {
-            throw new Error("please confirm your email before logging in");
         }
+        // if (!user.isEmailConfirmed || !user.isActive) {
+        //     throw new Error("please confirm your email before logging in");
+        // }
 
         const valid = await compare(password, user.password);
 

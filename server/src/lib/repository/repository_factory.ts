@@ -3,7 +3,7 @@ import { Connection } from "typeorm";
 import { User } from "@/entity/user";
 import { UserRepository } from "@/lib/repository/user_repository";
 import { UserConfirmationRepository } from "@/lib/repository/user_confirmation_repository";
-import { UserConfirmation } from "@/entity/user_confirmation";
+import { EmailConfirmation } from "@/entity/email_confirmation";
 import { ForgotPasswordRepository } from "@/lib/repository/forgot_password_repository";
 import { ForgotPassword } from "@/entity/forgot_password";
 
@@ -32,6 +32,6 @@ export class RepositoryFactory {
     }
 
     get userConfirmationRepository(): UserConfirmationRepository {
-        return new UserConfirmationRepository(this.connection.getRepository<UserConfirmation>(UserConfirmation));
+        return new UserConfirmationRepository(this.connection.getRepository<EmailConfirmation>(EmailConfirmation));
     }
 }

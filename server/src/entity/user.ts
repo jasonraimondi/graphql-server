@@ -1,5 +1,8 @@
-import { BaseEntity, Column, Entity, PrimaryColumn } from "typeorm";
+import { BaseEntity, Column, Entity, JoinTable, ManyToMany, PrimaryColumn } from "typeorm";
 import { Field, ID, ObjectType, Root } from "type-graphql";
+
+import { Role } from "@/entity/role";
+import { Permission } from "@/entity/permission";
 
 @ObjectType()
 @Entity()
@@ -37,6 +40,14 @@ export class User extends BaseEntity {
 
     @Column("int", { default: 0 })
     tokenVersion: number;
+
+    @ManyToMany(() => Role)
+    @JoinTable({ name: "user_role" })
+    roles: Role[];
+
+    @ManyToMany(() => Permission)
+    @JoinTable({ name: "user_permission" })
+    permissions: Permission[];
 
     @Field(() => String!, { nullable: true })
     name(@Root() {firstName, lastName}: User): string|null {

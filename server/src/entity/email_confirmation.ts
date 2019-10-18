@@ -5,7 +5,7 @@ import { User } from "@/entity/user";
 
 @ObjectType()
 @Entity()
-export class UserConfirmation extends BaseEntity {
+export class EmailConfirmation extends BaseEntity {
     @Field(() => ID)
     @PrimaryColumn("uuid")
     uuid: string;
@@ -20,7 +20,7 @@ export class UserConfirmation extends BaseEntity {
     createdAt: Date;
     
     @Field()
-    expiresAt(@Root() parent: UserConfirmation): Date {
+    expiresAt(@Root() parent: EmailConfirmation): Date {
         const created = new Date(parent.createdAt);
         // valid for 7 days
         const validFor = 60 * 60 * 24 * 7;

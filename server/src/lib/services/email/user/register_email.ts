@@ -2,13 +2,13 @@ import { inject, injectable } from "inversify";
 
 import { EmailService } from "@/lib/services/email/email_service";
 import { TYPES } from "@/lib/repository/repository_factory";
-import { UserConfirmation } from "@/entity/user_confirmation";
+import { EmailConfirmation } from "@/entity/email_confirmation";
 
 @injectable()
 export class RegisterEmail {
     constructor(@inject(TYPES.EmailService) private readonly emailService: EmailService) {}
 
-    async send(userConfirmation: UserConfirmation): Promise<any> {
+    async send(userConfirmation: EmailConfirmation): Promise<any> {
         const user = userConfirmation.user;
         await this.emailService.send({
             to: user.email,
