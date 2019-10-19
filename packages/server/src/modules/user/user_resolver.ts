@@ -1,7 +1,7 @@
 import { Arg, Query, Resolver } from "type-graphql";
 import { inject, injectable } from "inversify";
 
-import { User } from "@/entity/user";
+import { User } from "@/entity/user_entity";
 import { TYPES } from "@/lib/repository/repository_factory";
 import { UserRepository } from "@/lib/repository/user/user_repository";
 

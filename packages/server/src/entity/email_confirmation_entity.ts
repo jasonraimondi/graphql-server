@@ -2,7 +2,7 @@ import { CreateDateColumn, Entity, JoinColumn, OneToOne, PrimaryColumn } from "t
 import { Field, ID, ObjectType, Root } from "type-graphql";
 import v4 from "uuid/v4";
 
-import { User } from "@/entity/user";
+import { User } from "@/entity/user_entity";
 
 @ObjectType()
 @Entity()

@@ -1,6 +1,6 @@
-import { User } from "@/entity/user";
+import { User } from "@/entity/user_entity";
 import { Field, ObjectType } from "type-graphql";
-import { EmailConfirmation } from "@/entity/email_confirmation";
+import { EmailConfirmation } from "@/entity/email_confirmation_entity";
 
 @ObjectType()
 export class RegisterResponse {

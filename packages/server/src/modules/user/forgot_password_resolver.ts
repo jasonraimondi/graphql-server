@@ -8,7 +8,7 @@ import { ForgotPasswordEmail } from "@/lib/services/email/user/forgot_password_e
 import { UserRepository } from "@/lib/repository/user/user_repository";
 import { ForgotPasswordRepository } from "@/lib/repository/user/forgot_password_repository";
 import { TYPES } from "@/lib/repository/repository_factory";
-import { User } from "@/entity/user";
+import { User } from "@/entity/user_entity";
 
 @injectable()
 @Resolver()

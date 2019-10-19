@@ -1,7 +1,7 @@
 import { Response } from "express";
 import { sign } from "jsonwebtoken";
 
-import { User } from "@/entity/user";
+import { User } from "@/entity/user_entity";
 
 export const sendRefreshToken = (res: Response, token: string) => {
     res.cookie("jid", token, {

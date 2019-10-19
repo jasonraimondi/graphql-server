@@ -6,10 +6,10 @@ import { RegisterInput } from "@/modules/user/auth/register_input";
 import { RegisterResponse } from "@/modules/user/auth/register_response";
 import { TYPES } from "@/lib/repository/repository_factory";
 import { RegisterEmail } from "@/lib/services/email/user/register_email";
-import { User } from "@/entity/user";
+import { User } from "@/entity/user_entity";
 import { EmailConfirmationRepository } from "@/lib/repository/user/email_confirmation_repository";
 import { UserRepository } from "@/lib/repository/user/user_repository";
-import { EmailConfirmation } from "@/entity/email_confirmation";
+import { EmailConfirmation } from "@/entity/email_confirmation_entity";
 
 @injectable()
 @Resolver()
@@ -36,13 +36,11 @@ export class RegisterResolver {
 
     @Mutation(() => RegisterResponse!)
     async register(
-        @Arg("data") { email, uuid, firstName, lastName, password }: RegisterInput,
+        @Arg("data") registerInput: RegisterInput,
     ): Promise<RegisterResponse> {
+        const { email, uuid, password } = registerInput;
         await this.guardAgainstDuplicateUser(email, uuid);
-        const user = new User(uuid);
-        user.firstName = firstName;
-        user.lastName = lastName;
-        user.email = email;
+        const user = User.create(registerInput);
         user.password = password ? await hash(password, 12) : undefined;
         try {
             await this.userRepository.save(user);

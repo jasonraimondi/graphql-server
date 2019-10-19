@@ -2,7 +2,7 @@ import { inject, injectable } from "inversify";
 
 import { EmailService } from "@/lib/services/email/email_service";
 import { TYPES } from "@/lib/repository/repository_factory";
-import { ForgotPassword } from "@/entity/forgot_password";
+import { ForgotPassword } from "@/entity/forgot_password_entity";
 
 @injectable()
 export class ForgotPasswordEmail {

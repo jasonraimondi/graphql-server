@@ -2,7 +2,7 @@ import { Arg, Ctx, Mutation, Resolver } from "type-graphql";
 import { compare } from "bcryptjs";
 import { inject, injectable } from "inversify";
 
-import { User } from "@/entity/user";
+import { User } from "@/entity/user_entity";
 import { LoginInput } from "@/modules/user/auth/login_input";
 import { LoginResponse } from "@/modules/user/auth/login_response";
 import { TYPES} from "@/lib/repository/repository_factory";

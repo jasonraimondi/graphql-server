@@ -4,7 +4,7 @@ import { inject, injectable } from "inversify";
 
 import { isAuth } from "@/lib/middleware/is_auth";
 import { TYPES } from "@/lib/repository/repository_factory";
-import { User } from "@/entity/user";
+import { User } from "@/entity/user_entity";
 import { MyContext } from "@/lib/types/my_context";
 import { UserRepository } from "@/lib/repository/user/user_repository";
 

@@ -5,6 +5,6 @@
   "logging": true,
   "synchronize": true,
   "entities": [
-    "src/entity/*.*"
+    "src/entity/*_entity.ts"
   ]
 }

@@ -2,7 +2,7 @@ import { inject, injectable } from "inversify";
 
 import { EmailService } from "@/lib/services/email/email_service";
 import { TYPES } from "@/lib/repository/repository_factory";
-import { EmailConfirmation } from "@/entity/email_confirmation";
+import { EmailConfirmation } from "@/entity/email_confirmation_entity";
 
 @injectable()
 export class RegisterEmail {

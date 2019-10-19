@@ -1,7 +1,7 @@
 import { injectable } from "inversify";
 import { EntityRepository, Repository } from "typeorm";
 
-import { EmailConfirmation } from "@/entity/email_confirmation";
+import { EmailConfirmation } from "@/entity/email_confirmation_entity";
 
 @injectable()
 @EntityRepository(EmailConfirmation)

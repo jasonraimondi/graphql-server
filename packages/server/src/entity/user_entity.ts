@@ -2,14 +2,15 @@ import { Column, Entity, JoinTable, ManyToMany, PrimaryColumn } from "typeorm";
 import { Field, ID, ObjectType, Root } from "type-graphql";
 import v4 from "uuid/v4";
 
-import { Role } from "@/entity/role";
-import { Permission } from "@/entity/permission";
+import { Role } from "@/entity/role_entity";
+import { Permission } from "@/entity/permission_entity";
 
 interface ICreateUser {
     email: string;
     uuid?: string;
     firstName?: string;
     lastName?: string;
+    password?: string;
 }
 
 @ObjectType()
@@ -28,8 +29,6 @@ export class User {
         this.uuid = uuid;
         this.tokenVersion = 0;
         this.isEmailConfirmed = false;
-        this.roles = [];
-        this.permissions = [];
     }
 
     @Field(() => ID)
