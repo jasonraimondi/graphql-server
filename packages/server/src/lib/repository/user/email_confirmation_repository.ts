@@ -1,17 +1,13 @@
 import { injectable } from "inversify";
-import { Repository } from "typeorm";
+import { EntityRepository, Repository } from "typeorm";
 
-import { BaseRepository } from "@/lib/repository/base_repository";
 import { EmailConfirmation } from "@/entity/email_confirmation";
 
 @injectable()
-export class UserConfirmationRepository extends BaseRepository<EmailConfirmation> {
-    constructor(repository: Repository<EmailConfirmation>) {
-        super(repository);
-    }
-
+@EntityRepository(EmailConfirmation)
+export class EmailConfirmationRepository extends Repository<EmailConfirmation> {
     findByEmail(email: string): Promise<EmailConfirmation> {
-        return this.repository.findOneOrFail({
+        return this.findOneOrFail({
             join: {
                 alias: "user_confirmation",
                 leftJoinAndSelect: {
@@ -27,7 +23,7 @@ export class UserConfirmationRepository extends BaseRepository<EmailConfirmation
     }
 
     findById(uuid: string): Promise<EmailConfirmation> {
-        return this.repository.findOneOrFail(uuid, {
+        return this.findOneOrFail(uuid, {
             join: {
                 alias: "user_confirmation",
                 leftJoinAndSelect: {

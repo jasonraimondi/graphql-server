@@ -2,15 +2,15 @@ import { inject, injectable } from "inversify";
 import { Arg, Mutation, Resolver } from "type-graphql";
 
 import { TYPES } from "@/lib/repository/repository_factory";
-import { UserRepository } from "@/lib/repository/user_repository";
-import { UserConfirmationRepository } from "@/lib/repository/user_confirmation_repository";
+import { EmailConfirmationRepository } from "@/lib/repository/user/email_confirmation_repository";
+import { UserRepository } from "@/lib/repository/user/user_repository";
 
 @injectable()
 @Resolver()
-export class UserConfirmationResolver {
+export class EmailConfirmationResolver {
     constructor(
         @inject(TYPES.UserRepository) private userRepository: UserRepository,
-        @inject(TYPES.UserConfirmationRepository) private userConfirmationRepository: UserConfirmationRepository
+        @inject(TYPES.UserConfirmationRepository) private userConfirmationRepository: EmailConfirmationRepository
     ) {
     }
 
@@ -27,7 +27,7 @@ export class UserConfirmationResolver {
             const { user } = userConfirmation;
             user.isEmailConfirmed = true;
             await this.userRepository.save(user);
-            await this.userConfirmationRepository.delete(userConfirmation.uuid)
+            await this.userConfirmationRepository.delete(userConfirmation.uuid);
             return true;
         } catch(e) {
             console.log(e);

@@ -4,9 +4,9 @@ import { inject, injectable } from "inversify";
 
 import { isAuth } from "@/lib/middleware/is_auth";
 import { TYPES } from "@/lib/repository/repository_factory";
-import { UserRepository } from "@/lib/repository/user_repository";
 import { User } from "@/entity/user";
 import { MyContext } from "@/lib/types/my_context";
+import { UserRepository } from "@/lib/repository/user/user_repository";
 
 @injectable()
 @Resolver()

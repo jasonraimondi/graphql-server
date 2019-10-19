@@ -1,12 +1,18 @@
-import { BaseEntity, Column, Entity, JoinTable, ManyToMany, PrimaryColumn } from "typeorm";
+import { Column, Entity, JoinTable, ManyToMany, PrimaryColumn } from "typeorm";
 import { Field, ID, ObjectType, Root } from "type-graphql";
+import v4 from "uuid/v4";
 
 import { Role } from "@/entity/role";
 import { Permission } from "@/entity/permission";
 
 @ObjectType()
 @Entity()
-export class User extends BaseEntity {
+export class User {
+    constructor(uuid?: string) {
+        if (!uuid) uuid = v4();
+        this.uuid = uuid;
+    }
+
     @Field(() => ID)
     @PrimaryColumn("uuid")
     uuid: string;

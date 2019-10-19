@@ -6,9 +6,9 @@ import { User } from "@/entity/user";
 import { LoginInput } from "@/modules/user/auth/login_input";
 import { LoginResponse } from "@/modules/user/auth/login_response";
 import { TYPES} from "@/lib/repository/repository_factory";
-import { UserRepository } from "@/lib/repository/user_repository";
 import { createAccessToken, createRefreshToken, sendRefreshToken } from "@/lib/services/auth/auth_service";
 import { MyContext } from "@/lib/types/my_context";
+import { UserRepository } from "@/lib/repository/user/user_repository";
 
 @injectable()
 @Resolver(User)

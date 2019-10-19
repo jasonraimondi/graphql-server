@@ -5,12 +5,12 @@ import "module-alias/register";
 import { ApolloServer } from "apollo-server-express";
 import cookieParser from "cookie-parser";
 import cors from "cors";
-import Express from "express";
 import nodemailer from "nodemailer";
 import { buildSchema } from "type-graphql";
 import { createConnection } from "typeorm";
+import { InversifyExpressServer } from "inversify-express-utils";
+import bodyParser from "body-parser";
 
-import { refreshToken } from "@/lib/handlers/refresh_token";
 import { RepositoryFactory } from "@/lib/repository/repository_factory";
 import { ResolveTime } from "@/lib/middleware/resolve_time";
 import { Container } from "@/lib/inversify";
@@ -20,7 +20,6 @@ if (!process.env.MAILER) throw new Error("process.env.MAILER is undefined");
 
 if (process.env.ENABLE_DEBUGGING) console.log("DEBUGGING ENABLED");
 
-
 const globalMiddlewares = (enableDebugging: boolean) => {
     const result = [];
     if (enableDebugging) result.push(ResolveTime);
@@ -28,18 +27,8 @@ const globalMiddlewares = (enableDebugging: boolean) => {
 };
 
 (async () => {
-    const app = Express();
-    app.use(
-        cors({
-            origin: process.env.CORS,
-            credentials: true,
-        }),
-    );
-    app.use(cookieParser());
-
-    app.get("/", (_req, res) => res.redirect("/graphql"));
-    app.post("/refresh_token", refreshToken);
-
+    await import("./controllers/auth_controller");
+    await import("./controllers/home_controller");
 
     const repositoryFactory = new RepositoryFactory(
         await createConnection()
@@ -54,6 +43,22 @@ const globalMiddlewares = (enableDebugging: boolean) => {
         globalMiddlewares: globalMiddlewares(!!process.env.ENABLE_DEBUGGING),
         resolvers: [__dirname + "/modules/**/*_resolver.ts"],
     });
+
+    const server = new InversifyExpressServer(container);
+    server.setConfig(app => {
+        app.use(bodyParser.urlencoded({
+            extended: true
+        }));
+        app.use(bodyParser.json());
+        app.use(
+            cors({
+                origin: process.env.CORS,
+                credentials: true,
+            }),
+        );
+        app.use(cookieParser());
+    });
+    const app = server.build();
 
     const apolloServer = new ApolloServer({
         schema,

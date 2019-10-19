@@ -1,14 +1,14 @@
 import { Arg, Mutation, Resolver } from "type-graphql";
 import { inject, injectable } from "inversify";
-
-import { SendForgotPasswordInput, UpdatePasswordInput } from "@/modules/user/auth/forgot_password_input";
-import { UserRepository } from "@/lib/repository/user_repository";
-import { ForgotPasswordEmail } from "@/lib/services/email/user/forgot_password_email";
-import { ForgotPasswordRepository } from "@/lib/repository/forgot_password_repository";
-import { TYPES } from "@/lib/repository/repository_factory";
-import { User } from "@/entity/user";
 import v4 from "uuid/v4";
 import { hash } from "bcryptjs";
+
+import { SendForgotPasswordInput, UpdatePasswordInput } from "@/modules/user/auth/forgot_password_input";
+import { ForgotPasswordEmail } from "@/lib/services/email/user/forgot_password_email";
+import { UserRepository } from "@/lib/repository/user/user_repository";
+import { ForgotPasswordRepository } from "@/lib/repository/user/forgot_password_repository";
+import { TYPES } from "@/lib/repository/repository_factory";
+import { User } from "@/entity/user";
 
 @injectable()
 @Resolver()

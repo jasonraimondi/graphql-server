@@ -1,11 +1,17 @@
-import { BaseEntity, Column, Entity, JoinColumn, OneToOne, PrimaryColumn } from "typeorm";
+import { Column, Entity, JoinColumn, OneToOne, PrimaryColumn } from "typeorm";
 import { Field, ID, ObjectType, Root } from "type-graphql";
+import v4 from "uuid/v4";
 
 import { User } from "@/entity/user";
 
 @ObjectType()
 @Entity()
-export class ForgotPassword extends BaseEntity {
+export class ForgotPassword {
+    constructor(uuid?: string) {
+        if (!uuid) uuid = v4();
+        this.uuid = uuid;
+    }
+
     @Field(() => ID)
     @PrimaryColumn("uuid")
     uuid: string;

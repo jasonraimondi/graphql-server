@@ -1,11 +1,17 @@
-import { BaseEntity, CreateDateColumn, Entity, JoinColumn, OneToOne, PrimaryColumn } from "typeorm";
+import { CreateDateColumn, Entity, JoinColumn, OneToOne, PrimaryColumn } from "typeorm";
 import { Field, ID, ObjectType, Root } from "type-graphql";
+import v4 from "uuid/v4";
 
 import { User } from "@/entity/user";
 
 @ObjectType()
 @Entity()
-export class EmailConfirmation extends BaseEntity {
+export class EmailConfirmation {
+    constructor(uuid?: string) {
+        if (!uuid) uuid = v4();
+        this.uuid = uuid;
+    }
+
     @Field(() => ID)
     @PrimaryColumn("uuid")
     uuid: string;

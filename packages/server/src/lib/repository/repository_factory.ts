@@ -1,11 +1,8 @@
 import { Connection } from "typeorm";
 
-import { User } from "@/entity/user";
-import { UserRepository } from "@/lib/repository/user_repository";
-import { UserConfirmationRepository } from "@/lib/repository/user_confirmation_repository";
-import { EmailConfirmation } from "@/entity/email_confirmation";
-import { ForgotPasswordRepository } from "@/lib/repository/forgot_password_repository";
-import { ForgotPassword } from "@/entity/forgot_password";
+import { EmailConfirmationRepository } from "@/lib/repository/user/email_confirmation_repository";
+import { UserRepository } from "@/lib/repository/user/user_repository";
+import { ForgotPasswordRepository } from "@/lib/repository/user/forgot_password_repository";
 
 export const TYPES = {
     AuthResolver: Symbol("AuthResolver"),
@@ -24,14 +21,14 @@ export class RepositoryFactory {
     }
 
     get forgotPasswordRepository(): ForgotPasswordRepository {
-        return new ForgotPasswordRepository(this.connection.getRepository<ForgotPassword>(ForgotPassword));
+        return this.connection.getCustomRepository<ForgotPasswordRepository>(ForgotPasswordRepository);
     }
 
     get userRepository(): UserRepository {
-        return new UserRepository(this.connection.getRepository<User>(User));
+        return this.connection.getCustomRepository<UserRepository>(UserRepository);
     }
 
-    get userConfirmationRepository(): UserConfirmationRepository {
-        return new UserConfirmationRepository(this.connection.getRepository<EmailConfirmation>(EmailConfirmation));
+    get userConfirmationRepository(): EmailConfirmationRepository {
+        return this.connection.getCustomRepository<EmailConfirmationRepository>(EmailConfirmationRepository);
     }
 }

@@ -5,10 +5,11 @@ import {
     registerDecorator,
 } from "class-validator";
 
-import { User } from "@/entity/user";
+// import { UserRepository } from "@/lib/repository/user/user_repository";
 
 export function ValidateAgainstDuplicateEmail(validationOptions?: ValidationOptions) {
     return (object: Object, propertyName: string) => {
+        console.log(object, propertyName, validationOptions);
         registerDecorator({
             target: object.constructor,
             propertyName: propertyName,
@@ -22,8 +23,11 @@ export function ValidateAgainstDuplicateEmail(validationOptions?: ValidationOpti
 @ValidatorConstraint({ async: true })
 class ValidateAgainstDuplicateEmailConstraint implements ValidatorConstraintInterface {
     validate(email: string) {
-        return User.findOne({ where: { email } }).then(user => {
-            return !user;
-        });
+        console.log(email, this);
+        return false;
+        // console.log(this);
+        // return this.userRepository.findOne({ where: { email } }).then(user => {
+        //     return !user;
+        // });
     }
 }

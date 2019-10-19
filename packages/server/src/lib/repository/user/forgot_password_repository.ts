@@ -1,17 +1,13 @@
 import { injectable } from "inversify";
-import { Repository } from "typeorm";
+import { EntityRepository, Repository } from "typeorm";
 
-import { BaseRepository } from "@/lib/repository/base_repository";
 import { ForgotPassword } from "@/entity/forgot_password";
 
 @injectable()
-export class ForgotPasswordRepository extends BaseRepository<ForgotPassword> {
-    constructor(repository: Repository<ForgotPassword>) {
-        super(repository);
-    }
-
+@EntityRepository(ForgotPassword)
+export class ForgotPasswordRepository extends Repository<ForgotPassword> {
     findById(uuid: string): Promise<ForgotPassword> {
-        return this.repository.findOneOrFail(uuid, {
+        return this.findOneOrFail(uuid, {
             join: {
                 alias: "forgot_password_token",
                 leftJoinAndSelect: {
@@ -22,7 +18,7 @@ export class ForgotPasswordRepository extends BaseRepository<ForgotPassword> {
     }
 
     findForUser(userId: string): Promise<ForgotPassword> {
-        return this.repository.findOneOrFail({
+        return this.findOneOrFail({
             where: {
                 user: userId
             },
