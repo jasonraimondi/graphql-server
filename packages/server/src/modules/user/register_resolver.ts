@@ -59,18 +59,14 @@ export class RegisterResolver {
     }
 
     private async guardAgainstDuplicateUser(email: string, uuid?: string) {
-        let user: User|undefined = undefined;
-        if (uuid) {
-            try {
-                user = await this.userRepository.findById(uuid);
-            } catch (e) {
-            }
-            if (user) throw new Error("duplicate uuid for user");
+        const falsy = () => false;
+        const { findById, findByEmail } = this.userRepository;
+        if (uuid && await findById(uuid).catch(falsy)) {
+            throw new Error("duplicate uuid for user");
         }
-        try {
-            user = await this.userRepository.findByEmail(email);
-        } catch (e) {
+        if (await findByEmail(email).catch(falsy)) {
+            throw new Error("duplicate email for user");
         }
-        if (user) throw new Error("duplicate email for user");
     }
 }
+
