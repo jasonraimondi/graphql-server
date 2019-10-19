@@ -14,11 +14,10 @@ import { EmailConfirmation } from "@/entity/email_confirmation";
 @injectable()
 @Resolver()
 export class RegisterResolver {
-
     constructor(
+        @inject(TYPES.RegisterEmail) private registerEmail: RegisterEmail,
         @inject(TYPES.UserRepository) private userRepository: UserRepository,
         @inject(TYPES.UserConfirmationRepository) private userConfirmationRepository: EmailConfirmationRepository,
-        @inject(TYPES.RegisterEmail) private registerEmail: RegisterEmail,
     ) {}
 
     @Mutation(() => Boolean!)

@@ -12,21 +12,20 @@ const FAILED_TO_REFRESH = { success: false, accessToken: "" };
 
 @controller("/auth")
 export class AuthController {
-    constructor(@inject(TYPES.UserRepository) private userRepository: UserRepository) {
-    }
+    constructor(@inject(TYPES.UserRepository) private userRepository: UserRepository) {}
 
     @httpPost("/refresh_token")
     async refreshToken(req: Request, res: Response) {
         const token = req.cookies.jid;
         if (!token) {
-            return fail(res);
+            return this.fail(res);
         }
 
         let payload: any = null;
         try {
             payload = verify(token, process.env.REFRESH_TOKEN_SECRET!);
         } catch (err) {
-            return fail(res);
+            return this.fail(res);
         }
 
         // token is valid and
@@ -34,22 +33,23 @@ export class AuthController {
         const user = await this.userRepository.findOne({ uuid: payload.userId });
 
         if (!user) {
-            return fail(res);
+            return this.fail(res);
         }
 
         if (user.tokenVersion !== payload.tokenVersion) {
-            return fail(res);
+            return this.fail(res);
         }
 
         sendRefreshToken(res, createRefreshToken(user));
 
         res.json({ success: true, accessToken: createAccessToken(user) });
     }
+
+    private fail(res: Response) {
+        res.status(STATUS_CODES.Unauthorized);
+        res.json(FAILED_TO_REFRESH);
+        return;
+    }
 }
 
-function fail(res: Response) {
-    res.status(STATUS_CODES.Unauthorized);
-    res.json(FAILED_TO_REFRESH);
-    return;
-}
 
