@@ -15,57 +15,55 @@ import { RepositoryFactory } from "@/lib/repository/repository_factory";
 import { ResolveTime } from "@/lib/middleware/resolve_time";
 import { Container } from "@/lib/inversify";
 import { ServiceFactory } from "@/lib/services/service_factory";
+import { Application } from "express";
 
 if (!process.env.MAILER) throw new Error("process.env.MAILER is undefined");
 
 if (process.env.ENABLE_DEBUGGING) console.log("DEBUGGING ENABLED");
 
-const globalMiddlewares = (enableDebugging: boolean) => {
-    const result = [];
-    if (enableDebugging) result.push(ResolveTime);
-    return result;
+const initializeApolloServer = async (container: Container) => {
+    const apolloMiddlewares = (enableDebugging: boolean) => {
+        const result = [];
+        if (enableDebugging) result.push(ResolveTime);
+        return result;
+    };
+
+    const schema = await buildSchema({
+        container,
+        globalMiddlewares: apolloMiddlewares(!!process.env.ENABLE_DEBUGGING),
+        resolvers: [__dirname + "/modules/**/*_resolver.ts"],
+    });
+
+    return new ApolloServer({
+        schema,
+        context: ({ req, res }) => ({ req, res, container }),
+    });
+};
+
+const expressMiddlewares = (app: Application) => {
+    app.use(bodyParser.urlencoded({
+        extended: true,
+    }));
+    app.use(bodyParser.json());
+    app.use(
+        cors({
+            origin: process.env.CORS,
+            credentials: true,
+        }),
+    );
+    app.use(cookieParser());
 };
 
 (async () => {
     await import("./controllers/auth_controller");
     await import("./controllers/home_controller");
-
-    const repositoryFactory = new RepositoryFactory(
-        await createConnection()
-    );
-    const serviceFactory = new ServiceFactory(
-        nodemailer.createTransport(process.env.MAILER),
-    );
+    const repositoryFactory = new RepositoryFactory(await createConnection());
+    const serviceFactory = new ServiceFactory(nodemailer.createTransport(process.env.MAILER));
     const container = new Container(repositoryFactory, serviceFactory);
-
-    const schema = await buildSchema({
-        container,
-        globalMiddlewares: globalMiddlewares(!!process.env.ENABLE_DEBUGGING),
-        resolvers: [__dirname + "/modules/**/*_resolver.ts"],
-    });
-
     const server = new InversifyExpressServer(container);
-    server.setConfig(app => {
-        app.use(bodyParser.urlencoded({
-            extended: true
-        }));
-        app.use(bodyParser.json());
-        app.use(
-            cors({
-                origin: process.env.CORS,
-                credentials: true,
-            }),
-        );
-        app.use(cookieParser());
-    });
+    server.setConfig(expressMiddlewares);
     const app = server.build();
-
-    const apolloServer = new ApolloServer({
-        schema,
-        context: ({req, res}) => ({req, res, container}),
-    });
-
+    const apolloServer = await initializeApolloServer(container);
     apolloServer.applyMiddleware({app, cors: false});
-
     app.listen(4000, () => "server started on localhost:4000");
 })();
