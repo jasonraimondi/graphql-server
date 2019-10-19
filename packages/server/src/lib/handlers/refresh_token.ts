@@ -3,20 +3,21 @@ import { verify } from "jsonwebtoken";
 
 import { User } from "@/entity/user";
 import { createAccessToken, createRefreshToken, sendRefreshToken } from "@/lib/services/auth/auth_service";
+import { STATUS_CODES } from "@/lib/handlers/status_codes";
 
 const FAILED_TO_REFRESH = { success: false, accessToken: "" };
 
 export const refreshToken = async (req: Request, res: Response) => {
     const token = req.cookies.jid;
     if (!token) {
-        return res.send(FAILED_TO_REFRESH);
+        return fail(res);
     }
 
     let payload: any = null;
     try {
         payload = verify(token, process.env.REFRESH_TOKEN_SECRET!);
     } catch (err) {
-        return res.send(FAILED_TO_REFRESH);
+        return fail(res);
     }
 
     // token is valid and
@@ -24,14 +25,21 @@ export const refreshToken = async (req: Request, res: Response) => {
     const user = await User.findOne({ uuid: payload.userId });
 
     if (!user) {
-        return res.send(FAILED_TO_REFRESH);
+        return fail(res);
     }
 
     if (user.tokenVersion !== payload.tokenVersion) {
-        return res.send(FAILED_TO_REFRESH);
+        return fail(res);
     }
 
     sendRefreshToken(res, createRefreshToken(user));
 
-    return res.send({ success: true, accessToken: createAccessToken(user) });
+    res.json({ success: true, accessToken: createAccessToken(user) });
 };
+
+function fail(res: Response) {
+    res.status(STATUS_CODES.Unauthorized);
+    res.json(FAILED_TO_REFRESH);
+    return;
+}
+
