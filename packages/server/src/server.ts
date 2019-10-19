@@ -13,7 +13,7 @@ import { createConnection } from "typeorm";
 import { refreshToken } from "@/lib/handlers/refresh_token";
 import { RepositoryFactory } from "@/lib/repository/repository_factory";
 import { ResolveTime } from "@/lib/middleware/resolve_time";
-import { Container } from "@/inversify";
+import { Container } from "@/lib/inversify";
 import { ServiceFactory } from "@/lib/services/service_factory";
 
 if (!process.env.MAILER) throw new Error("process.env.MAILER is undefined");
@@ -26,7 +26,6 @@ const globalMiddlewares = (enableDebugging: boolean) => {
     if (enableDebugging) result.push(ResolveTime);
     return result;
 };
-
 
 (async () => {
     const app = Express();
