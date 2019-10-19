@@ -2,9 +2,13 @@ import { injectable } from "inversify";
 import { EntityRepository, Repository } from "typeorm";
 import { User } from "@/entity/user";
 
+interface IUserRepository {
+    findById(uuid: string): any;
+}
+
 @injectable()
 @EntityRepository(User)
-export class UserRepository extends Repository<User> {
+export class UserRepository extends Repository<User> implements IUserRepository {
     findById(uuid: string) {
         return this.findOneOrFail(uuid);
     }

@@ -55,8 +55,7 @@ export class ForgotPasswordResolver {
     private async getForgotPasswordForUser(user: User) {
         try {
             return await this.forgotPasswordRepository.findForUser(user.uuid);
-        } catch (e) {
-        }
+        } catch (e) {}
         const forgotPassword = this.forgotPasswordRepository.create({
             uuid: v4(),
             user,

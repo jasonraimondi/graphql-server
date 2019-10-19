@@ -27,8 +27,11 @@ export class AuthResolver {
         if (!user) {
             throw new Error("could not find user");
         }
-        // if (!user.isEmailConfirmed || !user.isActive) {
-        //     throw new Error("please confirm your email before logging in");
+        if (!user.password) {
+            throw new Error("user must create password");
+        }
+        // if (!user.isActive) {
+        //     throw new Error("user is not active");
         // }
 
         const valid = await compare(password, user.password);

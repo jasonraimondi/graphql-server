@@ -5,17 +5,43 @@ import v4 from "uuid/v4";
 import { Role } from "@/entity/role";
 import { Permission } from "@/entity/permission";
 
+interface ICreateUser {
+    email: string;
+    uuid?: string;
+    firstName?: string;
+    lastName?: string;
+}
+
 @ObjectType()
 @Entity()
 export class User {
+    static create({ uuid, email, firstName, lastName }: ICreateUser) {
+        const user = new User(uuid);
+        user.email = email;
+        user.firstName = firstName;
+        user.lastName = lastName;
+        return user;
+    }
+
     constructor(uuid?: string) {
         if (!uuid) uuid = v4();
         this.uuid = uuid;
+        this.tokenVersion = 0;
+        this.isEmailConfirmed = false;
+        this.roles = [];
+        this.permissions = [];
     }
 
     @Field(() => ID)
     @PrimaryColumn("uuid")
     uuid: string;
+
+    @Field()
+    @Column("text", { unique: true })
+    email: string;
+
+    @Column({ nullable: true })
+    password?: string;
 
     @Field({ nullable: true })
     @Column({ nullable: true })
@@ -26,25 +52,14 @@ export class User {
     lastName?: string;
 
     @Field()
-    @Column("text", { unique: true })
-    email: string;
-
-    @Column()
-    password: string;
-
-    @Field()
-    @Column("boolean", { default: true })
-    isActive: boolean;
-
-    @Field()
-    @Column("boolean", { default: false })
+    @Column("boolean")
     isEmailConfirmed: boolean;
 
-    @Field(() => Date!, { nullable: true })
+    @Field(() => Date, { nullable: true })
     @Column({ nullable: true })
-    lastLoginAt: Date;
+    lastLoginAt?: Date;
 
-    @Column("int", { default: 0 })
+    @Column("int")
     tokenVersion: number;
 
     @ManyToMany(() => Role)
@@ -54,6 +69,11 @@ export class User {
     @ManyToMany(() => Permission)
     @JoinTable({ name: "user_permission" })
     permissions: Permission[];
+
+    @Field()
+    isActive(@Root() user: User): boolean {
+        return user.isEmailConfirmed && !!user.password;
+    }
 
     @Field(() => String!, { nullable: true })
     name(@Root() {firstName, lastName}: User): string|null {

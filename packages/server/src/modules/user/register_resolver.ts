@@ -43,7 +43,7 @@ export class RegisterResolver {
         user.firstName = firstName;
         user.lastName = lastName;
         user.email = email;
-        user.password = await hash(password, 12);
+        user.password = password ? await hash(password, 12) : undefined;
         try {
             await this.userRepository.save(user);
             const userConfirmation = new EmailConfirmation();
@@ -59,11 +59,10 @@ export class RegisterResolver {
 
     private async guardAgainstDuplicateUser(email: string, uuid?: string) {
         const falsy = () => false;
-        const { findById, findByEmail } = this.userRepository;
-        if (uuid && await findById(uuid).catch(falsy)) {
+        if (uuid && await this.userRepository.findById(uuid).catch(falsy)) {
             throw new Error("duplicate uuid for user");
         }
-        if (await findByEmail(email).catch(falsy)) {
+        if (await this.userRepository.findByEmail(email).catch(falsy)) {
             throw new Error("duplicate email for user");
         }
     }

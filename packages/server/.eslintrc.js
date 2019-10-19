@@ -38,5 +38,6 @@ module.exports = {
             "error",
             "always"
         ],
+        "no-empty": ["error", { "allowEmptyCatch": true }],
     }
 };
