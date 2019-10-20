@@ -7,16 +7,16 @@ services:
 #  redis:
 #    image: redis:alpine
 #
-#  postgres:
-#    image: postgres:alpine
-#    environment:
-#      POSTGRES_DB: typegraphql
-#      POSTGRES_USER: typegraphql
-#      POSTGRES_PASSWORD: typegraphql
-#    ports:
-#      - 5432:5432
-#    volumes:
-#      - pg-data-graphql:/var/lib/postgresql/data
+  postgres:
+    image: postgres:alpine
+    environment:
+      POSTGRES_DB: typegraphql
+      POSTGRES_USER: typegraphql
+      POSTGRES_PASSWORD: typegraphql
+    ports:
+      - 5432:5432
+    volumes:
+      - pg-data-graphql:/var/lib/postgresql/data
 
   mailhog:
     image: mailhog/mailhog
@@ -24,5 +24,5 @@ services:
       - 8025:8025
       - 1025:1025
 
-#volumes:
-#  pg-data-graphql:
+volumes:
+  pg-data-graphql:
