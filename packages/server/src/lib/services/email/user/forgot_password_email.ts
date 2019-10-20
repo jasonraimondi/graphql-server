@@ -15,10 +15,10 @@ export class ForgotPasswordEmail {
             I'll help you find a new ${uuid} ${user.email} ${forgotPassword.expiresAt(forgotPassword)}}
         `;
         const html = `
-<div>
-    <p>Forgot your password?</p>
-    <p>I'll Help you find a new one ${uuid} ${user.email} ${forgotPassword.expiresAt(forgotPassword)}</p>
-</div>
+            <div>
+                <p>Forgot your password?</p>
+                <p>I'll Help you find a new one ${uuid} ${user.email} ${forgotPassword.expiresAt(forgotPassword)}</p>
+            </div>
         `;
         await this.mailer.send({
             to: user.email,

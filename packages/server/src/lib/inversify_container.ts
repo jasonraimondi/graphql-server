@@ -8,7 +8,7 @@ import { UserResolver } from "@/modules/user/user_resolver";
 import { RepositoryFactory} from "@/lib/repository/repository_factory";
 import { ForgotPasswordEmail } from "@/lib/services/email/user/forgot_password_email";
 import { ServiceFactory } from "@/lib/services/service_factory";
-import { NodemailerService } from "@/lib/services/email/email_service";
+import { NodemailerService } from "@/lib/services/email/nodemailer_mailer";
 import { EmailConfirmationResolver } from "@/modules/user/email_confirmation_resolver";
 import { RegisterResolver } from "@/modules/user/register_resolver";
 import { RegisterEmail } from "@/lib/services/email/user/register_email";
@@ -43,8 +43,8 @@ export class InversifyContainer extends Container {
         this.bind<RegisterEmail>(SERVICES.RegisterEmail).to(RegisterEmail);
 
         // repositories
-        this.bind<ForgotPasswordRepository>(REPOSITORIES.ForgotPassword).toConstantValue(this.repositoryFactory.forgotPasswordRepository);
-        this.bind<UserRepository>(REPOSITORIES.User).toConstantValue(this.repositoryFactory.userRepository);
-        this.bind<EmailConfirmationRepository>(REPOSITORIES.EmailConfirmation).toConstantValue(this.repositoryFactory.userConfirmationRepository);
+        this.bind<ForgotPasswordRepository>(REPOSITORIES.ForgotPassword).toConstantValue(this.repositoryFactory.forgotPassword);
+        this.bind<UserRepository>(REPOSITORIES.User).toConstantValue(this.repositoryFactory.user);
+        this.bind<EmailConfirmationRepository>(REPOSITORIES.EmailConfirmation).toConstantValue(this.repositoryFactory.emailConfirmation);
     }
 }

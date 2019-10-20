@@ -5,7 +5,6 @@ import "module-alias/register";
 import { ApolloServer } from "apollo-server-express";
 import cookieParser from "cookie-parser";
 import cors from "cors";
-import nodemailer from "nodemailer";
 import { buildSchema } from "type-graphql";
 import { createConnection } from "typeorm";
 import { InversifyExpressServer } from "inversify-express-utils";
@@ -58,7 +57,7 @@ const expressMiddlewares = (app: Application) => {
     await import("./controllers/auth_controller");
     await import("./controllers/home_controller");
     const repositoryFactory = new RepositoryFactory(await createConnection());
-    const serviceFactory = new ServiceFactory(nodemailer.createTransport(process.env.MAILER));
+    const serviceFactory = new ServiceFactory(process.env.MAILER);
     const container = new InversifyContainer(repositoryFactory, serviceFactory);
     const server = new InversifyExpressServer(container);
     server.setConfig(expressMiddlewares);

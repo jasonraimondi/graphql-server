@@ -1,11 +1,15 @@
-import { injectable } from "inversify";
+import nodemailer from "nodemailer";
 import Mail from "nodemailer/lib/mailer";
+import { injectable } from "inversify";
 
 import { IMailer, Options } from "@/lib/services/email/mailer";
 
 @injectable()
 export class NodemailerService implements IMailer {
-    constructor(private readonly transporter: Mail) {
+    private readonly transporter: Mail;
+
+    constructor(mailerURL: string) {
+        this.transporter = nodemailer.createTransport(mailerURL)
     }
 
     async send(options: Options) {

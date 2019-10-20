@@ -8,15 +8,16 @@ export class RepositoryFactory {
     constructor(private readonly connection: Connection) {
     }
 
-    get forgotPasswordRepository(): ForgotPasswordRepository {
+    get forgotPassword(): ForgotPasswordRepository {
+        console.log("hiya");
         return this.connection.getCustomRepository<ForgotPasswordRepository>(ForgotPasswordRepository);
     }
 
-    get userRepository(): UserRepository {
+    get user(): UserRepository {
         return this.connection.getCustomRepository<UserRepository>(UserRepository);
     }
 
-    get userConfirmationRepository(): EmailConfirmationRepository {
+    get emailConfirmation(): EmailConfirmationRepository {
         return this.connection.getCustomRepository<EmailConfirmationRepository>(EmailConfirmationRepository);
     }
 }
