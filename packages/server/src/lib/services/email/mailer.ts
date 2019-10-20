@@ -2,6 +2,6 @@ import Mail from "nodemailer/lib/mailer";
 
 export interface Options extends Mail.Options {}
 
-export interface Mailer {
-    send(options: Options): Promise<any>;
+export interface IMailer {
+    send(options: Options): Promise<any>
 }

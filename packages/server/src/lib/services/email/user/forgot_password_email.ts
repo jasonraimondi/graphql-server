@@ -1,12 +1,12 @@
 import { inject, injectable } from "inversify";
 
-import { EmailService } from "@/lib/services/email/email_service";
-import { TYPES } from "@/lib/repository/repository_factory";
 import { ForgotPassword } from "@/entity/forgot_password_entity";
+import { IMailer } from "@/lib/services/email/mailer";
+import { SERVICES } from "@/lib/constants/inversify";
 
 @injectable()
 export class ForgotPasswordEmail {
-    constructor(@inject(TYPES.EmailService) private readonly emailService: EmailService) {}
+    constructor(@inject(SERVICES.Mailer) private readonly mailer: IMailer) {}
 
 
     async send(forgotPassword: ForgotPassword): Promise<any> {
@@ -20,7 +20,7 @@ export class ForgotPasswordEmail {
     <p>I'll Help you find a new one ${uuid} ${user.email} ${forgotPassword.expiresAt(forgotPassword)}</p>
 </div>
         `;
-        await this.emailService.send({
+        await this.mailer.send({
             to: user.email,
             from: "noreply@example.com",
             subject: `Forgot your password${user.firstName ? " "+user.firstName : null }?`,

@@ -13,7 +13,7 @@ import bodyParser from "body-parser";
 
 import { RepositoryFactory } from "@/lib/repository/repository_factory";
 import { ResolveTime } from "@/lib/middleware/resolve_time";
-import { Container } from "@/lib/inversify";
+import { InversifyContainer } from "@/lib/inversify_container";
 import { ServiceFactory } from "@/lib/services/service_factory";
 import { Application } from "express";
 
@@ -21,7 +21,7 @@ if (!process.env.MAILER) throw new Error("process.env.MAILER is undefined");
 
 if (process.env.ENABLE_DEBUGGING) console.log("DEBUGGING ENABLED");
 
-const initializeApolloServer = async (container: Container) => {
+const initializeApolloServer = async (container: InversifyContainer) => {
     const apolloMiddlewares = (enableDebugging: boolean) => {
         const result = [];
         if (enableDebugging) result.push(ResolveTime);
@@ -59,7 +59,7 @@ const expressMiddlewares = (app: Application) => {
     await import("./controllers/home_controller");
     const repositoryFactory = new RepositoryFactory(await createConnection());
     const serviceFactory = new ServiceFactory(nodemailer.createTransport(process.env.MAILER));
-    const container = new Container(repositoryFactory, serviceFactory);
+    const container = new InversifyContainer(repositoryFactory, serviceFactory);
     const server = new InversifyExpressServer(container);
     server.setConfig(expressMiddlewares);
     const app = server.build();

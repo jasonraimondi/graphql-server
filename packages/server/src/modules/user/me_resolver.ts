@@ -3,15 +3,15 @@ import { Ctx, Query, Resolver, UseMiddleware } from "type-graphql";
 import { inject, injectable } from "inversify";
 
 import { isAuth } from "@/lib/middleware/is_auth";
-import { TYPES } from "@/lib/repository/repository_factory";
 import { User } from "@/entity/user_entity";
 import { MyContext } from "@/lib/types/my_context";
 import { UserRepository } from "@/lib/repository/user/user_repository";
+import { REPOSITORIES } from "@/lib/constants/inversify";
 
 @injectable()
 @Resolver()
 export class MeResolver {
-    constructor(@inject(TYPES.UserRepository) private userRepository: UserRepository) {
+    constructor(@inject(REPOSITORIES.User) private userRepository: UserRepository) {
     }
 
     @Query(() => User)

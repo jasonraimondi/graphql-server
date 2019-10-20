@@ -4,18 +4,6 @@ import { EmailConfirmationRepository } from "@/lib/repository/user/email_confirm
 import { UserRepository } from "@/lib/repository/user/user_repository";
 import { ForgotPasswordRepository } from "@/lib/repository/user/forgot_password_repository";
 
-export const TYPES = {
-    AuthResolver: Symbol("AuthResolver"),
-    EmailService: Symbol("EmailService"),
-    ForgotPasswordEmail: Symbol("ForgotPasswordEmail"),
-    RegisterEmail: Symbol("RegisterEmail"),
-
-    UserRepository: Symbol("UserRepository"),
-    UserConfirmationRepository: Symbol("UserConfirmationRepository"),
-    ForgotPasswordRepository: Symbol("ForgotPasswordRepository"),
-
-};
-
 export class RepositoryFactory {
     constructor(private readonly connection: Connection) {
     }

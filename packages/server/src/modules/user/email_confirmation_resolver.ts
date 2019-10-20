@@ -1,16 +1,16 @@
 import { inject, injectable } from "inversify";
 import { Arg, Mutation, Resolver } from "type-graphql";
 
-import { TYPES } from "@/lib/repository/repository_factory";
 import { EmailConfirmationRepository } from "@/lib/repository/user/email_confirmation_repository";
 import { UserRepository } from "@/lib/repository/user/user_repository";
+import { REPOSITORIES } from "@/lib/constants/inversify";
 
 @injectable()
 @Resolver()
 export class EmailConfirmationResolver {
     constructor(
-        @inject(TYPES.UserRepository) private userRepository: UserRepository,
-        @inject(TYPES.UserConfirmationRepository) private userConfirmationRepository: EmailConfirmationRepository
+        @inject(REPOSITORIES.User) private userRepository: UserRepository,
+        @inject(REPOSITORIES.EmailConfirmation) private userConfirmationRepository: EmailConfirmationRepository
     ) {
     }
 

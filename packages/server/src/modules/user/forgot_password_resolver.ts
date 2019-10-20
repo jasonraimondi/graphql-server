@@ -7,16 +7,16 @@ import { SendForgotPasswordInput, UpdatePasswordInput } from "@/modules/user/aut
 import { ForgotPasswordEmail } from "@/lib/services/email/user/forgot_password_email";
 import { UserRepository } from "@/lib/repository/user/user_repository";
 import { ForgotPasswordRepository } from "@/lib/repository/user/forgot_password_repository";
-import { TYPES } from "@/lib/repository/repository_factory";
 import { User } from "@/entity/user_entity";
+import { REPOSITORIES, SERVICES } from "@/lib/constants/inversify";
 
 @injectable()
 @Resolver()
 export class ForgotPasswordResolver {
     constructor(
-        @inject(TYPES.UserRepository) private userRepository: UserRepository,
-        @inject(TYPES.ForgotPasswordRepository) private forgotPasswordRepository: ForgotPasswordRepository,
-        @inject(TYPES.ForgotPasswordEmail) private forgotPasswordEmail: ForgotPasswordEmail,
+        @inject(REPOSITORIES.User) private userRepository: UserRepository,
+        @inject(REPOSITORIES.ForgotPassword) private forgotPasswordRepository: ForgotPasswordRepository,
+        @inject(SERVICES.ForgotPasswordEmail) private forgotPasswordEmail: ForgotPasswordEmail,
     ) {
     }
 

@@ -5,16 +5,16 @@ import { inject, injectable } from "inversify";
 import { User } from "@/entity/user_entity";
 import { LoginInput } from "@/modules/user/auth/login_input";
 import { LoginResponse } from "@/modules/user/auth/login_response";
-import { TYPES} from "@/lib/repository/repository_factory";
 import { createAccessToken, createRefreshToken, sendRefreshToken } from "@/lib/services/auth/auth_service";
 import { MyContext } from "@/lib/types/my_context";
 import { UserRepository } from "@/lib/repository/user/user_repository";
+import { REPOSITORIES } from "@/lib/constants/inversify";
 
 @injectable()
 @Resolver(User)
 export class AuthResolver {
 
-    constructor(@inject(TYPES.UserRepository) private userRepository: UserRepository) {
+    constructor(@inject(REPOSITORIES.User) private userRepository: UserRepository) {
     }
 
     @Mutation(() => LoginResponse)
