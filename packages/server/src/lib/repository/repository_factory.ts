@@ -9,7 +9,6 @@ export class RepositoryFactory {
     }
 
     get forgotPassword(): ForgotPasswordRepository {
-        console.log("hiya");
         return this.connection.getCustomRepository<ForgotPasswordRepository>(ForgotPasswordRepository);
     }
 

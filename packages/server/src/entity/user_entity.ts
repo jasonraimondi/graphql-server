@@ -5,7 +5,7 @@ import v4 from "uuid/v4";
 import { Role } from "@/entity/role_entity";
 import { Permission } from "@/entity/permission_entity";
 
-interface ICreateUser {
+export interface ICreateUser {
     email: string;
     uuid?: string;
     firstName?: string;
@@ -18,7 +18,7 @@ interface ICreateUser {
 export class User {
     static create({ uuid, email, firstName, lastName }: ICreateUser) {
         const user = new User(uuid);
-        user.email = email;
+        user.email = email.toLowerCase();
         user.firstName = firstName;
         user.lastName = lastName;
         return user;

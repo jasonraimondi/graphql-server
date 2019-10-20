@@ -6,13 +6,13 @@ import { verify } from "jsonwebtoken";
 import { createAccessToken, createRefreshToken, sendRefreshToken } from "@/lib/services/auth/auth_service";
 import { STATUS_CODES } from "@/lib/constants/status_codes";
 import { UserRepository } from "@/lib/repository/user/user_repository";
-import { REPOSITORIES } from "@/lib/constants/inversify";
+import { REPOSITORY } from "@/lib/constants/inversify";
 
 const FAILED_TO_REFRESH = { success: false, accessToken: "" };
 
 @controller("/auth")
 export class AuthController {
-    constructor(@inject(REPOSITORIES.User) private userRepository: UserRepository) {}
+    constructor(@inject(REPOSITORY.UserRepository) private userRepository: UserRepository) {}
 
     @httpPost("/refresh_token")
     async refreshToken(req: Request, res: Response) {

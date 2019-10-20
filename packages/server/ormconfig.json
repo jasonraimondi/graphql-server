@@ -1,4 +1,4 @@
-[
+
   {
     "name": "default",
     "type": "sqlite",
@@ -8,15 +8,4 @@
     "entities": [
       "src/entity/*_entity.ts"
     ]
-  },
-  {
-    "name": "testing",
-    "type": "sqlite",
-    "database": ":memory:",
-    "logging": true,
-    "synchronize": true,
-    "entities": [
-      "src/entity/*_entity.ts"
-    ]
   }
-]

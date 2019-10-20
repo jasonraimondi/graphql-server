@@ -8,13 +8,13 @@ import { LoginResponse } from "@/modules/user/auth/login_response";
 import { createAccessToken, createRefreshToken, sendRefreshToken } from "@/lib/services/auth/auth_service";
 import { MyContext } from "@/lib/types/my_context";
 import { UserRepository } from "@/lib/repository/user/user_repository";
-import { REPOSITORIES } from "@/lib/constants/inversify";
+import { REPOSITORY } from "@/lib/constants/inversify";
 
 @injectable()
 @Resolver(User)
 export class AuthResolver {
 
-    constructor(@inject(REPOSITORIES.User) private userRepository: UserRepository) {
+    constructor(@inject(REPOSITORY.UserRepository) private userRepository: UserRepository) {
     }
 
     @Mutation(() => LoginResponse)

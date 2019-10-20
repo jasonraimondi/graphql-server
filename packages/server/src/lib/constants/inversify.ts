@@ -1,9 +1,9 @@
-export const REPOSITORIES = {
-    User: Symbol("User"),
-    EmailConfirmation: Symbol("EmailConfirmation"),
-    ForgotPassword: Symbol("ForgotPassword"),
+export const REPOSITORY = {
+    UserRepository: Symbol("UserRepository"),
+    EmailConfirmationRepository: Symbol("EmailConfirmationRepository"),
+    ForgotPasswordRepository: Symbol("ForgotPasswordRepository"),
 };
-export const SERVICES = {
+export const SERVICE = {
     Mailer: Symbol("Mailer"),
     ForgotPasswordEmail: Symbol("ForgotPasswordEmail"),
     RegisterEmail: Symbol("RegisterEmail"),

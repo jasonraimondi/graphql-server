@@ -16,11 +16,16 @@ export class TestingInversifyContainer extends InversifyContainer {
         this.rebindContainer();
     }
 
-    static async create(options: ConnectionOptions = {
-        type: "sqlite",
-        database: ":memory:",
-    }) {
-        const repositoryFactory = new RepositoryFactory(await createConnection(options));
+    static async create(entities: any[] = []) {
+        const options: ConnectionOptions = {
+            type: "sqlite",
+            database: ":memory:",
+            logging: true,
+            synchronize: true,
+            entities
+        };
+        const connection = await createConnection(options);
+        const repositoryFactory = new RepositoryFactory(connection);
         const serviceFactory = new TestingServiceFactory();
         return new TestingInversifyContainer(
             repositoryFactory,

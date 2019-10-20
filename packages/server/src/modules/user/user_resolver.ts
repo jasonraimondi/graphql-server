@@ -3,12 +3,12 @@ import { inject, injectable } from "inversify";
 
 import { User } from "@/entity/user_entity";
 import { UserRepository } from "@/lib/repository/user/user_repository";
-import { REPOSITORIES } from "@/lib/constants/inversify";
+import { REPOSITORY } from "@/lib/constants/inversify";
 
 @injectable()
 @Resolver(User)
 export class UserResolver {
-    constructor(@inject(REPOSITORIES.User) private userRepository: UserRepository) {
+    constructor(@inject(REPOSITORY.UserRepository) private userRepository: UserRepository) {
     }
 
     @Query(() => User)

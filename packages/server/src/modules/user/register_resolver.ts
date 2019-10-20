@@ -9,15 +9,15 @@ import { User } from "@/entity/user_entity";
 import { EmailConfirmationRepository } from "@/lib/repository/user/email_confirmation_repository";
 import { UserRepository } from "@/lib/repository/user/user_repository";
 import { EmailConfirmation } from "@/entity/email_confirmation_entity";
-import { REPOSITORIES, SERVICES } from "@/lib/constants/inversify";
+import { REPOSITORY, SERVICE } from "@/lib/constants/inversify";
 
 @injectable()
 @Resolver()
 export class RegisterResolver {
     constructor(
-        @inject(REPOSITORIES.User) private userRepository: UserRepository,
-        @inject(REPOSITORIES.EmailConfirmation) private userConfirmationRepository: EmailConfirmationRepository,
-        @inject(SERVICES.RegisterEmail) private registerEmail: RegisterEmail,
+        @inject(REPOSITORY.UserRepository) private userRepository: UserRepository,
+        @inject(REPOSITORY.EmailConfirmationRepository) private userConfirmationRepository: EmailConfirmationRepository,
+        @inject(SERVICE.RegisterEmail) private registerEmail: RegisterEmail,
     ) {}
 
     @Mutation(() => Boolean!)
@@ -38,6 +38,7 @@ export class RegisterResolver {
     async register(
         @Arg("data") registerInput: RegisterInput,
     ): Promise<RegisterResponse> {
+        registerInput.email = registerInput.email.toLowerCase();
         const { email, uuid, password } = registerInput;
         await this.guardAgainstDuplicateUser(email, uuid);
         const user = User.create(registerInput);

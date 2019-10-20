@@ -2,11 +2,11 @@ import { inject, injectable } from "inversify";
 
 import { ForgotPassword } from "@/entity/forgot_password_entity";
 import { IMailer } from "@/lib/services/email/mailer";
-import { SERVICES } from "@/lib/constants/inversify";
+import { SERVICE } from "@/lib/constants/inversify";
 
 @injectable()
 export class ForgotPasswordEmail {
-    constructor(@inject(SERVICES.Mailer) private readonly mailer: IMailer) {}
+    constructor(@inject(SERVICE.Mailer) private readonly mailer: IMailer) {}
 
 
     async send(forgotPassword: ForgotPassword): Promise<any> {

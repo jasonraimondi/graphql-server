@@ -8,15 +8,15 @@ import { ForgotPasswordEmail } from "@/lib/services/email/user/forgot_password_e
 import { UserRepository } from "@/lib/repository/user/user_repository";
 import { ForgotPasswordRepository } from "@/lib/repository/user/forgot_password_repository";
 import { User } from "@/entity/user_entity";
-import { REPOSITORIES, SERVICES } from "@/lib/constants/inversify";
+import { REPOSITORY, SERVICE } from "@/lib/constants/inversify";
 
 @injectable()
 @Resolver()
 export class ForgotPasswordResolver {
     constructor(
-        @inject(REPOSITORIES.User) private userRepository: UserRepository,
-        @inject(REPOSITORIES.ForgotPassword) private forgotPasswordRepository: ForgotPasswordRepository,
-        @inject(SERVICES.ForgotPasswordEmail) private forgotPasswordEmail: ForgotPasswordEmail,
+        @inject(REPOSITORY.UserRepository) private userRepository: UserRepository,
+        @inject(REPOSITORY.ForgotPasswordRepository) private forgotPasswordRepository: ForgotPasswordRepository,
+        @inject(SERVICE.ForgotPasswordEmail) private forgotPasswordEmail: ForgotPasswordEmail,
     ) {
     }
 

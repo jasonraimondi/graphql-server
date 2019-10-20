@@ -3,14 +3,14 @@ import { Arg, Mutation, Resolver } from "type-graphql";
 
 import { EmailConfirmationRepository } from "@/lib/repository/user/email_confirmation_repository";
 import { UserRepository } from "@/lib/repository/user/user_repository";
-import { REPOSITORIES } from "@/lib/constants/inversify";
+import { REPOSITORY } from "@/lib/constants/inversify";
 
 @injectable()
 @Resolver()
 export class EmailConfirmationResolver {
     constructor(
-        @inject(REPOSITORIES.User) private userRepository: UserRepository,
-        @inject(REPOSITORIES.EmailConfirmation) private userConfirmationRepository: EmailConfirmationRepository
+        @inject(REPOSITORY.UserRepository) private userRepository: UserRepository,
+        @inject(REPOSITORY.EmailConfirmationRepository) private userConfirmationRepository: EmailConfirmationRepository
     ) {
     }
 
