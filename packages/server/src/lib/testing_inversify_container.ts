@@ -1,4 +1,4 @@
-import { ConnectionOptions, createConnection } from "typeorm";
+import { createConnection } from "typeorm";
 import { interfaces } from "inversify";
 import v4 from "uuid/v4";
 
@@ -17,16 +17,15 @@ export class TestingInversifyContainer extends InversifyContainer {
         this.rebindContainer();
     }
 
-    static async create(entities: any[] = []) {
-        const options: ConnectionOptions = {
+    static async create(entities: any[] = [], logging = false) {
+        const connection = await createConnection({
             name: v4(),
             type: "sqlite",
             database: ":memory:",
-            logging: true,
+            logging,
             synchronize: true,
             entities
-        };
-        const connection = await createConnection(options);
+        });
         const repositoryFactory = new RepositoryFactory(connection);
         const serviceFactory = new TestingServiceFactory();
         return new TestingInversifyContainer(
