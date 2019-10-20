@@ -1,5 +1,6 @@
 import { ConnectionOptions, createConnection } from "typeorm";
 import { interfaces } from "inversify";
+import v4 from "uuid/v4";
 
 import { InversifyContainer } from "@/lib/inversify_container";
 import { RepositoryFactory } from "@/lib/repository/repository_factory";
@@ -18,6 +19,7 @@ export class TestingInversifyContainer extends InversifyContainer {
 
     static async create(entities: any[] = []) {
         const options: ConnectionOptions = {
+            name: v4(),
             type: "sqlite",
             database: ":memory:",
             logging: true,
