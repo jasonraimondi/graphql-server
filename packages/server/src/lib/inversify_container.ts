@@ -28,8 +28,6 @@ export class InversifyContainer extends Container {
     }
 
     protected bindContainer(): void {
-        console.log("BINDING CONTAINER");
-
         // app resolvers
         this.bind(AppResolver).toSelf();
         this.bind(AuthResolver).toSelf();
