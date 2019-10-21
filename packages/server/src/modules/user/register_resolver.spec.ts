@@ -1,15 +1,15 @@
-import { TestingInversifyContainer } from "@/lib/testing_inversify_container";
-import { User } from "@/entity/user_entity";
-import { Role } from "@/entity/role_entity";
-import { ForgotPassword } from "@/entity/forgot_password_entity";
-import { Permission } from "@/entity/permission_entity";
-import { EmailConfirmation } from "@/entity/email_confirmation_entity";
-import { RegisterResolver } from "@/modules/user/register_resolver";
-import { RegisterInput } from "@/modules/user/auth/register_input";
-import { REPOSITORY } from "@/lib/constants/inversify";
-import { EmailConfirmationRepository } from "@/lib/repository/user/email_confirmation_repository";
-import { validate } from "class-validator";
-import { UserRepository } from "@/lib/repository/user/user_repository";
+import {TestingInversifyContainer} from "@/lib/testing_inversify_container";
+import {User} from "@/entity/user_entity";
+import {Role} from "@/entity/role_entity";
+import {ForgotPassword} from "@/entity/forgot_password_entity";
+import {Permission} from "@/entity/permission_entity";
+import {EmailConfirmation} from "@/entity/email_confirmation_entity";
+import {RegisterResolver} from "@/modules/user/register_resolver";
+import {RegisterInput} from "@/modules/user/auth/register_input";
+import {REPOSITORY} from "@/lib/constants/inversify";
+import {EmailConfirmationRepository} from "@/lib/repository/user/email_confirmation_repository";
+import {validate} from "class-validator";
+import {UserRepository} from "@/lib/repository/user/user_repository";
 
 describe("register_resolver", () => {
     const entities = [User, Role, Permission, ForgotPassword, EmailConfirmation];
@@ -25,7 +25,7 @@ describe("register_resolver", () => {
     describe("register function", () => {
         test("valid register input is validated correctly", async () => {
             // arrange
-            const validInput =new RegisterInput();
+            const validInput = new RegisterInput();
             validInput.email = "jason@raimondi.us";
 
             // act
@@ -37,7 +37,7 @@ describe("register_resolver", () => {
 
         test("invalid register input has errors thrown", async () => {
             // arrange
-            const validInput =new RegisterInput();
+            const validInput = new RegisterInput();
             validInput.email = "jason@raimondi";
 
             // act
@@ -120,7 +120,7 @@ describe("register_resolver", () => {
             const result = resolver.resentConfirmEmail("jason@raimondi.us");
 
             // assert
-            await expect(result).rejects.toThrow(new RegExp(`Could not find any entity of type "EmailConfirmation"`));
+            await expect(result).rejects.toThrow(new RegExp('Could not find any entity of type "EmailConfirmation"'));
         });
     });
 });

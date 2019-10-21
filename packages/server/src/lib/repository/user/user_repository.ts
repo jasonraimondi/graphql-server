@@ -23,6 +23,7 @@ export class UserRepository extends Repository<User> implements IUserRepository 
     }
 
     async incrementToken(userId: string): Promise<void> {
-        await this.increment({ uuid: userId }, "tokenVersion", 1);
+        const foo = await this.increment({ uuid: userId }, "tokenVersion", 1);
+        console.log(foo);
     }
 }

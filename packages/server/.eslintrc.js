@@ -30,10 +30,7 @@ module.exports = {
             "unix"
         ],
         "no-unused-vars": "error",
-        "quotes": [
-            "error",
-            "double"
-        ],
+        "quotes": ["error", "double", { "allowTemplateLiterals": true, "avoidEscape": true }],
         "semi": [
             "error",
             "always"

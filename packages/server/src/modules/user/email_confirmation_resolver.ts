@@ -4,6 +4,7 @@ import { Arg, Mutation, Resolver } from "type-graphql";
 import { EmailConfirmationRepository } from "@/lib/repository/user/email_confirmation_repository";
 import { UserRepository } from "@/lib/repository/user/user_repository";
 import { REPOSITORY } from "@/lib/constants/inversify";
+import { VerifyEmailInput } from "@/modules/user/auth/verify_email_input";
 
 @injectable()
 @Resolver()
@@ -15,9 +16,8 @@ export class EmailConfirmationResolver {
     }
 
     @Mutation(() => Boolean!)
-    async verifyUserConfirmation(
-        @Arg("uuid") uuid: string,
-        @Arg("email") email: string,
+    async verifyEmailConfirmation(
+        @Arg("data") { uuid, email }: VerifyEmailInput
     ): Promise<boolean> {
         const userConfirmation = await this.userConfirmationRepository.findById(uuid);
         if (userConfirmation.user.email !== email) {

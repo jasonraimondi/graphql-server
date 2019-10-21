@@ -86,12 +86,12 @@ export class User {
 
     async setPassword(password?: string) {
         this.password = undefined;
-        if (password) this.password = await hash(password, 12)
+        if (password) this.password = await hash(password, 12);
     }
 
     async verify(password: string) {
         if (!this.password) throw new Error("user must create password");
         if (!this.isActive(this)) throw new Error("user is not active");
-        if (!await compare(password, this.password)) throw new Error("invalid password")
+        if (!await compare(password, this.password)) throw new Error("invalid password");
     }
 }

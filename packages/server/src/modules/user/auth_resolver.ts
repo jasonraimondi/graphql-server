@@ -44,6 +44,7 @@ export class AuthResolver {
     @Mutation(() => Boolean)
     async revokeRefreshToken(@Arg("userId", () => String) userId: string) {
         try {
+            await this.userRepository.findById(userId);
             await this.userRepository.incrementToken(userId);
             return true;
         } catch {

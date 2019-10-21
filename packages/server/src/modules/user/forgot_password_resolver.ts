@@ -20,6 +20,20 @@ export class ForgotPasswordResolver {
     }
 
     @Mutation(() => Boolean)
+    async sendForgotPasswordEmail(@Arg("data") { email }: SendForgotPasswordInput) {
+        const user = await this.userRepository.findByEmail(email);
+        const forgotPassword = await this.getForgotPasswordForUser(user);
+        try {
+            await this.forgotPasswordRepository.save(forgotPassword);
+            await this.forgotPasswordEmail.send(forgotPassword);
+            return true;
+        } catch (e) {
+            console.log(e);
+        }
+        return false;
+    }
+
+    @Mutation(() => Boolean)
     async updatePasswordFromToken(@Arg("data") { token, email, password }: UpdatePasswordInput) {
         const forgotPassword = await this.forgotPasswordRepository.findById(token);
         const { user } = forgotPassword;
@@ -30,20 +44,6 @@ export class ForgotPasswordResolver {
         try {
             await this.userRepository.save(user);
             await this.forgotPasswordRepository.delete(forgotPassword.uuid);
-            return true;
-        } catch (e) {
-            console.log(e);
-        }
-        return false;
-    }
-
-    @Mutation(() => Boolean)
-    async sendForgotPasswordEmail(@Arg("data") { email }: SendForgotPasswordInput) {
-        const user = await this.userRepository.findByEmail(email);
-        const forgotPassword = await this.getForgotPasswordForUser(user);
-        try {
-            await this.forgotPasswordRepository.save(forgotPassword);
-            await this.forgotPasswordEmail.send(forgotPassword);
             return true;
         } catch (e) {
             console.log(e);

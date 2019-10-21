@@ -7,10 +7,11 @@ import { User } from "@/entity/user_entity";
 @ObjectType()
 @Entity()
 export class ForgotPassword {
-    constructor(uuid?: string) {
+    constructor(uuid?: string, user?: User) {
         if (!uuid) uuid = v4();
         this.uuid = uuid;
-        const validFor = 60 * 60 * 24 * 7; // 7 days
+        if (user) this.user = user;
+        const validFor = 60 * 60 * 24 * 1; // 7 days
         this.expiresAt = new Date(Date.now() + (validFor * 1000));
     }
 
