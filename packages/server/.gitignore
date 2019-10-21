@@ -1,4 +1,7 @@
-.idea
-node_modules
-dist
-tmp
+.env
+
+.idea/
+coverage/
+dist/
+node_modules/
+tmp/

@@ -19,8 +19,8 @@ describe("register_resolver", () => {
         userRepository = container.get<UserRepository>(REPOSITORY.UserRepository);
     });
 
-    describe("users function", () => {
-        test("user is registered with email confirmation", async () => {
+    describe("user", () => {
+        test("resolve user by uuid", async () => {
             // arrange
             const resolver = container.get<UserResolver>(UserResolver);
             const user = await userRepository.save(User.create({ email: "jason@raimondi.us" }));
@@ -35,8 +35,8 @@ describe("register_resolver", () => {
         });
     });
 
-    describe("users function", () => {
-        test("user is registered with email confirmation", async () => {
+    describe("users", () => {
+        test("resolve list users", async () => {
             // arrange
             const resolver = container.get<UserResolver>(UserResolver);
             await userRepository.save(User.create({ email: "jason@raimondi.us" }));
