@@ -1,0 +1,27 @@
+language: node_js
+node_js:
+  - "12"
+
+cache: yarn
+
+install:
+  - yarn global add lerna jest now
+  - lerna bootstrap
+
+matrix:
+  include:
+    - name: Blog Pipeline
+      env: PACKAGE_LOCATION=packages/blog PACKAGE_NAME=lerna-monorepo-blog
+    - name: Shop Pipeline
+      env: PACKAGE_LOCATION=packages/shop PACKAGE_NAME=lerna-monorepo-shop
+
+script:
+  - cd $PACKAGE_LOCATION
+  - yarn test
+  - yarn build
+
+deploy:
+  provider: script
+  script: now public --token $NOW_TOKEN
+  skip_cleanup: true
+  app: $PACKAGE_NAME

@@ -1,7 +1,0 @@
-query Me {
-    me {
-        uuid
-        name
-        email
-    }
-}
