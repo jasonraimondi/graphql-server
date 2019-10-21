@@ -41,7 +41,7 @@ export class RegisterResolver {
         registerInput.email = registerInput.email.toLowerCase();
         const { email, uuid, password } = registerInput;
         await this.guardAgainstDuplicateUser(email, uuid);
-        const user = User.create(registerInput);
+        const user = await User.create(registerInput);
         user.password = password ? await hash(password, 12) : undefined;
         try {
             await this.userRepository.save(user);

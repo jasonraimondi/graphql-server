@@ -1,5 +1,4 @@
 import { Arg, Ctx, Mutation, Resolver } from "type-graphql";
-import { compare } from "bcryptjs";
 import { inject, injectable } from "inversify";
 
 import { User } from "@/entity/user_entity";
@@ -24,21 +23,7 @@ export class AuthResolver {
     ): Promise<LoginResponse> {
         const user = await this.userRepository.findByEmail(email);
 
-        if (!user) {
-            throw new Error("could not find user");
-        }
-        if (!user.password) {
-            throw new Error("user must create password");
-        }
-        // if (!user.isActive) {
-        //     throw new Error("user is not active");
-        // }
-
-        const valid = await compare(password, user.password);
-
-        if (!valid) {
-            throw new Error("bad password");
-        }
+        await user.verify(password);
 
         sendRefreshToken(res, createRefreshToken(user));
 

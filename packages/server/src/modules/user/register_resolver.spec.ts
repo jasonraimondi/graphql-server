@@ -53,7 +53,7 @@ describe("register_resolver", () => {
             const input = new RegisterInput();
             input.uuid = "b031765a-a950-4a0d-92dd-ecd12788f3a6n";
             input.email = "jason@raimondi.us";
-            await userRepository.save(User.create(input));
+            await userRepository.save(await User.create(input));
 
             // act
             const result = resolver.register(input);
@@ -67,7 +67,7 @@ describe("register_resolver", () => {
             const resolver = container.get<RegisterResolver>(RegisterResolver);
             const input = new RegisterInput();
             input.email = "jason@raimondi.us";
-            await userRepository.save(User.create(input));
+            await userRepository.save(await User.create(input));
 
             // act
             const result = resolver.register(input);

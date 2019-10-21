@@ -4,6 +4,7 @@ import v4 from "uuid/v4";
 
 import { Role } from "@/entity/role_entity";
 import { Permission } from "@/entity/permission_entity";
+import { compare, hash } from "bcryptjs";
 
 export interface ICreateUser {
     email: string;
@@ -16,11 +17,12 @@ export interface ICreateUser {
 @ObjectType()
 @Entity()
 export class User {
-    static create({ uuid, email, firstName, lastName }: ICreateUser) {
+    static async create({ uuid, email, firstName, lastName, password }: ICreateUser) {
         const user = new User(uuid);
         user.email = email.toLowerCase();
         user.firstName = firstName;
         user.lastName = lastName;
+        await user.setPassword(password);
         return user;
     }
 
@@ -80,5 +82,16 @@ export class User {
         if (firstName) name.push(firstName);
         if (lastName) name.push(lastName);
         return name.join(" ") || null;
+    }
+
+    async setPassword(password?: string) {
+        this.password = undefined;
+        if (password) this.password = await hash(password, 12)
+    }
+
+    async verify(password: string) {
+        if (!this.password) throw new Error("user must create password");
+        if (!this.isActive(this)) throw new Error("user is not active");
+        if (!await compare(password, this.password)) throw new Error("invalid password")
     }
 }

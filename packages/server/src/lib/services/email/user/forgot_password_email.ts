@@ -12,12 +12,12 @@ export class ForgotPasswordEmail {
     async send(forgotPassword: ForgotPassword): Promise<any> {
         const { uuid, user } = forgotPassword;
         const text = `
-            I'll help you find a new ${uuid} ${user.email} ${forgotPassword.expiresAt(forgotPassword)}}
+            I'll help you find a new ${uuid} ${user.email} ${forgotPassword.expiresAt}}
         `;
         const html = `
             <div>
                 <p>Forgot your password?</p>
-                <p>I'll Help you find a new one ${uuid} ${user.email} ${forgotPassword.expiresAt(forgotPassword)}</p>
+                <p>I'll Help you find a new one ${uuid} ${user.email} ${forgotPassword.expiresAt}</p>
             </div>
         `;
         await this.mailer.send({
