@@ -1,27 +1,16 @@
 language: node_js
 node_js:
   - "12"
-
-cache: yarn
-
+cache:
+  directories:
+    - node_modules
 install:
-  - yarn global add lerna jest now
-  - lerna bootstrap
-
-matrix:
-  include:
-    - name: Blog Pipeline
-      env: PACKAGE_LOCATION=packages/blog PACKAGE_NAME=lerna-monorepo-blog
-    - name: Shop Pipeline
-      env: PACKAGE_LOCATION=packages/shop PACKAGE_NAME=lerna-monorepo-shop
-
+  - npm ci
+before_script:
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
 script:
-  - cd $PACKAGE_LOCATION
-  - yarn test
-  - yarn build
-
-deploy:
-  provider: script
-  script: now public --token $NOW_TOKEN
-  skip_cleanup: true
-  app: $PACKAGE_NAME
+  - npm run test
+after_script:
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT

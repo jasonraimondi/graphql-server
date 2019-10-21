@@ -20,7 +20,8 @@ module.exports = {
         "@typescript-eslint"
     ],
     "rules": {
-        "@typescript-eslint/no-unused-vars": "error",
+        "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
+        "no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
         "indent": [
             "error",
             4
@@ -29,7 +30,6 @@ module.exports = {
             "error",
             "unix"
         ],
-        "no-unused-vars": "error",
         "quotes": ["error", "double", { "allowTemplateLiterals": true, "avoidEscape": true }],
         "semi": [
             "error",

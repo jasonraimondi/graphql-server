@@ -9,7 +9,7 @@ export class NodemailerService implements IMailer {
     private readonly transporter: Mail;
 
     constructor(mailerURL: string) {
-        this.transporter = nodemailer.createTransport(mailerURL)
+        this.transporter = nodemailer.createTransport(mailerURL);
     }
 
     async send(options: Options) {

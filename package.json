@@ -3,7 +3,7 @@
   "main": "src/server.ts",
   "version": "0.0.1-rc.1",
   "author": "Jason Raimondi <jason@raimondi.us>",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "private": true,
   "scripts": {
     "test": "jest",
