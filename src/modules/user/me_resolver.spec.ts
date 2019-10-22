@@ -29,7 +29,7 @@ describe("me resolver", () => {
         resolver = container.get(MeResolver);
     });
 
-    test.skip("user logs in successfully", async () => {
+    test.skip("resolves authenticated user successfully", async () => {
         // arrange
         // act
         const result = await resolver.me(context);

@@ -58,9 +58,9 @@ describe("auth_resolver", () => {
 
         test("invalid jwt throws exception", async () => {
             // arrange
-            const result = authService.refreshToken("not-a-jwt");
+            const result = authService.updateAccessToken("not-a-jwt");
             // assert
-            await expect(result).rejects.toThrowError("invalid token");
+            await expect(result).rejects.toThrowError("invalid refresh token");
         });
     });
 });

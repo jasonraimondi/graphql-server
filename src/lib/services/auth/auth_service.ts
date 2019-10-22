@@ -12,26 +12,26 @@ export class AuthService {
     constructor(@inject(REPOSITORY.UserRepository) private userRepository: UserRepository) {
     }
 
-    async refreshToken(token: string) {
+    async updateAccessToken(refreshToken: string) {
         let payload: any;
         try {
-            payload = verify(token, ENV.refreshTokenSecret);
+            payload = verify(refreshToken, ENV.refreshTokenSecret);
         } catch (e) {
-            throw new Error("invalid token");
+            throw new Error("invalid refresh token");
         }
 
-        // token is valid and
-        // we can send back an access token
+        // refreshToken is valid and
+        // we can send back an access refreshToken
         const uuid = payload && payload.userId ? payload.userId : "NOT_FOUND";
         const user = await this.userRepository.findById(uuid);
 
         if (user.tokenVersion !== payload.tokenVersion) {
-            throw new Error("invalid token");
+            throw new Error("invalid refresh token");
         }
 
         return {
             accessToken: this.createAccessToken(user),
-            refreshToken: this.createRefreshToken(user),
+            user,
         };
     }
 
@@ -51,12 +51,15 @@ export class AuthService {
             },
         );
     }
+
+    sendRefreshToken(res: Response, user?: User) {
+        let token = "";
+        if (user) token = this.createRefreshToken(user!);
+        res.cookie("jid", token, {
+            // domain: "localhost",
+            httpOnly: true,
+            path: "/refresh_token",
+        });
+    }
 }
 
-export const sendRefreshToken = (res: Response, token: string) => {
-    res.cookie("jid", token, {
-        // domain: "localhost",
-        httpOnly: true,
-        path: "/refresh_token",
-    });
-};

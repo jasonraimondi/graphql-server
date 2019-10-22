@@ -7,7 +7,7 @@ import { LoginResponse } from "@/modules/user/auth/login_response";
 import { MyContext } from "@/lib/types/my_context";
 import { UserRepository } from "@/lib/repository/user/user_repository";
 import { REPOSITORY, SERVICE } from "@/lib/constants/inversify";
-import { AuthService, sendRefreshToken } from "@/lib/services/auth/auth_service";
+import { AuthService } from "@/lib/services/auth/auth_service";
 
 @injectable()
 @Resolver(User)
@@ -27,7 +27,7 @@ export class AuthResolver {
 
         await user.verify(password);
 
-        sendRefreshToken(res, this.authService.createRefreshToken(user));
+        this.authService.sendRefreshToken(res, user);
 
         await this.userRepository.incrementLastLoginAt(user);
 
@@ -39,7 +39,7 @@ export class AuthResolver {
 
     @Mutation(() => Boolean)
     async logout(@Ctx() { res }: MyContext) {
-        sendRefreshToken(res, "");
+        this.authService.sendRefreshToken(res, undefined);
         return true;
     }
 
