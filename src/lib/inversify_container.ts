@@ -16,6 +16,7 @@ import { UserRepository } from "@/lib/repository/user/user_repository";
 import { ForgotPasswordRepository } from "@/lib/repository/user/forgot_password_repository";
 import { REPOSITORY, SERVICE } from "@/lib/constants/inversify";
 import { IMailer } from "@/lib/services/email/mailer";
+import { AuthService } from "@/lib/services/auth/auth_service";
 
 export class InversifyContainer extends Container {
     public constructor(
@@ -39,6 +40,9 @@ export class InversifyContainer extends Container {
 
         // services
         this.bind<IMailer>(SERVICE.Mailer).toConstantValue(this.serviceFactory.emailService);
+        this.bind<AuthService>(SERVICE.AuthService).to(AuthService);
+
+        // emails
         this.bind<ForgotPasswordEmail>(SERVICE.ForgotPasswordEmail).to(ForgotPasswordEmail);
         this.bind<RegisterEmail>(SERVICE.RegisterEmail).to(RegisterEmail);
 

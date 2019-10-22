@@ -1,6 +1,7 @@
 import "dotenv/config";
 import "reflect-metadata";
 import "module-alias/register";
+
 import { createConnection } from "typeorm";
 import { InversifyExpressServer } from "inversify-express-utils";
 
@@ -8,16 +9,16 @@ import { RepositoryFactory } from "@/lib/repository/repository_factory";
 import { InversifyContainer } from "@/lib/inversify_container";
 import { ServiceFactory } from "@/lib/services/service_factory";
 import { expressMiddlewares, initializeApolloServer } from "@/init";
-
-if (!process.env.MAILER) throw new Error("process.env.MAILER is undefined");
-
-if (process.env.ENABLE_DEBUGGING) console.log("DEBUGGING ENABLED");
+import { ENV } from "@/lib/constants/config";
 
 (async () => {
+    if (ENV.enableDebugging) {
+        console.log("DEBUGGING ENABLED");
+    }
     await import("./controllers/auth_controller");
     await import("./controllers/home_controller");
     const repositoryFactory = new RepositoryFactory(await createConnection());
-    const serviceFactory = new ServiceFactory(process.env.MAILER);
+    const serviceFactory = new ServiceFactory(ENV.mailerURL);
     const container = new InversifyContainer(repositoryFactory, serviceFactory);
     const server = new InversifyExpressServer(container);
     server.setConfig(expressMiddlewares);

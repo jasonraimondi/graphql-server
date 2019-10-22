@@ -7,6 +7,7 @@ import cookieParser from "cookie-parser";
 
 import { InversifyContainer } from "@/lib/inversify_container";
 import { ResolveTime } from "@/lib/middleware/resolve_time";
+import { ENV } from "@/lib/constants/config";
 
 export const initializeApolloServer = async (container: InversifyContainer) => {
     const apolloMiddlewares = (enableDebugging: boolean) => {
@@ -17,7 +18,7 @@ export const initializeApolloServer = async (container: InversifyContainer) => {
 
     const schema = await buildSchema({
         container,
-        globalMiddlewares: apolloMiddlewares(!!process.env.ENABLE_DEBUGGING),
+        globalMiddlewares: apolloMiddlewares(ENV.enableDebugging),
         resolvers: [__dirname + "/modules/**/*_resolver.ts"],
     });
 
@@ -34,7 +35,7 @@ export const expressMiddlewares = (app: Application) => {
     app.use(bodyParser.json());
     app.use(
         cors({
-            origin: process.env.CORS,
+            origin: ENV.cors,
             credentials: true,
         }),
     );
