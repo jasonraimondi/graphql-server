@@ -23,7 +23,7 @@ export class TestingInversifyContainer extends InversifyContainer {
             type: "sqlite",
             database: ":memory:",
             logging,
-            synchronize: true,
+            synchronize: entities.length > 0,
             entities
         });
         const repositoryFactory = new RepositoryFactory(connection);
