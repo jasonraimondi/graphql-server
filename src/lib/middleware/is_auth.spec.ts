@@ -23,6 +23,16 @@ describe("is_auth", () => {
         };
     });
 
+    test("updates context", async () => {
+        // arrange
+        // act
+        const params: any = { context };
+        const next: any = () => {};
+
+        // assert
+        await expect(isAuth(params, next)).rejects.toThrowError("not authenticated");
+    });
+
     test("guards against missing token", async () => {
         // arrange
         // act

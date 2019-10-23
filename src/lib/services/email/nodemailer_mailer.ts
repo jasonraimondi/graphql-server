@@ -13,6 +13,6 @@ export class NodemailerService implements IMailer {
     }
 
     async send(options: Options) {
-        return await this.transporter.sendMail(options);
+        return await this.transporter.sendMail(options).catch(() => { throw new Error("mailer error"); });
     }
 }

@@ -2,7 +2,7 @@ import { ResolveTime } from "@/lib/middleware/resolve_time";
 
 describe("resolve_time", () => {
 
-    const timeout = (ms: number) => {
+    const sleep = (ms: number) => {
         return new Promise(resolve => setTimeout(resolve, ms));
     };
 
@@ -10,13 +10,15 @@ describe("resolve_time", () => {
         // arrange
         const action: any = {
             info: {
+                is_testing: true,
                 parentType: {
                     name: "Name"
                 },
                 fieldName: "FieldName"
             }
         };
-        const next = async () => await timeout(5);
+        const timeout = 5;
+        const next = async () => await sleep(timeout);
 
         // act
         const {
@@ -25,7 +27,7 @@ describe("resolve_time", () => {
         } = await ResolveTime(action, next);
 
         // assert
-        expect(resolveTime).toBeGreaterThan(5);
+        expect(resolveTime).toBeGreaterThan(timeout);
         expect(message).toMatch(/Name\.FieldName \[\d+ ms]/);
     });
 });
