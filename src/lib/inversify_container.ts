@@ -5,7 +5,7 @@ import { AppResolver } from "@/modules/app/app_resolver";
 import { ForgotPasswordResolver } from "@/modules/user/forgot_password_resolver";
 import { MeResolver } from "@/modules/user/me_resolver";
 import { UserResolver } from "@/modules/user/user_resolver";
-import { RepositoryFactory} from "@/lib/repository/repository_factory";
+import { RepositoryFactory } from "@/lib/repository/repository_factory";
 import { ForgotPasswordEmail } from "@/lib/services/email/user/forgot_password_email";
 import { ServiceFactory } from "@/lib/services/service_factory";
 import { EmailConfirmationResolver } from "@/modules/user/email_confirmation_resolver";

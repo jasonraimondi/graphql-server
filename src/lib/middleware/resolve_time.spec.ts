@@ -27,7 +27,7 @@ describe("resolve_time", () => {
         } = await ResolveTime(action, next);
 
         // assert
-        expect(resolveTime).toBeGreaterThan(timeout);
+        expect(resolveTime).toBeGreaterThanOrEqual(timeout);
         expect(message).toMatch(/Name\.FieldName \[\d+ ms]/);
     });
 });

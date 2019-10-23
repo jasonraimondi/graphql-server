@@ -6,9 +6,9 @@ import { Permission } from "@/entity/permission_entity";
 import { REPOSITORY } from "@/lib/constants/inversify";
 import { EmailConfirmation } from "@/entity/email_confirmation_entity";
 import { TestingInversifyContainer } from "@/lib/testing_inversify_container";
-import {EmailConfirmationResolver} from "@/modules/user/email_confirmation_resolver";
-import {EmailConfirmationRepository} from "@/lib/repository/user/email_confirmation_repository";
-import {VerifyEmailInput} from "@/modules/user/auth/verify_email_input";
+import { EmailConfirmationResolver } from "@/modules/user/email_confirmation_resolver";
+import { EmailConfirmationRepository } from "@/lib/repository/user/email_confirmation_repository";
+import { VerifyEmailInput } from "@/modules/user/auth/verify_email_input";
 
 describe("email confirmation resolver", () => {
     const entities = [User, Role, Permission, ForgotPassword, EmailConfirmation];
