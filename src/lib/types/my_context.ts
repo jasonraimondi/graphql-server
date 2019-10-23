@@ -8,6 +8,7 @@ export interface MyContext {
     auth?: {
         userId: string,
         email: string,
+        isEmailConfirmed: boolean,
     };
     container: InversifyContainer;
 }

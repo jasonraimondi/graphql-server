@@ -1,6 +1,5 @@
 import { MiddlewareFn } from "type-graphql";
 import { verify } from "jsonwebtoken";
-import jwtDecode from "jwt-decode";
 
 import { MyContext } from "@/lib/types/my_context";
 import { ENV } from "@/lib/constants/config";
@@ -12,13 +11,15 @@ export const isAuth: MiddlewareFn<MyContext> = async ({ context }, next) => {
     }
     try {
         const token = authorization.split(" ")[1];
-        const verif = verify(token, ENV.accessTokenSecret);
-        console.log({verif});
-        const decoded = await jwtDecode<{ userId: string }>(token);
-        console.log(context, decoded);
+        const verif: any = verify(token, ENV.accessTokenSecret);
+        context.auth = {
+            userId: verif.userId,
+            email: verif.email,
+            isEmailConfirmed: verif.isEmailConfirmed,
+        };
     } catch (err) {
         throw new Error("not authenticated");
     }
 
-    return next();
+    return await next();
 };

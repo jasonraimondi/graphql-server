@@ -7,9 +7,8 @@ import { TestingInversifyContainer } from "@/lib/testing_inversify_container";
 import { MyContext } from "@/lib/types/my_context";
 import { mockRequest, mockResponse } from "@/modules/user/auth_resolver.spec";
 import { MeResolver } from "@/modules/user/me_resolver";
-import { REPOSITORY, SERVICE } from "@/lib/constants/inversify";
+import { REPOSITORY } from "@/lib/constants/inversify";
 import { UserRepository } from "@/lib/repository/user/user_repository";
-import { AuthService } from "@/lib/services/auth/auth_service";
 
 describe("me resolver", () => {
     const entities = [User, Role, Permission, ForgotPassword, EmailConfirmation];
@@ -30,13 +29,17 @@ describe("me resolver", () => {
 
     test("successfully returns user response", async () => {
         const userRepository = container.get<UserRepository>(REPOSITORY.UserRepository);
-        const authService = container.get<AuthService>(SERVICE.AuthService);
         const user = await userRepository.save(await User.create({ email: "jason@raimondi.us", }));
 
         context = {
-            req: mockRequest(`bearer ${authService.createAccessToken(user)}`),
+            req: mockRequest(),
             res: mockResponse(),
             container,
+            auth: {
+                userId: user.uuid,
+                email: user.email,
+                isEmailConfirmed: user.isEmailConfirmed,
+            }
         };
 
         // act
@@ -49,9 +52,9 @@ describe("me resolver", () => {
         expect(result!.isEmailConfirmed).toBe(user.isEmailConfirmed);
     });
 
-    test("invalid token throws", async () => {
+    test("blank authorization throws", async () => {
         context = {
-            req: mockRequest("bearer foobar-valid-jwt"),
+            req: mockRequest(),
             res: mockResponse(),
             container,
         };
@@ -60,14 +63,6 @@ describe("me resolver", () => {
         const result = resolver.me(context);
 
         // assert
-        await expect(result).rejects.toThrowError("jwt malformed");
-    });
-
-    test("blank authorization token returns null", async () => {
-        // act
-        const result = await resolver.me(context);
-
-        // assert
-        expect(result).toBeNull();
+        await expect(result).rejects.toThrowError(/Cannot read property 'userId' of undefined/);
     });
 });

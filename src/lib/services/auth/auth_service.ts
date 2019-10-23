@@ -37,7 +37,12 @@ export class AuthService {
 
 
     createAccessToken(user: User) {
-        return sign({ userId: user.uuid }, ENV.accessTokenSecret, {
+        const payload = {
+            userId: user.uuid,
+            email: user.email,
+            isEmailConfirmed: user.isEmailConfirmed
+        };
+        return sign(payload, ENV.accessTokenSecret, {
             expiresIn: "15m",
         });
     }
