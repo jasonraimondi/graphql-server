@@ -1,9 +1,5 @@
 import { buildSchema } from "type-graphql";
 import { ApolloServer } from "apollo-server-express";
-import { Application } from "express";
-import bodyParser from "body-parser";
-import cors from "cors";
-import cookieParser from "cookie-parser";
 
 import { InversifyContainer } from "@/lib/inversify_container";
 import { ResolveTime } from "@/lib/middleware/resolve_time";
@@ -26,18 +22,4 @@ export const initializeApolloServer = async (container: InversifyContainer) => {
         schema,
         context: ({ req, res }) => ({ req, res, container }),
     });
-};
-
-export const expressMiddlewares = (app: Application) => {
-    app.use(bodyParser.urlencoded({
-        extended: true,
-    }));
-    app.use(bodyParser.json());
-    app.use(
-        cors({
-            origin: ENV.cors,
-            credentials: true,
-        }),
-    );
-    app.use(cookieParser());
 };

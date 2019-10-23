@@ -9,7 +9,7 @@ import { EmailConfirmation } from "@/entity/email_confirmation_entity";
 import { REPOSITORY, SERVICE } from "@/lib/constants/inversify";
 import { UserRepository } from "@/lib/repository/user/user_repository";
 import { AuthService } from "@/lib/services/auth/auth_service";
-import { application } from "@/app";
+import { application } from "@/lib/express";
 
 describe("auth controller", () => {
     const entities = [User, Role, Permission, ForgotPassword, EmailConfirmation];
@@ -19,6 +19,8 @@ describe("auth controller", () => {
     let authService: AuthService;
 
     beforeEach(async () => {
+        await import("./auth_controller");
+
         container = await TestingInversifyContainer.create(entities);
         userRepository = container.get<UserRepository>(REPOSITORY.UserRepository);
         authService = container.get<AuthService>(SERVICE.AuthService);
@@ -26,7 +28,7 @@ describe("auth controller", () => {
 
     test("refresh token updates successfully", async () => {
         // arrange
-        const app = await application(container, ["./controllers/auth_controller"]);
+        const app = await application(container);
 
         const user = await userRepository.save(await User.create({ email: "jason@raimondi.us", }));
         const refreshToken = authService.createRefreshToken(user);
@@ -50,7 +52,7 @@ describe("auth controller", () => {
 
     test("missing token (jid) fails", async () => {
         // arrange
-        const app = await application(container, ["./controllers/auth_controller"]);
+        const app = await application(container);
 
         // act
         const response = await request(app)
@@ -65,7 +67,7 @@ describe("auth controller", () => {
     });
 
     test("invalid token (jid) fails", async () => {
-        const app = await application(container, ["./controllers/auth_controller"]);
+        const app = await application(container);
 
         // arrange
         const invalidToken = "invalid-token";
