@@ -18,7 +18,7 @@ export class MeResolver {
     @Query(() => User)
     @UseMiddleware(isAuth)
     async me(@Ctx() context: MyContext) {
-        const authorization = context.req.headers["authorization"];
+        const authorization = context.req.get("authorization");
         if (!authorization) {
             return null;
         }

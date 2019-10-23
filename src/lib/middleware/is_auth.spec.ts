@@ -1,5 +1,3 @@
-import produce from "immer";
-
 import { User } from "@/entity/user_entity";
 import { Role } from "@/entity/role_entity";
 import { Permission } from "@/entity/permission_entity";
@@ -37,12 +35,14 @@ describe("is_auth", () => {
 
     test("guards against invalid token", async () => {
         // arrange
+        context = {
+            req: mockRequest("bearer foobar-valid-jwt"),
+            res: mockResponse(),
+            container,
+        };
+
         // act
-        const newContext = produce(context, oldContext => {
-            oldContext.req = mockRequest("bearer foobar-valid-jwt");
-            return oldContext;
-        });
-        const params: any = { context: newContext };
+        const params: any = { context };
         const next: any = () => {};
 
         // assert

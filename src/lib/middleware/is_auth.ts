@@ -5,18 +5,10 @@ import { MyContext } from "@/lib/types/my_context";
 import { ENV } from "@/lib/constants/config";
 
 export const isAuth: MiddlewareFn<MyContext> = async ({ context }, next) => {
-    let authorization: string;
-
-    // try {
-    authorization = context.req.get("authorization");
-    // } catch (e) {
-    //     throw new Error("not authenticated");
-    // }
-
+    const authorization = context.req.get("authorization");
     if (!authorization) {
         throw new Error("not authenticated");
     }
-
     try {
         const token = authorization.split(" ")[1];
         const payload = verify(token, ENV.accessTokenSecret);
