@@ -4,8 +4,14 @@ import { verify } from "jsonwebtoken";
 import { MyContext } from "@/lib/types/my_context";
 import { ENV } from "@/lib/constants/config";
 
-export const isAuth: MiddlewareFn<MyContext> = ({ context }, next) => {
-    const authorization = context.req.headers["authorization"];
+export const isAuth: MiddlewareFn<MyContext> = async ({ context }, next) => {
+    let authorization: string;
+
+    // try {
+    authorization = context.req.get("authorization");
+    // } catch (e) {
+    //     throw new Error("not authenticated");
+    // }
 
     if (!authorization) {
         throw new Error("not authenticated");
@@ -21,4 +27,3 @@ export const isAuth: MiddlewareFn<MyContext> = ({ context }, next) => {
 
     return next();
 };
-

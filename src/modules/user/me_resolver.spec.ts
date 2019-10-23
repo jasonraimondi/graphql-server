@@ -18,12 +18,8 @@ describe("me resolver", () => {
     beforeEach(async () => {
         container = await TestingInversifyContainer.create(entities);
         context = {
-            res: mockRequest({
-                headers: {
-                    Authorization: "Bearer foobarpoop",
-                },
-            }),
-            req: mockResponse(),
+            req: mockRequest("Bearer foobarpoop"),
+            res: mockResponse(),
             container,
         };
         resolver = container.get(MeResolver);

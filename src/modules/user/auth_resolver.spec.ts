@@ -13,14 +13,11 @@ import {LoginInput} from "@/modules/user/auth/login_input";
 import {MyContext} from "@/lib/types/my_context";
 
 
-export const mockRequest = (authHeader?: any, sessionData?: any) => ({
+export const mockRequest = (authHeader?: string, sessionData?: any) => ({
     get(name: string) {
         if (name === "authorization") return authHeader;
         return null;
     },
-    headers: jest.fn().mockReturnValue({
-        authorization: "bearer iamaheader"
-    }),
     cookie: jest.fn().mockReturnValue({
         authorization: "bearer iamacookie"
     }),
