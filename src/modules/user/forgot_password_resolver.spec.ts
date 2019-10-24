@@ -6,20 +6,20 @@ import { User } from "@/entity/user/user_entity";
 import { REPOSITORY } from "@/lib/constants/inversify";
 import { IForgotPasswordRepository } from "@/lib/repository/user/forgot_password_repository";
 import { IUserRepository } from "@/lib/repository/user/user_repository";
-import { TestingInversifyContainer } from "@/lib/testing_inversify_container";
+import { TestingContainer } from "@test/test_container";
 import { SendForgotPasswordInput, UpdatePasswordInput } from "@/modules/user/auth/forgot_password_input";
 import { ForgotPasswordResolver } from "@/modules/user/forgot_password_resolver";
 
 describe("forgot password resolver", () => {
     const entities = [User, Role, Permission, ForgotPassword, EmailConfirmation];
 
-    let container: TestingInversifyContainer;
+    let container: TestingContainer;
     let resolver: ForgotPasswordResolver;
     let userRepository: IUserRepository;
     let forgotPasswordRepository: IForgotPasswordRepository;
 
     beforeEach(async () => {
-        container = await TestingInversifyContainer.create(entities);
+        container = await TestingContainer.create(entities);
         userRepository = container.get<IUserRepository>(REPOSITORY.UserRepository);
         forgotPasswordRepository = container.get<IForgotPasswordRepository>(REPOSITORY.ForgotPasswordRepository);
         resolver = container.get(ForgotPasswordResolver);

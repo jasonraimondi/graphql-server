@@ -7,39 +7,22 @@ import { ForgotPassword } from "@/entity/user/forgot_password_entity";
 import { User } from "@/entity/user/user_entity";
 import { REPOSITORY } from "@/lib/constants/inversify";
 import { IUserRepository } from "@/lib/repository/user/user_repository";
-import { TestingInversifyContainer } from "@/lib/testing_inversify_container";
+import { TestingContainer } from "@test/test_container";
 import { MyContext } from "@/lib/types/my_context";
 import { LoginInput } from "@/modules/user/auth/login_input";
 import { AuthResolver } from "@/modules/user/auth_resolver";
-
-export const mockRequest = (authHeader?: string, sessionData?: any) => ({
-    get(name: string) {
-        if (name === "authorization") return authHeader;
-        return null;
-    },
-    cookie: jest.fn().mockReturnValue({
-        authorization: "bearer iamacookie"
-    }),
-    session: {data: sessionData},
-});
-
-export const mockResponse = () => {
-    const res: any = {};
-    res.status = jest.fn().mockReturnValue(res);
-    res.json = jest.fn().mockReturnValue(res);
-    return res;
-};
+import { mockRequest, mockResponse } from "@test/mock_application";
 
 describe("auth_resolver", () => {
     const entities = [User, Role, Permission, ForgotPassword, EmailConfirmation];
 
-    let container: TestingInversifyContainer;
+    let container: TestingContainer;
     let userRepository: IUserRepository;
     let context: MyContext;
     let resolver: AuthResolver;
 
     beforeEach(async () => {
-        container = await TestingInversifyContainer.create(entities);
+        container = await TestingContainer.create(entities);
         userRepository = container.get<IUserRepository>(REPOSITORY.UserRepository);
         context = {
             res: mockRequest(),

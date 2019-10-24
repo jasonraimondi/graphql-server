@@ -2,12 +2,13 @@ import { createConnection } from "typeorm";
 import { interfaces } from "inversify";
 import v4 from "uuid/v4";
 
-import { InversifyContainer } from "@/lib/inversify_container";
-import { RepositoryFactory } from "@/lib/repository/repository_factory";
+import { Container } from "@/lib/inversify_container";
 import { ServiceFactory } from "@/lib/services/service_factory";
 import { TestingServiceFactory } from "@/lib/services/testing_service_factory";
+import { RepositoryFactory } from "@/lib/repository/repository_factory";
 
-export class TestingInversifyContainer extends InversifyContainer {
+
+export class TestingContainer extends Container {
     private constructor(
         protected readonly repositoryFactory: RepositoryFactory,
         protected readonly serviceFactory: ServiceFactory,
@@ -28,7 +29,7 @@ export class TestingInversifyContainer extends InversifyContainer {
         });
         const repositoryFactory = new RepositoryFactory(connection);
         const serviceFactory = new TestingServiceFactory();
-        return new TestingInversifyContainer(
+        return new TestingContainer(
             repositoryFactory,
             serviceFactory,
         );

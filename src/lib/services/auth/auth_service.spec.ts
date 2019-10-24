@@ -6,19 +6,19 @@ import { Permission } from "@/entity/role/permission_entity";
 import { REPOSITORY, SERVICE } from "@/lib/constants/inversify";
 import { ForgotPassword } from "@/entity/user/forgot_password_entity";
 import { EmailConfirmation } from "@/entity/user/email_confirmation_entity";
-import { TestingInversifyContainer } from "@/lib/testing_inversify_container";
+import { TestingContainer } from "@test/test_container";
 import { AuthService } from "@/lib/services/auth/auth_service";
 import { IUserRepository } from "@/lib/repository/user/user_repository";
 
 describe("auth_resolver", () => {
     const entities = [User, Role, Permission, ForgotPassword, EmailConfirmation];
 
-    let container: TestingInversifyContainer;
+    let container: TestingContainer;
     let authService: AuthService;
     let userRepository: IUserRepository;
 
     beforeEach(async () => {
-        container = await TestingInversifyContainer.create(entities);
+        container = await TestingContainer.create(entities);
         authService = container.get(SERVICE.AuthService);
         userRepository = container.get<IUserRepository>(REPOSITORY.UserRepository);
     });

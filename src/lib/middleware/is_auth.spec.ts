@@ -3,19 +3,19 @@ import { Role } from "@/entity/role/role_entity";
 import { Permission } from "@/entity/role/permission_entity";
 import { ForgotPassword } from "@/entity/user/forgot_password_entity";
 import { EmailConfirmation } from "@/entity/user/email_confirmation_entity";
-import { TestingInversifyContainer } from "@/lib/testing_inversify_container";
+import { TestingContainer } from "@test/test_container";
 import { MyContext } from "@/lib/types/my_context";
-import { mockRequest, mockResponse } from "@/modules/user/auth_resolver.spec";
 import { isAuth } from "@/lib/middleware/is_auth";
+import { mockRequest, mockResponse } from "@test/mock_application";
 
 describe("is_auth", () => {
     const entities = [User, Role, Permission, ForgotPassword, EmailConfirmation];
 
-    let container: TestingInversifyContainer;
+    let container: TestingContainer;
     let context: MyContext;
 
     beforeEach(async () => {
-        container = await TestingInversifyContainer.create(entities);
+        container = await TestingContainer.create(entities);
         context = {
             res: mockResponse(),
             req: mockRequest(),

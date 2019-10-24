@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 
-import { InversifyContainer } from "@/lib/inversify_container";
+import { Container } from "@/lib/inversify_container";
 
 export interface MyContext {
     req: Request|any;
@@ -10,5 +10,5 @@ export interface MyContext {
         email: string,
         isEmailConfirmed: boolean,
     };
-    container: InversifyContainer;
+    container: Container;
 }

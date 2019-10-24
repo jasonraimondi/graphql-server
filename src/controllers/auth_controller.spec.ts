@@ -1,6 +1,6 @@
 import request from "supertest";
 
-import { TestingInversifyContainer } from "@/lib/testing_inversify_container";
+import { TestingContainer } from "@test/test_container";
 import { User } from "@/entity/user/user_entity";
 import { Role } from "@/entity/role/role_entity";
 import { Permission } from "@/entity/role/permission_entity";
@@ -14,14 +14,14 @@ import { application } from "@/lib/express";
 describe("auth controller", () => {
     const entities = [User, Role, Permission, ForgotPassword, EmailConfirmation];
 
-    let container: TestingInversifyContainer;
+    let container: TestingContainer;
     let userRepository: IUserRepository;
     let authService: AuthService;
 
     beforeEach(async () => {
         await import("./auth_controller");
 
-        container = await TestingInversifyContainer.create(entities);
+        container = await TestingContainer.create(entities);
         userRepository = container.get<IUserRepository>(REPOSITORY.UserRepository);
         authService = container.get<AuthService>(SERVICE.AuthService);
     });
@@ -43,8 +43,8 @@ describe("auth controller", () => {
 
         // assert
         expect(response.header["set-cookie"].length).toBe(1);
-        let JID_JWT_ = /jid=[a-zA-Z\d\-_]+.[a-zA-Z\d\-_]+.[a-zA-Z\d\-_]+; Path=\/refresh_token; HttpOnly/;
-        expect(response.header["set-cookie"][0]).toMatch(JID_JWT_);
+        const JID_JWT_COOKIE = /jid=[a-zA-Z\d\-_]+.[a-zA-Z\d\-_]+.[a-zA-Z\d\-_]+; Path=\/refresh_token; HttpOnly/;
+        expect(response.header["set-cookie"][0]).toMatch(JID_JWT_COOKIE);
         // expect(response.header["set-cookie"][0].includes(refreshToken)).toBeFalsy();
         expect(response.body.success).toBe(true);
         expect(response.body.accessToken).toMatch(/[a-zA-Z\d]+.[a-zA-Z\d]+.[a-zA-Z\d]+/);

@@ -1,4 +1,4 @@
-import { Container, interfaces } from "inversify";
+import { Container as InversifyContainer, interfaces } from "inversify";
 
 import { AuthResolver } from "@/modules/user/auth_resolver";
 import { AppResolver } from "@/modules/app/app_resolver";
@@ -18,7 +18,7 @@ import { REPOSITORY, SERVICE } from "@/lib/constants/inversify";
 import { IMailer } from "@/lib/services/email/mailer";
 import { AuthService } from "@/lib/services/auth/auth_service";
 
-export class InversifyContainer extends Container {
+export class Container extends InversifyContainer {
     public constructor(
         protected readonly repositoryFactory: RepositoryFactory,
         protected readonly serviceFactory: ServiceFactory,

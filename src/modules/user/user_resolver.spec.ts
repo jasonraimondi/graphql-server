@@ -1,4 +1,4 @@
-import { TestingInversifyContainer } from "@/lib/testing_inversify_container";
+import { TestingContainer } from "@test/test_container";
 import { User } from "@/entity/user/user_entity";
 import { Role } from "@/entity/role/role_entity";
 import { ForgotPassword } from "@/entity/user/forgot_password_entity";
@@ -11,11 +11,11 @@ import { REPOSITORY } from "@/lib/constants/inversify";
 describe("register_resolver", () => {
     const entities = [User, Role, Permission, ForgotPassword, EmailConfirmation];
 
-    let container: TestingInversifyContainer;
+    let container: TestingContainer;
     let userRepository: IUserRepository;
 
     beforeEach(async () => {
-        container = await TestingInversifyContainer.create(entities);
+        container = await TestingContainer.create(entities);
         userRepository = container.get<IUserRepository>(REPOSITORY.UserRepository);
     });
 

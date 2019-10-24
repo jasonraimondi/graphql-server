@@ -1,11 +1,11 @@
 import { buildSchema } from "type-graphql";
 import { ApolloServer } from "apollo-server-express";
 
-import { InversifyContainer } from "@/lib/inversify_container";
+import { Container } from "@/lib/inversify_container";
 import { ResolveTime } from "@/lib/middleware/resolve_time";
 import { ENV } from "@/lib/constants/config";
 
-export const initializeApolloServer = async (container: InversifyContainer) => {
+export const initializeApolloServer = async (container: Container) => {
     const apolloMiddlewares = (enableDebugging: boolean) => {
         const result = [];
         if (enableDebugging) result.push(ResolveTime);

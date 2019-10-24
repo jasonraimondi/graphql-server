@@ -1,4 +1,4 @@
-import { InversifyContainer } from "@/lib/inversify_container";
+import { Container } from "@/lib/inversify_container";
 import { InversifyExpressServer } from "inversify-express-utils";
 import { Application } from "express";
 import bodyParser from "body-parser";
@@ -20,7 +20,7 @@ const expressMiddlewares = (app: Application) => {
     app.use(cookieParser());
 };
 
-export const application = async (container: InversifyContainer) => {
+export const application = async (container: Container) => {
     const server = new InversifyExpressServer(container);
     server.setConfig(expressMiddlewares);
     return server.build();

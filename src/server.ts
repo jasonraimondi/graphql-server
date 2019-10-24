@@ -5,7 +5,7 @@ import "module-alias/register";
 import { createConnection } from "typeorm";
 
 import { RepositoryFactory } from "@/lib/repository/repository_factory";
-import { InversifyContainer } from "@/lib/inversify_container";
+import { Container } from "@/lib/inversify_container";
 import { ServiceFactory } from "@/lib/services/service_factory";
 import { initializeApolloServer } from "@/apollo";
 import { ENV } from "@/lib/constants/config";
@@ -19,7 +19,7 @@ import { application } from "@/lib/express";
 
     const repositoryFactory = new RepositoryFactory(await createConnection());
     const serviceFactory = new ServiceFactory(ENV.mailerURL);
-    const container = new InversifyContainer(repositoryFactory, serviceFactory);
+    const container = new Container(repositoryFactory, serviceFactory);
     const app = await application(container);
     const apolloServer = await initializeApolloServer(container);
 

@@ -1,10 +1,10 @@
 import { Column, Entity, JoinTable, ManyToMany, PrimaryColumn } from "typeorm";
 import { Field, ID, ObjectType, Root } from "type-graphql";
-import v4 from "uuid/v4";
+import { compare, hash } from "bcryptjs";
 
 import { Role } from "@/entity/role/role_entity";
 import { Permission } from "@/entity/role/permission_entity";
-import { compare, hash } from "bcryptjs";
+import { BaseUuidEntity } from "@/entity/uuid_entity";
 
 export interface ICreateUser {
     email: string;
@@ -16,7 +16,7 @@ export interface ICreateUser {
 
 @ObjectType()
 @Entity()
-export class User {
+export class User extends BaseUuidEntity {
     static async create({ uuid, email, firstName, lastName, password }: ICreateUser) {
         const user = new User(uuid);
         user.email = email.toLowerCase();
@@ -26,9 +26,8 @@ export class User {
         return user;
     }
 
-    constructor(uuid?: string) {
-        if (!uuid) uuid = v4();
-        this.uuid = uuid;
+    private constructor(uuid?: string) {
+        super(uuid);
         this.tokenVersion = 0;
         this.isEmailConfirmed = false;
     }
