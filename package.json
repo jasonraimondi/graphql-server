@@ -11,7 +11,8 @@
     "build": "rm -rf dist && ./node_modules/.bin/tsc",
     "start": "ts-node src/server.ts",
     "lint": "eslint --ext .ts src/",
-    "lint:fix": "eslint --fix --ext .ts src/"
+    "lint:fix": "eslint --fix --ext .ts src/",
+    "pretty": "prettier --write src/**/*.ts test/**/*.ts"
   },
   "dependencies": {
     "apollo-server-express": "^2.9.6",
@@ -51,6 +52,7 @@
     "eslint": "^6.5.1",
     "jest": "^24.9.0",
     "jwt-decode": "^2.2.0",
+    "prettier": "^1.18.2",
     "sqlite3": "^4.1.0",
     "supertest": "^4.0.2",
     "ts-jest": "^24.1.0",
