@@ -1,15 +1,15 @@
 import { Response } from "express";
 import { sign, verify } from "jsonwebtoken";
+import { inject, injectable } from "inversify";
 
 import { User } from "@/entity/user/user_entity";
 import { ENV } from "@/lib/constants/config";
-import { inject, injectable } from "inversify";
 import { REPOSITORY } from "@/lib/constants/inversify";
-import { UserRepository } from "@/lib/repository/user/user_repository";
+import { IUserRepository } from "@/lib/repository/user/user_repository";
 
 @injectable()
 export class AuthService {
-    constructor(@inject(REPOSITORY.UserRepository) private userRepository: UserRepository) {
+    constructor(@inject(REPOSITORY.UserRepository) private userRepository: IUserRepository) {
     }
 
     async updateAccessToken(refreshToken: string) {

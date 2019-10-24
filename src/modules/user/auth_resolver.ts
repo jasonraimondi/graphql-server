@@ -1,20 +1,19 @@
 import { Arg, Ctx, Mutation, Resolver } from "type-graphql";
 import { inject, injectable } from "inversify";
 
-import { User } from "@/entity/user/user_entity";
 import { LoginInput } from "@/modules/user/auth/login_input";
 import { LoginResponse } from "@/modules/user/auth/login_response";
 import { MyContext } from "@/lib/types/my_context";
-import { UserRepository } from "@/lib/repository/user/user_repository";
+import { IUserRepository } from "@/lib/repository/user/user_repository";
 import { REPOSITORY, SERVICE } from "@/lib/constants/inversify";
 import { AuthService } from "@/lib/services/auth/auth_service";
 
 @injectable()
-@Resolver(User)
+@Resolver()
 export class AuthResolver {
 
     constructor(
-        @inject(REPOSITORY.UserRepository) private userRepository: UserRepository,
+        @inject(REPOSITORY.UserRepository) private userRepository: IUserRepository,
         @inject(SERVICE.AuthService) private authService: AuthService,
     ) {}
 

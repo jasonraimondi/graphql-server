@@ -8,7 +8,7 @@ import { MyContext } from "@/lib/types/my_context";
 import { mockRequest, mockResponse } from "@/modules/user/auth_resolver.spec";
 import { MeResolver } from "@/modules/user/me_resolver";
 import { REPOSITORY } from "@/lib/constants/inversify";
-import { UserRepository } from "@/lib/repository/user/user_repository";
+import { IUserRepository } from "@/lib/repository/user/user_repository";
 
 describe("me resolver", () => {
     const entities = [User, Role, Permission, ForgotPassword, EmailConfirmation];
@@ -28,8 +28,9 @@ describe("me resolver", () => {
     });
 
     test("successfully returns user response", async () => {
-        const userRepository = container.get<UserRepository>(REPOSITORY.UserRepository);
-        const user = await userRepository.save(await User.create({ email: "jason@raimondi.us", }));
+        const userRepository = container.get<IUserRepository>(REPOSITORY.UserRepository);
+        const user = await User.create({ email: "jason@raimondi.us", });
+        await userRepository.save(user);
 
         context = {
             req: mockRequest(),

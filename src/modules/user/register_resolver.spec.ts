@@ -1,3 +1,5 @@
+import { validate } from "class-validator";
+
 import { TestingInversifyContainer } from "@/lib/testing_inversify_container";
 import { User } from "@/entity/user/user_entity";
 import { Role } from "@/entity/role/role_entity";
@@ -8,18 +10,17 @@ import { RegisterResolver } from "@/modules/user/register_resolver";
 import { RegisterInput } from "@/modules/user/auth/register_input";
 import { REPOSITORY } from "@/lib/constants/inversify";
 import { EmailConfirmationRepository } from "@/lib/repository/user/email_confirmation_repository";
-import { validate } from "class-validator";
-import { UserRepository } from "@/lib/repository/user/user_repository";
+import { IUserRepository } from "@/lib/repository/user/user_repository";
 
 describe("register_resolver", () => {
     const entities = [User, Role, Permission, ForgotPassword, EmailConfirmation];
 
     let container: TestingInversifyContainer;
-    let userRepository: UserRepository;
+    let userRepository: IUserRepository;
 
     beforeEach(async () => {
         container = await TestingInversifyContainer.create(entities);
-        userRepository = container.get<UserRepository>(REPOSITORY.UserRepository);
+        userRepository = container.get<IUserRepository>(REPOSITORY.UserRepository);
     });
 
     describe("register function", () => {

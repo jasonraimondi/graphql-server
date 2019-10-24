@@ -5,25 +5,26 @@ import { ForgotPassword } from "@/entity/user/forgot_password_entity";
 import { Permission } from "@/entity/role/permission_entity";
 import { EmailConfirmation } from "@/entity/user/email_confirmation_entity";
 import { UserResolver } from "@/modules/user/user_resolver";
-import { UserRepository } from "@/lib/repository/user/user_repository";
+import { IUserRepository } from "@/lib/repository/user/user_repository";
 import { REPOSITORY } from "@/lib/constants/inversify";
 
 describe("register_resolver", () => {
     const entities = [User, Role, Permission, ForgotPassword, EmailConfirmation];
 
     let container: TestingInversifyContainer;
-    let userRepository: UserRepository;
+    let userRepository: IUserRepository;
 
     beforeEach(async () => {
         container = await TestingInversifyContainer.create(entities);
-        userRepository = container.get<UserRepository>(REPOSITORY.UserRepository);
+        userRepository = container.get<IUserRepository>(REPOSITORY.UserRepository);
     });
 
     describe("user", () => {
         test("resolve user by uuid", async () => {
             // arrange
             const resolver = container.get<UserResolver>(UserResolver);
-            const user = await userRepository.save(await User.create({ email: "jason@raimondi.us" }));
+            const user = await User.create({ email: "jason@raimondi.us" });
+            await userRepository.save(user);
 
             // act
             const result = await resolver.user(user.uuid);

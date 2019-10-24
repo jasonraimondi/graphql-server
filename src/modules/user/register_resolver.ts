@@ -6,8 +6,8 @@ import { RegisterInput } from "@/modules/user/auth/register_input";
 import { RegisterResponse } from "@/modules/user/auth/register_response";
 import { RegisterEmail } from "@/lib/services/email/user/register_email";
 import { User } from "@/entity/user/user_entity";
-import { EmailConfirmationRepository } from "@/lib/repository/user/email_confirmation_repository";
-import { UserRepository } from "@/lib/repository/user/user_repository";
+import { IEmailConfirmationRepository } from "@/lib/repository/user/email_confirmation_repository";
+import { IUserRepository } from "@/lib/repository/user/user_repository";
 import { EmailConfirmation } from "@/entity/user/email_confirmation_entity";
 import { REPOSITORY, SERVICE } from "@/lib/constants/inversify";
 
@@ -15,8 +15,8 @@ import { REPOSITORY, SERVICE } from "@/lib/constants/inversify";
 @Resolver()
 export class RegisterResolver {
     constructor(
-        @inject(REPOSITORY.UserRepository) private userRepository: UserRepository,
-        @inject(REPOSITORY.EmailConfirmationRepository) private userConfirmationRepository: EmailConfirmationRepository,
+        @inject(REPOSITORY.UserRepository) private userRepository: IUserRepository,
+        @inject(REPOSITORY.EmailConfirmationRepository) private userConfirmationRepository: IEmailConfirmationRepository,
         @inject(SERVICE.RegisterEmail) private registerEmail: RegisterEmail,
     ) {}
 

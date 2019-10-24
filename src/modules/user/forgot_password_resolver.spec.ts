@@ -1,27 +1,27 @@
-import { User } from "@/entity/user/user_entity";
-import { ForgotPassword } from "@/entity/user/forgot_password_entity";
-import { Role } from "@/entity/role/role_entity";
-import { UserRepository } from "@/lib/repository/user/user_repository";
 import { Permission } from "@/entity/role/permission_entity";
-import { REPOSITORY } from "@/lib/constants/inversify";
+import { Role } from "@/entity/role/role_entity";
 import { EmailConfirmation } from "@/entity/user/email_confirmation_entity";
+import { ForgotPassword } from "@/entity/user/forgot_password_entity";
+import { User } from "@/entity/user/user_entity";
+import { REPOSITORY } from "@/lib/constants/inversify";
+import { IForgotPasswordRepository } from "@/lib/repository/user/forgot_password_repository";
+import { IUserRepository } from "@/lib/repository/user/user_repository";
 import { TestingInversifyContainer } from "@/lib/testing_inversify_container";
-import { ForgotPasswordRepository } from "@/lib/repository/user/forgot_password_repository";
-import { ForgotPasswordResolver } from "@/modules/user/forgot_password_resolver";
 import { SendForgotPasswordInput, UpdatePasswordInput } from "@/modules/user/auth/forgot_password_input";
+import { ForgotPasswordResolver } from "@/modules/user/forgot_password_resolver";
 
 describe("forgot password resolver", () => {
     const entities = [User, Role, Permission, ForgotPassword, EmailConfirmation];
 
     let container: TestingInversifyContainer;
     let resolver: ForgotPasswordResolver;
-    let userRepository: UserRepository;
-    let forgotPasswordRepository: ForgotPasswordRepository;
+    let userRepository: IUserRepository;
+    let forgotPasswordRepository: IForgotPasswordRepository;
 
     beforeEach(async () => {
         container = await TestingInversifyContainer.create(entities);
-        userRepository = container.get(REPOSITORY.UserRepository);
-        forgotPasswordRepository = container.get(REPOSITORY.ForgotPasswordRepository);
+        userRepository = container.get<IUserRepository>(REPOSITORY.UserRepository);
+        forgotPasswordRepository = container.get<IForgotPasswordRepository>(REPOSITORY.ForgotPasswordRepository);
         resolver = container.get(ForgotPasswordResolver);
     });
 
@@ -32,12 +32,10 @@ describe("forgot password resolver", () => {
             user.isEmailConfirmed = true;
             await userRepository.save(user);
 
-
             // act
             const input = new SendForgotPasswordInput();
             input.email = user.email;
             await resolver.sendForgotPasswordEmail(input);
-
 
             // assert
             const updatedForgotPassword = await forgotPasswordRepository.findForUser(user.uuid);
@@ -51,8 +49,8 @@ describe("forgot password resolver", () => {
             const user = await User.create({email: "jason@raimondi.us"});
             user.isEmailConfirmed = true;
             await userRepository.save(user);
-            const forgotPassword = await forgotPasswordRepository.save(new ForgotPassword(user));
-
+            const forgotPassword = new ForgotPassword(user);
+            await forgotPasswordRepository.save(forgotPassword);
 
             // act
             const input = new UpdatePasswordInput();
@@ -60,7 +58,6 @@ describe("forgot password resolver", () => {
             input.email = user.email;
             input.password = "my-new-password";
             await resolver.updatePasswordFromToken(input);
-
 
             // assert
             const updatedUser = await userRepository.findById(user.uuid);

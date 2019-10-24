@@ -2,13 +2,13 @@ import { Arg, Query, Resolver } from "type-graphql";
 import { inject, injectable } from "inversify";
 
 import { User } from "@/entity/user/user_entity";
-import { UserRepository } from "@/lib/repository/user/user_repository";
+import { IUserRepository } from "@/lib/repository/user/user_repository";
 import { REPOSITORY } from "@/lib/constants/inversify";
 
 @injectable()
-@Resolver(User)
+@Resolver()
 export class UserResolver {
-    constructor(@inject(REPOSITORY.UserRepository) private userRepository: UserRepository) {
+    constructor(@inject(REPOSITORY.UserRepository) private userRepository: IUserRepository) {
     }
 
     @Query(() => User)

@@ -8,26 +8,27 @@ import { ForgotPassword } from "@/entity/user/forgot_password_entity";
 import { EmailConfirmation } from "@/entity/user/email_confirmation_entity";
 import { TestingInversifyContainer } from "@/lib/testing_inversify_container";
 import { AuthService } from "@/lib/services/auth/auth_service";
-import { UserRepository } from "@/lib/repository/user/user_repository";
+import { IUserRepository } from "@/lib/repository/user/user_repository";
 
 describe("auth_resolver", () => {
     const entities = [User, Role, Permission, ForgotPassword, EmailConfirmation];
 
     let container: TestingInversifyContainer;
     let authService: AuthService;
-    let userRepository: UserRepository;
+    let userRepository: IUserRepository;
 
     beforeEach(async () => {
         container = await TestingInversifyContainer.create(entities);
         authService = container.get(SERVICE.AuthService);
-        userRepository = container.get<UserRepository>(REPOSITORY.UserRepository);
+        userRepository = container.get<IUserRepository>(REPOSITORY.UserRepository);
     });
 
     describe("refreshToken", () => {
 
         test("create refresh token is created with expected data", async () => {
             // arrange
-            const user = await userRepository.save(await User.create({ email: "jason@raimondi.us", }));
+            const user = await User.create({ email: "jason@raimondi.us", });
+            await userRepository.save(user);
             const daysInFuture = (days: number) => Date.now() / 1000 + 60 * 60 * 24 * days;
 
             // act
@@ -42,7 +43,8 @@ describe("auth_resolver", () => {
 
         test("create access token is created with expected data", async () => {
             // arrange
-            const user = await userRepository.save(await User.create({ email: "jason@raimondi.us", }));
+            const user = await User.create({ email: "jason@raimondi.us", });
+            await userRepository.save(user);
             const minutesInFuture = (minutes: number) => Date.now() / 1000 + 60 * minutes;
 
             // act

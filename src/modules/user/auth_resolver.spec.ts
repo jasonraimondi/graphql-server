@@ -1,17 +1,16 @@
 import jwtDecode from "jwt-decode";
 
-import { Role } from "@/entity/role/role_entity";
-import { User } from "@/entity/user/user_entity";
-import { UserRepository } from "@/lib/repository/user/user_repository";
 import { Permission } from "@/entity/role/permission_entity";
-import { AuthResolver } from "@/modules/user/auth_resolver";
-import { REPOSITORY } from "@/lib/constants/inversify";
-import { ForgotPassword } from "@/entity/user/forgot_password_entity";
+import { Role } from "@/entity/role/role_entity";
 import { EmailConfirmation } from "@/entity/user/email_confirmation_entity";
+import { ForgotPassword } from "@/entity/user/forgot_password_entity";
+import { User } from "@/entity/user/user_entity";
+import { REPOSITORY } from "@/lib/constants/inversify";
+import { IUserRepository } from "@/lib/repository/user/user_repository";
 import { TestingInversifyContainer } from "@/lib/testing_inversify_container";
-import { LoginInput } from "@/modules/user/auth/login_input";
 import { MyContext } from "@/lib/types/my_context";
-
+import { LoginInput } from "@/modules/user/auth/login_input";
+import { AuthResolver } from "@/modules/user/auth_resolver";
 
 export const mockRequest = (authHeader?: string, sessionData?: any) => ({
     get(name: string) {
@@ -35,13 +34,13 @@ describe("auth_resolver", () => {
     const entities = [User, Role, Permission, ForgotPassword, EmailConfirmation];
 
     let container: TestingInversifyContainer;
-    let userRepository: UserRepository;
+    let userRepository: IUserRepository;
     let context: MyContext;
     let resolver: AuthResolver;
 
     beforeEach(async () => {
         container = await TestingInversifyContainer.create(entities);
-        userRepository = container.get<UserRepository>(REPOSITORY.UserRepository);
+        userRepository = container.get<IUserRepository>(REPOSITORY.UserRepository);
         context = {
             res: mockRequest(),
             req: mockResponse(),
@@ -60,10 +59,8 @@ describe("auth_resolver", () => {
             user.isEmailConfirmed = true;
             await userRepository.save(user);
 
-
             // act
             const result = await resolver.login(input, context);
-
 
             // assert
             const decode = jwtDecode<any>(result.accessToken);
@@ -77,18 +74,26 @@ describe("auth_resolver", () => {
             await userRepository.save(await User.create({email: "jason@raimondi.us"}));
             const input = new LoginInput();
             input.email = "jason@raimondi.us";
-            input.password = "jasonraimondi";
+            input.password = "non-existant-password";
 
             // act
             const result = resolver.login(input, context);
-            const result1 = resolver.login({
-                ...input,
-                email: "email@not_found.com",
-            }, context);
 
             // assert
             await expect(result).rejects.toThrowError("user must create password");
-            await expect(result1).rejects.toThrowError(new RegExp('Could not find any entity of type "User"'));
+        });
+
+        test("non existant user throws", async () => {
+            // arrange
+            const input = new LoginInput();
+            input.email = "email@notfound.com";
+            input.password = "thisuserdoesntexist";
+
+            // act
+            const result = resolver.login(input, context);
+
+            // assert
+            await expect(result).rejects.toThrowError(new RegExp('Could not find any entity of type "User"'));
         });
     });
 

@@ -1,17 +1,17 @@
 import { inject, injectable } from "inversify";
 import { Arg, Mutation, Resolver } from "type-graphql";
 
-import { EmailConfirmationRepository } from "@/lib/repository/user/email_confirmation_repository";
-import { UserRepository } from "@/lib/repository/user/user_repository";
+import { IEmailConfirmationRepository } from "@/lib/repository/user/email_confirmation_repository";
 import { REPOSITORY } from "@/lib/constants/inversify";
 import { VerifyEmailInput } from "@/modules/user/auth/verify_email_input";
+import { IUserRepository } from "@/lib/repository/user/user_repository";
 
 @injectable()
 @Resolver()
 export class EmailConfirmationResolver {
     constructor(
-        @inject(REPOSITORY.UserRepository) private userRepository: UserRepository,
-        @inject(REPOSITORY.EmailConfirmationRepository) private userConfirmationRepository: EmailConfirmationRepository
+        @inject(REPOSITORY.UserRepository) private userRepository: IUserRepository,
+        @inject(REPOSITORY.EmailConfirmationRepository) private userConfirmationRepository: IEmailConfirmationRepository
     ) {
     }
 

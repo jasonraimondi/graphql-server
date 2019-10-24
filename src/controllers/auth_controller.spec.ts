@@ -7,7 +7,7 @@ import { Permission } from "@/entity/role/permission_entity";
 import { ForgotPassword } from "@/entity/user/forgot_password_entity";
 import { EmailConfirmation } from "@/entity/user/email_confirmation_entity";
 import { REPOSITORY, SERVICE } from "@/lib/constants/inversify";
-import { UserRepository } from "@/lib/repository/user/user_repository";
+import { IUserRepository } from "@/lib/repository/user/user_repository";
 import { AuthService } from "@/lib/services/auth/auth_service";
 import { application } from "@/lib/express";
 
@@ -15,14 +15,14 @@ describe("auth controller", () => {
     const entities = [User, Role, Permission, ForgotPassword, EmailConfirmation];
 
     let container: TestingInversifyContainer;
-    let userRepository: UserRepository;
+    let userRepository: IUserRepository;
     let authService: AuthService;
 
     beforeEach(async () => {
         await import("./auth_controller");
 
         container = await TestingInversifyContainer.create(entities);
-        userRepository = container.get<UserRepository>(REPOSITORY.UserRepository);
+        userRepository = container.get<IUserRepository>(REPOSITORY.UserRepository);
         authService = container.get<AuthService>(SERVICE.AuthService);
     });
 
@@ -30,7 +30,8 @@ describe("auth controller", () => {
         // arrange
         const app = await application(container);
 
-        const user = await userRepository.save(await User.create({ email: "jason@raimondi.us", }));
+        const user = await User.create({ email: "jason@raimondi.us", });
+        await userRepository.save(user);
         const refreshToken = authService.createRefreshToken(user);
 
         // act

@@ -3,18 +3,18 @@ import { inject, injectable } from "inversify";
 
 import { SendForgotPasswordInput, UpdatePasswordInput } from "@/modules/user/auth/forgot_password_input";
 import { ForgotPasswordEmail } from "@/lib/services/email/user/forgot_password_email";
-import { UserRepository } from "@/lib/repository/user/user_repository";
-import { ForgotPasswordRepository } from "@/lib/repository/user/forgot_password_repository";
+import { IForgotPasswordRepository } from "@/lib/repository/user/forgot_password_repository";
 import { User } from "@/entity/user/user_entity";
 import { REPOSITORY, SERVICE } from "@/lib/constants/inversify";
 import { ForgotPassword } from "@/entity/user/forgot_password_entity";
+import { IUserRepository } from "@/lib/repository/user/user_repository";
 
 @injectable()
 @Resolver()
 export class ForgotPasswordResolver {
     constructor(
-        @inject(REPOSITORY.UserRepository) private userRepository: UserRepository,
-        @inject(REPOSITORY.ForgotPasswordRepository) private forgotPasswordRepository: ForgotPasswordRepository,
+        @inject(REPOSITORY.UserRepository) private userRepository: IUserRepository,
+        @inject(REPOSITORY.ForgotPasswordRepository) private forgotPasswordRepository: IForgotPasswordRepository,
         @inject(SERVICE.ForgotPasswordEmail) private forgotPasswordEmail: ForgotPasswordEmail,
     ) {
     }
