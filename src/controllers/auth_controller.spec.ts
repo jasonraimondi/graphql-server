@@ -45,6 +45,7 @@ describe("auth controller", () => {
         expect(response.header["set-cookie"].length).toBe(1);
         const JID_JWT_COOKIE = /jid=[a-zA-Z\d\-_]+.[a-zA-Z\d\-_]+.[a-zA-Z\d\-_]+; Path=\/refresh_token; HttpOnly/;
         expect(response.header["set-cookie"][0]).toMatch(JID_JWT_COOKIE);
+        // @todo should pass, I need to add this back...
         // expect(response.header["set-cookie"][0].includes(refreshToken)).toBeFalsy();
         expect(response.body.success).toBe(true);
         expect(response.body.accessToken).toMatch(/[a-zA-Z\d]+.[a-zA-Z\d]+.[a-zA-Z\d]+/);
