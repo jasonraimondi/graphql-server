@@ -1,6 +1,6 @@
 import { inject, injectable } from "inversify";
 
-import { ForgotPassword } from "@/entity/forgot_password_entity";
+import { ForgotPassword } from "@/entity/user/forgot_password_entity";
 import { IMailer } from "@/lib/services/email/mailer";
 import { SERVICE } from "@/lib/constants/inversify";
 

@@ -1,7 +1,7 @@
 import { Arg, Query, Resolver } from "type-graphql";
 import { inject, injectable } from "inversify";
 
-import { User } from "@/entity/user_entity";
+import { User } from "@/entity/user/user_entity";
 import { UserRepository } from "@/lib/repository/user/user_repository";
 import { REPOSITORY } from "@/lib/constants/inversify";
 

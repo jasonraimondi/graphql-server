@@ -1,10 +1,10 @@
-import { User } from "@/entity/user_entity";
-import { ForgotPassword } from "@/entity/forgot_password_entity";
-import { Role } from "@/entity/role_entity";
+import { User } from "@/entity/user/user_entity";
+import { ForgotPassword } from "@/entity/user/forgot_password_entity";
+import { Role } from "@/entity/role/role_entity";
 import { UserRepository } from "@/lib/repository/user/user_repository";
-import { Permission } from "@/entity/permission_entity";
+import { Permission } from "@/entity/role/permission_entity";
 import { REPOSITORY } from "@/lib/constants/inversify";
-import { EmailConfirmation } from "@/entity/email_confirmation_entity";
+import { EmailConfirmation } from "@/entity/user/email_confirmation_entity";
 import { TestingInversifyContainer } from "@/lib/testing_inversify_container";
 import { EmailConfirmationResolver } from "@/modules/user/email_confirmation_resolver";
 import { EmailConfirmationRepository } from "@/lib/repository/user/email_confirmation_repository";
@@ -29,7 +29,7 @@ describe("email confirmation resolver", () => {
         test("resolve user by uuid", async () => {
             // arrange
             const user = await userRepository.save(await User.create({email: "jason@raimondi.us"}));
-            const emailConfirmation = await emailConfirmationRepository.save(new EmailConfirmation(undefined, user));
+            const emailConfirmation = await emailConfirmationRepository.save(new EmailConfirmation(user));
 
 
             // act

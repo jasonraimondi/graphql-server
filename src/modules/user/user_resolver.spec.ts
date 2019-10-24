@@ -1,9 +1,9 @@
 import { TestingInversifyContainer } from "@/lib/testing_inversify_container";
-import { User } from "@/entity/user_entity";
-import { Role } from "@/entity/role_entity";
-import { ForgotPassword } from "@/entity/forgot_password_entity";
-import { Permission } from "@/entity/permission_entity";
-import { EmailConfirmation } from "@/entity/email_confirmation_entity";
+import { User } from "@/entity/user/user_entity";
+import { Role } from "@/entity/role/role_entity";
+import { ForgotPassword } from "@/entity/user/forgot_password_entity";
+import { Permission } from "@/entity/role/permission_entity";
+import { EmailConfirmation } from "@/entity/user/email_confirmation_entity";
 import { UserResolver } from "@/modules/user/user_resolver";
 import { UserRepository } from "@/lib/repository/user/user_repository";
 import { REPOSITORY } from "@/lib/constants/inversify";

@@ -1,6 +1,6 @@
 import { injectable } from "inversify";
 import { EntityRepository, Repository } from "typeorm";
-import { User } from "@/entity/user_entity";
+import { User } from "@/entity/user/user_entity";
 
 interface IUserRepository {
     findById(uuid: string): any;

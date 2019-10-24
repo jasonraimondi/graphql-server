@@ -2,8 +2,8 @@ import { Column, Entity, JoinTable, ManyToMany, PrimaryColumn } from "typeorm";
 import { Field, ID, ObjectType, Root } from "type-graphql";
 import v4 from "uuid/v4";
 
-import { Role } from "@/entity/role_entity";
-import { Permission } from "@/entity/permission_entity";
+import { Role } from "@/entity/role/role_entity";
+import { Permission } from "@/entity/role/permission_entity";
 import { compare, hash } from "bcryptjs";
 
 export interface ICreateUser {

@@ -1,6 +1,6 @@
 import { inject, injectable } from "inversify";
 
-import { EmailConfirmation } from "@/entity/email_confirmation_entity";
+import { EmailConfirmation } from "@/entity/user/email_confirmation_entity";
 import { IMailer } from "@/lib/services/email/mailer";
 import { SERVICE } from "@/lib/constants/inversify";
 

@@ -1,7 +1,7 @@
 import { injectable } from "inversify";
 import { EntityRepository, Repository } from "typeorm";
 
-import { ForgotPassword } from "@/entity/forgot_password_entity";
+import { ForgotPassword } from "@/entity/user/forgot_password_entity";
 
 @injectable()
 @EntityRepository(ForgotPassword)

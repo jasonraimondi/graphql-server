@@ -1,7 +1,7 @@
 import { Response } from "express";
 import { sign, verify } from "jsonwebtoken";
 
-import { User } from "@/entity/user_entity";
+import { User } from "@/entity/user/user_entity";
 import { ENV } from "@/lib/constants/config";
 import { inject, injectable } from "inversify";
 import { REPOSITORY } from "@/lib/constants/inversify";

@@ -1,7 +1,7 @@
 import { Arg, Ctx, Mutation, Resolver } from "type-graphql";
 import { inject, injectable } from "inversify";
 
-import { User } from "@/entity/user_entity";
+import { User } from "@/entity/user/user_entity";
 import { LoginInput } from "@/modules/user/auth/login_input";
 import { LoginResponse } from "@/modules/user/auth/login_response";
 import { MyContext } from "@/lib/types/my_context";

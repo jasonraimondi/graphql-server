@@ -1,10 +1,10 @@
-import { User } from "@/entity/user_entity";
-import { ForgotPassword } from "@/entity/forgot_password_entity";
-import { Role } from "@/entity/role_entity";
+import { User } from "@/entity/user/user_entity";
+import { ForgotPassword } from "@/entity/user/forgot_password_entity";
+import { Role } from "@/entity/role/role_entity";
 import { UserRepository } from "@/lib/repository/user/user_repository";
-import { Permission } from "@/entity/permission_entity";
+import { Permission } from "@/entity/role/permission_entity";
 import { REPOSITORY } from "@/lib/constants/inversify";
-import { EmailConfirmation } from "@/entity/email_confirmation_entity";
+import { EmailConfirmation } from "@/entity/user/email_confirmation_entity";
 import { TestingInversifyContainer } from "@/lib/testing_inversify_container";
 import { ForgotPasswordRepository } from "@/lib/repository/user/forgot_password_repository";
 import { ForgotPasswordResolver } from "@/modules/user/forgot_password_resolver";
@@ -51,7 +51,7 @@ describe("forgot password resolver", () => {
             const user = await User.create({email: "jason@raimondi.us"});
             user.isEmailConfirmed = true;
             await userRepository.save(user);
-            const forgotPassword = await forgotPasswordRepository.save(new ForgotPassword(undefined, user));
+            const forgotPassword = await forgotPasswordRepository.save(new ForgotPassword(user));
 
 
             // act

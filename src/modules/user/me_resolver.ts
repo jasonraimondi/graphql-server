@@ -2,7 +2,7 @@ import { Ctx, Query, Resolver, UseMiddleware } from "type-graphql";
 import { inject, injectable } from "inversify";
 
 import { isAuth } from "@/lib/middleware/is_auth";
-import { User } from "@/entity/user_entity";
+import { User } from "@/entity/user/user_entity";
 import { MyContext } from "@/lib/types/my_context";
 import { UserRepository } from "@/lib/repository/user/user_repository";
 import { REPOSITORY } from "@/lib/constants/inversify";

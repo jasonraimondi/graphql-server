@@ -5,9 +5,9 @@ import { SendForgotPasswordInput, UpdatePasswordInput } from "@/modules/user/aut
 import { ForgotPasswordEmail } from "@/lib/services/email/user/forgot_password_email";
 import { UserRepository } from "@/lib/repository/user/user_repository";
 import { ForgotPasswordRepository } from "@/lib/repository/user/forgot_password_repository";
-import { User } from "@/entity/user_entity";
+import { User } from "@/entity/user/user_entity";
 import { REPOSITORY, SERVICE } from "@/lib/constants/inversify";
-import { ForgotPassword } from "@/entity/forgot_password_entity";
+import { ForgotPassword } from "@/entity/user/forgot_password_entity";
 
 @injectable()
 @Resolver()

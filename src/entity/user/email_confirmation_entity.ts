@@ -1,18 +1,18 @@
 import { Column, Entity, JoinColumn, OneToOne, PrimaryColumn } from "typeorm";
 import { Field, ID, ObjectType } from "type-graphql";
-import v4 from "uuid/v4";
 
-import { User } from "@/entity/user_entity";
+import { User } from "@/entity/user/user_entity";
+import { BaseUuidEntity } from "@/entity/uuid_entity";
 
 @ObjectType()
 @Entity()
-export class ForgotPassword {
-    constructor(uuid?: string, user?: User) {
-        if (!uuid) uuid = v4();
-        this.uuid = uuid;
+export class EmailConfirmation extends BaseUuidEntity {
+    private readonly sevenDays = 60 * 60 * 24 * 7 * 1000; // 1 day
+
+    constructor(user?: User, uuid?: string) {
+        super(uuid);
         if (user) this.user = user;
-        const validFor = 60 * 60 * 24 * 1; // 7 days
-        this.expiresAt = new Date(Date.now() + (validFor * 1000));
+        this.expiresAt = new Date(Date.now() + this.sevenDays);
     }
 
     @Field(() => ID)
