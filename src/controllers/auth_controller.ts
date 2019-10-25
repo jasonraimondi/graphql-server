@@ -16,7 +16,7 @@ export class AuthController {
 
     @httpPost("/refresh_token")
     async refreshToken(req: Request, res: Response) {
-        const refreshToken = req.cookies.jid;
+        const refreshToken = req.cookies?.jid;
         if (!refreshToken) {
             res.status(STATUS_CODES.Unauthorized);
             res.json(this.FAILED_TO_REFRESH);
