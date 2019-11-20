@@ -1,9 +1,9 @@
-let accessToken = "";
+let inMemoryAccessToken = "";
 
-export const setAccessToken = (s: string) => {
-  accessToken = s;
+export const setAccessToken = (token: string) => {
+  inMemoryAccessToken = token;
 };
 
 export const getAccessToken = () => {
-  return accessToken;
+  return inMemoryAccessToken;
 };

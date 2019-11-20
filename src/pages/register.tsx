@@ -8,12 +8,13 @@ import { Layout } from "@/app/components/layouts/layout";
 const validEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 
 const page = () => {
-  const [register] = useRegisterMutation();
+  const [register, { called, loading }] = useRegisterMutation();
+  console.log(called, loading);
 
-  const onSubmit = async (data: any, { setSubmitting }: any) => {
+  const onSubmit = async (data: any, { setSubmitting, setError }: any) => {
     await register({
       variables: { data },
-    });
+    }).catch(e => setError(e.message));
     setSubmitting(false);
   };
   const validate = (values: any) => {
@@ -33,6 +34,7 @@ const page = () => {
       onSubmit={onSubmit}
     >
       {({
+          error,
           values,
           errors,
           touched,
@@ -40,8 +42,9 @@ const page = () => {
           handleBlur,
           handleSubmit,
           isSubmitting,
-        }) => (
-        <form onSubmit={handleSubmit}>
+        }) => {
+        return <form onSubmit={handleSubmit}>
+            {error}
           <label style={{ display: "block" }}>
             Email
             <input
@@ -68,7 +71,7 @@ const page = () => {
             Submit
           </button>
         </form>
-      )}
+      }}
     </Formik>
   </Layout>;
 };

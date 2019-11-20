@@ -3,6 +3,10 @@ import jwtDecode from "jwt-decode";
 import fetch from "isomorphic-unfetch";
 import { getAccessToken, setAccessToken } from "@/app/lib/access_token";
 
+import getConfig from 'next/config'
+
+const { publicRuntimeConfig } = getConfig();
+
 export const refreshLink = new TokenRefreshLink({
   accessTokenField: "accessToken",
   isTokenValidOrUndefined: () => {
@@ -26,7 +30,7 @@ export const refreshLink = new TokenRefreshLink({
   },
   fetchAccessToken: () => {
     console.log("fetch access token");
-    return fetch("http://localhost:4000/refresh_token", {
+    return fetch(publicRuntimeConfig.REFRESH_TOKEN, {
       method: "POST",
       credentials: "include",
     });
