@@ -1,0 +1,20 @@
+input RegisterInput {
+    uuid: String
+    firstName: String
+    lastName: String
+    email: String!
+    password: String!
+}
+mutation Register($data: RegisterInput!) {
+    register(data: $data) {
+        user {
+            uuid
+            name
+            email
+        }
+        userConfirmation {
+            uuid
+            expiresAt
+        }
+    }
+}
