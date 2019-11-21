@@ -1,7 +1,3 @@
-input LoginInput {
-    email: String!
-    password: String!
-}
 mutation Login($data: LoginInput!) {
     login(data: $data) {
         accessToken

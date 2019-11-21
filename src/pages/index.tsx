@@ -16,7 +16,7 @@ let page = () => {
   }
 
   return (
-    <Layout>
+    <Layout title="Hello index page">
       <div>
         <div>users:</div>
         <ul>

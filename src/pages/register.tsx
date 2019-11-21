@@ -1,20 +1,25 @@
 import React from "react";
-import { Formik } from "formik";
+import { Formik, FormikHelpers } from "formik";
 
 import { withApollo } from "@/app/lib/apollo_next";
 import { useRegisterMutation } from "@/generated/graphql";
 import { Layout } from "@/app/components/layouts/layout";
 
-const validEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+export const validEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+
+type FormData = {
+  email: string;
+  password: string;
+}
 
 const page = () => {
   const [register, { called, loading }] = useRegisterMutation();
-  console.log(called, loading);
+  console.log({called, loading});
 
-  const onSubmit = async (data: any, { setSubmitting, setError }: any) => {
+  const onSubmit = async (data: any, { setSubmitting, setStatus }: FormikHelpers<FormData>) => {
     await register({
       variables: { data },
-    }).catch(e => setError(e.message));
+    }).catch(e => setStatus(e.message));
     setSubmitting(false);
   };
   const validate = (values: any) => {
@@ -26,7 +31,7 @@ const page = () => {
     }
     return errors;
   };
-  return <Layout>
+  return <Layout title="This is the register page">
     <p>Register Page</p>
     <Formik
       initialValues={{ email: "jason@raimondi.us", password: "" }}
@@ -34,7 +39,7 @@ const page = () => {
       onSubmit={onSubmit}
     >
       {({
-          error,
+          status,
           values,
           errors,
           touched,
@@ -44,7 +49,7 @@ const page = () => {
           isSubmitting,
         }) => {
         return <form onSubmit={handleSubmit}>
-            {error}
+            {status}
           <label style={{ display: "block" }}>
             Email
             <input

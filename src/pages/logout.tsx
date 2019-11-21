@@ -14,7 +14,7 @@ const page = () => {
   // };
 
   return (
-    <Layout>
+    <Layout title="This is the logout page">
       <div>Bye soon</div>
     </Layout>
   );

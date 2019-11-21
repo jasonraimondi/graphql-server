@@ -6,6 +6,7 @@ import { useLoginMutation } from "@/generated/graphql";
 import { withApollo } from "@/app/lib/apollo_next";
 import { setAccessToken } from "@/app/lib/access_token";
 import { Layout } from "@/app/components/layouts/layout";
+import {validEmail} from "@/app/pages/register";
 
 const page = () => {
   const [login] = useLoginMutation();
@@ -42,14 +43,13 @@ const page = () => {
     let errors: any = {};
     if (!values.email) {
       errors.email = "Required";
-    } else if (
-      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-    ) {
+    } else if (!validEmail.test(values.email)) {
       errors.email = "Invalid email address";
     }
     return errors;
   };
-  return <Layout>
+
+  return <Layout title="Hello login page">
     <p>Login Page</p>
     <Formik
       initialValues={{ email: "jason@raimondi.us", password: "" }}
