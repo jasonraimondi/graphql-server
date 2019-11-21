@@ -1,5 +1,5 @@
 import React from "react";
-import { Formik } from "formik";
+import { Formik, Form, Field, ErrorMessage } from "formik";
 import Router from "next/router";
 
 import { useLoginMutation } from "@/generated/graphql";
@@ -7,6 +7,11 @@ import { withApollo } from "@/app/lib/apollo_next";
 import { setAccessToken } from "@/app/lib/access_token";
 import { Layout } from "@/app/components/layouts/layout";
 import {validEmail} from "@/app/pages/register";
+
+type LoginFormData = {
+  email: string;
+  password: string;
+}
 
 const page = () => {
   const [login] = useLoginMutation();
@@ -49,51 +54,37 @@ const page = () => {
     return errors;
   };
 
-  return <Layout title="Hello login page">
-    <p>Login Page</p>
-    <Formik
-      initialValues={{ email: "jason@raimondi.us", password: "" }}
+  return <Layout title="Login page">
+    <h1>Login Page</h1>
+    <Formik<LoginFormData>
+      initialValues={{ email: '', password: '' }}
       validate={validate}
       onSubmit={onSubmit}
     >
-      {({
-          values,
-          errors,
-          touched,
-          handleChange,
-          handleBlur,
-          handleSubmit,
-          isSubmitting,
-        }) => (
-        <form onSubmit={handleSubmit}>
-          <label style={{ display: "block" }}>
+      {({ isSubmitting }) => (
+        <Form className="login-form">
+          <label>
             Email
-            <input
-              type="email"
-              name="email"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.email}
-            />
+            <Field type="email" name="email" placeholder="john.doe@example.com"/>
+            <ErrorMessage name="email" component="div"/>
           </label>
-          {errors.email && touched.email && errors.email}
-          <label style={{ display: "block" }}>
+          <label>
             Password
-            <input
-              type="password"
-              name="password"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.password}
-            />
+            <Field type="password" name="password" placeholder="******"/>
+            <ErrorMessage name="password" component="div"/>
           </label>
-          {errors.password && touched.password && errors.password}
           <button type="submit" disabled={isSubmitting}>
             Submit
           </button>
-        </form>
+        </Form>
       )}
     </Formik>
+    <style jsx>{`
+      .login-form label {
+        background-color: blue;
+        display: block;
+      }
+    `}</style>
   </Layout>;
 };
 

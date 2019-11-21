@@ -1,10 +1,8 @@
-const { join } = require("path");
+const withCSS = require('@zeit/next-css');
 const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
+const { join } = require("path");
 
-console.log(join(__dirname, "src"));
-console.log(join(__dirname, "generated"));
-
-module.exports = {
+module.exports = withCSS({
     distDir: "dist",
     publicRuntimeConfig: {
         REFRESH_TOKEN: process.env.REFRESH_TOKEN || "http://localhost:4000/refresh_token",
@@ -20,4 +18,4 @@ module.exports = {
         ];
         return config
     },
-};
+});

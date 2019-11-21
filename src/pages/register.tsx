@@ -1,5 +1,5 @@
 import React from "react";
-import { Formik, FormikHelpers } from "formik";
+import { ErrorMessage, Field, Form, Formik, FormikHelpers } from "formik";
 
 import { withApollo } from "@/app/lib/apollo_next";
 import { useRegisterMutation } from "@/generated/graphql";
@@ -7,7 +7,7 @@ import { Layout } from "@/app/components/layouts/layout";
 
 export const validEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 
-type FormData = {
+type RegisterFormData = {
   email: string;
   password: string;
 }
@@ -16,13 +16,14 @@ const page = () => {
   const [register, { called, loading }] = useRegisterMutation();
   console.log({called, loading});
 
-  const onSubmit = async (data: any, { setSubmitting, setStatus }: FormikHelpers<FormData>) => {
-    await register({
-      variables: { data },
-    }).catch(e => setStatus(e.message));
+  const initialFormValues: RegisterFormData = { email: "", password: "" };
+
+  const handleSubmit = async (data: any, { setSubmitting, setStatus }: FormikHelpers<RegisterFormData>) => {
+    await register({ variables: { data } }).catch(e => setStatus(e.message.replace(/GraphQL error: /gi, "")));
     setSubmitting(false);
   };
-  const validate = (values: any) => {
+
+  const handleValidate = (values: any) => {
     let errors: any = {};
     if (!values.email) {
       errors.email = "Required";
@@ -31,53 +32,52 @@ const page = () => {
     }
     return errors;
   };
-  return <Layout title="This is the register page">
-    <p>Register Page</p>
-    <Formik
-      initialValues={{ email: "jason@raimondi.us", password: "" }}
-      validate={validate}
-      onSubmit={onSubmit}
+
+  return <Layout title="Register page">
+    <h1>Register Page</h1>
+    <Formik<RegisterFormData>
+      initialValues={initialFormValues}
+      validate={handleValidate}
+      onSubmit={handleSubmit}
     >
-      {({
-          status,
-          values,
-          errors,
-          touched,
-          handleChange,
-          handleBlur,
-          handleSubmit,
-          isSubmitting,
-        }) => {
-        return <form onSubmit={handleSubmit}>
-            {status}
-          <label style={{ display: "block" }}>
+      {({ status, isSubmitting }) => (
+        <Form className="register-form">
+          {status}
+          <label>
             Email
-            <input
-              type="email"
-              name="email"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.email}
-            />
+            <Field type="email" name="email" placeholder="john.doe@example.com"/>
+            <ErrorMessage name="email" component="div"/>
           </label>
-          {errors.email && touched.email && errors.email}
-          <label style={{ display: "block" }}>
+          <label>
+            First Name
+            <Field type="password" name="password" placeholder="**************"/>
+            <ErrorMessage name="password" component="div"/>
+          </label>
+          <label>
+            First Name
+            <Field type="first" name="first" placeholder="John"/>
+            <ErrorMessage name="first" component="div"/>
+          </label>
+          <label>
             Password
-            <input
-              type="password"
-              name="password"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.password}
-            />
+            <Field type="last" name="last" placeholder="Doe"/>
+            <ErrorMessage name="last" component="div"/>
           </label>
-          {errors.password && touched.password && errors.password}
           <button type="submit" disabled={isSubmitting}>
             Submit
           </button>
-        </form>
-      }}
+        </Form>
+      )}
     </Formik>
+
+    <style jsx>{`
+      .register-form {
+        color: teal;
+      }
+      .register-form label {
+        display: block;
+      }
+    `}</style>
   </Layout>;
 };
 
