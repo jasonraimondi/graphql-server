@@ -17,6 +17,7 @@ export class AuthService {
         try {
             payload = verify(refreshToken, ENV.refreshTokenSecret);
         } catch (e) {
+            console.log(e);
             throw new Error("invalid refresh token");
         }
 
@@ -60,10 +61,13 @@ export class AuthService {
     sendRefreshToken(res: Response, user?: User) {
         let token = "";
         if (user) token = this.createRefreshToken(user!);
+        // 7 days
+        const expiresAt = Date.now() + (60 * 60 * 24 * 7);
         res.cookie("jid", token, {
-            // domain: "localhost",
             httpOnly: true,
-            path: "/refresh_token",
+            // domain: ".example.com"
+            domain: "localhost",
+            expires: new Date(expiresAt),
         });
     }
 }

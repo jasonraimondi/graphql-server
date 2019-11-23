@@ -41,7 +41,7 @@ describe("auth_resolver", () => {
             expect(decoded.exp).toBeLessThan(daysInFuture(8));
         });
 
-        test("create access token is created with expected data", async () => {
+        test.skip("create access token is created with expected data", async () => {
             // arrange
             const user = await User.create({ email: "jason@raimondi.us", });
             await userRepository.save(user);
@@ -56,7 +56,6 @@ describe("auth_resolver", () => {
             expect(decoded.exp).toBeGreaterThan(minutesInFuture(14));
             expect(decoded.exp).toBeLessThan(minutesInFuture(16));
         });
-
 
         test("invalid jwt throws exception", async () => {
             // arrange

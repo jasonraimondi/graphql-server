@@ -36,14 +36,14 @@ describe("auth controller", () => {
 
         // act
         const response = await request(app)
-            .post("/refresh_token")
+            .post("/auth/refresh_token")
             .expect(200)
             .set("Cookie", [`jid=${refreshToken}`])
             .expect("Content-Type", /json/);
 
         // assert
         expect(response.header["set-cookie"].length).toBe(1);
-        const JID_JWT_COOKIE = /jid=[a-zA-Z\d\-_]+.[a-zA-Z\d\-_]+.[a-zA-Z\d\-_]+; Path=\/refresh_token; HttpOnly/;
+        const JID_JWT_COOKIE = /jid=[a-zA-Z\d\-_]+.[a-zA-Z\d\-_]+.[a-zA-Z\d\-_]+; Domain=localhost; Path=\/; HttpOnly/;
         expect(response.header["set-cookie"][0]).toMatch(JID_JWT_COOKIE);
         // @todo should pass, I need to add this back...
         // expect(response.header["set-cookie"][0].includes(refreshToken)).toBeFalsy();
@@ -58,7 +58,7 @@ describe("auth controller", () => {
 
         // act
         const response = await request(app)
-            .post("/refresh_token")
+            .post("/auth/refresh_token")
             .expect(401)
             .expect("Content-Type", /json/);
 
@@ -76,7 +76,7 @@ describe("auth controller", () => {
 
         // act
         const response = await request(app)
-            .post("/refresh_token")
+            .post("/auth/refresh_token")
             .expect(401)
             .set("Cookie", [`jid=${invalidToken}`])
             .expect("Content-Type", /json/);
