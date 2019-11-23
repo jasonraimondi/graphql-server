@@ -17,6 +17,7 @@ export class UserRepository extends Repository<User> implements IUserRepository 
     }
 
     findByEmail(email: string) {
+        email = email.toLowerCase();
         return this.findOneOrFail({ where: { email } });
     }
 

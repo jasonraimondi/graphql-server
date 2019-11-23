@@ -43,7 +43,7 @@ export class AuthService {
             isEmailConfirmed: user.isEmailConfirmed
         };
         return sign(payload, ENV.accessTokenSecret, {
-            expiresIn: "15m",
+            expiresIn: "1m",
         });
     }
 

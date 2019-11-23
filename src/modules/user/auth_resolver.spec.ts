@@ -36,7 +36,7 @@ describe("auth_resolver", () => {
         test("user logs in successfully", async () => {
             // arrange
             const input = new LoginInput();
-            input.email = "jason@raimondi.us";
+            input.email = "jason@Raimondi.us";
             input.password = "jasonraimondi";
             const user = await User.create(input);
             user.isEmailConfirmed = true;

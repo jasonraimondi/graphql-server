@@ -36,7 +36,7 @@ describe("auth controller", () => {
 
         // act
         const response = await request(app)
-            .post("/auth/refresh_token")
+            .post("/refresh_token")
             .expect(200)
             .set("Cookie", [`jid=${refreshToken}`])
             .expect("Content-Type", /json/);
@@ -58,7 +58,7 @@ describe("auth controller", () => {
 
         // act
         const response = await request(app)
-            .post("/auth/refresh_token")
+            .post("/refresh_token")
             .expect(401)
             .expect("Content-Type", /json/);
 
@@ -76,7 +76,7 @@ describe("auth controller", () => {
 
         // act
         const response = await request(app)
-            .post("/auth/refresh_token")
+            .post("/refresh_token")
             .expect(401)
             .set("Cookie", [`jid=${invalidToken}`])
             .expect("Content-Type", /json/);
