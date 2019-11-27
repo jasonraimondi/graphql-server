@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - 'packages/graphql-api/*'
+      - '.github/workflows/nodejs.yml'
 
 jobs:
   build:
