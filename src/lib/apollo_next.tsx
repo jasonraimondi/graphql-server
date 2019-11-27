@@ -31,7 +31,7 @@ const authLink = setContext((_request, { headers }) => {
 });
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {
-  console.log({graphQLErrors, networkError});
+  console.log("apollo next error", {graphQLErrors, networkError});
 });
 
 // can also be a function that accepts a `context` object (SSR only) and returns a config

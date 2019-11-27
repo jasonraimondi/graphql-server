@@ -35,7 +35,7 @@ export const getAuth = async (ctx?: NextPageContext): Promise<Auth> => {
 export async function redirectToLogin(ctx?: NextPageContext) {
   const redirectTo = ctx && ctx.pathname ? ctx.pathname : document.referrer;
   console.log({ redirectTo });
-  await Redirect(ctx, redirectTo ? `/login?redirectTo=${encodeURI(redirectTo)}` : "/login");
+  await Redirect(redirectTo ? `/login?redirectTo=${encodeURI(redirectTo)}` : "/login", ctx);
 }
 
 export type DeprecatedAuth = {

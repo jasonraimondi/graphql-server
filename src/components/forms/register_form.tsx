@@ -35,13 +35,13 @@ export const RegisterForm = ({ handleValidate, handleSubmit }: Props) => {
         </Label>
         <Label>
           <span>First Name</span>
-          <Field type="first" name="first" placeholder="John"/>
-          <ErrorMessage name="first" component="div"/>
+          <Field type="text" name="firstName" placeholder="John"/>
+          <ErrorMessage name="firstName" component="div"/>
         </Label>
         <Label>
           <span>Last Name</span>
-          <Field type="last" name="last" placeholder="Doe"/>
-          <ErrorMessage name="last" component="div"/>
+          <Field type="text" name="lastName" placeholder="Doe"/>
+          <ErrorMessage name="lastName" component="div"/>
         </Label>
         <Button type="submit" disabled={isSubmitting}>
           Submit

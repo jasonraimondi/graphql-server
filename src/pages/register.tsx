@@ -12,12 +12,13 @@ export const validEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 type RegisterFormData = {
   email: string;
   password: string;
+  firstName?: string;
+  lastName?: string;
 }
 
-const Register: NextPage = () => {
+const Register: NextPage<{}> = () => {
   const [register, { called, loading }] = useRegisterMutation();
-  console.log({called, loading});
-
+  console.log({ called, loading });
 
   const handleSubmit = async (data: RegisterFormData, { setSubmitting, setStatus }: FormikHelpers<RegisterFormData>) => {
     await register({ variables: { data } }).catch(e => setStatus(e.message.replace(/GraphQL error: /gi, "")));
@@ -40,4 +41,6 @@ const Register: NextPage = () => {
   </>;
 };
 
-export default withLayout(withApollo(Register));
+export default withLayout(withApollo(Register), {
+  title: "Register Page",
+});

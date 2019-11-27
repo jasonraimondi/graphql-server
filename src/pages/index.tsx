@@ -28,4 +28,6 @@ const Index: NextPage<any> = () => {
   return <div>{body}</div>;
 };
 
-export default withLayout(withApollo(Index));
+export default withLayout(withApollo(Index), {
+  title: "Hi ya slugger"
+});

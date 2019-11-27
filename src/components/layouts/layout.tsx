@@ -2,6 +2,7 @@ import * as React from "react";
 import Head from "next/head";
 import { css } from "emotion";
 import "normalize.css/normalize.css";
+import baseStyles from "@/styles/base";
 
 import { Header } from "@/app/components/layouts/partials/header";
 import { colors } from "@/styles/theme";
@@ -15,7 +16,7 @@ type Props = {
 };
 
 type Settings = {
-  protectedRoute: boolean;
+  protectedRoute?: boolean;
   title?: string;
 };
 
@@ -36,6 +37,7 @@ export const withLayout = (WrappedComponent: NextPage<any>, settings?: Settings)
         <title>{title}</title>
         <meta charSet="utf-8"/>
         <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
+        {baseStyles}
       </Head>
       <main className={css`
         height: 100%;

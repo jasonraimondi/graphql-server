@@ -13,12 +13,12 @@ const Logout: NextPage = () => {
   const handleLogout = async () => {
     await logout();
     await client!.resetStore();
+    destroyAccessToken();
+    await Redirect("/login");
   };
 
   useEffect(() => {
     handleLogout().catch(e => console.error(e));
-    destroyAccessToken();
-    Redirect(undefined, "/login");
   }, []);
 
   return (
@@ -26,4 +26,6 @@ const Logout: NextPage = () => {
   );
 };
 
-export default withLayout(withApollo(Logout));
+export default withLayout(withApollo(Logout), {
+  title: "Logout Page"
+});

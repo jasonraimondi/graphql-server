@@ -1,5 +1,5 @@
 import { NextPage } from "next";
-import Router from "next/router";
+import { withRouter } from "next/router";
 import React from "react";
 
 import { useLoginMutation } from "@/generated/graphql";
@@ -8,12 +8,13 @@ import { validEmail } from "@/app/pages/register";
 import { setAccessToken } from "@/app/lib/auth";
 import { withLayout } from "@/app/components/layouts/layout";
 import { LoginForm, LoginFormData } from "@/app/components/forms/login_form";
+import { WithRouterProps } from "next/dist/client/with-router";
+import { Redirect } from "@/app/lib/redirect";
 
-type Props = {
-  redirectTo?: string;
-}
+type Props = WithRouterProps & {
+};
 
-const LoginPage: NextPage<Props> = ({ redirectTo }) => {
+const LoginPage: NextPage<Props> = ({ router: { query: { redirectTo, message } } }) => {
   const [login] = useLoginMutation();
 
   const handleSubmit = async (data: LoginFormData, { setSubmitting }: any) => {
@@ -25,7 +26,8 @@ const LoginPage: NextPage<Props> = ({ redirectTo }) => {
     }
     setSubmitting(false);
     if (!redirectTo || redirectTo.includes("/login")) redirectTo = "/dashboard";
-    await Router.push(redirectTo);
+    if (Array.isArray(redirectTo)) redirectTo = redirectTo[0];
+    await Redirect(redirectTo);
   };
 
   const handleValidate = (values: LoginFormData) => {
@@ -40,13 +42,11 @@ const LoginPage: NextPage<Props> = ({ redirectTo }) => {
 
   return <>
     <h1 className="h5">Login Page</h1>
+    {message ? <p>{message}</p> : null}
     <LoginForm handleSubmit={handleSubmit} handleValidate={handleValidate}/>
   </>;
 };
 
-LoginPage.getInitialProps = async (ctx) => {
-  let { redirectTo } = ctx.query;
-  return { redirectTo: redirectTo ? redirectTo.toString() : undefined };
-};
-
-export default withLayout(withApollo(LoginPage));
+export default withLayout(withApollo(withRouter(LoginPage)), {
+  title: "Login Page"
+});

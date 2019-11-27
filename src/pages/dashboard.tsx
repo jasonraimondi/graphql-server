@@ -14,4 +14,5 @@ const Dashboard: NextPage = ({ accessToken }: any) => {
 
 export default withLayout(Dashboard, {
   protectedRoute: true,
+  title: "The Dashboard"
 });
