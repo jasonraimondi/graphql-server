@@ -1,0 +1,98 @@
+type AppInfoResponse {
+    name: String!
+    version: String!
+    author: String!
+    license: String!
+}
+
+scalar DateTime
+
+type EmailConfirmation {
+    uuid: ID!
+    user: User!
+    expiresAt: DateTime!
+}
+
+type ForgotPassword {
+    uuid: ID!
+    user: User!
+    expiresAt: DateTime!
+}
+
+input LoginInput {
+    email: String!
+    password: String!
+}
+
+type LoginResponse {
+    accessToken: String!
+    user: User!
+}
+
+type Mutation {
+    login(data: LoginInput!): LoginResponse!
+    logout: Boolean!
+    revokeRefreshToken(userId: String!): Boolean!
+    sendForgotPasswordEmail(data: SendForgotPasswordInput!): Boolean!
+    updatePasswordFromToken(data: UpdatePasswordInput!): Boolean!
+    verifyEmailConfirmation(data: VerifyEmailInput!): Boolean!
+    resentConfirmEmail(email: String!): Boolean!
+    register(data: RegisterInput!): RegisterResponse!
+}
+
+type Permission {
+    id: ID!
+    name: String!
+}
+
+type Query {
+    info: AppInfoResponse!
+    me: User!
+    user(uuid: String!): User!
+    users: [User!]!
+}
+
+input RegisterInput {
+    uuid: String
+    firstName: String
+    lastName: String
+    email: String!
+    password: String!
+}
+
+type RegisterResponse {
+    user: User
+    userConfirmation: EmailConfirmation
+}
+
+type Role {
+    id: ID!
+    name: String!
+}
+
+input SendForgotPasswordInput {
+    email: String!
+}
+
+input UpdatePasswordInput {
+    password: String!
+    token: String!
+    email: String!
+}
+
+type User {
+    uuid: ID!
+    email: String!
+    firstName: String
+    lastName: String
+    isEmailConfirmed: Boolean!
+    lastLoginAt: DateTime
+    isActive: Boolean!
+    name: String
+}
+
+input VerifyEmailInput {
+    email: String!
+    uuid: String!
+}
+
