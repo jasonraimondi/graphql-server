@@ -1,5 +1,5 @@
 import { Field, InputType } from "type-graphql";
-import { IsEmail, IsUUID } from "class-validator";
+import { IsEmail } from "class-validator";
 
 @InputType()
 export class VerifyEmailInput {
@@ -8,6 +8,6 @@ export class VerifyEmailInput {
     email: string;
 
     @Field()
-    @IsUUID("4")
+    // @IsUUID("4")
     uuid: string;
 }

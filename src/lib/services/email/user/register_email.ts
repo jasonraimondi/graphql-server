@@ -10,15 +10,15 @@ export class RegisterEmail {
 
     async send(userConfirmation: EmailConfirmation): Promise<any> {
         const user = userConfirmation.user;
+        const url = `http://localhost:3000/verify_email?e=${user.email}&u=${userConfirmation.uuid}`;
         await this.emailService.send({
             to: user.email,
             from: "noreply@example.com",
             subject: `Register user ${user.email}?`,
-            text: `
-            verifyUserConfirmation(email:"${user.email}", uuid:"${userConfirmation.uuid}")
-            `,
+            text: url,
             html: `
-            <strong>verifyUserConfirmation(email:"${user.email}", uuid:"${userConfirmation.uuid}")</strong>
+            <a href="${url}">${url}</a>
+            verifyUserConfirmation(email:"${user.email}", uuid:"${userConfirmation.uuid}")
             `
         });
     }

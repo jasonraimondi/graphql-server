@@ -19,9 +19,10 @@ export class EmailConfirmationResolver {
     async verifyEmailConfirmation(
         @Arg("data") { uuid, email }: VerifyEmailInput
     ): Promise<boolean> {
+        email = email.toLowerCase();
         const userConfirmation = await this.userConfirmationRepository.findById(uuid);
         if (userConfirmation.user.email !== email) {
-            throw new Error("invalid user and confirmation");
+            throw new Error(`invalid user and confirmation (${userConfirmation.user.email}) (${email})`);
         }
         try {
             const { user } = userConfirmation;
