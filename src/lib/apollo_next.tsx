@@ -1,6 +1,6 @@
 // @ts-ignore
 import { withData } from "next-apollo";
-import getConfig from 'next/config'
+import getConfig from "next/config";
 import { ApolloLink } from "apollo-link";
 import { onError } from "apollo-link-error";
 import { setContext } from "apollo-link-context";
@@ -8,7 +8,7 @@ import { HttpLink } from "apollo-boost";
 import fetch from "isomorphic-unfetch";
 
 import { refreshLink } from "@/app/lib/token_refresh_link";
-import { getAccessToken } from "@/app/lib/access_token";
+import { getAuth } from "@/app/lib/auth";
 
 const { publicRuntimeConfig } = getConfig();
 
@@ -19,15 +19,15 @@ const httpLink = new HttpLink({
 });
 
 const authLink = setContext((_request, { headers }) => {
-  // const token = isServer() ? serverAccessToken : getAccessToken();
-  const token = getAccessToken();
-  console.log("setContext", {token});
-  return {
-    headers: {
-      ...headers,
-      authorization: token ? `bearer ${token}` : ""
-    }
-  };
+  return getAuth().then(token => {
+    console.log({token});
+    return {
+      headers: {
+        ...headers,
+        authorization: token ? token.accessToken.authorizationString : undefined,
+      },
+    };
+  });
 });
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {

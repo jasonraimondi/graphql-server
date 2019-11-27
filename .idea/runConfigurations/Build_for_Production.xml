@@ -1,12 +1,14 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="nextjs dev" type="js.build_tools.npm">
+  <configuration default="false" name="Build for Production" type="js.build_tools.npm">
     <package-json value="$PROJECT_DIR$/package.json" />
     <command value="run" />
     <scripts>
-      <script value="dev" />
+      <script value="build" />
     </scripts>
     <node-interpreter value="project" />
-    <envs />
+    <envs>
+      <env name="NODE_ENV" value="production" />
+    </envs>
     <method v="2">
       <option name="RunConfigurationTask" enabled="true" run_configuration_name="Generate GQL" run_configuration_type="js.build_tools.npm" />
     </method>

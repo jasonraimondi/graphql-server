@@ -1,50 +1,34 @@
-import React from "react";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { NextPage } from "next";
 import Router from "next/router";
+import React from "react";
 
 import { useLoginMutation } from "@/generated/graphql";
 import { withApollo } from "@/app/lib/apollo_next";
-import { setAccessToken } from "@/app/lib/access_token";
-import { Layout } from "@/app/components/layouts/layout";
-import {validEmail} from "@/app/pages/register";
+import { validEmail } from "@/app/pages/register";
+import { setAccessToken } from "@/app/lib/auth";
+import { withLayout } from "@/app/components/layouts/layout";
+import { LoginForm, LoginFormData } from "@/app/components/forms/login_form";
 
-type LoginFormData = {
-  email: string;
-  password: string;
+type Props = {
+  redirectTo?: string;
 }
 
-const page = () => {
+const LoginPage: NextPage<Props> = ({ redirectTo }) => {
   const [login] = useLoginMutation();
 
-  const onSubmit = async (data: any, { setSubmitting }: any) => {
-    console.log("form submitted");
+  const handleSubmit = async (data: LoginFormData, { setSubmitting }: any) => {
     const response = await login({
       variables: { data },
-      update: (store: any, { data }): any => {
-        if (!data) {
-          return null;
-        }
-        console.log(store, data);
-
-        // store.writeQuery<MeQuery>({
-        //     query: MeDocument,
-        //     data: {
-        //         me: data.login.user
-        //     }
-        // });
-      },
     });
-
-    console.log(response);
-
     if (response && response.data) {
       setAccessToken(response.data.login.accessToken);
     }
-
     setSubmitting(false);
-    await Router.push("/");
+    if (!redirectTo || redirectTo.includes("/login")) redirectTo = "/dashboard";
+    await Router.push(redirectTo);
   };
-  const validate = (values: any) => {
+
+  const handleValidate = (values: LoginFormData) => {
     let errors: any = {};
     if (!values.email) {
       errors.email = "Required";
@@ -54,38 +38,15 @@ const page = () => {
     return errors;
   };
 
-  return <Layout title="Login page">
-    <h1>Login Page</h1>
-    <Formik<LoginFormData>
-      initialValues={{ email: '', password: '' }}
-      validate={validate}
-      onSubmit={onSubmit}
-    >
-      {({ isSubmitting }) => (
-        <Form className="login-form">
-          <label>
-            Email
-            <Field type="email" name="email" placeholder="john.doe@example.com"/>
-            <ErrorMessage name="email" component="div"/>
-          </label>
-          <label>
-            Password
-            <Field type="password" name="password" placeholder="******"/>
-            <ErrorMessage name="password" component="div"/>
-          </label>
-          <button type="submit" disabled={isSubmitting}>
-            Submit
-          </button>
-        </Form>
-      )}
-    </Formik>
-    <style jsx>{`
-      .login-form label {
-        background-color: blue;
-        display: block;
-      }
-    `}</style>
-  </Layout>;
+  return <>
+    <h1 className="h5">Login Page</h1>
+    <LoginForm handleSubmit={handleSubmit} handleValidate={handleValidate}/>
+  </>;
 };
 
-export default withApollo(page);
+LoginPage.getInitialProps = async (ctx) => {
+  let { redirectTo } = ctx.query;
+  return { redirectTo: redirectTo ? redirectTo.toString() : undefined };
+};
+
+export default withLayout(withApollo(LoginPage));

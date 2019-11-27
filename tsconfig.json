@@ -20,7 +20,8 @@
     "strict": true,
     "paths": {
       "@/app/*": ["src/*"],
-      "@/generated/*": ["generated/*"]
+      "@/generated/*": ["generated/*"],
+      "@/styles/*": ["styles/*"]
     }
   },
   "exclude": [

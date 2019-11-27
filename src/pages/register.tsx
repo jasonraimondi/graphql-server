@@ -1,9 +1,11 @@
+import { FormikHelpers } from "formik";
+import { NextPage } from "next";
 import React from "react";
-import { ErrorMessage, Field, Form, Formik, FormikHelpers } from "formik";
 
 import { withApollo } from "@/app/lib/apollo_next";
 import { useRegisterMutation } from "@/generated/graphql";
-import { Layout } from "@/app/components/layouts/layout";
+import { withLayout } from "@/app/components/layouts/layout";
+import { RegisterForm } from "@/app/components/forms/register_form";
 
 export const validEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 
@@ -12,18 +14,17 @@ type RegisterFormData = {
   password: string;
 }
 
-const page = () => {
+const Register: NextPage = () => {
   const [register, { called, loading }] = useRegisterMutation();
   console.log({called, loading});
 
-  const initialFormValues: RegisterFormData = { email: "", password: "" };
 
-  const handleSubmit = async (data: any, { setSubmitting, setStatus }: FormikHelpers<RegisterFormData>) => {
+  const handleSubmit = async (data: RegisterFormData, { setSubmitting, setStatus }: FormikHelpers<RegisterFormData>) => {
     await register({ variables: { data } }).catch(e => setStatus(e.message.replace(/GraphQL error: /gi, "")));
     setSubmitting(false);
   };
 
-  const handleValidate = (values: any) => {
+  const handleValidate = (values: RegisterFormData) => {
     let errors: any = {};
     if (!values.email) {
       errors.email = "Required";
@@ -33,52 +34,10 @@ const page = () => {
     return errors;
   };
 
-  return <Layout title="Register page">
+  return <>
     <h1>Register Page</h1>
-    <Formik<RegisterFormData>
-      initialValues={initialFormValues}
-      validate={handleValidate}
-      onSubmit={handleSubmit}
-    >
-      {({ status, isSubmitting }) => (
-        <Form className="register-form">
-          {status}
-          <label>
-            Email
-            <Field type="email" name="email" placeholder="john.doe@example.com"/>
-            <ErrorMessage name="email" component="div"/>
-          </label>
-          <label>
-            First Name
-            <Field type="password" name="password" placeholder="**************"/>
-            <ErrorMessage name="password" component="div"/>
-          </label>
-          <label>
-            First Name
-            <Field type="first" name="first" placeholder="John"/>
-            <ErrorMessage name="first" component="div"/>
-          </label>
-          <label>
-            Password
-            <Field type="last" name="last" placeholder="Doe"/>
-            <ErrorMessage name="last" component="div"/>
-          </label>
-          <button type="submit" disabled={isSubmitting}>
-            Submit
-          </button>
-        </Form>
-      )}
-    </Formik>
-
-    <style jsx>{`
-      .register-form {
-        color: teal;
-      }
-      .register-form label {
-        display: block;
-      }
-    `}</style>
-  </Layout>;
+    <RegisterForm handleSubmit={handleSubmit} handleValidate={handleValidate}/>
+  </>;
 };
 
-export default withApollo(page);
+export default withLayout(withApollo(Register));

@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/nextjs.iml" filepath="$PROJECT_DIR$/.idea/nextjs.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../typescript-graphql/.idea/server.iml" filepath="$PROJECT_DIR$/../typescript-graphql/.idea/server.iml" />
     </modules>
   </component>
 </project>

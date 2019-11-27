@@ -3,9 +3,10 @@ const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
 const { join } = require("path");
 
 module.exports = withCSS({
+    minify: false,
     distDir: "dist",
     publicRuntimeConfig: {
-        REFRESH_TOKEN: process.env.REFRESH_TOKEN || "http://localhost:4000/refresh_token",
+        REFRESH_TOKEN_URL: process.env.REFRESH_TOKEN_URL || "http://localhost:4000/auth/refresh_token",
         GRAPH_API_URL: process.env.GRAPH_API_URL || "http://localhost:4000/graphql",
     },
     serverRuntimeConfig: {

@@ -1,23 +1,29 @@
-import React from "react";
+import { NextPage } from "next";
+import React, { useEffect } from "react";
 
-// import { useLogoutMutation } from "@/generated/graphql";
-import { Layout } from "@/app/components/layouts/layout";
+import { useLogoutMutation } from "@/generated/graphql";
 import { withApollo } from "@/app/lib/apollo_next";
+import { withLayout } from "@/app/components/layouts/layout";
+import { destroyAccessToken } from "@/app/lib/auth";
+import { Redirect } from "@/app/lib/redirect";
 
-const page = () => {
-  // const [logout, { client }] = useLogoutMutation();
-  // const handleLogout = async () => {
-  //   alert("log the user out!");
-  //   await logout();
-  //   setAccessToken("");
-  //   await client!.resetStore();
-  // };
+const Logout: NextPage = () => {
+  const [logout, { client }] = useLogoutMutation();
+
+  const handleLogout = async () => {
+    await logout();
+    await client!.resetStore();
+  };
+
+  useEffect(() => {
+    handleLogout().catch(e => console.error(e));
+    destroyAccessToken();
+    Redirect(undefined, "/login");
+  }, []);
 
   return (
-    <Layout title="This is the logout page">
-      <div>Bye soon</div>
-    </Layout>
+      <h1>Logging Out...</h1>
   );
 };
 
-export default withApollo(page);
+export default withLayout(withApollo(Logout));

@@ -1,10 +1,11 @@
 import React from "react";
+import { NextPage } from "next";
 
 import { useUsersQuery } from "@/generated/graphql";
-import { Layout } from "@/app/components/layouts/layout";
+import { withLayout } from "@/app/components/layouts/layout";
 import { withApollo } from "@/app/lib/apollo_next";
 
-let page = () => {
+const Index: NextPage<any> = () => {
   const { data } = useUsersQuery({ fetchPolicy: "network-only" });
   let body;
   if (!data) {
@@ -24,11 +25,7 @@ let page = () => {
     </>;
   }
 
-  return (
-    <Layout title="Hello index page">
-      {body}
-    </Layout>
-  );
+  return <div>{body}</div>;
 };
 
-export default withApollo(page);
+export default withLayout(withApollo(Index));

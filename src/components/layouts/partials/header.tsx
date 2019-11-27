@@ -1,48 +1,57 @@
 import React from "react";
+import styled from "@emotion/styled";
+import { css } from "@emotion/core";
 
-import { NavLink } from "@/app/components/nav_link";
+import { Link } from "@/app/components/hoc/nav_link";
+import { colors } from "@/styles/theme";
+import { DeprecatedAuth } from "@/app/lib/auth";
 
 interface Props {
-  user?: { email: string, name: string, };
+  auth?: DeprecatedAuth;
 }
 
-
-export const Header: React.FC<Props> = ({ user }) => {
+export const Header: React.FC<Props> = ({ auth }) => {
   return (
     <header>
-      <nav>
-        <NavLink href="/">
-          <a className="helmet">Home</a>
-        </NavLink>
-        <NavLink href="/register">
-          <a className="helmet">Register</a>
-        </NavLink>
-        <NavLink href="/login">
-          <a className="helmet">Login</a>
-        </NavLink>
-        {user ? <NavLink href="/logout">
-          <a className="helmet">Logout</a>
-        </NavLink> : null}
+      <nav css={css`
+         display: flex;
+      `}>
+        <Link href="/"><NavAnchor>Home</NavAnchor></Link>
+        <Link href="/dashboard"><NavAnchor>Dashboard</NavAnchor></Link>
+        <Link href="/blank"><NavAnchor>Blank</NavAnchor></Link>
+        {auth && auth.email ? (
+          <>
+            <Link href="/logout"><NavAnchor>Logout</NavAnchor></Link>
+          </>
+        ) : (
+          <>
+            <Link href="/register"><NavAnchor>Register</NavAnchor></Link>
+            <Link href="/login"><NavAnchor>Login</NavAnchor></Link>
+          </>
+        )}
       </nav>
-
-      <style jsx>{`
-        nav { 
-          display: flex;
-        }
-        .helmet {
-          color: teal;
-        }
-        .helmet:after {
-          content: "|";
-          color: black;
-          text-decoration: none;
-          padding: 0 2px;
-        }
-        .helmet:last-child:after {
-          content: "";
-          padding: 0;
-        }
-      `}</style>
     </header>
   );
 };
+
+const NavAnchor = styled.a`
+  color: ${colors.gray["100"]};
+  font-weight: 500;
+  padding: 0.5rem 0;
+
+  &:hover,
+  &:active {
+    color: ${colors.gray["400"]};
+  }
+  
+  &:after {
+    content: "|";
+    color: ${colors.black};
+    text-decoration: none;
+    padding: 0 2px;
+  }
+  &:last-child:after {
+    content: "";
+    padding: 0;
+  }
+`;
