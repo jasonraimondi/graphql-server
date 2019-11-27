@@ -23,8 +23,9 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - name: npm install and test
       run: |
-        npm ci --prefix packages/graphql-api
-        npm test --prefix packages/graphql-api
+        cd packages/graphql-api
+        npm ci
+        npm test
       env:
         ACCESS_TOKEN_SECRET: 5854127e-8fdb-45db-8e89-26830f14ef52n
         REFRESH_TOKEN_SECRET: aad76070-fe92-4035-b165-c364cd547d7en
@@ -32,9 +33,10 @@ jobs:
         CI: true
     - name: report coverage to code climate
       run: |
+        cd packages/graphql-api
         curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
         chmod +x ./cc-test-reporter
-        ./cc-test-reporter format-coverage -t lcov packages/graphql-api/coverage/lcov.info
+        ./cc-test-reporter format-coverage -t lcov coverage/lcov.info
         ./cc-test-reporter upload-coverage
       env:
         CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
