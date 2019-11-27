@@ -31,9 +31,9 @@ export function privateRoute(WrappedComponent: NextPage<any>) {
     if (accessToken.isExpired) {
       destroyAccessToken(ctx);
 
-      // @todo optional chain refactor
-      if (refreshToken && refreshToken.isExpired) {
+      if (!refreshToken || refreshToken.token === "") {
         await redirectToLogin(ctx);
+        return {};
       }
 
       const data = await fetchAccessToken();

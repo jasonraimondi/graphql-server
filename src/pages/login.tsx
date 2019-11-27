@@ -10,6 +10,7 @@ import { withLayout } from "@/app/components/layouts/layout";
 import { LoginForm, LoginFormData } from "@/app/components/forms/login_form";
 import { WithRouterProps } from "next/dist/client/with-router";
 import { Redirect } from "@/app/lib/redirect";
+import { FormikHelpers } from "formik";
 
 type Props = WithRouterProps & {
 };
@@ -17,7 +18,7 @@ type Props = WithRouterProps & {
 const LoginPage: NextPage<Props> = ({ router: { query: { redirectTo, message } } }) => {
   const [login] = useLoginMutation();
 
-  const handleSubmit = async (data: LoginFormData, { setSubmitting }: any) => {
+  const handleSubmit = async (data: LoginFormData, { setSubmitting }: FormikHelpers<LoginFormData>) => {
     const response = await login({
       variables: { data },
     });

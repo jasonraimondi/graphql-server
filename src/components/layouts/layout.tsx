@@ -53,8 +53,8 @@ export const withLayout = (WrappedComponent: NextPage<any>, settings?: Settings)
         background-color: ${colors.blue["300"]};
       `}>
           {/* todo refactor optional chaining*/}
+          <WrappedComponent {...props} className="blue" />
           <p>Auth: {auth && auth.decoded && auth.decoded.email ? "true" : "false"} {JSON.stringify(auth)}</p>
-          <WrappedComponent {...props} />
         </div>
       </main>
     </React.StrictMode>;

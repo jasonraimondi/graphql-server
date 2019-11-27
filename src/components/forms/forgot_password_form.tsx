@@ -1,11 +1,11 @@
 import React from "react";
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import { Button, Label } from "@/app/components/forms/elements";
-import { Link } from "@/app/components/hoc/nav_link";
 
-export type LoginFormData = {
+import { Button, Label } from "@/app/components/forms/elements";
+
+
+export type ForgotPasswordFormData = {
   email: string;
-  password: string;
 }
 
 type Props = {
@@ -13,9 +13,9 @@ type Props = {
   handleSubmit: any;
 };
 
-export const LoginForm = ({ handleValidate, handleSubmit }: Props) => {
-  return <Formik<LoginFormData>
-    initialValues={{ email: "", password: "" }}
+export const ForgotPasswordForm = ({ handleValidate, handleSubmit }: Props) => {
+  return <Formik<ForgotPasswordFormData>
+    initialValues={{ email: "" }}
     validate={handleValidate}
     onSubmit={handleSubmit}
   >
@@ -25,15 +25,6 @@ export const LoginForm = ({ handleValidate, handleSubmit }: Props) => {
           <span>Email</span>
           <Field type="email" name="email" placeholder="john.doe@example.com"/>
           <ErrorMessage name="email" component="div"/>
-        </Label>
-        <Label>
-          <span>Password</span>
-          <Field type="password" name="password" placeholder="******"/>
-          <br/>
-          <Link href="/forgot_password">
-            <a className="small">Forgot Password?</a>
-          </Link>
-          <ErrorMessage name="password" component="div"/>
         </Label>
         <Button type="submit" disabled={isSubmitting}>
           <span>Submit</span>
