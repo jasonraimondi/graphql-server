@@ -2,12 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="166bc532-c0ed-4e14-94b6-924e116089d0" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.github/workflows/nodejs.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/nodejs.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/graphql-api/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/packages/graphql-api/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/web/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/packages/web/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/web/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/packages/web/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/web/package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/web/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/packages/web/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -189,7 +185,7 @@
       <workItem from="1574549881318" duration="6940000" />
       <workItem from="1574653211228" duration="7000" />
       <workItem from="1574820804616" duration="60000" />
-      <workItem from="1574837142654" duration="2701000" />
+      <workItem from="1574837142654" duration="3160000" />
     </task>
     <servers />
   </component>
