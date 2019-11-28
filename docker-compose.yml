@@ -24,10 +24,10 @@ services:
       ACCESS_TOKEN_SECRET: 6fbf61ea-5214-40d8-a08b-4846daf8280an
       REFRESH_TOKEN_SECRET: de92ec07-29fe-457b-b71c-3aaf88ce01cbn
       ENABLE_DEBUGGING: 1
-      MAILER: smtp://localhost:1025
+      MAILER: smtp://host.docker.internal:1025
       TYPEORM_SYNCHRONIZE: 1
       TYPEORM_LOGGING: 1
-      TYPEORM_URL: postgres://typegraphql:typegraphql@localhost:5432/typegraphql
+      TYPEORM_URL: postgres://typegraphql:secret@host.docker.internal:5432/typegraphql
       TYPEORM_CONNECTION: postgres
       CORS: ""
     depends_on:
@@ -56,15 +56,15 @@ services:
       - "traefik.http.routers.nextjs.entrypoints=web"
 
   pg:
-    image: postgres:alpine
+    image: postgres:11-alpine
     environment:
       POSTGRES_DB: typegraphql
       POSTGRES_USER: typegraphql
-      POSTGRES_PASSWORD: typegraphql
+      POSTGRES_PASSWORD: secret
     ports:
       - 5432:5432
     volumes:
-      - pgdata:/var/lib/postgresql/data
+      - pgdata1:/var/lib/postgresql/data
 
   mailhog:
     image: mailhog/mailhog
@@ -73,4 +73,4 @@ services:
       - 1025:1025
 
 volumes:
-  pgdata:
+  pgdata1:
