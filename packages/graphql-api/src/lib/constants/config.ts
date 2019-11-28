@@ -3,5 +3,5 @@ export const ENV = {
     refreshTokenSecret: process.env.REFRESH_TOKEN_SECRET || "",
     enableDebugging: !!process.env.ENABLE_DEBUGGING,
     cors: (process.env.CORS || "").split(","),
-    mailerURL: process.env.MAILER,
+    mailerURL: process.env.MAILER || "smtp://localhost:1025",
 };

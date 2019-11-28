@@ -1,8 +1,8 @@
-import { NodemailerService } from "./email/nodemailer_mailer";
-import { IMailer } from "./email/mailer";
+import { IMailer } from "@/lib/services/email/mailer";
+import { NodemailerService } from "@/lib/services/email/nodemailer_mailer";
 
 export class ServiceFactory {
-    constructor(private readonly mailerURL: string = "smtp://localhost:1025") {
+    constructor(private readonly mailerURL: string) {
     }
 
     get emailService(): IMailer {

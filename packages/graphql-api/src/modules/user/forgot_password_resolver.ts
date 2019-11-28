@@ -1,13 +1,13 @@
 import { Arg, Mutation, Resolver } from "type-graphql";
 import { inject, injectable } from "inversify";
 
-import { SendForgotPasswordInput, UpdatePasswordInput } from "./auth/forgot_password_input";
-import { ForgotPasswordEmail } from "../../lib/services/email/user/forgot_password_email";
-import { IForgotPasswordRepository } from "../../lib/repository/user/forgot_password_repository";
-import { User } from "../../entity/user/user_entity";
-import { REPOSITORY, SERVICE } from "../../lib/constants/inversify";
-import { ForgotPassword } from "../../entity/user/forgot_password_entity";
-import { IUserRepository } from "../../lib/repository/user/user_repository";
+import { ForgotPasswordEmail } from "@/lib/services/email/user/forgot_password_email";
+import { IForgotPasswordRepository } from "@/lib/repository/user/forgot_password_repository";
+import { User } from "@/entity/user/user_entity";
+import { REPOSITORY, SERVICE } from "@/lib/constants/inversify";
+import { ForgotPassword } from "@/entity/user/forgot_password_entity";
+import { IUserRepository } from "@/lib/repository/user/user_repository";
+import { SendForgotPasswordInput, UpdatePasswordInput } from "@/modules/user/auth/forgot_password_input";
 
 @injectable()
 @Resolver()

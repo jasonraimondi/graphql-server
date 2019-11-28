@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="Web" pattern="file[typescript-graphql]:packages/web//*" />
+</component>

@@ -1,8 +1,8 @@
 import { injectable } from "inversify";
 import { EntityRepository, Repository } from "typeorm";
 
-import { EmailConfirmation } from "../../../entity/user/email_confirmation_entity";
-import { IBaseRepository } from "../base_repository";
+import { IBaseRepository } from "@/lib/repository/base_repository";
+import { EmailConfirmation } from "@/entity/user/email_confirmation_entity";
 
 export interface IEmailConfirmationRepository extends IBaseRepository<EmailConfirmation> {
     findByEmail(email: string): Promise<EmailConfirmation>;

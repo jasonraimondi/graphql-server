@@ -6,6 +6,7 @@ import { Container } from "../src/lib/inversify_container";
 import { ServiceFactory } from "../src/lib/services/service_factory";
 import { TestingServiceFactory } from "../src/lib/services/testing_service_factory";
 import { RepositoryFactory } from "../src/lib/repository/repository_factory";
+import { ENV } from "../src/lib/constants/config";
 
 
 export class TestingContainer extends Container {
@@ -28,7 +29,7 @@ export class TestingContainer extends Container {
             entities
         });
         const repositoryFactory = new RepositoryFactory(connection);
-        const serviceFactory = new TestingServiceFactory();
+        const serviceFactory = new TestingServiceFactory(ENV.mailerURL);
         return new TestingContainer(
             repositoryFactory,
             serviceFactory,

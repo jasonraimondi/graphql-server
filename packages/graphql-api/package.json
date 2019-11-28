@@ -6,13 +6,13 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "test": "../../node_modules/.bin/jest",
-    "dev": "../../node_modules/.bin/ts-node-dev --debounce --respawn --ignore-watch node_modules packages/graphql-api/src/server.ts",
-    "build": "rm -rf dist && ../../node_modules/.bin/tsc",
-    "start": "../../node_modules/.bin/ts-node packages/graphql-api/src/server.ts",
-    "lint": "../../node_modules/.bin/eslint --ext .ts packages/graphql-api/src/",
-    "lint:fix": "../../node_modules/.bin/eslint --fix --ext .ts packages/graphql-api/src/",
-    "pretty": "../../node_modules/.bin/prettier --write src/**/*.ts packages/graphql-api/test/**/*.ts"
+    "test": "jest",
+    "dev": "ts-node-dev --debounce --respawn --ignore-watch node_modules src/server.ts",
+    "build": "rm -rf dist && ./node_modules/.bin/tsc",
+    "start": "node dist/server.js",
+    "lint": "eslint --ext .ts src/",
+    "lint:fix": "eslint --fix --ext .ts src/",
+    "pretty": "prettier --write src/**/*.ts test/**/*.ts"
   },
   "dependencies": {
     "apollo-server-express": "^2.9.6",
@@ -61,7 +61,6 @@
     "typescript": "^3.7.2"
   },
   "_moduleAliases": {
-    "@": "src",
-    "@root": "."
+    "@": "dist"
   }
 }

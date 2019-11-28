@@ -1,12 +1,12 @@
 import { Arg, Ctx, Mutation, Resolver } from "type-graphql";
 import { inject, injectable } from "inversify";
 
-import { LoginInput } from "./auth/login_input";
-import { LoginResponse } from "./auth/login_response";
-import { MyContext } from "../../lib/types/my_context";
-import { IUserRepository } from "../../lib/repository/user/user_repository";
-import { REPOSITORY, SERVICE } from "../../lib/constants/inversify";
-import { AuthService } from "../../lib/services/auth/auth_service";
+import { MyContext } from "@/lib/types/my_context";
+import { LoginResponse } from "@/modules/user/auth/login_response";
+import { AuthService } from "@/lib/services/auth/auth_service";
+import { IUserRepository } from "@/lib/repository/user/user_repository";
+import { REPOSITORY, SERVICE } from "@/lib/constants/inversify";
+import { LoginInput } from "@/modules/user/auth/login_input";
 
 @injectable()
 @Resolver()

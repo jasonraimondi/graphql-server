@@ -2,14 +2,14 @@ import { Arg, Mutation, Resolver } from "type-graphql";
 import { hash } from "bcryptjs";
 import { inject, injectable } from "inversify";
 
-import { RegisterInput } from "./auth/register_input";
-import { RegisterResponse } from "./auth/register_response";
-import { RegisterEmail } from "../../lib/services/email/user/register_email";
-import { User } from "../../entity/user/user_entity";
-import { IEmailConfirmationRepository } from "../../lib/repository/user/email_confirmation_repository";
-import { IUserRepository } from "../../lib/repository/user/user_repository";
-import { EmailConfirmation } from "../../entity/user/email_confirmation_entity";
-import { REPOSITORY, SERVICE } from "../../lib/constants/inversify";
+import { RegisterResponse } from "@/modules/user/auth/register_response";
+import { User } from "@/entity/user/user_entity";
+import { IEmailConfirmationRepository } from "@/lib/repository/user/email_confirmation_repository";
+import { IUserRepository } from "@/lib/repository/user/user_repository";
+import { RegisterInput } from "@/modules/user/auth/register_input";
+import { REPOSITORY, SERVICE } from "@/lib/constants/inversify";
+import { RegisterEmail } from "@/lib/services/email/user/register_email";
+import { EmailConfirmation } from "@/entity/user/email_confirmation_entity";
 
 @injectable()
 @Resolver()

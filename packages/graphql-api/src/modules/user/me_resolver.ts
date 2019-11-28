@@ -1,11 +1,11 @@
 import { Ctx, Query, Resolver, UseMiddleware } from "type-graphql";
 import { inject, injectable } from "inversify";
 
-import { isAuth } from "../../lib/middleware/is_auth";
-import { User } from "../../entity/user/user_entity";
-import { MyContext } from "../../lib/types/my_context";
-import { REPOSITORY } from "../../lib/constants/inversify";
-import { IUserRepository } from "../../lib/repository/user/user_repository";
+import { isAuth } from "@/lib/middleware/is_auth";
+import { User } from "@/entity/user/user_entity";
+import { MyContext } from "@/lib/types/my_context";
+import { REPOSITORY } from "@/lib/constants/inversify";
+import { IUserRepository } from "@/lib/repository/user/user_repository";
 
 @injectable()
 @Resolver()

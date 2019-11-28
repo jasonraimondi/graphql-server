@@ -2,9 +2,9 @@ import { controller, httpPost } from "inversify-express-utils";
 import { inject } from "inversify";
 import { Request, Response } from "express";
 
-import { AuthService } from "../lib/services/auth/auth_service";
-import { STATUS_CODES } from "../lib/constants/status_codes";
-import { SERVICE } from "../lib/constants/inversify";
+import { AuthService } from "@/lib/services/auth/auth_service";
+import { STATUS_CODES } from "@/lib/constants/status_codes";
+import { SERVICE } from "@/lib/constants/inversify";
 
 
 @controller("/auth")

@@ -5,7 +5,7 @@ services:
     image: "traefik:v2.0.0"
     container_name: "traefik"
     command:
-      - "--log.level=DEBUG"
+      # - "--log.level=DEBUG"
       - "--api.insecure=true"
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
@@ -17,43 +17,45 @@ services:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
 
   api:
-    build: packages/graphql-api/
+    build: packages/graphql-api
     ports:
       - 4000:4000
     environment:
       ACCESS_TOKEN_SECRET: 6fbf61ea-5214-40d8-a08b-4846daf8280an
       REFRESH_TOKEN_SECRET: de92ec07-29fe-457b-b71c-3aaf88ce01cbn
-      CORS: http://localhost:3000
-      ENABLE_DEBUGGING: "true"
+      ENABLE_DEBUGGING: 1
       MAILER: smtp://localhost:1025
-      TYPEORM_SYNCHRONIZE: "true"
-      TYPEORM_LOGGING: "true"
-      TYPEORM_ENTITIES: src/entity/**/*_entity.ts
-      TYPEORM_CONNECTION: sqlite
-      TYPEORM_DATABASE: tmp/db.sqlite3
+      TYPEORM_SYNCHRONIZE: 1
+      TYPEORM_LOGGING: 1
+      TYPEORM_URL: postgres://typegraphql:typegraphql@localhost:5432/typegraphql
+      TYPEORM_CONNECTION: postgres
+      CORS: ""
     depends_on:
-      - postgres
+      - pg
       - mailhog
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.api.rule=Host(`localhost`)"
+      - "traefik.http.routers.api.rule=Host(`localhost`) && PathPrefix(`/api`)"
+      - "traefik.http.middlewares.api-stripprefix.stripprefix.prefixes=/api"
+      - "traefik.http.routers.api.middlewares=api-stripprefix@docker"
       - "traefik.http.routers.api.entrypoints=web"
 
-  web:
-    build: packages/web/
+  nextjs:
+    build: packages/web
     ports:
       - 3000:3000
     environment:
-      REFRESH_TOKEN_URL: "http://localhost:4000/auth/refresh_token"
-      GRAPH_API_URL: "http://localhost:4000/graphql"
+      REFRESH_TOKEN_URL: "/api/auth/refresh_token"
+      GRAPH_API_URL: "/api/graphql"
+      NEXT_TELEMETRY_DISABLED: 1
     depends_on:
       - api
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.web.rule=Host(`localhost`)"
-      - "traefik.http.routers.web.entrypoints=api"
+      - "traefik.http.routers.nextjs.rule=Host(`localhost`)"
+      - "traefik.http.routers.nextjs.entrypoints=web"
 
-  postgres:
+  pg:
     image: postgres:alpine
     environment:
       POSTGRES_DB: typegraphql
@@ -62,7 +64,7 @@ services:
     ports:
       - 5432:5432
     volumes:
-      - pg-data-graphql:/var/lib/postgresql/data
+      - pgdata:/var/lib/postgresql/data
 
   mailhog:
     image: mailhog/mailhog
@@ -71,4 +73,4 @@ services:
       - 1025:1025
 
 volumes:
-  pg-data-graphql:
+  pgdata:

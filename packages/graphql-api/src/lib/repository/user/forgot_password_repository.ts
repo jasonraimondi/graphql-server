@@ -1,9 +1,8 @@
 import { injectable } from "inversify";
 import { EntityRepository, Repository } from "typeorm";
 
-import { ForgotPassword } from "../../../entity/user/forgot_password_entity";
-import { IBaseRepository } from "../base_repository";
-
+import { IBaseRepository } from "@/lib/repository/base_repository";
+import { ForgotPassword } from "@/entity/user/forgot_password_entity";
 
 export interface IForgotPasswordRepository extends IBaseRepository<ForgotPassword> {
     findForUser(userId: string): Promise<ForgotPassword>;

@@ -1,8 +1,8 @@
 import { inject, injectable } from "inversify";
 
-import { EmailConfirmation } from "../../../../entity/user/email_confirmation_entity";
-import { IMailer } from "../mailer";
-import { SERVICE } from "../../../constants/inversify";
+import { IMailer } from "@/lib/services/email/mailer";
+import { SERVICE } from "@/lib/constants/inversify";
+import { EmailConfirmation } from "@/entity/user/email_confirmation_entity";
 
 @injectable()
 export class RegisterEmail {

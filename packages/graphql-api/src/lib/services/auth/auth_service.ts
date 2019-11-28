@@ -2,10 +2,10 @@ import { Response } from "express";
 import { sign, verify } from "jsonwebtoken";
 import { inject, injectable } from "inversify";
 
-import { User } from "../../../entity/user/user_entity";
-import { ENV } from "../../constants/config";
-import { REPOSITORY } from "../../constants/inversify";
-import { IUserRepository } from "../../repository/user/user_repository";
+import { User } from "@/entity/user/user_entity";
+import { IUserRepository } from "@/lib/repository/user/user_repository";
+import { REPOSITORY } from "@/lib/constants/inversify";
+import { ENV } from "@/lib/constants/config";
 
 @injectable()
 export class AuthService {
@@ -17,7 +17,6 @@ export class AuthService {
         try {
             payload = verify(refreshToken, ENV.refreshTokenSecret);
         } catch (e) {
-            console.log(e);
             throw new Error("invalid refresh token");
         }
 

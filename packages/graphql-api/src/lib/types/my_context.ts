@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 
-import { Container } from "../inversify_container";
+import { Container } from "@/lib/inversify_container";
 
 export interface MyContext {
     req: Request|any;

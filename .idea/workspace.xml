@@ -2,8 +2,58 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="166bc532-c0ed-4e14-94b6-924e116089d0" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.github/workflows/nodejs.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/nodejs.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/scopes/API.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/scopes/Web.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/server.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/typescript-graphql.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/graphql-api/.idea/codeStyles/Project.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/graphql-api/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/graphql-api/.idea/graphql-api.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/graphql-api/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/graphql-api/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/graphql-api/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/graphql-api/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/graphql-api/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/packages/graphql-api/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/graphql-api/jest.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/graphql-api/jest.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/graphql-api/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/packages/graphql-api/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/graphql-api/src/apollo.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/graphql-api/src/apollo.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/graphql-api/src/controllers/auth_controller.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/graphql-api/src/controllers/auth_controller.spec.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/graphql-api/src/lib/express.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/graphql-api/src/lib/express.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/graphql-api/src/lib/inversify_container.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/graphql-api/src/lib/inversify_container.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/graphql-api/src/lib/middleware/is_auth.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/graphql-api/src/lib/middleware/is_auth.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/graphql-api/src/lib/middleware/resolve_time.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/graphql-api/src/lib/middleware/resolve_time.spec.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/graphql-api/src/lib/repository/repository_factory.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/graphql-api/src/lib/repository/repository_factory.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/graphql-api/src/lib/repository/user/email_confirmation_repository.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/graphql-api/src/lib/repository/user/email_confirmation_repository.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/graphql-api/src/lib/repository/user/forgot_password_repository.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/graphql-api/src/lib/repository/user/forgot_password_repository.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/graphql-api/src/lib/repository/user/user_repository.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/graphql-api/src/lib/repository/user/user_repository.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/graphql-api/src/lib/services/auth/auth_service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/graphql-api/src/lib/services/auth/auth_service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/graphql-api/src/lib/services/email/nodemailer_mailer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/graphql-api/src/lib/services/email/nodemailer_mailer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/graphql-api/src/lib/services/email/testing_mailer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/graphql-api/src/lib/services/email/testing_mailer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/graphql-api/src/lib/services/email/user/forgot_password_email.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/graphql-api/src/lib/services/email/user/forgot_password_email.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/graphql-api/src/lib/services/email/user/register_email.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/graphql-api/src/lib/services/email/user/register_email.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/graphql-api/src/lib/services/service_factory.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/graphql-api/src/lib/services/service_factory.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/graphql-api/src/lib/services/testing_service_factory.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/graphql-api/src/lib/services/testing_service_factory.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/graphql-api/src/lib/types/my_context.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/graphql-api/src/lib/types/my_context.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/graphql-api/src/modules/app/app_resolver.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/graphql-api/src/modules/app/app_resolver.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/graphql-api/src/modules/user/auth/register_response.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/graphql-api/src/modules/user/auth/register_response.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/graphql-api/src/modules/user/auth_resolver.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/graphql-api/src/modules/user/auth_resolver.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/graphql-api/src/modules/user/email_confirmation_resolver.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/graphql-api/src/modules/user/email_confirmation_resolver.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/graphql-api/src/modules/user/forgot_password_resolver.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/graphql-api/src/modules/user/forgot_password_resolver.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/graphql-api/src/modules/user/me_resolver.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/graphql-api/src/modules/user/me_resolver.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/graphql-api/src/modules/user/register_resolver.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/graphql-api/src/modules/user/register_resolver.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/graphql-api/src/modules/user/user_resolver.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/graphql-api/src/modules/user/user_resolver.spec.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/graphql-api/src/modules/user/user_resolver.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/graphql-api/src/modules/user/user_resolver.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/graphql-api/src/server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/graphql-api/src/server.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/graphql-api/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/packages/graphql-api/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/web/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/packages/web/Dockerfile" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,10 +66,15 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="NamedScopeManager">
+    <order>
+      <scope name="API" />
+      <scope name="Web" />
+    </order>
+  </component>
   <component name="ProjectId" id="1SXdWfz4Sw6VwoN33r9MXh0dI4n" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
@@ -36,7 +91,7 @@
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="prettierjs.PrettierConfiguration.Package" value="$PROJECT_DIR$/node_modules/prettier" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.TypeScript" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Spy-js" />
     <property name="ts.external.directory.path" value="$PROJECT_DIR$/node_modules/typescript/lib" />
   </component>
   <component name="RecentsManager">
@@ -185,7 +240,9 @@
       <workItem from="1574549881318" duration="6940000" />
       <workItem from="1574653211228" duration="7000" />
       <workItem from="1574820804616" duration="60000" />
-      <workItem from="1574837142654" duration="3231000" />
+      <workItem from="1574837142654" duration="3351000" />
+      <workItem from="1574899566952" duration="468000" />
+      <workItem from="1574900038435" duration="3764000" />
     </task>
     <servers />
   </component>
@@ -206,22 +263,38 @@
     </option>
   </component>
   <component name="WindowStateProjectService">
-    <state width="1638" height="590" key="GridCell.Tab.0.bottom" timestamp="1574837690850">
-      <screen x="0" y="23" width="1680" height="1027" />
+    <state width="1638" height="590" key="GridCell.Tab.0.bottom" timestamp="1574899127156">
+      <screen x="0" y="23" width="2560" height="1417" />
     </state>
     <state width="1638" height="590" key="GridCell.Tab.0.bottom/0.23.1680.1027@0.23.1680.1027" timestamp="1574837690850" />
-    <state width="1638" height="590" key="GridCell.Tab.0.center" timestamp="1574837690849">
-      <screen x="0" y="23" width="1680" height="1027" />
+    <state width="1638" height="590" key="GridCell.Tab.0.bottom/0.23.2560.1417/2560.563.1440.877@0.23.2560.1417" timestamp="1574899127156" />
+    <state width="1638" height="590" key="GridCell.Tab.0.center" timestamp="1574899127154">
+      <screen x="0" y="23" width="2560" height="1417" />
     </state>
     <state width="1638" height="590" key="GridCell.Tab.0.center/0.23.1680.1027@0.23.1680.1027" timestamp="1574837690849" />
-    <state width="1638" height="590" key="GridCell.Tab.0.left" timestamp="1574837690848">
-      <screen x="0" y="23" width="1680" height="1027" />
+    <state width="1638" height="590" key="GridCell.Tab.0.center/0.23.2560.1417/2560.563.1440.877@0.23.2560.1417" timestamp="1574899127154" />
+    <state width="1638" height="590" key="GridCell.Tab.0.left" timestamp="1574899127154">
+      <screen x="0" y="23" width="2560" height="1417" />
     </state>
     <state width="1638" height="590" key="GridCell.Tab.0.left/0.23.1680.1027@0.23.1680.1027" timestamp="1574837690848" />
-    <state width="1638" height="590" key="GridCell.Tab.0.right" timestamp="1574837690849">
-      <screen x="0" y="23" width="1680" height="1027" />
+    <state width="1638" height="590" key="GridCell.Tab.0.left/0.23.2560.1417/2560.563.1440.877@0.23.2560.1417" timestamp="1574899127154" />
+    <state width="1638" height="590" key="GridCell.Tab.0.right" timestamp="1574899127155">
+      <screen x="0" y="23" width="2560" height="1417" />
     </state>
     <state width="1638" height="590" key="GridCell.Tab.0.right/0.23.1680.1027@0.23.1680.1027" timestamp="1574837690849" />
+    <state width="1638" height="590" key="GridCell.Tab.0.right/0.23.2560.1417/2560.563.1440.877@0.23.2560.1417" timestamp="1574899127155" />
+    <state x="781" y="370" key="SettingsEditor" timestamp="1574899970407">
+      <screen x="0" y="23" width="2560" height="1417" />
+    </state>
+    <state x="781" y="370" key="SettingsEditor/0.23.2560.1417/2560.563.1440.877@0.23.2560.1417" timestamp="1574899970407" />
+    <state x="100" y="123" width="2360" height="1217" key="VCS.FileHistoryDialog" timestamp="1574901939113">
+      <screen x="0" y="23" width="2560" height="1417" />
+    </state>
+    <state x="100" y="123" width="2360" height="1217" key="VCS.FileHistoryDialog/0.23.2560.1417/2560.563.1440.877@0.23.2560.1417" timestamp="1574901939113" />
+    <state x="936" y="493" width="688" height="476" key="find.popup" timestamp="1574902112933">
+      <screen x="0" y="23" width="2560" height="1417" />
+    </state>
+    <state x="936" y="493" width="688" height="476" key="find.popup/0.23.2560.1417/2560.563.1440.877@0.23.2560.1417" timestamp="1574902112933" />
     <state x="945" y="348" width="670" height="676" key="search.everywhere.popup" timestamp="1574820809628">
       <screen x="0" y="23" width="2560" height="1417" />
     </state>

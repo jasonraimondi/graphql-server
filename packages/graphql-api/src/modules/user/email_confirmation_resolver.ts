@@ -1,10 +1,10 @@
 import { inject, injectable } from "inversify";
 import { Arg, Mutation, Resolver } from "type-graphql";
 
-import { IEmailConfirmationRepository } from "../../lib/repository/user/email_confirmation_repository";
-import { REPOSITORY } from "../../lib/constants/inversify";
-import { VerifyEmailInput } from "./auth/verify_email_input";
-import { IUserRepository } from "../../lib/repository/user/user_repository";
+import { IEmailConfirmationRepository } from "@/lib/repository/user/email_confirmation_repository";
+import { REPOSITORY } from "@/lib/constants/inversify";
+import { IUserRepository } from "@/lib/repository/user/user_repository";
+import { VerifyEmailInput } from "@/modules/user/auth/verify_email_input";
 
 @injectable()
 @Resolver()

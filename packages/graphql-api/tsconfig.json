@@ -8,15 +8,18 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "resolveJsonModule": true,
-    "baseUrl": "../..",
+    "baseUrl": ".",
     "outDir": "dist",
     "paths": {
       "@/*": ["src/*"],
-      "@test/*": ["test/*"],
-      "@root": ["package.json"]
+      "@test/*": ["test/*"]
     }
   },
   "include": [
-    "packages/graphql-api/src/**/*"
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "src/**/*.spec.*"
   ]
 }

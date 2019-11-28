@@ -1,6 +1,7 @@
 FROM node:12-alpine as builder
 ENV NODE_ENV=production \
-    CI=true
+    CI=true \
+    NEXT_TELEMETRY_DISABLED=1
 WORKDIR /app
 COPY package* /app/
 RUN npm ci --production=false
@@ -15,7 +16,9 @@ RUN npm run gen
 RUN npm run build
 
 FROM node:12-alpine
-ENV NODE_ENV=production
+ENV NODE_ENV=production \
+    CI=true \
+    NEXT_TELEMETRY_DISABLED=1
 WORKDIR /app
 RUN mkdir -p /app && chown node:node /app
 USER node

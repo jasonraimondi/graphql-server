@@ -1,4 +1,4 @@
-import { ResolveTime } from "./resolve_time";
+import { ResolveTime } from "@/lib/middleware/resolve_time";
 
 describe("resolve_time", () => {
 

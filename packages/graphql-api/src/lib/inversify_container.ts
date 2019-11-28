@@ -1,22 +1,22 @@
 import { Container as InversifyContainer, interfaces } from "inversify";
 
-import { AuthResolver } from "../modules/user/auth_resolver";
-import { AppResolver } from "../modules/app/app_resolver";
-import { ForgotPasswordResolver } from "../modules/user/forgot_password_resolver";
-import { MeResolver } from "../modules/user/me_resolver";
-import { UserResolver } from "../modules/user/user_resolver";
-import { RepositoryFactory } from "./repository/repository_factory";
-import { ForgotPasswordEmail } from "./services/email/user/forgot_password_email";
-import { ServiceFactory } from "./services/service_factory";
-import { EmailConfirmationResolver } from "../modules/user/email_confirmation_resolver";
-import { RegisterResolver } from "../modules/user/register_resolver";
-import { RegisterEmail } from "./services/email/user/register_email";
-import { IEmailConfirmationRepository } from "./repository/user/email_confirmation_repository";
-import { IUserRepository } from "./repository/user/user_repository";
-import { IForgotPasswordRepository } from "./repository/user/forgot_password_repository";
-import { REPOSITORY, SERVICE } from "./constants/inversify";
-import { IMailer } from "./services/email/mailer";
-import { AuthService } from "./services/auth/auth_service";
+import { AppResolver } from "@/modules/app/app_resolver";
+import { ServiceFactory } from "@/lib/services/service_factory";
+import { ForgotPasswordResolver } from "@/modules/user/forgot_password_resolver";
+import { MeResolver } from "@/modules/user/me_resolver";
+import { IEmailConfirmationRepository } from "@/lib/repository/user/email_confirmation_repository";
+import { EmailConfirmationResolver } from "@/modules/user/email_confirmation_resolver";
+import { IUserRepository } from "@/lib/repository/user/user_repository";
+import { RegisterEmail } from "@/lib/services/email/user/register_email";
+import { RegisterResolver } from "@/modules/user/register_resolver";
+import { AuthService } from "@/lib/services/auth/auth_service";
+import { AuthResolver } from "@/modules/user/auth_resolver";
+import { IMailer } from "@/lib/services/email/mailer";
+import { ForgotPasswordEmail } from "@/lib/services/email/user/forgot_password_email";
+import { REPOSITORY, SERVICE } from "@/lib/constants/inversify";
+import { IForgotPasswordRepository } from "@/lib/repository/user/forgot_password_repository";
+import { UserResolver } from "@/modules/user/user_resolver";
+import { RepositoryFactory } from "@/lib/repository/repository_factory";
 
 export class Container extends InversifyContainer {
     public constructor(

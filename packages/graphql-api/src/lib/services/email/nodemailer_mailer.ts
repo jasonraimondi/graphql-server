@@ -2,7 +2,7 @@ import nodemailer from "nodemailer";
 import Mail from "nodemailer/lib/mailer";
 import { injectable } from "inversify";
 
-import { IMailer, Options } from "./mailer";
+import { IMailer, Options } from "@/lib/services/email/mailer";
 
 @injectable()
 export class NodemailerService implements IMailer {

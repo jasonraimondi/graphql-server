@@ -1,10 +1,11 @@
-import { Container } from "./inversify_container";
 import { InversifyExpressServer } from "inversify-express-utils";
 import { Application } from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
-import { ENV } from "./constants/config";
 import cookieParser from "cookie-parser";
+
+import { Container } from "@/lib/inversify_container";
+import { ENV } from "@/lib/constants/config";
 
 const expressMiddlewares = (app: Application) => {
     app.use(bodyParser.urlencoded({

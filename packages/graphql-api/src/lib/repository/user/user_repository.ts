@@ -1,7 +1,8 @@
 import { injectable } from "inversify";
 import { EntityRepository, Repository } from "typeorm";
-import { User } from "../../../entity/user/user_entity";
-import { IBaseRepository } from "../base_repository";
+
+import { IBaseRepository } from "@/lib/repository/base_repository";
+import { User } from "@/entity/user/user_entity";
 
 export interface IUserRepository extends IBaseRepository<User> {
     findByEmail(email: string): Promise<User>

@@ -1,8 +1,8 @@
 import { inject, injectable } from "inversify";
 
-import { ForgotPassword } from "../../../../entity/user/forgot_password_entity";
-import { IMailer } from "../mailer";
-import { SERVICE } from "../../../constants/inversify";
+import { IMailer } from "@/lib/services/email/mailer";
+import { SERVICE } from "@/lib/constants/inversify";
+import { ForgotPassword } from "@/entity/user/forgot_password_entity";
 
 @injectable()
 export class ForgotPasswordEmail {

@@ -1,5 +1,5 @@
 import { AppResolver } from "./app_resolver";
-import pkg from "@root";
+import pkg from "../../../package.json";
 
 describe("app_resolver", () => {
     test("version is resolved correctly", () => {
