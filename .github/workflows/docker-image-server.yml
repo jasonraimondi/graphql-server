@@ -1,0 +1,21 @@
+name: Docker Server Image CI
+
+on: [push]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Build server docker image
+      run: |
+        cd packages/graphql-api
+        docker login --username $DOCKER_USERNAME --password $DOCKER_PASSWORD
+        docker build . --file Dockerfile --tag jasonraimondi/jasonraimondi.com:latest
+        docker push jasonraimondi/full-stack-graphql-server:latest
+      env:
+        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
