@@ -18,7 +18,7 @@ jobs:
       run: |
         cd packages/graphql-api
         docker login --username $DOCKER_USERNAME --password $DOCKER_PASSWORD
-        docker build . --file Dockerfile --tag jasonraimondi/jasonraimondi.com:latest
+        docker build . --file Dockerfile --tag jasonraimondi/full-stack-graphql-server:latest
         docker push jasonraimondi/full-stack-graphql-server:latest
       env:
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
