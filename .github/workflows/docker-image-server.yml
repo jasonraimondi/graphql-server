@@ -1,6 +1,10 @@
 name: Docker Server Image CI
 
-on: [push]
+on:
+  push:
+    paths:
+      - 'packages/graphql-api/*'
+      - '.github/workflows/docker-image-server.yml'
 
 jobs:
 
