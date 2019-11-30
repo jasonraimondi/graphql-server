@@ -105,8 +105,8 @@ describe("register_resolver", () => {
             const emailConfirmation = await emailConfirmationRepository.findByEmail(
                 "jason@raimondi.us",
             );
-            expect(result.userConfirmation).toBeTruthy();
-            expect(result.userConfirmation!.uuid).toBe(emailConfirmation.uuid);
+            expect(result.emailConfirmation).toBeTruthy();
+            expect(result.emailConfirmation!.uuid).toBe(emailConfirmation.uuid);
             expect(result.user).toBeTruthy();
             expect(result.user!.uuid).toBe(emailConfirmation.user.uuid);
             expect(result.user!.email).toBe("jason@raimondi.us");

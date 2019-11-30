@@ -8,5 +8,5 @@ export class RegisterResponse {
     @Field(() => User, { nullable: true })
     user?: User;
     @Field(() => EmailConfirmation, { nullable: true })
-    userConfirmation?: EmailConfirmation;
+    emailConfirmation?: EmailConfirmation;
 }

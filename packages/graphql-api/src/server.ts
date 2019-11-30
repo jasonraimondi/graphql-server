@@ -23,6 +23,8 @@ import { application } from "@/lib/express";
     const app = await application(container);
     const apolloServer = await initializeApolloServer(container);
 
+    // apolloServer.
+
     apolloServer.applyMiddleware({ app, cors: false });
     app.listen(4000, () => "server started on localhost:4000");
 })().catch(e => console.error(e));

@@ -18,17 +18,17 @@ export class RegisterResolver {
         @inject(REPOSITORY.UserRepository)
         private userRepository: IUserRepository,
         @inject(REPOSITORY.EmailConfirmationRepository)
-        private userConfirmationRepository: IEmailConfirmationRepository,
+        private emailConfirmationRepository: IEmailConfirmationRepository,
         @inject(SERVICE.RegisterEmail) private registerEmail: RegisterEmail,
     ) {}
 
     @Mutation(() => Boolean!)
     async resentConfirmEmail(@Arg("email") email: string): Promise<boolean> {
-        const userConfirmation = await this.userConfirmationRepository.findByEmail(
+        const emailConfirmation = await this.emailConfirmationRepository.findByEmail(
             email,
         );
         try {
-            await this.registerEmail.send(userConfirmation);
+            await this.registerEmail.send(emailConfirmation);
             return true;
         } catch (e) {
             console.log(e);
@@ -47,11 +47,11 @@ export class RegisterResolver {
         user.password = password ? await hash(password, 12) : undefined;
         try {
             await this.userRepository.save(user);
-            const userConfirmation = new EmailConfirmation();
-            userConfirmation.user = user;
-            await this.userConfirmationRepository.save(userConfirmation);
-            await this.registerEmail.send(userConfirmation);
-            return { user, userConfirmation };
+            const emailConfirmation = new EmailConfirmation();
+            emailConfirmation.user = user;
+            await this.emailConfirmationRepository.save(emailConfirmation);
+            await this.registerEmail.send(emailConfirmation);
+            return { user, emailConfirmation };
         } catch (e) {
             console.log(e);
         }

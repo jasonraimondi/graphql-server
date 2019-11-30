@@ -5,7 +5,7 @@ mutation Register($data: RegisterInput!) {
             name
             email
         }
-        userConfirmation {
+        emailConfirmation {
             uuid
             expiresAt
         }

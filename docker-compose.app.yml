@@ -1,0 +1,56 @@
+version: "3.7"
+
+services:
+  traefik:
+    image: "traefik:v2.0.0"
+    container_name: "traefik"
+    command:
+      # - "--log.level=DEBUG"
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
+    ports:
+      - "80:80"
+      - "8080:8080"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+
+  api:
+    build: packages/graphql-api
+    ports:
+      - 4000:4000
+    environment:
+      ACCESS_TOKEN_SECRET: 6fbf61ea-5214-40d8-a08b-4846daf8280an
+      REFRESH_TOKEN_SECRET: de92ec07-29fe-457b-b71c-3aaf88ce01cbn
+      ENABLE_DEBUGGING: 1
+      MAILER: smtp://host.docker.internal:1025
+      TYPEORM_SYNCHRONIZE: 1
+      TYPEORM_LOGGING: 1
+      TYPEORM_URL: postgres://typegraphql:secret@host.docker.internal:5432/typegraphql
+      TYPEORM_CONNECTION: postgres
+      CORS: ""
+    depends_on:
+      - pg
+      - mailhog
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.api.rule=Host(`localhost`) && PathPrefix(`/api`)"
+      - "traefik.http.middlewares.api-stripprefix.stripprefix.prefixes=/api"
+      - "traefik.http.routers.api.middlewares=api-stripprefix@docker"
+      - "traefik.http.routers.api.entrypoints=web"
+
+  nextjs:
+    build: packages/web
+    ports:
+      - 3000:3000
+    environment:
+      REFRESH_TOKEN_URL: "/api/auth/refresh_token"
+      GRAPH_API_URL: "/api/graphql"
+      NEXT_TELEMETRY_DISABLED: 1
+    depends_on:
+      - api
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.nextjs.rule=Host(`localhost`)"
+      - "traefik.http.routers.nextjs.entrypoints=web"
