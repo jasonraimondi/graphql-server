@@ -1,7 +1,6 @@
 import { ResolveTime } from "@/lib/middleware/resolve_time";
 
 describe("resolve_time", () => {
-
     const sleep = (ms: number) => {
         return new Promise(resolve => setTimeout(resolve, ms));
     };
@@ -12,19 +11,16 @@ describe("resolve_time", () => {
             info: {
                 is_testing: true,
                 parentType: {
-                    name: "Name"
+                    name: "Name",
                 },
-                fieldName: "FieldName"
-            }
+                fieldName: "FieldName",
+            },
         };
         const timeout = 5;
         const next = async () => await sleep(timeout);
 
         // act
-        const {
-            resolveTime,
-            message
-        } = await ResolveTime(action, next);
+        const { resolveTime, message } = await ResolveTime(action, next);
 
         // assert
         expect(resolveTime).toBeGreaterThanOrEqual(timeout);

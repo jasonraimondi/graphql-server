@@ -95,4 +95,3 @@ input VerifyEmailInput {
     email: String!
     uuid: String!
 }
-

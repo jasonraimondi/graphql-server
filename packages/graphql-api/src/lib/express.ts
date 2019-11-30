@@ -8,15 +8,17 @@ import { Container } from "@/lib/inversify_container";
 import { ENV } from "@/lib/constants/config";
 
 const expressMiddlewares = (app: Application) => {
-    app.use(bodyParser.urlencoded({
-        extended: true,
-    }));
+    app.use(
+        bodyParser.urlencoded({
+            extended: true,
+        })
+    );
     app.use(bodyParser.json());
     app.use(
         cors({
             origin: ENV.cors,
             credentials: true,
-        }),
+        })
     );
     app.use(cookieParser());
 };

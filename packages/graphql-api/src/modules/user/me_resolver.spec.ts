@@ -11,7 +11,13 @@ import { IUserRepository } from "../../lib/repository/user/user_repository";
 import { mockRequest, mockResponse } from "../../../test/mock_application";
 
 describe("me resolver", () => {
-    const entities = [User, Role, Permission, ForgotPassword, EmailConfirmation];
+    const entities = [
+        User,
+        Role,
+        Permission,
+        ForgotPassword,
+        EmailConfirmation,
+    ];
 
     let container: TestingContainer;
     let context: MyContext;
@@ -28,8 +34,10 @@ describe("me resolver", () => {
     });
 
     test("successfully returns user response", async () => {
-        const userRepository = container.get<IUserRepository>(REPOSITORY.UserRepository);
-        const user = await User.create({ email: "jason@raimondi.us", });
+        const userRepository = container.get<IUserRepository>(
+            REPOSITORY.UserRepository,
+        );
+        const user = await User.create({ email: "jason@raimondi.us" });
         await userRepository.save(user);
 
         context = {
@@ -40,11 +48,11 @@ describe("me resolver", () => {
                 userId: user.uuid,
                 email: user.email,
                 isEmailConfirmed: user.isEmailConfirmed,
-            }
+            },
         };
 
         // act
-        const result: User|null = await resolver.me(context);
+        const result: User | null = await resolver.me(context);
 
         // assert
         expect(result).toBeTruthy();
@@ -64,6 +72,8 @@ describe("me resolver", () => {
         const result = resolver.me(context);
 
         // assert
-        await expect(result).rejects.toThrowError(/Cannot read property 'userId' of undefined/);
+        await expect(result).rejects.toThrowError(
+            /Cannot read property 'userId' of undefined/,
+        );
     });
 });

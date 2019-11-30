@@ -8,7 +8,13 @@ import { EmailConfirmation } from "./entity/user/email_confirmation_entity";
 
 describe("apollo server", () => {
     test("boots and has endpoint", async () => {
-        const entities = [User, Role, Permission, ForgotPassword, EmailConfirmation];
+        const entities = [
+            User,
+            Role,
+            Permission,
+            ForgotPassword,
+            EmailConfirmation,
+        ];
         const container = await TestingContainer.create(entities);
         const apollo = await initializeApolloServer(container);
 

@@ -15,20 +15,22 @@ import { EmailConfirmation } from "@/entity/user/email_confirmation_entity";
 @Resolver()
 export class RegisterResolver {
     constructor(
-        @inject(REPOSITORY.UserRepository) private userRepository: IUserRepository,
-        @inject(REPOSITORY.EmailConfirmationRepository) private userConfirmationRepository: IEmailConfirmationRepository,
+        @inject(REPOSITORY.UserRepository)
+        private userRepository: IUserRepository,
+        @inject(REPOSITORY.EmailConfirmationRepository)
+        private userConfirmationRepository: IEmailConfirmationRepository,
         @inject(SERVICE.RegisterEmail) private registerEmail: RegisterEmail,
     ) {}
 
     @Mutation(() => Boolean!)
-    async resentConfirmEmail(
-        @Arg("email") email: string,
-    ): Promise<boolean> {
-        const userConfirmation = await this.userConfirmationRepository.findByEmail(email);
+    async resentConfirmEmail(@Arg("email") email: string): Promise<boolean> {
+        const userConfirmation = await this.userConfirmationRepository.findByEmail(
+            email,
+        );
         try {
             await this.registerEmail.send(userConfirmation);
             return true;
-        } catch(e) {
+        } catch (e) {
             console.log(e);
         }
         return false;
@@ -58,7 +60,7 @@ export class RegisterResolver {
 
     private async guardAgainstDuplicateUser(email: string, uuid?: string) {
         const falsy = () => false;
-        if (uuid && await this.userRepository.findById(uuid).catch(falsy)) {
+        if (uuid && (await this.userRepository.findById(uuid).catch(falsy))) {
             throw new Error("duplicate uuid for user");
         }
         if (await this.userRepository.findByEmail(email).catch(falsy)) {
@@ -66,4 +68,3 @@ export class RegisterResolver {
         }
     }
 }
-

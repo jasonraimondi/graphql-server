@@ -22,7 +22,7 @@ export class Container extends InversifyContainer {
     public constructor(
         protected readonly repositoryFactory: RepositoryFactory,
         protected readonly serviceFactory: ServiceFactory,
-        containerOptions?: interfaces.ContainerOptions,
+        containerOptions?: interfaces.ContainerOptions
     ) {
         super(containerOptions);
         this.bindContainer();
@@ -39,16 +39,26 @@ export class Container extends InversifyContainer {
         this.bind(UserResolver).toSelf();
 
         // services
-        this.bind<IMailer>(SERVICE.Mailer).toConstantValue(this.serviceFactory.emailService);
+        this.bind<IMailer>(SERVICE.Mailer).toConstantValue(
+            this.serviceFactory.emailService
+        );
         this.bind<AuthService>(SERVICE.AuthService).to(AuthService);
 
         // emails
-        this.bind<ForgotPasswordEmail>(SERVICE.ForgotPasswordEmail).to(ForgotPasswordEmail);
+        this.bind<ForgotPasswordEmail>(SERVICE.ForgotPasswordEmail).to(
+            ForgotPasswordEmail
+        );
         this.bind<RegisterEmail>(SERVICE.RegisterEmail).to(RegisterEmail);
 
         // repositories
-        this.bind<IForgotPasswordRepository>(REPOSITORY.ForgotPasswordRepository).toConstantValue(this.repositoryFactory.forgotPassword);
-        this.bind<IUserRepository>(REPOSITORY.UserRepository).toConstantValue(this.repositoryFactory.user);
-        this.bind<IEmailConfirmationRepository>(REPOSITORY.EmailConfirmationRepository).toConstantValue(this.repositoryFactory.emailConfirmation);
+        this.bind<IForgotPasswordRepository>(
+            REPOSITORY.ForgotPasswordRepository
+        ).toConstantValue(this.repositoryFactory.forgotPassword);
+        this.bind<IUserRepository>(REPOSITORY.UserRepository).toConstantValue(
+            this.repositoryFactory.user
+        );
+        this.bind<IEmailConfirmationRepository>(
+            REPOSITORY.EmailConfirmationRepository
+        ).toConstantValue(this.repositoryFactory.emailConfirmation);
     }
 }

@@ -12,7 +12,13 @@ import { TestingContainer } from "../../test/test_container";
 import { application } from "../lib/express";
 
 describe("auth controller", () => {
-    const entities = [User, Role, Permission, ForgotPassword, EmailConfirmation];
+    const entities = [
+        User,
+        Role,
+        Permission,
+        ForgotPassword,
+        EmailConfirmation,
+    ];
 
     let container: TestingContainer;
     let userRepository: IUserRepository;
@@ -22,7 +28,9 @@ describe("auth controller", () => {
         await import("./auth_controller");
 
         container = await TestingContainer.create(entities);
-        userRepository = container.get<IUserRepository>(REPOSITORY.UserRepository);
+        userRepository = container.get<IUserRepository>(
+            REPOSITORY.UserRepository
+        );
         authService = container.get<AuthService>(SERVICE.AuthService);
     });
 
@@ -30,7 +38,7 @@ describe("auth controller", () => {
         // arrange
         const app = await application(container);
 
-        const user = await User.create({ email: "jason@raimondi.us", });
+        const user = await User.create({ email: "jason@raimondi.us" });
         await userRepository.save(user);
         const refreshToken = authService.createRefreshToken(user);
 
@@ -48,9 +56,10 @@ describe("auth controller", () => {
         // @todo should pass, I need to add this back...
         // expect(response.header["set-cookie"][0].includes(refreshToken)).toBeFalsy();
         expect(response.body.success).toBe(true);
-        expect(response.body.accessToken).toMatch(/[a-zA-Z\d]+.[a-zA-Z\d]+.[a-zA-Z\d]+/);
+        expect(response.body.accessToken).toMatch(
+            /[a-zA-Z\d]+.[a-zA-Z\d]+.[a-zA-Z\d]+/
+        );
     });
-
 
     test("missing token (jid) fails", async () => {
         // arrange

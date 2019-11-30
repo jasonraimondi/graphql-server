@@ -11,9 +11,9 @@ import { LoginInput } from "@/modules/user/auth/login_input";
 @injectable()
 @Resolver()
 export class AuthResolver {
-
     constructor(
-        @inject(REPOSITORY.UserRepository) private userRepository: IUserRepository,
+        @inject(REPOSITORY.UserRepository)
+        private userRepository: IUserRepository,
         @inject(SERVICE.AuthService) private authService: AuthService,
     ) {}
 

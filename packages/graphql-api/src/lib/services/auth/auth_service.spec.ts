@@ -11,7 +11,13 @@ import { AuthService } from "./auth_service";
 import { IUserRepository } from "../../repository/user/user_repository";
 
 describe("auth_resolver", () => {
-    const entities = [User, Role, Permission, ForgotPassword, EmailConfirmation];
+    const entities = [
+        User,
+        Role,
+        Permission,
+        ForgotPassword,
+        EmailConfirmation,
+    ];
 
     let container: TestingContainer;
     let authService: AuthService;
@@ -20,16 +26,18 @@ describe("auth_resolver", () => {
     beforeEach(async () => {
         container = await TestingContainer.create(entities);
         authService = container.get(SERVICE.AuthService);
-        userRepository = container.get<IUserRepository>(REPOSITORY.UserRepository);
+        userRepository = container.get<IUserRepository>(
+            REPOSITORY.UserRepository,
+        );
     });
 
     describe("refreshToken", () => {
-
         test("create refresh token is created with expected data", async () => {
             // arrange
-            const user = await User.create({ email: "jason@raimondi.us", });
+            const user = await User.create({ email: "jason@raimondi.us" });
             await userRepository.save(user);
-            const daysInFuture = (days: number) => Date.now() / 1000 + 60 * 60 * 24 * days;
+            const daysInFuture = (days: number) =>
+                Date.now() / 1000 + 60 * 60 * 24 * days;
 
             // act
             const token = authService.createRefreshToken(user);
@@ -43,9 +51,10 @@ describe("auth_resolver", () => {
 
         test.skip("create access token is created with expected data", async () => {
             // arrange
-            const user = await User.create({ email: "jason@raimondi.us", });
+            const user = await User.create({ email: "jason@raimondi.us" });
             await userRepository.save(user);
-            const minutesInFuture = (minutes: number) => Date.now() / 1000 + 60 * minutes;
+            const minutesInFuture = (minutes: number) =>
+                Date.now() / 1000 + 60 * minutes;
 
             // act
             const token = authService.createAccessToken(user);

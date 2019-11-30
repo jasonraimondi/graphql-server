@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Server Dev" type="js.build_tools.npm">
-    <package-json value="$PROJECT_DIR$/../typescript-graphql/package.json" />
+    <package-json value="$PROJECT_DIR$/../graphql-api/package.json" />
     <command value="run" />
     <scripts>
       <script value="dev" />

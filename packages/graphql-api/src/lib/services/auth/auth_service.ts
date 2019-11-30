@@ -9,8 +9,10 @@ import { ENV } from "@/lib/constants/config";
 
 @injectable()
 export class AuthService {
-    constructor(@inject(REPOSITORY.UserRepository) private userRepository: IUserRepository) {
-    }
+    constructor(
+        @inject(REPOSITORY.UserRepository)
+        private userRepository: IUserRepository,
+    ) {}
 
     async updateAccessToken(refreshToken: string) {
         let payload: any;
@@ -35,12 +37,11 @@ export class AuthService {
         };
     }
 
-
     createAccessToken(user: User) {
         const payload = {
             userId: user.uuid,
             email: user.email,
-            isEmailConfirmed: user.isEmailConfirmed
+            isEmailConfirmed: user.isEmailConfirmed,
         };
         return sign(payload, ENV.accessTokenSecret, {
             expiresIn: "1m",
@@ -61,7 +62,7 @@ export class AuthService {
         let token = "";
         if (user) token = this.createRefreshToken(user!);
         // 7 days
-        const expiresAt = Date.now() + (60 * 60 * 24 * 7);
+        const expiresAt = Date.now() + 60 * 60 * 24 * 7;
         res.cookie("jid", token, {
             httpOnly: true,
             // domain: ".example.com"
@@ -70,4 +71,3 @@ export class AuthService {
         });
     }
 }
-

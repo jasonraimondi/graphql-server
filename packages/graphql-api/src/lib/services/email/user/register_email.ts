@@ -6,7 +6,9 @@ import { EmailConfirmation } from "@/entity/user/email_confirmation_entity";
 
 @injectable()
 export class RegisterEmail {
-    constructor(@inject(SERVICE.Mailer) private readonly emailService: IMailer) {}
+    constructor(
+        @inject(SERVICE.Mailer) private readonly emailService: IMailer,
+    ) {}
 
     async send(userConfirmation: EmailConfirmation): Promise<any> {
         const user = userConfirmation.user;
@@ -19,7 +21,7 @@ export class RegisterEmail {
             html: `
             <a href="${url}">${url}</a>
             verifyUserConfirmation(email:"${user.email}", uuid:"${userConfirmation.uuid}")
-            `
+            `,
         });
     }
 }

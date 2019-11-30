@@ -8,12 +8,11 @@ import { TestingServiceFactory } from "../src/lib/services/testing_service_facto
 import { RepositoryFactory } from "../src/lib/repository/repository_factory";
 import { ENV } from "../src/lib/constants/config";
 
-
 export class TestingContainer extends Container {
     private constructor(
         protected readonly repositoryFactory: RepositoryFactory,
         protected readonly serviceFactory: ServiceFactory,
-        containerOptions?: interfaces.ContainerOptions,
+        containerOptions?: interfaces.ContainerOptions
     ) {
         super(repositoryFactory, serviceFactory, containerOptions);
         this.rebindContainer();
@@ -26,16 +25,12 @@ export class TestingContainer extends Container {
             database: ":memory:",
             logging,
             synchronize: entities.length > 0,
-            entities
+            entities,
         });
         const repositoryFactory = new RepositoryFactory(connection);
         const serviceFactory = new TestingServiceFactory(ENV.mailerURL);
-        return new TestingContainer(
-            repositoryFactory,
-            serviceFactory,
-        );
+        return new TestingContainer(repositoryFactory, serviceFactory);
     }
 
-    protected rebindContainer(): void {
-    }
+    protected rebindContainer(): void {}
 }

@@ -7,20 +7,27 @@ import { User } from "@/entity/user/user_entity";
 import { REPOSITORY, SERVICE } from "@/lib/constants/inversify";
 import { ForgotPassword } from "@/entity/user/forgot_password_entity";
 import { IUserRepository } from "@/lib/repository/user/user_repository";
-import { SendForgotPasswordInput, UpdatePasswordInput } from "@/modules/user/auth/forgot_password_input";
+import {
+    SendForgotPasswordInput,
+    UpdatePasswordInput,
+} from "@/modules/user/auth/forgot_password_input";
 
 @injectable()
 @Resolver()
 export class ForgotPasswordResolver {
     constructor(
-        @inject(REPOSITORY.UserRepository) private userRepository: IUserRepository,
-        @inject(REPOSITORY.ForgotPasswordRepository) private forgotPasswordRepository: IForgotPasswordRepository,
-        @inject(SERVICE.ForgotPasswordEmail) private forgotPasswordEmail: ForgotPasswordEmail,
-    ) {
-    }
+        @inject(REPOSITORY.UserRepository)
+        private userRepository: IUserRepository,
+        @inject(REPOSITORY.ForgotPasswordRepository)
+        private forgotPasswordRepository: IForgotPasswordRepository,
+        @inject(SERVICE.ForgotPasswordEmail)
+        private forgotPasswordEmail: ForgotPasswordEmail,
+    ) {}
 
     @Mutation(() => Boolean)
-    async sendForgotPasswordEmail(@Arg("data") { email }: SendForgotPasswordInput) {
+    async sendForgotPasswordEmail(
+        @Arg("data") { email }: SendForgotPasswordInput,
+    ) {
         const user = await this.userRepository.findByEmail(email);
         const forgotPassword = await this.getForgotPasswordForUser(user);
         try {
@@ -34,8 +41,12 @@ export class ForgotPasswordResolver {
     }
 
     @Mutation(() => Boolean)
-    async updatePasswordFromToken(@Arg("data") { token, email, password }: UpdatePasswordInput) {
-        const forgotPassword = await this.forgotPasswordRepository.findById(token);
+    async updatePasswordFromToken(
+        @Arg("data") { token, email, password }: UpdatePasswordInput,
+    ) {
+        const forgotPassword = await this.forgotPasswordRepository.findById(
+            token,
+        );
         const { user } = forgotPassword;
         if (email !== user.email) {
             throw new Error("invalid access");

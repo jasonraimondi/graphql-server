@@ -9,7 +9,13 @@ import { isAuth } from "./is_auth";
 import { mockRequest, mockResponse } from "../../../test/mock_application";
 
 describe("is_auth", () => {
-    const entities = [User, Role, Permission, ForgotPassword, EmailConfirmation];
+    const entities = [
+        User,
+        Role,
+        Permission,
+        ForgotPassword,
+        EmailConfirmation,
+    ];
 
     let container: TestingContainer;
     let context: MyContext;
@@ -30,7 +36,9 @@ describe("is_auth", () => {
         const next: any = () => {};
 
         // assert
-        await expect(isAuth(params, next)).rejects.toThrowError("not authenticated");
+        await expect(isAuth(params, next)).rejects.toThrowError(
+            "not authenticated",
+        );
     });
 
     test("guards against missing token", async () => {
@@ -40,7 +48,9 @@ describe("is_auth", () => {
         const next: any = () => {};
 
         // assert
-        await expect(isAuth(params, next)).rejects.toThrowError("not authenticated");
+        await expect(isAuth(params, next)).rejects.toThrowError(
+            "not authenticated",
+        );
     });
 
     test("guards against invalid token", async () => {
@@ -56,6 +66,8 @@ describe("is_auth", () => {
         const next: any = () => {};
 
         // assert
-        await expect(isAuth(params, next)).rejects.toThrowError("not authenticated");
+        await expect(isAuth(params, next)).rejects.toThrowError(
+            "not authenticated",
+        );
     });
 });

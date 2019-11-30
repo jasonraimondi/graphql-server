@@ -7,11 +7,20 @@ import { REPOSITORY } from "../../lib/constants/inversify";
 import { IForgotPasswordRepository } from "../../lib/repository/user/forgot_password_repository";
 import { IUserRepository } from "../../lib/repository/user/user_repository";
 import { TestingContainer } from "../../../test/test_container";
-import { SendForgotPasswordInput, UpdatePasswordInput } from "./auth/forgot_password_input";
+import {
+    SendForgotPasswordInput,
+    UpdatePasswordInput,
+} from "./auth/forgot_password_input";
 import { ForgotPasswordResolver } from "./forgot_password_resolver";
 
 describe("forgot password resolver", () => {
-    const entities = [User, Role, Permission, ForgotPassword, EmailConfirmation];
+    const entities = [
+        User,
+        Role,
+        Permission,
+        ForgotPassword,
+        EmailConfirmation,
+    ];
 
     let container: TestingContainer;
     let resolver: ForgotPasswordResolver;
@@ -20,15 +29,19 @@ describe("forgot password resolver", () => {
 
     beforeEach(async () => {
         container = await TestingContainer.create(entities);
-        userRepository = container.get<IUserRepository>(REPOSITORY.UserRepository);
-        forgotPasswordRepository = container.get<IForgotPasswordRepository>(REPOSITORY.ForgotPasswordRepository);
+        userRepository = container.get<IUserRepository>(
+            REPOSITORY.UserRepository,
+        );
+        forgotPasswordRepository = container.get<IForgotPasswordRepository>(
+            REPOSITORY.ForgotPasswordRepository,
+        );
         resolver = container.get(ForgotPasswordResolver);
     });
 
     describe("sendForgotPasswordEmail", () => {
         test("success", async () => {
             // arrange
-            const user = await User.create({email: "jason@raimondi.us"});
+            const user = await User.create({ email: "jason@raimondi.us" });
             user.isEmailConfirmed = true;
             await userRepository.save(user);
 
@@ -38,15 +51,19 @@ describe("forgot password resolver", () => {
             await resolver.sendForgotPasswordEmail(input);
 
             // assert
-            const updatedForgotPassword = await forgotPasswordRepository.findForUser(user.uuid);
-            expect(updatedForgotPassword.expiresAt.getTime()).toBeGreaterThan(Date.now());
+            const updatedForgotPassword = await forgotPasswordRepository.findForUser(
+                user.uuid,
+            );
+            expect(updatedForgotPassword.expiresAt.getTime()).toBeGreaterThan(
+                Date.now(),
+            );
         });
     });
 
     describe("updatePasswordFromToken", () => {
         test("success", async () => {
             // arrange
-            const user = await User.create({email: "jason@raimondi.us"});
+            const user = await User.create({ email: "jason@raimondi.us" });
             user.isEmailConfirmed = true;
             await userRepository.save(user);
             const forgotPassword = new ForgotPassword(user);
@@ -61,8 +78,14 @@ describe("forgot password resolver", () => {
 
             // assert
             const updatedUser = await userRepository.findById(user.uuid);
-            await expect(updatedUser.verify("my-new-password")).resolves.toBeUndefined();
-            await expect(forgotPasswordRepository.findForUser(forgotPassword.uuid)).rejects.toThrowError('Could not find any entity of type "ForgotPassword"');
+            await expect(
+                updatedUser.verify("my-new-password"),
+            ).resolves.toBeUndefined();
+            await expect(
+                forgotPasswordRepository.findForUser(forgotPassword.uuid),
+            ).rejects.toThrowError(
+                'Could not find any entity of type "ForgotPassword"',
+            );
         });
     });
 });

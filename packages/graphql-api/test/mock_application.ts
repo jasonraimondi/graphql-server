@@ -4,7 +4,7 @@ export const mockRequest = (authHeader?: string, sessionData?: any) => ({
         return null;
     },
     cookie: jest.fn().mockReturnValue({
-        authorization: "bearer iamacookie"
+        authorization: "bearer iamacookie",
     }),
     session: { data: sessionData },
 });

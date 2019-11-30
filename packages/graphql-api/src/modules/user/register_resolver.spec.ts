@@ -13,14 +13,22 @@ import { EmailConfirmationRepository } from "../../lib/repository/user/email_con
 import { IUserRepository } from "../../lib/repository/user/user_repository";
 
 describe("register_resolver", () => {
-    const entities = [User, Role, Permission, ForgotPassword, EmailConfirmation];
+    const entities = [
+        User,
+        Role,
+        Permission,
+        ForgotPassword,
+        EmailConfirmation,
+    ];
 
     let container: TestingContainer;
     let userRepository: IUserRepository;
 
     beforeEach(async () => {
         container = await TestingContainer.create(entities);
-        userRepository = container.get<IUserRepository>(REPOSITORY.UserRepository);
+        userRepository = container.get<IUserRepository>(
+            REPOSITORY.UserRepository,
+        );
     });
 
     describe("register function", () => {
@@ -60,7 +68,9 @@ describe("register_resolver", () => {
             const result = resolver.register(input);
 
             // assert
-            await expect(result).rejects.toThrowError("duplicate uuid for user");
+            await expect(result).rejects.toThrowError(
+                "duplicate uuid for user",
+            );
         });
 
         test("duplicate user email is denied", async () => {
@@ -74,7 +84,9 @@ describe("register_resolver", () => {
             const result = resolver.register(input);
 
             // assert
-            await expect(result).rejects.toThrowError("duplicate email for user");
+            await expect(result).rejects.toThrowError(
+                "duplicate email for user",
+            );
         });
 
         test("user is registered with email confirmation", async () => {
@@ -87,8 +99,12 @@ describe("register_resolver", () => {
             const result = await resolver.register(input);
 
             // assert
-            const emailConfirmationRepository = container.get<EmailConfirmationRepository>(REPOSITORY.EmailConfirmationRepository);
-            const emailConfirmation = await emailConfirmationRepository.findByEmail("jason@raimondi.us");
+            const emailConfirmationRepository = container.get<
+                EmailConfirmationRepository
+            >(REPOSITORY.EmailConfirmationRepository);
+            const emailConfirmation = await emailConfirmationRepository.findByEmail(
+                "jason@raimondi.us",
+            );
             expect(result.userConfirmation).toBeTruthy();
             expect(result.userConfirmation!.uuid).toBe(emailConfirmation.uuid);
             expect(result.user).toBeTruthy();
@@ -107,7 +123,9 @@ describe("register_resolver", () => {
             await resolver.register(input);
 
             // act
-            const result = await resolver.resentConfirmEmail("jason@raimondi.us");
+            const result = await resolver.resentConfirmEmail(
+                "jason@raimondi.us",
+            );
 
             // assert
             expect(result).toBe(true);
@@ -121,7 +139,11 @@ describe("register_resolver", () => {
             const result = resolver.resentConfirmEmail("jason@raimondi.us");
 
             // assert
-            await expect(result).rejects.toThrow(new RegExp('Could not find any entity of type "EmailConfirmation"'));
+            await expect(result).rejects.toThrow(
+                new RegExp(
+                    'Could not find any entity of type "EmailConfirmation"',
+                ),
+            );
         });
     });
 });

@@ -1,7 +1,11 @@
 {
   "name": "root",
   "private": true,
+  "scripts": {
+    "pretty": "prettier --config prettier.config.js --write packages/**/*.{ts,tsx,js,graphql,css,scss}"
+  },
   "devDependencies": {
-    "lerna": "^3.19.0"
+    "lerna": "^3.19.0",
+    "prettier": "1.19.1"
   }
 }

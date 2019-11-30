@@ -5,14 +5,15 @@ import { IBaseRepository } from "@/lib/repository/base_repository";
 import { User } from "@/entity/user/user_entity";
 
 export interface IUserRepository extends IBaseRepository<User> {
-    findByEmail(email: string): Promise<User>
-    incrementLastLoginAt(user: User): Promise<void>
-    incrementToken(uuid: string): Promise<void>
+    findByEmail(email: string): Promise<User>;
+    incrementLastLoginAt(user: User): Promise<void>;
+    incrementToken(uuid: string): Promise<void>;
 }
 
 @injectable()
 @EntityRepository(User)
-export class UserRepository extends Repository<User> implements IUserRepository {
+export class UserRepository extends Repository<User>
+    implements IUserRepository {
     findById(uuid: string) {
         return this.findOneOrFail(uuid);
     }

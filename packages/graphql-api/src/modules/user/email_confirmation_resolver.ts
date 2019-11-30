@@ -10,19 +10,24 @@ import { VerifyEmailInput } from "@/modules/user/auth/verify_email_input";
 @Resolver()
 export class EmailConfirmationResolver {
     constructor(
-        @inject(REPOSITORY.UserRepository) private userRepository: IUserRepository,
-        @inject(REPOSITORY.EmailConfirmationRepository) private userConfirmationRepository: IEmailConfirmationRepository
-    ) {
-    }
+        @inject(REPOSITORY.UserRepository)
+        private userRepository: IUserRepository,
+        @inject(REPOSITORY.EmailConfirmationRepository)
+        private userConfirmationRepository: IEmailConfirmationRepository,
+    ) {}
 
     @Mutation(() => Boolean!)
     async verifyEmailConfirmation(
-        @Arg("data") { uuid, email }: VerifyEmailInput
+        @Arg("data") { uuid, email }: VerifyEmailInput,
     ): Promise<boolean> {
         email = email.toLowerCase();
-        const userConfirmation = await this.userConfirmationRepository.findById(uuid);
+        const userConfirmation = await this.userConfirmationRepository.findById(
+            uuid,
+        );
         if (userConfirmation.user.email !== email) {
-            throw new Error(`invalid user and confirmation (${userConfirmation.user.email}) (${email})`);
+            throw new Error(
+                `invalid user and confirmation (${userConfirmation.user.email}) (${email})`,
+            );
         }
         try {
             const { user } = userConfirmation;
@@ -30,7 +35,7 @@ export class EmailConfirmationResolver {
             await this.userRepository.save(user);
             await this.userConfirmationRepository.delete(userConfirmation.uuid);
             return true;
-        } catch(e) {
+        } catch (e) {
             console.log(e);
         }
         return false;

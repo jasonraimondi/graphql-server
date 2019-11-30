@@ -9,14 +9,22 @@ import { EmailConfirmation } from "../../entity/user/email_confirmation_entity";
 import { TestingContainer } from "../../../test/test_container";
 
 describe("register_resolver", () => {
-    const entities = [User, Role, Permission, ForgotPassword, EmailConfirmation];
+    const entities = [
+        User,
+        Role,
+        Permission,
+        ForgotPassword,
+        EmailConfirmation,
+    ];
 
     let container: TestingContainer;
     let userRepository: IUserRepository;
 
     beforeEach(async () => {
         container = await TestingContainer.create(entities);
-        userRepository = container.get<IUserRepository>(REPOSITORY.UserRepository);
+        userRepository = container.get<IUserRepository>(
+            REPOSITORY.UserRepository,
+        );
     });
 
     describe("user", () => {
@@ -40,8 +48,12 @@ describe("register_resolver", () => {
         test("resolve list users", async () => {
             // arrange
             const resolver = container.get<UserResolver>(UserResolver);
-            await userRepository.save(await User.create({ email: "jason@raimondi.us" }));
-            await userRepository.save(await User.create({ email: "jason1@raimondi.us" }));
+            await userRepository.save(
+                await User.create({ email: "jason@raimondi.us" }),
+            );
+            await userRepository.save(
+                await User.create({ email: "jason1@raimondi.us" }),
+            );
 
             // act
             const result = await resolver.users();

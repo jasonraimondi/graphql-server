@@ -14,9 +14,19 @@ describe("user entity", () => {
     });
 
     test("name is computed correctly", async () => {
-        const user1 = await User.create({ firstName: "Charlie", lastName: "Kelly", email: "charlie@kelly.us" });
-        const user2 = await User.create({ firstName: "Charlie", email: "charlie@kelly.us" });
-        const user3 = await User.create({ lastName: "Kelly", email: "charlie@kelly.us" });
+        const user1 = await User.create({
+            firstName: "Charlie",
+            lastName: "Kelly",
+            email: "charlie@kelly.us",
+        });
+        const user2 = await User.create({
+            firstName: "Charlie",
+            email: "charlie@kelly.us",
+        });
+        const user3 = await User.create({
+            lastName: "Kelly",
+            email: "charlie@kelly.us",
+        });
         const user4 = await User.create({ email: "charlie@kelly.us" });
 
         expect(user1.name(user1)).toBe("Charlie Kelly");

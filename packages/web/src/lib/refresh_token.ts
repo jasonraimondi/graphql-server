@@ -1,9 +1,9 @@
 let inMemoryRefreshToken = "";
 
 export const setRefreshToken = (token: string) => {
-  inMemoryRefreshToken = token;
+    inMemoryRefreshToken = token;
 };
 
 export const getRefreshToken = () => {
-  return inMemoryRefreshToken;
+    return inMemoryRefreshToken;
 };

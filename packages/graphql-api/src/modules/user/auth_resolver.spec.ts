@@ -14,7 +14,13 @@ import { AuthResolver } from "./auth_resolver";
 import { mockRequest, mockResponse } from "../../../test/mock_application";
 
 describe("auth_resolver", () => {
-    const entities = [User, Role, Permission, ForgotPassword, EmailConfirmation];
+    const entities = [
+        User,
+        Role,
+        Permission,
+        ForgotPassword,
+        EmailConfirmation,
+    ];
 
     let container: TestingContainer;
     let userRepository: IUserRepository;
@@ -23,7 +29,9 @@ describe("auth_resolver", () => {
 
     beforeEach(async () => {
         container = await TestingContainer.create(entities);
-        userRepository = container.get<IUserRepository>(REPOSITORY.UserRepository);
+        userRepository = container.get<IUserRepository>(
+            REPOSITORY.UserRepository,
+        );
         context = {
             res: mockRequest(),
             req: mockResponse(),
@@ -54,7 +62,9 @@ describe("auth_resolver", () => {
 
         test("user without password throws error", async () => {
             // arrange
-            await userRepository.save(await User.create({email: "jason@raimondi.us"}));
+            await userRepository.save(
+                await User.create({ email: "jason@raimondi.us" }),
+            );
             const input = new LoginInput();
             input.email = "jason@raimondi.us";
             input.password = "non-existant-password";
@@ -63,7 +73,9 @@ describe("auth_resolver", () => {
             const result = resolver.login(input, context);
 
             // assert
-            await expect(result).rejects.toThrowError("user must create password");
+            await expect(result).rejects.toThrowError(
+                "user must create password",
+            );
         });
 
         test("non existant user throws", async () => {
@@ -76,14 +88,18 @@ describe("auth_resolver", () => {
             const result = resolver.login(input, context);
 
             // assert
-            await expect(result).rejects.toThrowError(new RegExp('Could not find any entity of type "User"'));
+            await expect(result).rejects.toThrowError(
+                new RegExp('Could not find any entity of type "User"'),
+            );
         });
     });
 
     describe("revokeRefreshToken", () => {
         test("fails for invalid user", async () => {
             // arrange
-            const unsavedUser = await User.create({email: "control_user@example.com"});
+            const unsavedUser = await User.create({
+                email: "control_user@example.com",
+            });
 
             // act
             const result = await resolver.revokeRefreshToken(unsavedUser.uuid);
@@ -95,7 +111,7 @@ describe("auth_resolver", () => {
 
         test("increments the user token version", async () => {
             // arrange
-            const user = await User.create({email: "jason@raimondi.us"});
+            const user = await User.create({ email: "jason@raimondi.us" });
             await userRepository.save(user);
 
             // act

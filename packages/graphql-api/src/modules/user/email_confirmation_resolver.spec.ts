@@ -11,7 +11,13 @@ import { VerifyEmailInput } from "./auth/verify_email_input";
 import { IUserRepository } from "../../lib/repository/user/user_repository";
 
 describe("email confirmation resolver", () => {
-    const entities = [User, Role, Permission, ForgotPassword, EmailConfirmation];
+    const entities = [
+        User,
+        Role,
+        Permission,
+        ForgotPassword,
+        EmailConfirmation,
+    ];
 
     let container: TestingContainer;
     let resolver: EmailConfirmationResolver;
@@ -21,18 +27,19 @@ describe("email confirmation resolver", () => {
     beforeEach(async () => {
         container = await TestingContainer.create(entities);
         userRepository = container.get(REPOSITORY.UserRepository);
-        emailConfirmationRepository = container.get(REPOSITORY.EmailConfirmationRepository);
+        emailConfirmationRepository = container.get(
+            REPOSITORY.EmailConfirmationRepository,
+        );
         resolver = container.get(EmailConfirmationResolver);
     });
 
     describe("verify user email confirmation", () => {
         test("resolve user by uuid", async () => {
             // arrange
-            const user = await User.create({email: "jason@raimondi.us"});
+            const user = await User.create({ email: "jason@raimondi.us" });
             await userRepository.save(user);
             const emailConfirmation = new EmailConfirmation(user);
             await emailConfirmationRepository.save(emailConfirmation);
-
 
             // act
             const input = new VerifyEmailInput();
@@ -42,7 +49,9 @@ describe("email confirmation resolver", () => {
             const result = emailConfirmationRepository.findByEmail(user.email);
 
             // assert
-            await expect(result).rejects.toThrowError('Could not find any entity of type "EmailConfirmation"');
+            await expect(result).rejects.toThrowError(
+                'Could not find any entity of type "EmailConfirmation"',
+            );
         });
     });
 });
