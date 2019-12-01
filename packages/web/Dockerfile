@@ -14,6 +14,7 @@ COPY styles /app/styles/
 COPY src /app/src/
 RUN npm run gen
 RUN npm run build
+RUN npm prune
 
 FROM node:12-alpine
 ENV NODE_ENV=production \
@@ -22,7 +23,7 @@ ENV NODE_ENV=production \
 WORKDIR /app
 RUN mkdir -p /app && chown node:node /app
 USER node
+COPY --from=builder --chown=node:node /app/node_modules /app/node_modules
 COPY --from=builder --chown=node:node /app/next.config.js /app/package.json /app/package-lock.json /app/
-RUN npm ci
 COPY --from=builder --chown=node:node /app/dist/ /app/dist/
 CMD ["npm", "run", "start"]
