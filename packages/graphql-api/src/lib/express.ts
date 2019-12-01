@@ -16,7 +16,7 @@ const expressMiddlewares = (app: Application) => {
     app.use(bodyParser.json());
     app.use(
         cors({
-            origin: ENV.cors,
+            origin: ENV.corsURLS,
             credentials: true,
         })
     );

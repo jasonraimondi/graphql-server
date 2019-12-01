@@ -17,10 +17,10 @@ export const initializeApolloServer = async (container: Container) => {
         container,
         globalMiddlewares: apolloMiddlewares(ENV.enableDebugging),
         resolvers: [__dirname + "/modules/**/*_resolver.ts"],
-        emitSchemaFile: {
+        emitSchemaFile: (ENV.enableOutputSchema ? {
             path: join(__dirname, "../../web/.schema.graphql"),
             commentDescriptions: true,
-        },
+        } : false),
     });
 
     return new ApolloServer({

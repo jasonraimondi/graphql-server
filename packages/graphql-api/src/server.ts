@@ -1,6 +1,7 @@
-import "dotenv/config";
 import "reflect-metadata";
+import "source-map-support/register";
 import "module-alias/register";
+import "dotenv/config";
 
 import { createConnection } from "typeorm";
 
