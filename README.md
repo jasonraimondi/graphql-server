@@ -4,6 +4,8 @@ Full stack GraphQL project
 
 ## Server
 
+[packages/graphql-api](packages/graphql-api)
+
 GraphQL API using ApolloServer with TypeORM, with InversifyJS IoC container, JWT Authentication.
 
 [![Actions Status](https://github.com/jasonraimondi/typescript-graphql/workflows/docker%20image%20server/badge.svg)](https://github.com/jasonraimondi/typescript-graphql/actions)
@@ -11,6 +13,8 @@ GraphQL API using ApolloServer with TypeORM, with InversifyJS IoC container, JWT
 [![Test Coverage](https://api.codeclimate.com/v1/badges/9d4d4893fc4d569d1043/test_coverage)](https://codeclimate.com/github/jasonraimondi/typescript-graphql/test_coverage)
 
 ## Client
+
+[packages/web](packages/web)
 
 NextJS project using ApolloClient, JWT/Cookie based auth with refresh.
 
