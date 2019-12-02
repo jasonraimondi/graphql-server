@@ -1,6 +1,6 @@
 import "reflect-metadata";
 import "source-map-support/register";
-import "module-alias/register";
+import "tsconfig-paths/register";
 import "dotenv/config";
 
 import { createConnection } from "typeorm";
@@ -23,8 +23,6 @@ import { application } from "@/lib/express";
     const container = new Container(repositoryFactory, serviceFactory);
     const app = await application(container);
     const apolloServer = await initializeApolloServer(container);
-
-    // apolloServer.
 
     apolloServer.applyMiddleware({ app, cors: false });
     app.listen(4000, () => "server started on localhost:4000");

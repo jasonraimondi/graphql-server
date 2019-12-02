@@ -11,12 +11,8 @@
     "clean": "rm -rf dist",
     "compile": "tsc",
     "build": "run-s clean compile",
-    "start": "node dist/server.js",
     "lint": "eslint --ext .ts src/",
     "lint:fix": "eslint --fix --ext .ts src/"
-  },
-  "_moduleAliases": {
-    "@": "dist"
   },
   "dependencies": {
     "apollo-server-express": "^2.9.6",
@@ -37,6 +33,7 @@
     "pg": "^7.12.1",
     "reflect-metadata": "^0.1.13",
     "source-map-support": "^0.5.16",
+    "tsconfig-paths": "^3.9.0",
     "type-graphql": "^0.17.5",
     "typeorm": "^0.2.19",
     "uuid": "^3.3.3"

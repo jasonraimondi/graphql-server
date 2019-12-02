@@ -11,11 +11,12 @@ RUN npm prune
 
 FROM node:12-alpine
 ENV NODE_ENV=production \
-    TYPEORM_ENTITIES="dist/entity/**/*_entity.js"
+    TYPEORM_ENTITIES="src/entity/**/*_entity.js"
 WORKDIR /app
 RUN mkdir -p /app && chown node:node /app
 USER node
 COPY --from=builder --chown=node:node /app/package* /app/
-COPY --from=builder --chown=node:node /app/dist /app/dist
+COPY --from=builder --chown=node:node /app/tsconfig.json /app/tsconfig.json
+COPY --from=builder --chown=node:node /app/dist /app/src
 COPY --from=builder --chown=node:node /app/node_modules /app/node_modules
-CMD ["npm", "run", "start"]
+CMD ["node", "/app/src/server.js"]
