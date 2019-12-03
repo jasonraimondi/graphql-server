@@ -36,14 +36,14 @@ type LoginResponse {
 }
 
 type Mutation {
-    sendForgotPasswordEmail(data: SendForgotPasswordInput!): Boolean!
-    updatePasswordFromToken(data: UpdatePasswordInput!): Boolean!
-    verifyEmailConfirmation(data: VerifyEmailInput!): Boolean!
-    resentConfirmEmail(email: String!): Boolean!
-    register(data: RegisterInput!): RegisterResponse!
     login(data: LoginInput!): LoginResponse!
     logout: Boolean!
     revokeRefreshToken(userId: String!): Boolean!
+    verifyEmailConfirmation(data: VerifyEmailInput!): Boolean!
+    sendForgotPasswordEmail(data: SendForgotPasswordInput!): Boolean!
+    updatePasswordFromToken(data: UpdatePasswordInput!): Boolean!
+    resentConfirmEmail(email: String!): Boolean!
+    register(data: RegisterInput!): RegisterResponse!
 }
 
 type Permission {

@@ -6,13 +6,12 @@
   "license": "MIT",
   "private": true,
   "scripts": {
+    "gen": "ts-node bin/generate_graphql_schema.ts",
     "test": "jest",
     "dev": "ts-node-dev --debounce --respawn --ignore-watch node_modules src/server.ts",
     "clean": "rm -rf dist",
     "compile": "tsc",
-    "build": "run-s clean compile",
-    "lint": "eslint --ext .ts src/",
-    "lint:fix": "eslint --fix --ext .ts src/"
+    "build": "run-s clean compile"
   },
   "dependencies": {
     "apollo-server-express": "^2.9.6",

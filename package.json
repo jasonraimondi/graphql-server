@@ -2,6 +2,7 @@
   "name": "root",
   "private": true,
   "scripts": {
+    "dev": "lerna run --parallel dev",
     "pretty": "prettier --config prettier.config.js --write packages/**/*.{ts,tsx,js,graphql,css,scss}"
   },
   "devDependencies": {

@@ -1,6 +1,7 @@
 {
   "name": "nextjs",
   "scripts": {
+    "postinstall": "npm run gen",
     "dev": "next",
     "build": "next build",
     "start": "next start",
