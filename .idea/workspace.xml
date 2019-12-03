@@ -2,58 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="166bc532-c0ed-4e14-94b6-924e116089d0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/scopes/API.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/scopes/Web.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/server.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/typescript-graphql.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/graphql-api/.idea/codeStyles/Project.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/graphql-api/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/graphql-api/.idea/graphql-api.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/graphql-api/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/graphql-api/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/graphql-api/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/graphql-api/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docker-compose.app.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/graphql-api/bin/generate_graphql_schema.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/graphql-api/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/packages/graphql-api/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/graphql-api/jest.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/graphql-api/jest.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/graphql-api/.env.postgres" beforeDir="false" afterPath="$PROJECT_DIR$/packages/graphql-api/.env.postgres" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/graphql-api/.eslintrc.js" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintrc.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/graphql-api/jest.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/jest.config.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/packages/graphql-api/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/packages/graphql-api/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/graphql-api/src/apollo.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/graphql-api/src/apollo.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/graphql-api/src/controllers/auth_controller.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/graphql-api/src/controllers/auth_controller.spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/graphql-api/src/lib/express.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/graphql-api/src/lib/express.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/graphql-api/src/lib/inversify_container.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/graphql-api/src/lib/inversify_container.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/graphql-api/src/lib/middleware/is_auth.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/graphql-api/src/lib/middleware/is_auth.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/graphql-api/src/lib/middleware/resolve_time.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/graphql-api/src/lib/middleware/resolve_time.spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/graphql-api/src/lib/repository/repository_factory.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/graphql-api/src/lib/repository/repository_factory.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/graphql-api/src/lib/repository/user/email_confirmation_repository.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/graphql-api/src/lib/repository/user/email_confirmation_repository.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/graphql-api/src/lib/repository/user/forgot_password_repository.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/graphql-api/src/lib/repository/user/forgot_password_repository.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/graphql-api/src/lib/repository/user/user_repository.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/graphql-api/src/lib/repository/user/user_repository.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/graphql-api/src/lib/services/auth/auth_service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/graphql-api/src/lib/services/auth/auth_service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/graphql-api/src/lib/services/email/nodemailer_mailer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/graphql-api/src/lib/services/email/nodemailer_mailer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/graphql-api/src/lib/services/email/testing_mailer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/graphql-api/src/lib/services/email/testing_mailer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/graphql-api/src/lib/services/email/user/forgot_password_email.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/graphql-api/src/lib/services/email/user/forgot_password_email.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/graphql-api/src/lib/services/email/user/register_email.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/graphql-api/src/lib/services/email/user/register_email.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/graphql-api/src/lib/services/service_factory.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/graphql-api/src/lib/services/service_factory.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/graphql-api/src/lib/services/testing_service_factory.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/graphql-api/src/lib/services/testing_service_factory.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/graphql-api/src/lib/types/my_context.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/graphql-api/src/lib/types/my_context.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/graphql-api/src/modules/app/app_resolver.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/graphql-api/src/modules/app/app_resolver.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/graphql-api/src/modules/user/auth/register_response.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/graphql-api/src/modules/user/auth/register_response.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/graphql-api/src/modules/user/auth_resolver.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/graphql-api/src/modules/user/auth_resolver.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/graphql-api/src/modules/user/email_confirmation_resolver.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/graphql-api/src/modules/user/email_confirmation_resolver.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/graphql-api/src/modules/user/forgot_password_resolver.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/graphql-api/src/modules/user/forgot_password_resolver.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/graphql-api/src/modules/user/me_resolver.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/graphql-api/src/modules/user/me_resolver.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/graphql-api/src/modules/user/register_resolver.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/graphql-api/src/modules/user/register_resolver.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/graphql-api/src/modules/user/user_resolver.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/graphql-api/src/modules/user/user_resolver.spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/graphql-api/src/modules/user/user_resolver.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/graphql-api/src/modules/user/user_resolver.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/graphql-api/src/server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/graphql-api/src/server.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/graphql-api/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/packages/graphql-api/tsconfig.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/web/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/packages/web/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/web/.schema.graphql" beforeDir="false" afterPath="$PROJECT_DIR$/packages/web/.schema.graphql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/web/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/packages/web/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,7 +39,7 @@
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/lib/repository" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -92,15 +51,15 @@
     <property name="prettierjs.PrettierConfiguration.Package" value="$PROJECT_DIR$/node_modules/prettier" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Spy-js" />
-    <property name="ts.external.directory.path" value="$PROJECT_DIR$/node_modules/typescript/lib" />
+    <property name="ts.external.directory.path" value="$PROJECT_DIR$/packages/graphql-api/node_modules/typescript/lib" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/lib/repository" />
-      <recent name="$PROJECT_DIR$/src/lib/middleware" />
-      <recent name="$PROJECT_DIR$/src" />
-      <recent name="$PROJECT_DIR$/src/controllers" />
-      <recent name="$PROJECT_DIR$/src/lib/services/auth" />
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/packages/graphql-api" />
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/test" />
+      <recent name="$PROJECT_DIR$/src/entity/itinerary" />
+      <recent name="$PROJECT_DIR$/src/lib" />
     </key>
     <key name="es6.move.members.recent.items">
       <recent name="$PROJECT_DIR$/test/mock_application.ts" />
@@ -108,14 +67,15 @@
       <recent name="$PROJECT_DIR$/src/entity/uuid_entity.ts" />
       <recent name="$PROJECT_DIR$/src/app.ts" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/packages/graphql-api" />
-      <recent name="$PROJECT_DIR$/test" />
-      <recent name="$PROJECT_DIR$/src/entity/itinerary" />
-      <recent name="$PROJECT_DIR$/src/lib" />
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/src/lib/repository" />
+      <recent name="$PROJECT_DIR$/src/lib/middleware" />
+      <recent name="$PROJECT_DIR$/src" />
+      <recent name="$PROJECT_DIR$/src/controllers" />
     </key>
   </component>
-  <component name="RunManager" selected="Jest.auth controller">
+  <component name="RunManager" selected="npm.pretty">
     <configuration name="auth controller" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <node-options value="" />
@@ -144,32 +104,24 @@
       </test-names>
       <method v="2" />
     </configuration>
-    <configuration name="auth_resolver.login.user without password throws error" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+    <configuration name="gen" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/packages/graphql-api/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="gen" />
+      </scripts>
       <node-interpreter value="project" />
-      <node-options value="" />
-      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
-      <working-dir value="$PROJECT_DIR$" />
       <envs />
-      <scope-kind value="TEST" />
-      <test-file value="$PROJECT_DIR$/src/modules/user/auth_resolver.spec.ts" />
-      <test-names>
-        <test-name value="auth_resolver" />
-        <test-name value="login" />
-        <test-name value="user without password throws error" />
-      </test-names>
       <method v="2" />
     </configuration>
-    <configuration name="is_auth (1)" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+    <configuration name="postinstall" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/packages/web/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="postinstall" />
+      </scripts>
       <node-interpreter value="project" />
-      <node-options value="" />
-      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
-      <working-dir value="$PROJECT_DIR$" />
       <envs />
-      <scope-kind value="SUITE" />
-      <test-file value="$PROJECT_DIR$/src/lib/middleware/is_auth.spec.ts" />
-      <test-names>
-        <test-name value="is_auth" />
-      </test-names>
       <method v="2" />
     </configuration>
     <configuration name="pretty" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
@@ -184,11 +136,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.pretty" />
+        <item itemvalue="npm.gen" />
+        <item itemvalue="npm.postinstall" />
         <item itemvalue="Jest.auth controller" />
         <item itemvalue="Jest.auth_resolver.login.user logs in successfully" />
-        <item itemvalue="npm.pretty" />
-        <item itemvalue="Jest.auth_resolver.login.user without password throws error" />
-        <item itemvalue="Jest.is_auth (1)" />
       </list>
     </recent_temporary>
   </component>
@@ -243,6 +195,8 @@
       <workItem from="1574837142654" duration="3351000" />
       <workItem from="1574899566952" duration="468000" />
       <workItem from="1574900038435" duration="3764000" />
+      <workItem from="1575265085181" duration="1933000" />
+      <workItem from="1575351891799" duration="3488000" />
     </task>
     <servers />
   </component>
@@ -263,33 +217,42 @@
     </option>
   </component>
   <component name="WindowStateProjectService">
-    <state width="1638" height="590" key="GridCell.Tab.0.bottom" timestamp="1574899127156">
-      <screen x="0" y="23" width="2560" height="1417" />
+    <state x="578" y="290" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1575355396379">
+      <screen x="0" y="23" width="1680" height="1027" />
     </state>
-    <state width="1638" height="590" key="GridCell.Tab.0.bottom/0.23.1680.1027@0.23.1680.1027" timestamp="1574837690850" />
+    <state x="578" y="290" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.23.1680.1027@0.23.1680.1027" timestamp="1575355396379" />
+    <state x="423" y="135" key="CommitChangelistDialog2" timestamp="1575353828339">
+      <screen x="0" y="23" width="1680" height="1027" />
+    </state>
+    <state x="423" y="135" key="CommitChangelistDialog2/0.23.1680.1027@0.23.1680.1027" timestamp="1575353828339" />
+    <state width="1638" height="449" key="GridCell.Tab.0.bottom" timestamp="1575355512151">
+      <screen x="0" y="23" width="1680" height="1027" />
+    </state>
+    <state width="1638" height="449" key="GridCell.Tab.0.bottom/0.23.1680.1027@0.23.1680.1027" timestamp="1575355512151" />
     <state width="1638" height="590" key="GridCell.Tab.0.bottom/0.23.2560.1417/2560.563.1440.877@0.23.2560.1417" timestamp="1574899127156" />
-    <state width="1638" height="590" key="GridCell.Tab.0.center" timestamp="1574899127154">
-      <screen x="0" y="23" width="2560" height="1417" />
+    <state width="1638" height="449" key="GridCell.Tab.0.center" timestamp="1575355512150">
+      <screen x="0" y="23" width="1680" height="1027" />
     </state>
-    <state width="1638" height="590" key="GridCell.Tab.0.center/0.23.1680.1027@0.23.1680.1027" timestamp="1574837690849" />
+    <state width="1638" height="449" key="GridCell.Tab.0.center/0.23.1680.1027@0.23.1680.1027" timestamp="1575355512150" />
     <state width="1638" height="590" key="GridCell.Tab.0.center/0.23.2560.1417/2560.563.1440.877@0.23.2560.1417" timestamp="1574899127154" />
-    <state width="1638" height="590" key="GridCell.Tab.0.left" timestamp="1574899127154">
-      <screen x="0" y="23" width="2560" height="1417" />
+    <state width="1638" height="449" key="GridCell.Tab.0.left" timestamp="1575355512150">
+      <screen x="0" y="23" width="1680" height="1027" />
     </state>
-    <state width="1638" height="590" key="GridCell.Tab.0.left/0.23.1680.1027@0.23.1680.1027" timestamp="1574837690848" />
+    <state width="1638" height="449" key="GridCell.Tab.0.left/0.23.1680.1027@0.23.1680.1027" timestamp="1575355512150" />
     <state width="1638" height="590" key="GridCell.Tab.0.left/0.23.2560.1417/2560.563.1440.877@0.23.2560.1417" timestamp="1574899127154" />
-    <state width="1638" height="590" key="GridCell.Tab.0.right" timestamp="1574899127155">
-      <screen x="0" y="23" width="2560" height="1417" />
+    <state width="1638" height="449" key="GridCell.Tab.0.right" timestamp="1575355512151">
+      <screen x="0" y="23" width="1680" height="1027" />
     </state>
-    <state width="1638" height="590" key="GridCell.Tab.0.right/0.23.1680.1027@0.23.1680.1027" timestamp="1574837690849" />
+    <state width="1638" height="449" key="GridCell.Tab.0.right/0.23.1680.1027@0.23.1680.1027" timestamp="1575355512151" />
     <state width="1638" height="590" key="GridCell.Tab.0.right/0.23.2560.1417/2560.563.1440.877@0.23.2560.1417" timestamp="1574899127155" />
     <state x="781" y="370" key="SettingsEditor" timestamp="1574899970407">
       <screen x="0" y="23" width="2560" height="1417" />
     </state>
     <state x="781" y="370" key="SettingsEditor/0.23.2560.1417/2560.563.1440.877@0.23.2560.1417" timestamp="1574899970407" />
-    <state x="100" y="123" width="2360" height="1217" key="VCS.FileHistoryDialog" timestamp="1574901939113">
-      <screen x="0" y="23" width="2560" height="1417" />
+    <state x="66" y="95" width="1549" height="883" key="VCS.FileHistoryDialog" timestamp="1575265921113">
+      <screen x="0" y="23" width="1680" height="1027" />
     </state>
+    <state x="66" y="95" width="1549" height="883" key="VCS.FileHistoryDialog/0.23.1680.1027@0.23.1680.1027" timestamp="1575265921113" />
     <state x="100" y="123" width="2360" height="1217" key="VCS.FileHistoryDialog/0.23.2560.1417/2560.563.1440.877@0.23.2560.1417" timestamp="1574901939113" />
     <state x="936" y="493" width="688" height="476" key="find.popup" timestamp="1574902112933">
       <screen x="0" y="23" width="2560" height="1417" />
