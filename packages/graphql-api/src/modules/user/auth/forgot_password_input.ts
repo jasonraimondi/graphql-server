@@ -1,5 +1,5 @@
 import { Field, InputType } from "type-graphql";
-import { IsEmail, IsUUID, Length } from "class-validator";
+import { IsEmail, Length } from "class-validator";
 
 @InputType()
 export class SendForgotPasswordInput {
@@ -15,7 +15,7 @@ export class UpdatePasswordInput {
     password: string;
 
     @Field()
-    @IsUUID("4")
+    // @IsUUID("4")
     token: string;
 
     @Field()

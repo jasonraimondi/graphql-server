@@ -30,23 +30,10 @@ const Register: NextPage<{}> = () => {
         setSubmitting(false);
     };
 
-    const handleValidate = (values: RegisterFormData) => {
-        let errors: any = {};
-        if (!values.email) {
-            errors.email = "Required";
-        } else if (!validEmail.test(values.email)) {
-            errors.email = "Invalid email address";
-        }
-        return errors;
-    };
-
     return (
         <>
             <h1>Register Page</h1>
-            <RegisterForm
-                handleSubmit={handleSubmit}
-                handleValidate={handleValidate}
-            />
+            <RegisterForm handleSubmit={handleSubmit} />
         </>
     );
 };

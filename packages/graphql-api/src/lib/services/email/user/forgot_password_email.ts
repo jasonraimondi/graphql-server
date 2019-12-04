@@ -10,13 +10,15 @@ export class ForgotPasswordEmail {
 
     async send(forgotPassword: ForgotPassword): Promise<any> {
         const { uuid, user } = forgotPassword;
+        const url = `http://localhost:3000/reset_password?e=${user.email}&u=${uuid}`;
         const text = `
-            I'll help you find a new ${uuid} ${user.email} ${forgotPassword.expiresAt}}
+            Here is the url: ${url}
         `;
         const html = `
             <div>
                 <p>Forgot your password?</p>
                 <p>I'll Help you find a new one ${uuid} ${user.email} ${forgotPassword.expiresAt}</p>
+                <a href="${url}">${url}</a>
             </div>
         `;
         await this.mailer.send({

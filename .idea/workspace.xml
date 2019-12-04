@@ -2,17 +2,51 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="166bc532-c0ed-4e14-94b6-924e116089d0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/docker-compose.app.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/graphql-api/bin/generate_graphql_schema.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/web/cypress/integration/login_spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/web/cypress/integration/register_spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/web/cypress/tsconfig.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/web/src/components/forms/reset_password_form.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/packages/web/src/pages/reset_password.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/graphql-api/.env.postgres" beforeDir="false" afterPath="$PROJECT_DIR$/packages/graphql-api/.env.postgres" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/graphql-api/.eslintrc.js" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintrc.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/graphql-api/jest.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/jest.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/graphql-api/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/packages/graphql-api/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/graphql-api/jest.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/graphql-api/jest.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/graphql-api/src/lib/services/email/user/forgot_password_email.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/graphql-api/src/lib/services/email/user/forgot_password_email.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/graphql-api/src/modules/user/auth/forgot_password_input.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/graphql-api/src/modules/user/auth/forgot_password_input.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/graphql-api/src/modules/user/forgot_password_resolver.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/graphql-api/src/modules/user/forgot_password_resolver.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/graphql-api/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/packages/graphql-api/tsconfig.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/packages/web/.schema.graphql" beforeDir="false" afterPath="$PROJECT_DIR$/packages/web/.schema.graphql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/web/graphql/app.graphql" beforeDir="false" afterPath="$PROJECT_DIR$/packages/web/graphql/app.graphql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/web/graphql/forgot_password.graphql" beforeDir="false" afterPath="$PROJECT_DIR$/packages/web/graphql/forgot_password.graphql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/web/graphql/login.graphql" beforeDir="false" afterPath="$PROJECT_DIR$/packages/web/graphql/login.graphql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/web/graphql/logout.graphql" beforeDir="false" afterPath="$PROJECT_DIR$/packages/web/graphql/logout.graphql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/web/graphql/me.graphql" beforeDir="false" afterPath="$PROJECT_DIR$/packages/web/graphql/me.graphql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/web/graphql/register.graphql" beforeDir="false" afterPath="$PROJECT_DIR$/packages/web/graphql/register.graphql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/web/graphql/users.graphql" beforeDir="false" afterPath="$PROJECT_DIR$/packages/web/graphql/users.graphql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/web/graphql/verify_email_confirmation.graphql" beforeDir="false" afterPath="$PROJECT_DIR$/packages/web/graphql/verify_email_confirmation.graphql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/web/next.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/packages/web/next.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/web/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/packages/web/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/packages/web/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/packages/web/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/web/src/components/forms/elements.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/packages/web/src/components/forms/elements.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/web/src/components/forms/forgot_password_form.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/packages/web/src/components/forms/forgot_password_form.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/web/src/components/forms/login_form.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/packages/web/src/components/forms/login_form.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/web/src/components/forms/register_form.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/packages/web/src/components/forms/register_form.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/web/src/components/hoc/nav_link.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/packages/web/src/components/hoc/nav_link.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/web/src/components/hoc/private_route.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/packages/web/src/components/hoc/private_route.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/web/src/components/layouts/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/packages/web/src/components/layouts/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/web/src/components/layouts/partials/header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/packages/web/src/components/layouts/partials/header.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/web/src/lib/apollo_next.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/packages/web/src/lib/apollo_next.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/web/src/lib/auth.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/web/src/lib/auth.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/web/src/pages/_document.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/packages/web/src/pages/_document.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/web/src/pages/_error.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/packages/web/src/pages/_error.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/web/src/pages/blank.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/packages/web/src/pages/blank.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/web/src/pages/dashboard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/packages/web/src/pages/dashboard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/web/src/pages/forgot_password.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/packages/web/src/pages/forgot_password.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/web/src/pages/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/packages/web/src/pages/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/web/src/pages/login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/packages/web/src/pages/login.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/web/src/pages/logout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/packages/web/src/pages/logout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/web/src/pages/register.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/packages/web/src/pages/register.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/web/src/pages/verify_email.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/packages/web/src/pages/verify_email.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/web/styles/base.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/packages/web/styles/base.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/web/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/packages/web/tsconfig.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,7 +73,7 @@
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/packages/web/cypress/integration" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -54,12 +88,12 @@
     <property name="ts.external.directory.path" value="$PROJECT_DIR$/packages/graphql-api/node_modules/typescript/lib" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/packages/graphql-api" />
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/packages/web/cypress/integration" />
+      <recent name="$PROJECT_DIR$/packages/web/src/components/forms" />
+      <recent name="$PROJECT_DIR$/packages/web/src/pages" />
       <recent name="$PROJECT_DIR$" />
-      <recent name="$PROJECT_DIR$/test" />
-      <recent name="$PROJECT_DIR$/src/entity/itinerary" />
-      <recent name="$PROJECT_DIR$/src/lib" />
+      <recent name="$PROJECT_DIR$/src/lib/repository" />
     </key>
     <key name="es6.move.members.recent.items">
       <recent name="$PROJECT_DIR$/test/mock_application.ts" />
@@ -67,41 +101,33 @@
       <recent name="$PROJECT_DIR$/src/entity/uuid_entity.ts" />
       <recent name="$PROJECT_DIR$/src/app.ts" />
     </key>
-    <key name="CopyFile.RECENT_KEYS">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/packages/graphql-api" />
       <recent name="$PROJECT_DIR$" />
-      <recent name="$PROJECT_DIR$/src/lib/repository" />
-      <recent name="$PROJECT_DIR$/src/lib/middleware" />
-      <recent name="$PROJECT_DIR$/src" />
-      <recent name="$PROJECT_DIR$/src/controllers" />
+      <recent name="$PROJECT_DIR$/test" />
+      <recent name="$PROJECT_DIR$/src/entity/itinerary" />
+      <recent name="$PROJECT_DIR$/src/lib" />
     </key>
   </component>
   <component name="RunManager" selected="npm.pretty">
-    <configuration name="auth controller" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+    <configuration name="dev" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="dev" />
+      </scripts>
       <node-interpreter value="project" />
-      <node-options value="" />
-      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
-      <working-dir value="$PROJECT_DIR$" />
       <envs />
-      <scope-kind value="SUITE" />
-      <test-file value="$PROJECT_DIR$/src/controllers/auth_controller.spec.ts" />
-      <test-names>
-        <test-name value="auth controller" />
-      </test-names>
       <method v="2" />
     </configuration>
-    <configuration name="auth_resolver.login.user logs in successfully" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+    <configuration name="gen (1)" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/packages/web/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="gen" />
+      </scripts>
       <node-interpreter value="project" />
-      <node-options value="" />
-      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
-      <working-dir value="$PROJECT_DIR$" />
       <envs />
-      <scope-kind value="TEST" />
-      <test-file value="$PROJECT_DIR$/src/modules/user/auth_resolver.spec.ts" />
-      <test-names>
-        <test-name value="auth_resolver" />
-        <test-name value="login" />
-        <test-name value="user logs in successfully" />
-      </test-names>
       <method v="2" />
     </configuration>
     <configuration name="gen" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
@@ -137,10 +163,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="npm.pretty" />
+        <item itemvalue="npm.dev" />
         <item itemvalue="npm.gen" />
+        <item itemvalue="npm.gen (1)" />
         <item itemvalue="npm.postinstall" />
-        <item itemvalue="Jest.auth controller" />
-        <item itemvalue="Jest.auth_resolver.login.user logs in successfully" />
       </list>
     </recent_temporary>
   </component>
@@ -197,11 +223,17 @@
       <workItem from="1574900038435" duration="3764000" />
       <workItem from="1575265085181" duration="1933000" />
       <workItem from="1575351891799" duration="3488000" />
+      <workItem from="1575422347003" duration="13866000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+    <option name="additionalRoots">
+      <list>
+        <option value="$PROJECT_DIR$/packages/web/node_modules" />
+      </list>
+    </option>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -225,26 +257,74 @@
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="423" y="135" key="CommitChangelistDialog2/0.23.1680.1027@0.23.1680.1027" timestamp="1575353828339" />
-    <state width="1638" height="449" key="GridCell.Tab.0.bottom" timestamp="1575355512151">
+    <state width="1078" height="410" key="GridCell.Tab.0.bottom" timestamp="1575443772587">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
-    <state width="1638" height="449" key="GridCell.Tab.0.bottom/0.23.1680.1027@0.23.1680.1027" timestamp="1575355512151" />
-    <state width="1638" height="590" key="GridCell.Tab.0.bottom/0.23.2560.1417/2560.563.1440.877@0.23.2560.1417" timestamp="1574899127156" />
-    <state width="1638" height="449" key="GridCell.Tab.0.center" timestamp="1575355512150">
+    <state width="1078" height="410" key="GridCell.Tab.0.bottom/0.23.1680.1027@0.23.1680.1027" timestamp="1575443772587" />
+    <state width="1894" height="593" key="GridCell.Tab.0.bottom/0.23.2560.1417/2560.563.1440.877@0.23.2560.1417" timestamp="1575426558622" />
+    <state width="1078" height="410" key="GridCell.Tab.0.center" timestamp="1575443772586">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
-    <state width="1638" height="449" key="GridCell.Tab.0.center/0.23.1680.1027@0.23.1680.1027" timestamp="1575355512150" />
-    <state width="1638" height="590" key="GridCell.Tab.0.center/0.23.2560.1417/2560.563.1440.877@0.23.2560.1417" timestamp="1574899127154" />
-    <state width="1638" height="449" key="GridCell.Tab.0.left" timestamp="1575355512150">
+    <state width="1078" height="410" key="GridCell.Tab.0.center/0.23.1680.1027@0.23.1680.1027" timestamp="1575443772586" />
+    <state width="1894" height="593" key="GridCell.Tab.0.center/0.23.2560.1417/2560.563.1440.877@0.23.2560.1417" timestamp="1575426558621" />
+    <state width="1078" height="410" key="GridCell.Tab.0.left" timestamp="1575443772586">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
-    <state width="1638" height="449" key="GridCell.Tab.0.left/0.23.1680.1027@0.23.1680.1027" timestamp="1575355512150" />
-    <state width="1638" height="590" key="GridCell.Tab.0.left/0.23.2560.1417/2560.563.1440.877@0.23.2560.1417" timestamp="1574899127154" />
-    <state width="1638" height="449" key="GridCell.Tab.0.right" timestamp="1575355512151">
+    <state width="1078" height="410" key="GridCell.Tab.0.left/0.23.1680.1027@0.23.1680.1027" timestamp="1575443772586" />
+    <state width="1894" height="593" key="GridCell.Tab.0.left/0.23.2560.1417/2560.563.1440.877@0.23.2560.1417" timestamp="1575426558621" />
+    <state width="1078" height="410" key="GridCell.Tab.0.right" timestamp="1575443772586">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
-    <state width="1638" height="449" key="GridCell.Tab.0.right/0.23.1680.1027@0.23.1680.1027" timestamp="1575355512151" />
-    <state width="1638" height="590" key="GridCell.Tab.0.right/0.23.2560.1417/2560.563.1440.877@0.23.2560.1417" timestamp="1574899127155" />
+    <state width="1078" height="410" key="GridCell.Tab.0.right/0.23.1680.1027@0.23.1680.1027" timestamp="1575443772586" />
+    <state width="1894" height="593" key="GridCell.Tab.0.right/0.23.2560.1417/2560.563.1440.877@0.23.2560.1417" timestamp="1575426558622" />
+    <state width="1078" height="344" key="GridCell.Tab.1.bottom" timestamp="1575435752912">
+      <screen x="0" y="23" width="1680" height="1027" />
+    </state>
+    <state width="1078" height="344" key="GridCell.Tab.1.bottom/0.23.1680.1027@0.23.1680.1027" timestamp="1575435752912" />
+    <state width="1078" height="344" key="GridCell.Tab.1.center" timestamp="1575435752911">
+      <screen x="0" y="23" width="1680" height="1027" />
+    </state>
+    <state width="1078" height="344" key="GridCell.Tab.1.center/0.23.1680.1027@0.23.1680.1027" timestamp="1575435752911" />
+    <state width="1078" height="344" key="GridCell.Tab.1.left" timestamp="1575435752911">
+      <screen x="0" y="23" width="1680" height="1027" />
+    </state>
+    <state width="1078" height="344" key="GridCell.Tab.1.left/0.23.1680.1027@0.23.1680.1027" timestamp="1575435752911" />
+    <state width="1078" height="344" key="GridCell.Tab.1.right" timestamp="1575435752912">
+      <screen x="0" y="23" width="1680" height="1027" />
+    </state>
+    <state width="1078" height="344" key="GridCell.Tab.1.right/0.23.1680.1027@0.23.1680.1027" timestamp="1575435752912" />
+    <state width="1078" height="344" key="GridCell.Tab.2.bottom" timestamp="1575435752914">
+      <screen x="0" y="23" width="1680" height="1027" />
+    </state>
+    <state width="1078" height="344" key="GridCell.Tab.2.bottom/0.23.1680.1027@0.23.1680.1027" timestamp="1575435752914" />
+    <state width="1078" height="344" key="GridCell.Tab.2.center" timestamp="1575435752913">
+      <screen x="0" y="23" width="1680" height="1027" />
+    </state>
+    <state width="1078" height="344" key="GridCell.Tab.2.center/0.23.1680.1027@0.23.1680.1027" timestamp="1575435752913" />
+    <state width="1078" height="344" key="GridCell.Tab.2.left" timestamp="1575435752913">
+      <screen x="0" y="23" width="1680" height="1027" />
+    </state>
+    <state width="1078" height="344" key="GridCell.Tab.2.left/0.23.1680.1027@0.23.1680.1027" timestamp="1575435752913" />
+    <state width="1078" height="344" key="GridCell.Tab.2.right" timestamp="1575435752913">
+      <screen x="0" y="23" width="1680" height="1027" />
+    </state>
+    <state width="1078" height="344" key="GridCell.Tab.2.right/0.23.1680.1027@0.23.1680.1027" timestamp="1575435752913" />
+    <state width="1078" height="344" key="GridCell.Tab.3.bottom" timestamp="1575435752913">
+      <screen x="0" y="23" width="1680" height="1027" />
+    </state>
+    <state width="1078" height="344" key="GridCell.Tab.3.bottom/0.23.1680.1027@0.23.1680.1027" timestamp="1575435752913" />
+    <state width="1078" height="344" key="GridCell.Tab.3.center" timestamp="1575435752912">
+      <screen x="0" y="23" width="1680" height="1027" />
+    </state>
+    <state width="1078" height="344" key="GridCell.Tab.3.center/0.23.1680.1027@0.23.1680.1027" timestamp="1575435752912" />
+    <state width="1078" height="344" key="GridCell.Tab.3.left" timestamp="1575435752912">
+      <screen x="0" y="23" width="1680" height="1027" />
+    </state>
+    <state width="1078" height="344" key="GridCell.Tab.3.left/0.23.1680.1027@0.23.1680.1027" timestamp="1575435752912" />
+    <state width="1078" height="344" key="GridCell.Tab.3.right" timestamp="1575435752913">
+      <screen x="0" y="23" width="1680" height="1027" />
+    </state>
+    <state width="1078" height="344" key="GridCell.Tab.3.right/0.23.1680.1027@0.23.1680.1027" timestamp="1575435752913" />
     <state x="781" y="370" key="SettingsEditor" timestamp="1574899970407">
       <screen x="0" y="23" width="2560" height="1417" />
     </state>
@@ -254,10 +334,11 @@
     </state>
     <state x="66" y="95" width="1549" height="883" key="VCS.FileHistoryDialog/0.23.1680.1027@0.23.1680.1027" timestamp="1575265921113" />
     <state x="100" y="123" width="2360" height="1217" key="VCS.FileHistoryDialog/0.23.2560.1417/2560.563.1440.877@0.23.2560.1417" timestamp="1574901939113" />
-    <state x="936" y="493" width="688" height="476" key="find.popup" timestamp="1574902112933">
-      <screen x="0" y="23" width="2560" height="1417" />
+    <state x="614" y="364" width="762" height="476" key="find.popup" timestamp="1575434368463">
+      <screen x="0" y="23" width="1680" height="1027" />
     </state>
-    <state x="936" y="493" width="688" height="476" key="find.popup/0.23.2560.1417/2560.563.1440.877@0.23.2560.1417" timestamp="1574902112933" />
+    <state x="614" y="364" width="762" height="476" key="find.popup/0.23.1680.1027@0.23.1680.1027" timestamp="1575434368463" />
+    <state x="936" y="493" width="688" height="476" key="find.popup/0.23.2560.1417/2560.563.1440.877@0.23.2560.1417" timestamp="1575424103154" />
     <state x="945" y="348" width="670" height="676" key="search.everywhere.popup" timestamp="1574820809628">
       <screen x="0" y="23" width="2560" height="1417" />
     </state>
@@ -265,6 +346,14 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/packages/graphql-api/src/modules/user/forgot_password_resolver.ts</url>
+          <line>28</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
       <default-breakpoints>
         <breakpoint enabled="true" type="javascript-exception" />
       </default-breakpoints>

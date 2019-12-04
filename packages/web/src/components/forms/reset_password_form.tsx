@@ -4,16 +4,20 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import { Button, Label } from "@/app/components/forms/elements";
 import { validEmail } from "@/app/pages/register";
 
-export type ForgotPasswordFormData = {
+export type ResetPasswordFormData = {
+    token: string;
     email: string;
+    password: string;
 };
 
 type Props = {
     handleSubmit: any;
+    token: string;
+    email: string;
 };
 
-export const ForgotPasswordForm = ({ handleSubmit }: Props) => {
-    const handleValidate = (values: ForgotPasswordFormData) => {
+export const ResetPasswordForm = ({ handleSubmit, token, email }: Props) => {
+    const handleValidate = (values: ResetPasswordFormData) => {
         let errors: any = {};
         if (!values.email) {
             errors.email = "Required";
@@ -24,19 +28,19 @@ export const ForgotPasswordForm = ({ handleSubmit }: Props) => {
     };
 
     return (
-        <Formik<ForgotPasswordFormData>
-            initialValues={{ email: "" }}
+        <Formik<ResetPasswordFormData>
+            initialValues={{ email, token, password: "" }}
             validate={handleValidate}
             onSubmit={handleSubmit}
         >
             {({ isSubmitting }) => (
-                <Form id="forgot-password-form">
-                    <Label id="forgot-password-form--email">
-                        <span>Email</span>
+                <Form>
+                    <Label>
+                        <span>Password</span>
                         <Field
-                            type="email"
-                            name="email"
-                            placeholder="john.doe@example.com"
+                            type="password"
+                            name="password"
+                            placeholder="************"
                         />
                         <ErrorMessage name="email" component="div" />
                     </Label>

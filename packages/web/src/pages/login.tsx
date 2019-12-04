@@ -4,7 +4,6 @@ import React from "react";
 
 import { useLoginMutation } from "@/generated/graphql";
 import { withApollo } from "@/app/lib/apollo_next";
-import { validEmail } from "@/app/pages/register";
 import { setAccessToken } from "@/app/lib/auth";
 import { withLayout } from "@/app/components/layouts/layout";
 import { LoginForm, LoginFormData } from "@/app/components/forms/login_form";
@@ -38,24 +37,11 @@ const LoginPage: NextPage<Props> = ({
         await Redirect(redirectTo);
     };
 
-    const handleValidate = (values: LoginFormData) => {
-        let errors: any = {};
-        if (!values.email) {
-            errors.email = "Required";
-        } else if (!validEmail.test(values.email)) {
-            errors.email = "Invalid email address";
-        }
-        return errors;
-    };
-
     return (
         <>
             <h1 className="h5">Login Page</h1>
             {message ? <p>{message}</p> : null}
-            <LoginForm
-                handleSubmit={handleSubmit}
-                handleValidate={handleValidate}
-            />
+            <LoginForm handleSubmit={handleSubmit} />
         </>
     );
 };

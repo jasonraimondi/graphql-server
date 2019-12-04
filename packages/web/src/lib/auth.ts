@@ -31,11 +31,19 @@ export const getAuth = async (ctx?: NextPageContext): Promise<Auth> => {
 };
 
 // @ts-ignore
-export async function redirectToLogin(ctx?: NextPageContext) {
-    const redirectTo = ctx && ctx.pathname ? ctx.pathname : document.referrer;
-    console.log({ redirectTo });
+export async function redirectToLogin(ctx?: NextPageContext, doNotRedirectBack = false) {
+    let redirectLink = ctx && ctx.pathname ? ctx.pathname : document.referrer;
+
+    if (redirectLink) {
+        redirectLink = `?redirectTo=${encodeURI(redirectLink)}`;
+    }
+
+    if (doNotRedirectBack) {
+        redirectLink = "";
+    }
+
     await Redirect(
-        redirectTo ? `/login?redirectTo=${encodeURI(redirectTo)}` : "/login",
+        `/login${redirectLink}`,
         ctx
     );
 }

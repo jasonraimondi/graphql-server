@@ -10,8 +10,8 @@ import {
     ForgotPasswordForm,
     ForgotPasswordFormData,
 } from "@/app/components/forms/forgot_password_form";
-import { validEmail } from "@/app/pages/register";
 import { useSendForgotPasswordEmailMutation } from "@/generated/graphql";
+import { Redirect } from "@/app/lib/redirect";
 
 type Props = WithRouterProps & {};
 
@@ -23,26 +23,14 @@ const ForgotPassword: NextPage<Props> = () => {
         { setSubmitting }: FormikHelpers<ForgotPasswordFormData>
     ) => {
         await forgotPassword({ variables: { email: data.email } });
+        await Redirect("/");
         setSubmitting(false);
-    };
-
-    const handleValidate = (values: ForgotPasswordFormData) => {
-        let errors: any = {};
-        if (!values.email) {
-            errors.email = "Required";
-        } else if (!validEmail.test(values.email)) {
-            errors.email = "Invalid email address";
-        }
-        return errors;
     };
 
     return (
         <>
             <h1 className="h5">Forgot Password Page</h1>
-            <ForgotPasswordForm
-                handleValidate={handleValidate}
-                handleSubmit={handleSubmit}
-            />
+            <ForgotPasswordForm handleSubmit={handleSubmit} />
         </>
     );
 };

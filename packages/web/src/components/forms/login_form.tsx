@@ -2,6 +2,7 @@ import React from "react";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { Button, Label } from "@/app/components/forms/elements";
 import { Link } from "@/app/components/hoc/nav_link";
+import { validEmail } from "@/app/pages/register";
 
 export type LoginFormData = {
     email: string;
@@ -9,11 +10,20 @@ export type LoginFormData = {
 };
 
 type Props = {
-    handleValidate: any;
     handleSubmit: any;
 };
 
-export const LoginForm = ({ handleValidate, handleSubmit }: Props) => {
+export const LoginForm = ({ handleSubmit }: Props) => {
+    const handleValidate = (values: LoginFormData) => {
+        let errors: any = {};
+        if (!values.email) {
+            errors.email = "Required";
+        } else if (!validEmail.test(values.email)) {
+            errors.email = "Invalid email address";
+        }
+        return errors;
+    };
+
     return (
         <Formik<LoginFormData>
             initialValues={{ email: "", password: "" }}
@@ -21,8 +31,8 @@ export const LoginForm = ({ handleValidate, handleSubmit }: Props) => {
             onSubmit={handleSubmit}
         >
             {({ isSubmitting }) => (
-                <Form className="login-form">
-                    <Label>
+                <Form id="login-form">
+                    <Label id="login-form--email">
                         <span>Email</span>
                         <Field
                             type="email"
@@ -31,7 +41,7 @@ export const LoginForm = ({ handleValidate, handleSubmit }: Props) => {
                         />
                         <ErrorMessage name="email" component="div" />
                     </Label>
-                    <Label>
+                    <Label id="login-form--password">
                         <span>Password</span>
                         <Field
                             type="password"
@@ -40,7 +50,9 @@ export const LoginForm = ({ handleValidate, handleSubmit }: Props) => {
                         />
                         <br />
                         <Link href="/forgot_password">
-                            <a className="small">Forgot Password?</a>
+                            <a id="forgot-password-link" className="small">
+                                Forgot Password?
+                            </a>
                         </Link>
                         <ErrorMessage name="password" component="div" />
                     </Label>
