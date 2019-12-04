@@ -5,49 +5,46 @@ import { AccessToken } from "@/app/lib/auth/access_token";
 import { Redirect } from "@/app/lib/redirect";
 
 type Auth = {
-    accessToken: AccessToken;
-    refreshToken?: RefreshToken;
+  accessToken: AccessToken;
+  refreshToken?: RefreshToken;
 };
 
 export const destroyAccessToken = (ctx?: NextPageContext) => {
-    console.log("DESTROY ACCESS TOKEN");
-    destroyCookie(ctx, "jit");
+  console.log("DESTROY ACCESS TOKEN");
+  destroyCookie(ctx, "jit");
 };
 
 export const setAccessToken = (token: string, ctx?: NextPageContext) => {
-    console.log("SET ACCESS TOKEN", token);
-    setCookie(ctx, "jit", token, {
-        maxAge: 60 * 60 * 24,
-        path: "/",
-    });
+  console.log("SET ACCESS TOKEN", token);
+  setCookie(ctx, "jit", token, {
+    maxAge: 60 * 60 * 24,
+    path: "/",
+  });
 };
 
 export const getAuth = async (ctx?: NextPageContext): Promise<Auth> => {
-    const { jid, jit } = parseCookies(ctx);
-    return {
-        accessToken: new AccessToken(jit),
-        refreshToken: new RefreshToken(jid),
-    };
+  const { jid, jit } = parseCookies(ctx);
+  return {
+    accessToken: new AccessToken(jit),
+    refreshToken: new RefreshToken(jid),
+  };
 };
 
 // @ts-ignore
 export async function redirectToLogin(ctx?: NextPageContext, doNotRedirectBack = false) {
-    let redirectLink = ctx && ctx.pathname ? ctx.pathname : document.referrer;
+  let redirectLink = ctx && ctx.pathname ? ctx.pathname : document.referrer;
 
-    if (redirectLink) {
-        redirectLink = `?redirectTo=${encodeURI(redirectLink)}`;
-    }
+  if (redirectLink) {
+    redirectLink = `?redirectTo=${encodeURI(redirectLink)}`;
+  }
 
-    if (doNotRedirectBack) {
-        redirectLink = "";
-    }
+  if (doNotRedirectBack) {
+    redirectLink = "";
+  }
 
-    await Redirect(
-        `/login${redirectLink}`,
-        ctx
-    );
+  await Redirect(`/login${redirectLink}`, ctx);
 }
 
 export type DeprecatedAuth = {
-    email?: string;
+  email?: string;
 };

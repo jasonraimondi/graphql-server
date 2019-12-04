@@ -11,66 +11,56 @@ import { AuthService } from "./auth_service";
 import { IUserRepository } from "../../repository/user/user_repository";
 
 describe("auth_resolver", () => {
-    const entities = [
-        User,
-        Role,
-        Permission,
-        ForgotPassword,
-        EmailConfirmation,
-    ];
+  const entities = [User, Role, Permission, ForgotPassword, EmailConfirmation];
 
-    let container: TestingContainer;
-    let authService: AuthService;
-    let userRepository: IUserRepository;
+  let container: TestingContainer;
+  let authService: AuthService;
+  let userRepository: IUserRepository;
 
-    beforeEach(async () => {
-        container = await TestingContainer.create(entities);
-        authService = container.get(SERVICE.AuthService);
-        userRepository = container.get<IUserRepository>(
-            REPOSITORY.UserRepository,
-        );
+  beforeEach(async () => {
+    container = await TestingContainer.create(entities);
+    authService = container.get(SERVICE.AuthService);
+    userRepository = container.get<IUserRepository>(REPOSITORY.UserRepository);
+  });
+
+  describe("refreshToken", () => {
+    test("create refresh token is created with expected data", async () => {
+      // arrange
+      const user = await User.create({ email: "jason@raimondi.us" });
+      await userRepository.save(user);
+      const daysInFuture = (days: number) => Date.now() / 1000 + 60 * 60 * 24 * days;
+
+      // act
+      const token = authService.createRefreshToken(user);
+      const decoded: any = jwtDecode(token);
+
+      // assert
+      expect(decoded.userId).toBe(user.uuid);
+      expect(decoded.exp).toBeGreaterThan(daysInFuture(6));
+      expect(decoded.exp).toBeLessThan(daysInFuture(8));
     });
 
-    describe("refreshToken", () => {
-        test("create refresh token is created with expected data", async () => {
-            // arrange
-            const user = await User.create({ email: "jason@raimondi.us" });
-            await userRepository.save(user);
-            const daysInFuture = (days: number) =>
-                Date.now() / 1000 + 60 * 60 * 24 * days;
+    test.skip("create access token is created with expected data", async () => {
+      // arrange
+      const user = await User.create({ email: "jason@raimondi.us" });
+      await userRepository.save(user);
+      const minutesInFuture = (minutes: number) => Date.now() / 1000 + 60 * minutes;
 
-            // act
-            const token = authService.createRefreshToken(user);
-            const decoded: any = jwtDecode(token);
+      // act
+      const token = authService.createAccessToken(user);
+      const decoded: any = jwtDecode(token);
 
-            // assert
-            expect(decoded.userId).toBe(user.uuid);
-            expect(decoded.exp).toBeGreaterThan(daysInFuture(6));
-            expect(decoded.exp).toBeLessThan(daysInFuture(8));
-        });
-
-        test.skip("create access token is created with expected data", async () => {
-            // arrange
-            const user = await User.create({ email: "jason@raimondi.us" });
-            await userRepository.save(user);
-            const minutesInFuture = (minutes: number) =>
-                Date.now() / 1000 + 60 * minutes;
-
-            // act
-            const token = authService.createAccessToken(user);
-            const decoded: any = jwtDecode(token);
-
-            // assert
-            expect(decoded.userId).toBe(user.uuid);
-            expect(decoded.exp).toBeGreaterThan(minutesInFuture(14));
-            expect(decoded.exp).toBeLessThan(minutesInFuture(16));
-        });
-
-        test("invalid jwt throws exception", async () => {
-            // arrange
-            const result = authService.updateAccessToken("not-a-jwt");
-            // assert
-            await expect(result).rejects.toThrowError("invalid refresh token");
-        });
+      // assert
+      expect(decoded.userId).toBe(user.uuid);
+      expect(decoded.exp).toBeGreaterThan(minutesInFuture(14));
+      expect(decoded.exp).toBeLessThan(minutesInFuture(16));
     });
+
+    test("invalid jwt throws exception", async () => {
+      // arrange
+      const result = authService.updateAccessToken("not-a-jwt");
+      // assert
+      await expect(result).rejects.toThrowError("invalid refresh token");
+    });
+  });
 });

@@ -14,38 +14,34 @@ import { FormikHelpers } from "formik";
 type Props = WithRouterProps & {};
 
 const LoginPage: NextPage<Props> = ({
-    router: {
-        query: { redirectTo, message },
-    },
+  router: {
+    query: { redirectTo, message },
+  },
 }) => {
-    const [login] = useLoginMutation();
+  const [login] = useLoginMutation();
 
-    const handleSubmit = async (
-        data: LoginFormData,
-        { setSubmitting }: FormikHelpers<LoginFormData>
-    ) => {
-        const response = await login({
-            variables: { data },
-        });
-        if (response && response.data) {
-            setAccessToken(response.data.login.accessToken);
-        }
-        setSubmitting(false);
-        if (!redirectTo || redirectTo.includes("/login"))
-            redirectTo = "/dashboard";
-        if (Array.isArray(redirectTo)) redirectTo = redirectTo[0];
-        await Redirect(redirectTo);
-    };
+  const handleSubmit = async (data: LoginFormData, { setSubmitting }: FormikHelpers<LoginFormData>) => {
+    const response = await login({
+      variables: { data },
+    });
+    if (response && response.data) {
+      setAccessToken(response.data.login.accessToken);
+    }
+    setSubmitting(false);
+    if (!redirectTo || redirectTo.includes("/login")) redirectTo = "/dashboard";
+    if (Array.isArray(redirectTo)) redirectTo = redirectTo[0];
+    await Redirect(redirectTo);
+  };
 
-    return (
-        <>
-            <h1 className="h5">Login Page</h1>
-            {message ? <p>{message}</p> : null}
-            <LoginForm handleSubmit={handleSubmit} />
-        </>
-    );
+  return (
+    <>
+      <h1 className="h5">Login Page</h1>
+      {message ? <p>{message}</p> : null}
+      <LoginForm handleSubmit={handleSubmit} />
+    </>
+  );
 };
 
 export default withLayout(withApollo(withRouter(LoginPage)), {
-    title: "Login Page",
+  title: "Login Page",
 });

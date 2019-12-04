@@ -4,23 +4,23 @@ import { Global } from "@emotion/core";
 import { baseStyles } from "@/styles/base";
 
 class MyDocument extends Document {
-    static async getInitialProps(ctx: any) {
-        const initialProps = await Document.getInitialProps(ctx);
-        return { ...initialProps };
-    }
+  static async getInitialProps(ctx: any) {
+    const initialProps = await Document.getInitialProps(ctx);
+    return { ...initialProps };
+  }
 
-    render() {
-        return (
-            <Html>
-                <Head />
-                <Global styles={baseStyles} />
-                <body>
-                    <Main />
-                    <NextScript />
-                </body>
-            </Html>
-        );
-    }
+  render() {
+    return (
+      <Html>
+        <Head />
+        <Global styles={baseStyles} />
+        <body>
+          <Main />
+          <NextScript />
+        </body>
+      </Html>
+    );
+  }
 }
 
 export default MyDocument;

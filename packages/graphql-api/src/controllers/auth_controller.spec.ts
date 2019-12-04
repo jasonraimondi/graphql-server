@@ -12,87 +12,77 @@ import { TestingContainer } from "../../test/test_container";
 import { application } from "../lib/express";
 
 describe("auth controller", () => {
-    const entities = [
-        User,
-        Role,
-        Permission,
-        ForgotPassword,
-        EmailConfirmation,
-    ];
+  const entities = [User, Role, Permission, ForgotPassword, EmailConfirmation];
 
-    let container: TestingContainer;
-    let userRepository: IUserRepository;
-    let authService: AuthService;
+  let container: TestingContainer;
+  let userRepository: IUserRepository;
+  let authService: AuthService;
 
-    beforeEach(async () => {
-        await import("./auth_controller");
+  beforeEach(async () => {
+    await import("./auth_controller");
 
-        container = await TestingContainer.create(entities);
-        userRepository = container.get<IUserRepository>(
-            REPOSITORY.UserRepository
-        );
-        authService = container.get<AuthService>(SERVICE.AuthService);
-    });
+    container = await TestingContainer.create(entities);
+    userRepository = container.get<IUserRepository>(REPOSITORY.UserRepository);
+    authService = container.get<AuthService>(SERVICE.AuthService);
+  });
 
-    test("refresh token updates successfully", async () => {
-        // arrange
-        const app = await application(container);
+  test("refresh token updates successfully", async () => {
+    // arrange
+    const app = await application(container);
 
-        const user = await User.create({ email: "jason@raimondi.us" });
-        await userRepository.save(user);
-        const refreshToken = authService.createRefreshToken(user);
+    const user = await User.create({ email: "jason@raimondi.us" });
+    await userRepository.save(user);
+    const refreshToken = authService.createRefreshToken(user);
 
-        // act
-        const response = await request(app)
-            .post("/auth/refresh_token")
-            .expect(200)
-            .set("Cookie", [`jid=${refreshToken}`])
-            .expect("Content-Type", /json/);
+    // act
+    const response = await request(app)
+      .post("/auth/refresh_token")
+      .expect(200)
+      .set("Cookie", [`jid=${refreshToken}`])
+      .expect("Content-Type", /json/);
 
-        // assert
-        expect(response.header["set-cookie"].length).toBe(1);
-        const JID_JWT_COOKIE = /jid=[a-zA-Z\d\-_]+.[a-zA-Z\d\-_]+.[a-zA-Z\d\-_]+; Domain=localhost; Path=\/; */;
-        expect(response.header["set-cookie"][0]).toMatch(JID_JWT_COOKIE);
-        // @todo should pass, I need to add this back...
-        // expect(response.header["set-cookie"][0].includes(refreshToken)).toBeFalsy();
-        expect(response.body.success).toBe(true);
-        expect(response.body.accessToken).toMatch(
-            /[a-zA-Z\d]+.[a-zA-Z\d]+.[a-zA-Z\d]+/
-        );
-    });
+    // assert
+    expect(response.header["set-cookie"].length).toBe(1);
+    const JID_JWT_COOKIE = /jid=[a-zA-Z\d\-_]+.[a-zA-Z\d\-_]+.[a-zA-Z\d\-_]+; Domain=localhost; Path=\/; */;
+    expect(response.header["set-cookie"][0]).toMatch(JID_JWT_COOKIE);
+    // @todo should pass, I need to add this back...
+    // expect(response.header["set-cookie"][0].includes(refreshToken)).toBeFalsy();
+    expect(response.body.success).toBe(true);
+    expect(response.body.accessToken).toMatch(/[a-zA-Z\d]+.[a-zA-Z\d]+.[a-zA-Z\d]+/);
+  });
 
-    test("missing token (jid) fails", async () => {
-        // arrange
-        const app = await application(container);
+  test("missing token (jid) fails", async () => {
+    // arrange
+    const app = await application(container);
 
-        // act
-        const response = await request(app)
-            .post("/auth/refresh_token")
-            .expect(401)
-            .expect("Content-Type", /json/);
+    // act
+    const response = await request(app)
+      .post("/auth/refresh_token")
+      .expect(401)
+      .expect("Content-Type", /json/);
 
-        // assert
-        expect(response.header["set-cookie"]).toBeUndefined();
-        expect(response.body.success).toBe(false);
-        expect(response.body.accessToken).toBe("");
-    });
+    // assert
+    expect(response.header["set-cookie"]).toBeUndefined();
+    expect(response.body.success).toBe(false);
+    expect(response.body.accessToken).toBe("");
+  });
 
-    test("invalid token (jid) fails", async () => {
-        const app = await application(container);
+  test("invalid token (jid) fails", async () => {
+    const app = await application(container);
 
-        // arrange
-        const invalidToken = "invalid-token";
+    // arrange
+    const invalidToken = "invalid-token";
 
-        // act
-        const response = await request(app)
-            .post("/auth/refresh_token")
-            .expect(401)
-            .set("Cookie", [`jid=${invalidToken}`])
-            .expect("Content-Type", /json/);
+    // act
+    const response = await request(app)
+      .post("/auth/refresh_token")
+      .expect(401)
+      .set("Cookie", [`jid=${invalidToken}`])
+      .expect("Content-Type", /json/);
 
-        // assert
-        expect(response.header["set-cookie"]).toBeUndefined();
-        expect(response.body.success).toBe(false);
-        expect(response.body.accessToken).toBe("");
-    });
+    // assert
+    expect(response.header["set-cookie"]).toBeUndefined();
+    expect(response.body.success).toBe(false);
+    expect(response.body.accessToken).toBe("");
+  });
 });

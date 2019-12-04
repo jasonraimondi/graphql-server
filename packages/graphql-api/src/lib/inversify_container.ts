@@ -19,46 +19,40 @@ import { UserResolver } from "@/modules/user/user_resolver";
 import { RepositoryFactory } from "@/lib/repository/repository_factory";
 
 export class Container extends InversifyContainer {
-    public constructor(
-        protected readonly repositoryFactory: RepositoryFactory,
-        protected readonly serviceFactory: ServiceFactory,
-        containerOptions?: interfaces.ContainerOptions
-    ) {
-        super(containerOptions);
-        this.bindContainer();
-    }
+  public constructor(
+    protected readonly repositoryFactory: RepositoryFactory,
+    protected readonly serviceFactory: ServiceFactory,
+    containerOptions?: interfaces.ContainerOptions
+  ) {
+    super(containerOptions);
+    this.bindContainer();
+  }
 
-    protected bindContainer(): void {
-        // app resolvers
-        this.bind(AppResolver).toSelf();
-        this.bind(AuthResolver).toSelf();
-        this.bind(ForgotPasswordResolver).toSelf();
-        this.bind(MeResolver).toSelf();
-        this.bind(RegisterResolver).toSelf();
-        this.bind(EmailConfirmationResolver).toSelf();
-        this.bind(UserResolver).toSelf();
+  protected bindContainer(): void {
+    // app resolvers
+    this.bind(AppResolver).toSelf();
+    this.bind(AuthResolver).toSelf();
+    this.bind(ForgotPasswordResolver).toSelf();
+    this.bind(MeResolver).toSelf();
+    this.bind(RegisterResolver).toSelf();
+    this.bind(EmailConfirmationResolver).toSelf();
+    this.bind(UserResolver).toSelf();
 
-        // services
-        this.bind<IMailer>(SERVICE.Mailer).toConstantValue(
-            this.serviceFactory.emailService
-        );
-        this.bind<AuthService>(SERVICE.AuthService).to(AuthService);
+    // services
+    this.bind<IMailer>(SERVICE.Mailer).toConstantValue(this.serviceFactory.emailService);
+    this.bind<AuthService>(SERVICE.AuthService).to(AuthService);
 
-        // emails
-        this.bind<ForgotPasswordEmail>(SERVICE.ForgotPasswordEmail).to(
-            ForgotPasswordEmail
-        );
-        this.bind<RegisterEmail>(SERVICE.RegisterEmail).to(RegisterEmail);
+    // emails
+    this.bind<ForgotPasswordEmail>(SERVICE.ForgotPasswordEmail).to(ForgotPasswordEmail);
+    this.bind<RegisterEmail>(SERVICE.RegisterEmail).to(RegisterEmail);
 
-        // repositories
-        this.bind<IForgotPasswordRepository>(
-            REPOSITORY.ForgotPasswordRepository
-        ).toConstantValue(this.repositoryFactory.forgotPassword);
-        this.bind<IUserRepository>(REPOSITORY.UserRepository).toConstantValue(
-            this.repositoryFactory.user
-        );
-        this.bind<IEmailConfirmationRepository>(
-            REPOSITORY.EmailConfirmationRepository
-        ).toConstantValue(this.repositoryFactory.emailConfirmation);
-    }
+    // repositories
+    this.bind<IForgotPasswordRepository>(REPOSITORY.ForgotPasswordRepository).toConstantValue(
+      this.repositoryFactory.forgotPassword
+    );
+    this.bind<IUserRepository>(REPOSITORY.UserRepository).toConstantValue(this.repositoryFactory.user);
+    this.bind<IEmailConfirmationRepository>(REPOSITORY.EmailConfirmationRepository).toConstantValue(
+      this.repositoryFactory.emailConfirmation
+    );
+  }
 }

@@ -5,46 +5,38 @@ import { Button, Label } from "@/app/components/forms/elements";
 import { validEmail } from "@/app/pages/register";
 
 export type ForgotPasswordFormData = {
-    email: string;
+  email: string;
 };
 
 type Props = {
-    handleSubmit: any;
+  handleSubmit: any;
 };
 
 export const ForgotPasswordForm = ({ handleSubmit }: Props) => {
-    const handleValidate = (values: ForgotPasswordFormData) => {
-        let errors: any = {};
-        if (!values.email) {
-            errors.email = "Required";
-        } else if (!validEmail.test(values.email)) {
-            errors.email = "Invalid email address";
-        }
-        return errors;
-    };
+  const handleValidate = (values: ForgotPasswordFormData) => {
+    let errors: any = {};
+    if (!values.email) {
+      errors.email = "Required";
+    } else if (!validEmail.test(values.email)) {
+      errors.email = "Invalid email address";
+    }
+    return errors;
+  };
 
-    return (
-        <Formik<ForgotPasswordFormData>
-            initialValues={{ email: "" }}
-            validate={handleValidate}
-            onSubmit={handleSubmit}
-        >
-            {({ isSubmitting }) => (
-                <Form id="forgot-password-form">
-                    <Label id="forgot-password-form--email">
-                        <span>Email</span>
-                        <Field
-                            type="email"
-                            name="email"
-                            placeholder="john.doe@example.com"
-                        />
-                        <ErrorMessage name="email" component="div" />
-                    </Label>
-                    <Button type="submit" disabled={isSubmitting}>
-                        <span>Submit</span>
-                    </Button>
-                </Form>
-            )}
-        </Formik>
-    );
+  return (
+    <Formik<ForgotPasswordFormData> initialValues={{ email: "" }} validate={handleValidate} onSubmit={handleSubmit}>
+      {({ isSubmitting }) => (
+        <Form id="forgot-password-form">
+          <Label id="forgot-password-form--email">
+            <span>Email</span>
+            <Field type="email" name="email" placeholder="john.doe@example.com" />
+            <ErrorMessage name="email" component="div" />
+          </Label>
+          <Button type="submit" disabled={isSubmitting}>
+            <span>Submit</span>
+          </Button>
+        </Form>
+      )}
+    </Formik>
+  );
 };

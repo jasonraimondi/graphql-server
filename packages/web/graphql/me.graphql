@@ -1,7 +1,7 @@
 query Me {
-    me {
-        uuid
-        name
-        email
-    }
+  me {
+    uuid
+    name
+    email
+  }
 }

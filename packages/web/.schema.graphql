@@ -4,101 +4,101 @@
 # -----------------------------------------------
 
 type AppInfoResponse {
-    name: String!
-    version: String!
-    author: String!
-    license: String!
+  name: String!
+  version: String!
+  author: String!
+  license: String!
 }
 
 # The javascript `Date` as string. Type represents date and time as the ISO Date string.
 scalar DateTime
 
 type EmailConfirmation {
-    uuid: ID!
-    user: User!
-    expiresAt: DateTime!
+  uuid: ID!
+  user: User!
+  expiresAt: DateTime!
 }
 
 type ForgotPassword {
-    uuid: ID!
-    user: User!
-    expiresAt: DateTime!
+  uuid: ID!
+  user: User!
+  expiresAt: DateTime!
 }
 
 input LoginInput {
-    email: String!
-    password: String!
+  email: String!
+  password: String!
 }
 
 type LoginResponse {
-    accessToken: String!
-    user: User!
+  accessToken: String!
+  user: User!
 }
 
 type Mutation {
-    validateForgotPasswordToken(email: String!, token: String!): Boolean!
-    sendForgotPasswordEmail(data: SendForgotPasswordInput!): Boolean!
-    updatePasswordFromToken(data: UpdatePasswordInput!): Boolean!
-    verifyEmailConfirmation(data: VerifyEmailInput!): Boolean!
-    resentConfirmEmail(email: String!): Boolean!
-    register(data: RegisterInput!): RegisterResponse!
-    login(data: LoginInput!): LoginResponse!
-    logout: Boolean!
-    revokeRefreshToken(userId: String!): Boolean!
+  validateForgotPasswordToken(email: String!, token: String!): Boolean!
+  sendForgotPasswordEmail(data: SendForgotPasswordInput!): Boolean!
+  updatePasswordFromToken(data: UpdatePasswordInput!): Boolean!
+  verifyEmailConfirmation(data: VerifyEmailInput!): Boolean!
+  resentConfirmEmail(email: String!): Boolean!
+  register(data: RegisterInput!): RegisterResponse!
+  login(data: LoginInput!): LoginResponse!
+  logout: Boolean!
+  revokeRefreshToken(userId: String!): Boolean!
 }
 
 type Permission {
-    id: ID!
-    name: String!
+  id: ID!
+  name: String!
 }
 
 type Query {
-    info: AppInfoResponse!
-    me: User!
-    user(uuid: String!): User!
-    users: [User!]!
+  info: AppInfoResponse!
+  me: User!
+  user(uuid: String!): User!
+  users: [User!]!
 }
 
 input RegisterInput {
-    uuid: String
-    firstName: String
-    lastName: String
-    email: String!
-    password: String!
+  uuid: String
+  firstName: String
+  lastName: String
+  email: String!
+  password: String!
 }
 
 type RegisterResponse {
-    user: User
-    emailConfirmation: EmailConfirmation
+  user: User
+  emailConfirmation: EmailConfirmation
 }
 
 type Role {
-    id: ID!
-    name: String!
+  id: ID!
+  name: String!
 }
 
 input SendForgotPasswordInput {
-    email: String!
+  email: String!
 }
 
 input UpdatePasswordInput {
-    password: String!
-    token: String!
-    email: String!
+  password: String!
+  token: String!
+  email: String!
 }
 
 type User {
-    uuid: ID!
-    email: String!
-    firstName: String
-    lastName: String
-    isEmailConfirmed: Boolean!
-    lastLoginAt: DateTime
-    isActive: Boolean!
-    name: String
+  uuid: ID!
+  email: String!
+  firstName: String
+  lastName: String
+  isEmailConfirmed: Boolean!
+  lastLoginAt: DateTime
+  isActive: Boolean!
+  name: String
 }
 
 input VerifyEmailInput {
-    email: String!
-    uuid: String!
+  email: String!
+  uuid: String!
 }

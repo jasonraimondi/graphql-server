@@ -8,8 +8,8 @@ const { author, license, name, version } = require("../../../package.json");
 @injectable()
 @Resolver()
 export class AppResolver {
-    @Query(() => AppInfoResponse!)
-    info() {
-        return { name, author, version, license };
-    }
+  @Query(() => AppInfoResponse!)
+  info() {
+    return { name, author, version, license };
+  }
 }

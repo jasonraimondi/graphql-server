@@ -3,22 +3,22 @@ import { IsEmail, Length } from "class-validator";
 
 @InputType()
 export class SendForgotPasswordInput {
-    @Field()
-    @IsEmail()
-    email: string;
+  @Field()
+  @IsEmail()
+  email: string;
 }
 
 @InputType()
 export class UpdatePasswordInput {
-    @Field()
-    @Length(5)
-    password: string;
+  @Field()
+  @Length(5)
+  password: string;
 
-    @Field()
-    // @IsUUID("4")
-    token: string;
+  @Field()
+  // @IsUUID("4")
+  token: string;
 
-    @Field()
-    @IsEmail()
-    email: string;
+  @Field()
+  @IsEmail()
+  email: string;
 }

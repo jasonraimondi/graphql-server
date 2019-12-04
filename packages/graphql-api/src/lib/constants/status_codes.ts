@@ -1,3 +1,3 @@
 export const STATUS_CODES = {
-    Unauthorized: 401,
+  Unauthorized: 401,
 };

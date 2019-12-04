@@ -8,22 +8,22 @@ import { destroyAccessToken } from "@/app/lib/auth";
 import { Redirect } from "@/app/lib/redirect";
 
 const Logout: NextPage = () => {
-    const [logout, { client }] = useLogoutMutation();
+  const [logout, { client }] = useLogoutMutation();
 
-    const handleLogout = async () => {
-        await logout();
-        await client!.resetStore();
-        destroyAccessToken();
-        await Redirect("/login");
-    };
+  const handleLogout = async () => {
+    await logout();
+    await client!.resetStore();
+    destroyAccessToken();
+    await Redirect("/login");
+  };
 
-    useEffect(() => {
-        handleLogout().catch(e => console.error(e));
-    }, []);
+  useEffect(() => {
+    handleLogout().catch(e => console.error(e));
+  }, []);
 
-    return <h1>Logging Out...</h1>;
+  return <h1>Logging Out...</h1>;
 };
 
 export default withLayout(withApollo(Logout), {
-    title: "Logout Page",
+  title: "Logout Page",
 });

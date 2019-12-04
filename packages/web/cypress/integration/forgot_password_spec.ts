@@ -7,10 +7,12 @@ describe("Forgot Password Page", () => {
     cy.visit("http://localhost:3000/login");
     cy.get("#forgot-password-link").click();
 
-    cy.location().should((loc) => {
+    cy.location().should(loc => {
       expect(loc.href).to.eq("http://localhost:3000/forgot_password");
     });
-    cy.get("#forgot-password-form--email").click().type("jason@raimondi.us");
+    cy.get("#forgot-password-form--email")
+      .click()
+      .type("jason@raimondi.us");
 
     cy.get(`#forgot-password-form`).submit();
 

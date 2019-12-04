@@ -8,18 +8,18 @@ import { REPOSITORY } from "@/lib/constants/inversify";
 @injectable()
 @Resolver()
 export class UserResolver {
-    constructor(
-        @inject(REPOSITORY.UserRepository)
-        private userRepository: IUserRepository,
-    ) {}
+  constructor(
+    @inject(REPOSITORY.UserRepository)
+    private userRepository: IUserRepository
+  ) {}
 
-    @Query(() => User)
-    async user(@Arg("uuid") uuid: string) {
-        return await this.userRepository.findById(uuid);
-    }
+  @Query(() => User)
+  async user(@Arg("uuid") uuid: string) {
+    return await this.userRepository.findById(uuid);
+  }
 
-    @Query(() => [User])
-    users() {
-        return this.userRepository.find();
-    }
+  @Query(() => [User])
+  users() {
+    return this.userRepository.find();
+  }
 }

@@ -11,69 +11,59 @@ import { IUserRepository } from "../../lib/repository/user/user_repository";
 import { mockRequest, mockResponse } from "../../../test/mock_application";
 
 describe("me resolver", () => {
-    const entities = [
-        User,
-        Role,
-        Permission,
-        ForgotPassword,
-        EmailConfirmation,
-    ];
+  const entities = [User, Role, Permission, ForgotPassword, EmailConfirmation];
 
-    let container: TestingContainer;
-    let context: MyContext;
-    let resolver: MeResolver;
+  let container: TestingContainer;
+  let context: MyContext;
+  let resolver: MeResolver;
 
-    beforeEach(async () => {
-        container = await TestingContainer.create(entities);
-        context = {
-            req: mockRequest(),
-            res: mockResponse(),
-            container,
-        };
-        resolver = container.get(MeResolver);
-    });
+  beforeEach(async () => {
+    container = await TestingContainer.create(entities);
+    context = {
+      req: mockRequest(),
+      res: mockResponse(),
+      container,
+    };
+    resolver = container.get(MeResolver);
+  });
 
-    test("successfully returns user response", async () => {
-        const userRepository = container.get<IUserRepository>(
-            REPOSITORY.UserRepository,
-        );
-        const user = await User.create({ email: "jason@raimondi.us" });
-        await userRepository.save(user);
+  test("successfully returns user response", async () => {
+    const userRepository = container.get<IUserRepository>(REPOSITORY.UserRepository);
+    const user = await User.create({ email: "jason@raimondi.us" });
+    await userRepository.save(user);
 
-        context = {
-            req: mockRequest(),
-            res: mockResponse(),
-            container,
-            auth: {
-                userId: user.uuid,
-                email: user.email,
-                isEmailConfirmed: user.isEmailConfirmed,
-            },
-        };
+    context = {
+      req: mockRequest(),
+      res: mockResponse(),
+      container,
+      auth: {
+        userId: user.uuid,
+        email: user.email,
+        isEmailConfirmed: user.isEmailConfirmed,
+      },
+    };
 
-        // act
-        const result: User | null = await resolver.me(context);
+    // act
+    const result: User | null = await resolver.me(context);
 
-        // assert
-        expect(result).toBeTruthy();
-        expect(result!.uuid).toBe(user.uuid);
-        expect(result!.email).toBe(user.email);
-        expect(result!.isEmailConfirmed).toBe(user.isEmailConfirmed);
-    });
+    // assert
+    expect(result).toBeTruthy();
+    expect(result!.uuid).toBe(user.uuid);
+    expect(result!.email).toBe(user.email);
+    expect(result!.isEmailConfirmed).toBe(user.isEmailConfirmed);
+  });
 
-    test("blank authorization throws", async () => {
-        context = {
-            req: mockRequest(),
-            res: mockResponse(),
-            container,
-        };
+  test("blank authorization throws", async () => {
+    context = {
+      req: mockRequest(),
+      res: mockResponse(),
+      container,
+    };
 
-        // act
-        const result = resolver.me(context);
+    // act
+    const result = resolver.me(context);
 
-        // assert
-        await expect(result).rejects.toThrowError(
-            /Cannot read property 'userId' of undefined/,
-        );
-    });
+    // assert
+    await expect(result).rejects.toThrowError(/Cannot read property 'userId' of undefined/);
+  });
 });

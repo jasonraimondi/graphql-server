@@ -3,20 +3,17 @@ import jwtDecode from "jwt-decode";
 export type DecodedRefreshToken = {
   readonly exp: number;
   readonly userId?: string;
-}
+};
 
 export class RefreshToken {
   readonly decoded: DecodedRefreshToken;
 
-  constructor(
-    public readonly token: string = "",
-  ) {
+  constructor(public readonly token: string = "") {
     this.decoded = { exp: 0 };
 
     try {
       if (token) this.decoded = jwtDecode(token);
-    } catch (e) {
-    }
+    } catch (e) {}
   }
 
   get expiresAt(): Date {

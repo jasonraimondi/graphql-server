@@ -11,45 +11,42 @@ import { LoginInput } from "@/modules/user/auth/login_input";
 @injectable()
 @Resolver()
 export class AuthResolver {
-    constructor(
-        @inject(REPOSITORY.UserRepository)
-        private userRepository: IUserRepository,
-        @inject(SERVICE.AuthService) private authService: AuthService,
-    ) {}
+  constructor(
+    @inject(REPOSITORY.UserRepository)
+    private userRepository: IUserRepository,
+    @inject(SERVICE.AuthService) private authService: AuthService
+  ) {}
 
-    @Mutation(() => LoginResponse)
-    async login(
-        @Arg("data") { email, password }: LoginInput,
-        @Ctx() { res }: MyContext,
-    ): Promise<LoginResponse> {
-        const user = await this.userRepository.findByEmail(email);
+  @Mutation(() => LoginResponse)
+  async login(@Arg("data") { email, password }: LoginInput, @Ctx() { res }: MyContext): Promise<LoginResponse> {
+    const user = await this.userRepository.findByEmail(email);
 
-        await user.verify(password);
+    await user.verify(password);
 
-        this.authService.sendRefreshToken(res, user);
+    this.authService.sendRefreshToken(res, user);
 
-        await this.userRepository.incrementLastLoginAt(user);
+    await this.userRepository.incrementLastLoginAt(user);
 
-        return {
-            accessToken: this.authService.createAccessToken(user),
-            user,
-        };
+    return {
+      accessToken: this.authService.createAccessToken(user),
+      user,
+    };
+  }
+
+  @Mutation(() => Boolean)
+  async logout(@Ctx() { res }: MyContext) {
+    this.authService.sendRefreshToken(res, undefined);
+    return true;
+  }
+
+  @Mutation(() => Boolean)
+  async revokeRefreshToken(@Arg("userId", () => String) userId: string) {
+    try {
+      await this.userRepository.findById(userId);
+      await this.userRepository.incrementToken(userId);
+      return true;
+    } catch {
+      return false;
     }
-
-    @Mutation(() => Boolean)
-    async logout(@Ctx() { res }: MyContext) {
-        this.authService.sendRefreshToken(res, undefined);
-        return true;
-    }
-
-    @Mutation(() => Boolean)
-    async revokeRefreshToken(@Arg("userId", () => String) userId: string) {
-        try {
-            await this.userRepository.findById(userId);
-            await this.userRepository.incrementToken(userId);
-            return true;
-        } catch {
-            return false;
-        }
-    }
+  }
 }

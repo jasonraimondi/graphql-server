@@ -6,18 +6,17 @@ export type DecodedAccessToken = DeprecatedAuth & {
   readonly exp: number;
   readonly isEmailConfirmed?: boolean;
   readonly userId?: string;
-}
+};
 
 export class AccessToken {
   readonly decoded: DecodedAccessToken;
 
-  constructor(public readonly token?: string,) {
+  constructor(public readonly token?: string) {
     this.decoded = { exp: 0 };
 
     try {
       if (token) this.decoded = jwtDecode(token);
-    } catch (e) {
-    }
+    } catch (e) {}
   }
 
   get expiresAt(): Date {

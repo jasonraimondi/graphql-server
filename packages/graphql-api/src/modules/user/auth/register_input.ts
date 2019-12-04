@@ -3,19 +3,19 @@ import { IsEmail } from "class-validator";
 
 @InputType()
 export class RegisterInput {
-    @Field({ nullable: true })
-    uuid?: string;
+  @Field({ nullable: true })
+  uuid?: string;
 
-    @Field({ nullable: true })
-    firstName?: string;
+  @Field({ nullable: true })
+  firstName?: string;
 
-    @Field({ nullable: true })
-    lastName?: string;
+  @Field({ nullable: true })
+  lastName?: string;
 
-    @Field()
-    @IsEmail()
-    email: string;
+  @Field()
+  @IsEmail()
+  email: string;
 
-    @Field()
-    password: string;
+  @Field()
+  password: string;
 }

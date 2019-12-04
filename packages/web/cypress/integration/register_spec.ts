@@ -5,11 +5,19 @@ describe("Register Page", () => {
 
   it("register", () => {
     cy.visit("http://localhost:3000/register");
-    cy.get("#register-form--email").click().type("jason3@raimondi.us");
+    cy.get("#register-form--email")
+      .click()
+      .type("jason3@raimondi.us");
     // cy.get("#register-form--email input").click().clear();
-    cy.get("#register-form--password").click().type("jasonraimondi");
-    cy.get("#register-form--first").click().type("Jason");
-    cy.get("#register-form--last").click().type("Raimondi");
+    cy.get("#register-form--password")
+      .click()
+      .type("jasonraimondi");
+    cy.get("#register-form--first")
+      .click()
+      .type("Jason");
+    cy.get("#register-form--last")
+      .click()
+      .type("Raimondi");
 
     cy.get("#register-form").submit();
 
@@ -21,6 +29,5 @@ describe("Register Page", () => {
       console.log(res.body.items[0].Raw.Data);
       expect(res.body.total).to.eq(1);
     });
-
   });
 });

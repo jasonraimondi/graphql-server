@@ -1,13 +1,13 @@
 mutation Register($data: RegisterInput!) {
-    register(data: $data) {
-        user {
-            uuid
-            name
-            email
-        }
-        emailConfirmation {
-            uuid
-            expiresAt
-        }
+  register(data: $data) {
+    user {
+      uuid
+      name
+      email
     }
+    emailConfirmation {
+      uuid
+      expiresAt
+    }
+  }
 }

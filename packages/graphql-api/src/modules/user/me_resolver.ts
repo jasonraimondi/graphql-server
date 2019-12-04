@@ -10,14 +10,14 @@ import { IUserRepository } from "@/lib/repository/user/user_repository";
 @injectable()
 @Resolver()
 export class MeResolver {
-    constructor(
-        @inject(REPOSITORY.UserRepository)
-        private userRepository: IUserRepository,
-    ) {}
+  constructor(
+    @inject(REPOSITORY.UserRepository)
+    private userRepository: IUserRepository
+  ) {}
 
-    @Query(() => User)
-    @UseMiddleware(isAuth)
-    async me(@Ctx() { auth }: MyContext) {
-        return await this.userRepository.findById(auth!.userId);
-    }
+  @Query(() => User)
+  @UseMiddleware(isAuth)
+  async me(@Ctx() { auth }: MyContext) {
+    return await this.userRepository.findById(auth!.userId);
+  }
 }
