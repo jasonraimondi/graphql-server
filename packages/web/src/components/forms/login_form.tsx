@@ -31,13 +31,13 @@ export const LoginForm = ({ handleSubmit }: Props) => {
       onSubmit={handleSubmit}
     >
       {({ isSubmitting }) => (
-        <Form id="login-form">
-          <Label id="login-form--email">
+        <Form data-test="login-form">
+          <Label data-test="email">
             <span>Email</span>
             <Field type="email" name="email" placeholder="john.doe@example.com" />
-            <ErrorMessage name="email" component="div" />
+            <ErrorMessage data-test="email-error" name="email" component="div" />
           </Label>
-          <Label id="login-form--password">
+          <Label data-test="password">
             <span>Password</span>
             <Field type="password" name="password" placeholder="******" />
             <br />
@@ -46,7 +46,7 @@ export const LoginForm = ({ handleSubmit }: Props) => {
                 Forgot Password?
               </a>
             </Link>
-            <ErrorMessage name="password" component="div" />
+            <ErrorMessage data-test="password-error" name="password" component="div" />
           </Label>
           <Button type="submit" disabled={isSubmitting}>
             <span>Submit</span>

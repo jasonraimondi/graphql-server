@@ -3,16 +3,24 @@ describe("Login Page", () => {
     cy.request("DELETE", "http://localhost:8025/api/v1/messages");
   });
 
-  it("login", () => {
+  it("show invalid email message", () => {
     cy.visit("http://localhost:3000/login?redirectTo=/dashboard");
-    cy.get("#login-form--email")
+    cy.get("[data-test=email]")
       .click()
-      .type("jason2@raimondi.us");
-    cy.get("#login-form--password")
+      .type("jason4@raimondi")
+      .contains("Invalid email");
+  });
+
+  it("login success", () => {
+    cy.visit("http://localhost:3000/login?redirectTo=/dashboard");
+    cy.get("[data-test=email]")
+      .click()
+      .type("jason4@raimondi.us");
+    cy.get("[data-test=password]")
       .click()
       .type("jasonraimondi");
 
-    cy.get("#login-form").submit();
+    cy.get("[data-test=login-form]").submit();
 
     cy.location().should(loc => {
       expect(loc.href).to.eq("http://localhost:3000/dashboard");

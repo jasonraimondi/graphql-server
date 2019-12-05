@@ -20,17 +20,23 @@ const LoginPage: NextPage<Props> = ({
 }) => {
   const [login] = useLoginMutation();
 
-  const handleSubmit = async (data: LoginFormData, { setSubmitting }: FormikHelpers<LoginFormData>) => {
-    const response = await login({
-      variables: { data },
-    });
-    if (response && response.data) {
-      setAccessToken(response.data.login.accessToken);
+  const handleSubmit = async (data: LoginFormData, { setSubmitting, setStatus }: FormikHelpers<LoginFormData>) => {
+    console.log("hello jason");
+
+    try {
+      const response = await login({
+        variables: { data },
+      });
+      if (response && response.data) {
+        setAccessToken(response.data.login.accessToken);
+      }
+      setSubmitting(false);
+      if (!redirectTo || redirectTo.includes("/login")) redirectTo = "/dashboard";
+      if (Array.isArray(redirectTo)) redirectTo = redirectTo[0];
+      await Redirect(redirectTo);
+    } catch (e) {
+      setStatus(e.message);
     }
-    setSubmitting(false);
-    if (!redirectTo || redirectTo.includes("/login")) redirectTo = "/dashboard";
-    if (Array.isArray(redirectTo)) redirectTo = redirectTo[0];
-    await Redirect(redirectTo);
   };
 
   return (

@@ -5,10 +5,10 @@ describe("Register Page", () => {
 
   it("register", () => {
     cy.visit("http://localhost:3000/register");
+
     cy.get("#register-form--email")
       .click()
-      .type("jason3@raimondi.us");
-    // cy.get("#register-form--email input").click().clear();
+      .type("jason4@raimondi.us");
     cy.get("#register-form--password")
       .click()
       .type("jasonraimondi");
