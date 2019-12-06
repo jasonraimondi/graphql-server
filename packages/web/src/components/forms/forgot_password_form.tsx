@@ -26,8 +26,8 @@ export const ForgotPasswordForm = ({ handleSubmit }: Props) => {
   return (
     <Formik<ForgotPasswordFormData> initialValues={{ email: "" }} validate={handleValidate} onSubmit={handleSubmit}>
       {({ isSubmitting }) => (
-        <Form id="forgot-password-form">
-          <Label id="forgot-password-form--email">
+        <Form data-test="forgot-password-form">
+          <Label data-test="forgot-password-form--email">
             <span>Email</span>
             <Field type="email" name="email" placeholder="john.doe@example.com" />
             <ErrorMessage name="email" component="div" />

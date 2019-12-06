@@ -5,16 +5,18 @@ describe("Forgot Password Page", () => {
 
   it("forgot password", () => {
     cy.visit("http://localhost:3000/login");
-    cy.get("#forgot-password-link").click();
+    cy.dataTest("forgot-password-link").click();
 
     cy.location().should(loc => {
       expect(loc.href).to.eq("http://localhost:3000/forgot_password");
     });
-    cy.get("#forgot-password-form--email")
-      .click()
-      .type("jason@raimondi.us");
+    const email = cy.faker.internet.email();
 
-    cy.get(`#forgot-password-form`).submit();
+    cy.dataTest("forgot-password-form--email")
+      .click()
+      .type(email);
+
+    cy.dataTest("forgot-password-form-form").submit();
 
     cy.location().should(loc => {
       expect(loc.href).to.eq("http://localhost:3000/");

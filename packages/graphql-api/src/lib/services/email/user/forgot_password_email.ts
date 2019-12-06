@@ -24,7 +24,7 @@ export class ForgotPasswordEmail {
     await this.mailer.send({
       to: user.email,
       from: "noreply@example.com",
-      subject: `Forgot your password${user.firstName ? " " + user.firstName : null}?`,
+      subject: `Forgot your password?`,
       text,
       html,
     });

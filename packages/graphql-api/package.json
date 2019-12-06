@@ -26,6 +26,7 @@
     "immer": "^4.0.2",
     "inversify": "^5.0.1",
     "inversify-express-utils": "^6.3.2",
+    "isomorphic-unfetch": "^3.0.0",
     "jsonwebtoken": "^8.5.1",
     "module-alias": "^2.2.2",
     "nodemailer": "^6.3.1",

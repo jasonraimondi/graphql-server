@@ -3,8 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="166bc532-c0ed-4e14-94b6-924e116089d0" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/web/cypress/integration/login_spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/web/cypress/integration/login_spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/web/cypress/integration/register_spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/web/cypress/integration/register_spec.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/web/src/pages/login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/packages/web/src/pages/login.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,7 +66,7 @@
       <recent name="$PROJECT_DIR$/src/lib" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.dev">
+  <component name="RunManager" selected="npm.cypress:open">
     <configuration name="cypress:open" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/packages/web/package.json" />
       <command value="run" />
@@ -120,8 +119,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.dev" />
         <item itemvalue="npm.cypress:open" />
+        <item itemvalue="npm.dev" />
         <item itemvalue="npm.pretty" />
         <item itemvalue="npm.gen" />
         <item itemvalue="npm.gen (1)" />
@@ -185,6 +184,8 @@
       <workItem from="1575483882801" duration="650000" />
       <workItem from="1575495326167" duration="238000" />
       <workItem from="1575503492148" duration="1181000" />
+      <workItem from="1575572583228" duration="939000" />
+      <workItem from="1575581155915" duration="26000" />
     </task>
     <servers />
   </component>
@@ -218,28 +219,32 @@
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="423" y="135" key="CommitChangelistDialog2/0.23.1680.1027@0.23.1680.1027" timestamp="1575353828339" />
-    <state width="1638" height="367" key="GridCell.Tab.0.bottom" timestamp="1575504719066">
-      <screen x="0" y="23" width="1680" height="1027" />
+    <state width="1434" height="303" key="GridCell.Tab.0.bottom" timestamp="1575574058131">
+      <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state width="1638" height="367" key="GridCell.Tab.0.bottom/0.23.1680.1027@0.23.1680.1027" timestamp="1575504719066" />
+    <state width="1434" height="303" key="GridCell.Tab.0.bottom/0.23.1920.1057/1920.203.1440.877@0.23.1920.1057" timestamp="1575574058131" />
     <state width="1238" height="239" key="GridCell.Tab.0.bottom/0.23.1920.1057@0.23.1920.1057" timestamp="1575495570160" />
     <state width="1894" height="593" key="GridCell.Tab.0.bottom/0.23.2560.1417/2560.563.1440.877@0.23.2560.1417" timestamp="1575426558622" />
-    <state width="1638" height="367" key="GridCell.Tab.0.center" timestamp="1575504719063">
-      <screen x="0" y="23" width="1680" height="1027" />
+    <state width="1434" height="303" key="GridCell.Tab.0.center" timestamp="1575574058130">
+      <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state width="1638" height="367" key="GridCell.Tab.0.center/0.23.1680.1027@0.23.1680.1027" timestamp="1575504719063" />
+    <state width="1434" height="303" key="GridCell.Tab.0.center/0.23.1920.1057/1920.203.1440.877@0.23.1920.1057" timestamp="1575574058130" />
     <state width="1238" height="239" key="GridCell.Tab.0.center/0.23.1920.1057@0.23.1920.1057" timestamp="1575495570158" />
     <state width="1894" height="593" key="GridCell.Tab.0.center/0.23.2560.1417/2560.563.1440.877@0.23.2560.1417" timestamp="1575426558621" />
-    <state width="1638" height="367" key="GridCell.Tab.0.left" timestamp="1575504719054">
-      <screen x="0" y="23" width="1680" height="1027" />
+    <state width="1434" height="303" key="GridCell.Tab.0.left" timestamp="1575574058129">
+      <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state width="1638" height="367" key="GridCell.Tab.0.left/0.23.1680.1027@0.23.1680.1027" timestamp="1575504719054" />
+    <state width="1434" height="303" key="GridCell.Tab.0.left/0.23.1920.1057/1920.203.1440.877@0.23.1920.1057" timestamp="1575574058129" />
     <state width="1238" height="239" key="GridCell.Tab.0.left/0.23.1920.1057@0.23.1920.1057" timestamp="1575495570157" />
     <state width="1894" height="593" key="GridCell.Tab.0.left/0.23.2560.1417/2560.563.1440.877@0.23.2560.1417" timestamp="1575426558621" />
-    <state width="1638" height="367" key="GridCell.Tab.0.right" timestamp="1575504719064">
-      <screen x="0" y="23" width="1680" height="1027" />
+    <state width="1434" height="303" key="GridCell.Tab.0.right" timestamp="1575574058131">
+      <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state width="1638" height="367" key="GridCell.Tab.0.right/0.23.1680.1027@0.23.1680.1027" timestamp="1575504719064" />
+    <state width="1434" height="303" key="GridCell.Tab.0.right/0.23.1920.1057/1920.203.1440.877@0.23.1920.1057" timestamp="1575574058131" />
     <state width="1238" height="239" key="GridCell.Tab.0.right/0.23.1920.1057@0.23.1920.1057" timestamp="1575495570159" />
     <state width="1894" height="593" key="GridCell.Tab.0.right/0.23.2560.1417/2560.563.1440.877@0.23.2560.1417" timestamp="1575426558622" />
     <state width="1078" height="344" key="GridCell.Tab.1.bottom" timestamp="1575480853969">

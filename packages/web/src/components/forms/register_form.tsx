@@ -28,24 +28,24 @@ export const RegisterForm = ({ handleSubmit }: Props) => {
   return (
     <Formik<RegisterFormData> initialValues={initialFormValues} validate={handleValidate} onSubmit={handleSubmit}>
       {({ status, isSubmitting }) => (
-        <Form id="register-form">
+        <Form data-test="register-form">
           {status}
-          <Label id="register-form--email">
+          <Label data-test="register-form--email">
             <span>Email</span>
             <Field type="email" name="email" placeholder="john.doe@example.com" />
             <ErrorMessage name="email" component="div" />
           </Label>
-          <Label id="register-form--password">
+          <Label data-test="register-form--password">
             <span>Password</span>
             <Field type="password" name="password" placeholder="**************" />
             <ErrorMessage name="password" component="div" />
           </Label>
-          <Label id="register-form--first">
+          <Label data-test="register-form--first">
             <span>First Name</span>
             <Field type="text" name="firstName" placeholder="John" />
             <ErrorMessage name="firstName" component="div" />
           </Label>
-          <Label id="register-form--last">
+          <Label data-test="register-form--last">
             <span>Last Name</span>
             <Field type="text" name="lastName" placeholder="Doe" />
             <ErrorMessage name="lastName" component="div" />

@@ -14,7 +14,7 @@ export class RegisterEmail {
     await this.emailService.send({
       to: user.email,
       from: "noreply@example.com",
-      subject: `Register user ${user.email}?`,
+      subject: `Register User Email`,
       text: url,
       html: `
             <a href="${url}">${url}</a>

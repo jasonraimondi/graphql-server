@@ -5,7 +5,7 @@ describe("Login Page", () => {
 
   it("show invalid email message", () => {
     cy.visit("http://localhost:3000/login?redirectTo=/dashboard");
-    cy.get("[data-test=email]")
+    cy.dataTest("login-form--email")
       .click()
       .type("jason4@raimondi")
       .contains("Invalid email");
@@ -13,14 +13,14 @@ describe("Login Page", () => {
 
   it("login success", () => {
     cy.visit("http://localhost:3000/login?redirectTo=/dashboard");
-    cy.get("[data-test=email]")
+    cy.dataTest("login-form--email")
       .click()
       .type("jason4@raimondi.us");
-    cy.get("[data-test=password]")
+    cy.dataTest("login-form--password")
       .click()
       .type("jasonraimondi");
 
-    cy.get("[data-test=login-form]").submit();
+    cy.dataTest("login-form").submit();
 
     cy.location().should(loc => {
       expect(loc.href).to.eq("http://localhost:3000/dashboard");

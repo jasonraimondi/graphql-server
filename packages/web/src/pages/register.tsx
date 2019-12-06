@@ -17,14 +17,18 @@ type RegisterFormData = {
 };
 
 const Register: NextPage<{}> = () => {
-  const [register, { called, loading }] = useRegisterMutation();
-  console.log({ called, loading });
+  const [register] = useRegisterMutation();
 
   const handleSubmit = async (
-    data: RegisterFormData,
+    registerFormData: RegisterFormData,
     { setSubmitting, setStatus }: FormikHelpers<RegisterFormData>
   ) => {
-    await register({ variables: { data } }).catch(e => setStatus(e.message.replace(/GraphQL error: /gi, "")));
+    try {
+      const res = await register({ variables: { data: registerFormData } });
+      console.log("register response page", res);
+    } catch (e) {
+      setStatus(e.message.replace(/GraphQL error: /gi, ""));
+    }
     setSubmitting(false);
   };
 
