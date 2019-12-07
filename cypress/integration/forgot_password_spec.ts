@@ -1,10 +1,10 @@
 describe("Forgot Password Page", () => {
-  beforeEach(() => {
-    cy.request("DELETE", "http://localhost:8025/api/v1/messages");
-  });
+  // beforeEach(() => {
+  //   cy.request("DELETE", "http://localhost:8025/api/v1/messages");
+  // });
 
   it("forgot password", () => {
-    cy.visit("http://localhost:3000/login");
+    cy.visit("/login");
     cy.dataTest("forgot-password-link").click();
 
     cy.location().should(loc => {

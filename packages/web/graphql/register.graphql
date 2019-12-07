@@ -10,3 +10,6 @@ mutation Register($data: RegisterInput!) {
     }
   }
 }
+mutation VerifyEmailConfirmation($data: VerifyEmailInput!) {
+  verifyEmailConfirmation(data: $data)
+}

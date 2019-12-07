@@ -4,20 +4,19 @@ Cypress.Commands.add("dataTest", tag => {
 });
 
 Cypress.Commands.add("getLastEmail", email => {
-  console.log({ email });
+  cy.wait(1500);
   return cy
     .request("GET", `http://localhost:8025/api/v2/search?kind=to&query=${decodeURIComponent(email)}`)
     .then(({ body: { items } }) => {
       const lastEmail = items[0];
-      console.log(lastEmail.Content.Body);
-
       if (lastEmail) {
+        const [to] = lastEmail.Content.Headers.To;
         return {
           subject: "empty something",
           body: lastEmail.Content.Body,
+          to,
         };
       }
-      return;
     });
 });
 

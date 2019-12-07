@@ -11,9 +11,7 @@ export class ForgotPasswordEmail {
   async send(forgotPassword: ForgotPassword): Promise<any> {
     const { uuid, user } = forgotPassword;
     const url = `http://localhost:3000/reset_password?e=${user.email}&u=${uuid}`;
-    const text = `
-            Here is the url: ${url}
-        `;
+    const text = url;
     const html = `
             <div>
                 <p>Forgot your password?</p>

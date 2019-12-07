@@ -1,10 +1,10 @@
 describe("Login Page", () => {
-  beforeEach(() => {
-    cy.request("DELETE", "http://localhost:8025/api/v1/messages");
-  });
+  // beforeEach(() => {
+  //   cy.request("DELETE", "http://localhost:8025/api/v1/messages");
+  // });
 
   it("show invalid email message", () => {
-    cy.visit("http://localhost:3000/login?redirectTo=/dashboard");
+    cy.visit("/login?redirectTo=/dashboard");
     cy.dataTest("login-form--email")
       .click()
       .type("jason4@raimondi")
@@ -12,14 +12,13 @@ describe("Login Page", () => {
   });
 
   it("login success", () => {
-    cy.visit("http://localhost:3000/login?redirectTo=/dashboard");
+    cy.visit("/login?redirectTo=/dashboard");
     cy.dataTest("login-form--email")
       .click()
       .type("jason4@raimondi.us");
     cy.dataTest("login-form--password")
       .click()
       .type("jasonraimondi");
-
     cy.dataTest("login-form").submit();
 
     cy.location().should(loc => {

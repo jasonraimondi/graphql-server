@@ -6,6 +6,8 @@ import { validEmail } from "@/app/pages/register";
 export type RegisterFormData = {
   email: string;
   password: string;
+  firstName: string;
+  lastName: string;
 };
 
 type Props = {
@@ -13,7 +15,7 @@ type Props = {
 };
 
 export const RegisterForm = ({ handleSubmit }: Props) => {
-  const initialFormValues: RegisterFormData = { email: "", password: "" };
+  const initialFormValues: RegisterFormData = { email: "", password: "", firstName: "", lastName: "" };
 
   const handleValidate = (values: RegisterFormData) => {
     let errors: any = {};

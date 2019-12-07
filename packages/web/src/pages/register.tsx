@@ -6,6 +6,7 @@ import { withApollo } from "@/app/lib/apollo_next";
 import { useRegisterMutation } from "@/generated/graphql";
 import { withLayout } from "@/app/components/layouts/layout";
 import { RegisterForm } from "@/app/components/forms/register_form";
+import { redirectToLogin } from "@/app/lib/auth";
 
 export const validEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 
@@ -30,6 +31,7 @@ const Register: NextPage<{}> = () => {
       setStatus(e.message.replace(/GraphQL error: /gi, ""));
     }
     setSubmitting(false);
+    await redirectToLogin(undefined, true);
   };
 
   return (
