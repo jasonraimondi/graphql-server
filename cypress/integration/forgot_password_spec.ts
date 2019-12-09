@@ -4,7 +4,7 @@ describe("Forgot Password Page", () => {
     cy.dataTest("forgot-password-link").click();
 
     cy.location().should(loc => {
-      expect(loc.href).to.eq("http://localhost:3000/forgot_password");
+      expect(loc.pathname).to.eq("/forgot_password");
     });
     const email = "jason@raimondi.us";
     cy.dataTest("forgot-password-form--email")
@@ -14,7 +14,7 @@ describe("Forgot Password Page", () => {
     cy.dataTest("forgot-password-form").submit();
 
     cy.location().should(loc => {
-      expect(loc.href).to.eq("http://localhost:3000/");
+      expect(loc.pathname).to.eq("/");
     });
 
     // cy.getLastEmail(email).then(res => {

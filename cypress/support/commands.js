@@ -24,7 +24,7 @@ Cypress.Commands.add("register", ({ email, password, first, last }) => {
   cy.dataTest("register-form").submit();
 
   cy.location().should(loc => {
-    expect(loc.href).to.eq("http://localhost:3000/login");
+    expect(loc.pathname).to.eq("/login");
   });
 });
 
@@ -39,20 +39,17 @@ Cypress.Commands.add("login", (email, password, redirectTo = "/dashboard") => {
   cy.dataTest("login-form").submit();
 
   cy.location().should(loc => {
-    expect(loc.href).to.eq(`http://localhost:3000${redirectTo}`);
+    expect(loc.href).to.eq(redirectTo);
   });
   cy.getCookie("jit").should("exist");
   cy.getCookie("jid").should("exist");
 });
 
 Cypress.Commands.add("getLastEmail", email => {
-  const url = `${Cypress.env("MAILER_URL")}/api/v2/search?kind=to&query=${decodeURIComponent(email)}`;
+  const url = `${Cypress.env("MAILER_HTTP_URL")}/api/v2/search?kind=to&query=${decodeURIComponent(email)}`;
   return cy
     .request("GET", url)
-    .then(res => {
-      const {
-        body: { items },
-      } = res;
+    .then(({ body: { items } }) => {
       const lastEmail = items[0];
 
       expect(lastEmail).not.to.be.undefined;

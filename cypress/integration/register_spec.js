@@ -22,15 +22,13 @@ describe("Register Page", () => {
   });
 
   it("validate user email", () => {
-    cy.log(Cypress.env());
-    cy.log(Cypress.env("MAILER_URL"));
-
     cy.getLastEmail(email).then(res => {
       const parsedEmail = res.parsedBody.textAsHtml;
       const link = parsedEmail.match(/href="([^"]*)/)[1];
       cy.visit(link);
       cy.location().should(loc => {
-        expect(loc.href).to.eq("http://localhost:3000/login");
+        cy.log(log);
+        expect(loc.pathname).to.eq("/login");
       });
     });
   });
@@ -45,7 +43,7 @@ describe("Register Page", () => {
     cy.dataTest("logout-link").click();
 
     cy.location().should(loc => {
-      expect(loc.href).to.eq("http://localhost:3000/login");
+      expect(loc.pathname).to.eq("/login");
     });
     cy.getCookie("jit").should("not.exist");
     cy.getCookie("jid").should("have.property", "value", "");
