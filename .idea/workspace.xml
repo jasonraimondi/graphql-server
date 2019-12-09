@@ -2,22 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="166bc532-c0ed-4e14-94b6-924e116089d0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/cypress/integration/spec.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.github/workflows/integration-tests.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/integration-tests.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/typescript-graphql.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/typescript-graphql.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cypress/integration/forgot_password_spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cypress/integration/forgot_password_spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cypress/integration/register_invalid_spec.js" beforeDir="false" afterPath="$PROJECT_DIR$/cypress/integration/register_invalid_spec.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cypress/integration/register_spec.js" beforeDir="false" afterPath="$PROJECT_DIR$/cypress/integration/register_spec.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cypress/plugins/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/cypress/plugins/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cypress/support/commands.js" beforeDir="false" afterPath="$PROJECT_DIR$/cypress/support/commands.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cypress/support/index.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cypress/support/index.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/graphql-api/src/modules/user/forgot_password_resolver.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/graphql-api/src/modules/user/forgot_password_resolver.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/web/src/components/layouts/partials/header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/packages/web/src/components/layouts/partials/header.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/web/src/lib/apollo_next.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/packages/web/src/lib/apollo_next.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/web/src/pages/verify_email.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/packages/web/src/pages/verify_email.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,7 +79,7 @@
       </scripts>
       <node-interpreter value="project" />
       <envs>
-        <env name="MAILER_URL" value="http://localhost:8025" />
+        <env name="MAILER_HTTP_URL" value="http://localhost:8025" />
       </envs>
       <method v="2" />
     </configuration>
@@ -98,16 +88,6 @@
       <command value="run" />
       <scripts>
         <script value="dev" />
-      </scripts>
-      <node-interpreter value="project" />
-      <envs />
-      <method v="2" />
-    </configuration>
-    <configuration name="gen (1)" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/packages/web/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="gen" />
       </scripts>
       <node-interpreter value="project" />
       <envs />
@@ -133,20 +113,30 @@
       <envs />
       <method v="2" />
     </configuration>
+    <configuration name="start-and-test" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="start-and-test" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
     <list>
       <item itemvalue="npm.cypress:open" />
       <item itemvalue="npm.dev" />
       <item itemvalue="npm.gen" />
-      <item itemvalue="npm.gen (1)" />
       <item itemvalue="npm.pretty" />
+      <item itemvalue="npm.start-and-test" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="npm.cypress:open" />
+        <item itemvalue="npm.start-and-test" />
         <item itemvalue="npm.dev" />
         <item itemvalue="npm.pretty" />
         <item itemvalue="npm.gen" />
-        <item itemvalue="npm.gen (1)" />
       </list>
     </recent_temporary>
   </component>
@@ -212,7 +202,7 @@
       <workItem from="1575677415828" duration="1956000" />
       <workItem from="1575682409398" duration="7260000" />
       <workItem from="1575763071528" duration="555000" />
-      <workItem from="1575783761465" duration="18025000" />
+      <workItem from="1575783761465" duration="20041000" />
     </task>
     <servers />
   </component>
@@ -238,10 +228,10 @@
     </option>
   </component>
   <component name="WindowStateProjectService">
-    <state x="304" y="198" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1575871058558">
+    <state x="304" y="198" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1575874851281">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
-    <state x="304" y="198" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1680.1027@0.23.1680.1027" timestamp="1575871058558" />
+    <state x="304" y="198" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1680.1027@0.23.1680.1027" timestamp="1575874851281" />
     <state x="578" y="290" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1575355396379">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
@@ -258,35 +248,35 @@
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="100" y="123" width="1480" height="827" key="DiffContextDialog/0.23.1680.1027@0.23.1680.1027" timestamp="1575869677763" />
-    <state x="594" y="308" key="EnvironmentVariablesDialog" timestamp="1575871056002">
+    <state x="594" y="308" key="EnvironmentVariablesDialog" timestamp="1575874849241">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
-    <state x="594" y="308" key="EnvironmentVariablesDialog/0.23.1680.1027@0.23.1680.1027" timestamp="1575871056002" />
-    <state width="1469" height="366" key="GridCell.Tab.0.bottom" timestamp="1575872692589">
+    <state x="594" y="308" key="EnvironmentVariablesDialog/0.23.1680.1027@0.23.1680.1027" timestamp="1575874849241" />
+    <state width="1469" height="366" key="GridCell.Tab.0.bottom" timestamp="1575875181432">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
-    <state width="1469" height="366" key="GridCell.Tab.0.bottom/0.23.1680.1027@0.23.1680.1027" timestamp="1575872692589" />
+    <state width="1469" height="366" key="GridCell.Tab.0.bottom/0.23.1680.1027@0.23.1680.1027" timestamp="1575875181432" />
     <state width="1434" height="303" key="GridCell.Tab.0.bottom/0.23.1920.1057/1920.203.1440.877@0.23.1920.1057" timestamp="1575574058131" />
     <state width="1238" height="239" key="GridCell.Tab.0.bottom/0.23.1920.1057@0.23.1920.1057" timestamp="1575495570160" />
     <state width="1894" height="593" key="GridCell.Tab.0.bottom/0.23.2560.1417/2560.563.1440.877@0.23.2560.1417" timestamp="1575426558622" />
-    <state width="1469" height="366" key="GridCell.Tab.0.center" timestamp="1575872692588">
+    <state width="1469" height="366" key="GridCell.Tab.0.center" timestamp="1575875181431">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
-    <state width="1469" height="366" key="GridCell.Tab.0.center/0.23.1680.1027@0.23.1680.1027" timestamp="1575872692588" />
+    <state width="1469" height="366" key="GridCell.Tab.0.center/0.23.1680.1027@0.23.1680.1027" timestamp="1575875181431" />
     <state width="1434" height="303" key="GridCell.Tab.0.center/0.23.1920.1057/1920.203.1440.877@0.23.1920.1057" timestamp="1575574058130" />
     <state width="1238" height="239" key="GridCell.Tab.0.center/0.23.1920.1057@0.23.1920.1057" timestamp="1575495570158" />
     <state width="1894" height="593" key="GridCell.Tab.0.center/0.23.2560.1417/2560.563.1440.877@0.23.2560.1417" timestamp="1575426558621" />
-    <state width="1469" height="366" key="GridCell.Tab.0.left" timestamp="1575872692588">
+    <state width="1469" height="366" key="GridCell.Tab.0.left" timestamp="1575875181430">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
-    <state width="1469" height="366" key="GridCell.Tab.0.left/0.23.1680.1027@0.23.1680.1027" timestamp="1575872692588" />
+    <state width="1469" height="366" key="GridCell.Tab.0.left/0.23.1680.1027@0.23.1680.1027" timestamp="1575875181430" />
     <state width="1434" height="303" key="GridCell.Tab.0.left/0.23.1920.1057/1920.203.1440.877@0.23.1920.1057" timestamp="1575574058129" />
     <state width="1238" height="239" key="GridCell.Tab.0.left/0.23.1920.1057@0.23.1920.1057" timestamp="1575495570157" />
     <state width="1894" height="593" key="GridCell.Tab.0.left/0.23.2560.1417/2560.563.1440.877@0.23.2560.1417" timestamp="1575426558621" />
-    <state width="1469" height="366" key="GridCell.Tab.0.right" timestamp="1575872692588">
+    <state width="1469" height="366" key="GridCell.Tab.0.right" timestamp="1575875181431">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
-    <state width="1469" height="366" key="GridCell.Tab.0.right/0.23.1680.1027@0.23.1680.1027" timestamp="1575872692588" />
+    <state width="1469" height="366" key="GridCell.Tab.0.right/0.23.1680.1027@0.23.1680.1027" timestamp="1575875181431" />
     <state width="1434" height="303" key="GridCell.Tab.0.right/0.23.1920.1057/1920.203.1440.877@0.23.1920.1057" timestamp="1575574058131" />
     <state width="1238" height="239" key="GridCell.Tab.0.right/0.23.1920.1057@0.23.1920.1057" timestamp="1575495570159" />
     <state width="1894" height="593" key="GridCell.Tab.0.right/0.23.2560.1417/2560.563.1440.877@0.23.2560.1417" timestamp="1575426558622" />
