@@ -29,6 +29,7 @@ jobs:
         npx lerna bootstrap
         npm run start-and-test
       env:
+        NODE_ENV: test
         ACCESS_TOKEN_SECRET: randomAccessToken
         REFRESH_TOKEN_SECRET: randomRefreshToken
         ENABLE_OUTPUT_SCHEMA: true
