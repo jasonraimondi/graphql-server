@@ -27,6 +27,7 @@ jobs:
     - name: npm install and test
       run: |
         npx lerna bootstrap
+        npm install
         npm run start-and-test
       env:
         NODE_ENV: test
