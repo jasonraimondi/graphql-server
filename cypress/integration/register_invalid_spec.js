@@ -13,7 +13,7 @@ describe("invalid emails", () => {
   ];
 
   invalidEmails.forEach(invalid => {
-    it("show invalid email message on register page", () => {
+    it(`login page shows invalid message for email: (${invalid})`, () => {
       cy.visit("/login?redirectTo=/dashboard");
       cy.dataTest("login-form--email")
         .click()
@@ -24,7 +24,7 @@ describe("invalid emails", () => {
   });
 
   invalidEmails.forEach(invalid => {
-    it("show invalid email message on login page", () => {
+    it(`register page shows invalid message for email: (${invalid})`, () => {
       cy.visit("/register");
       cy.dataTest("register-form--email")
         .click()

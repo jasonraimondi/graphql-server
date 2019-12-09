@@ -14,6 +14,9 @@ declare namespace Cypress {
 
     dataTest(value: string): Chainable<Element>;
 
+    login(email: string, password: string, redirectTo?: string): Chainable<void>;
+    register(email: string, password: string, redirectTo?: string): Chainable<void>;
+
     getLastEmail(value: string): Chainable<ParsedEmail>;
   }
 }

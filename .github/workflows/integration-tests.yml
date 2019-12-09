@@ -1,10 +1,6 @@
 name: integration tests
 
-on:
-  push:
-    paths:
-      - 'packages/graphql-api/*'
-      - '.github/workflows/nodejs.yml'
+on: [push]
 
 jobs:
   build:
@@ -31,8 +27,7 @@ jobs:
     - name: npm install and test
       run: |
         npx lerna bootstrap
-    - name: Install dependencies
-      uses: cypress-io/github-action@v1
+        npm run start-and-test
       env:
         ACCESS_TOKEN_SECRET: randomAccessToken
         REFRESH_TOKEN_SECRET: randomRefreshToken

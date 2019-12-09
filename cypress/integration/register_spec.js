@@ -3,34 +3,9 @@ describe("Register Page", () => {
   const first = cy.faker.name.firstName();
   const last = cy.faker.name.lastName();
   const password = cy.faker.internet.password();
-  const foo = cy.faker.name.firstName();
 
   it("register", () => {
-    cy.log(`this is the email: ${email}`);
-    cy.log("BEFORE TEST");
-    cy.log({ foo });
-    cy.log({ email, first, last, password });
-
-    cy.visit("/register");
-
-    cy.dataTest("register-form--email")
-      .click()
-      .type(email);
-    cy.dataTest("register-form--password")
-      .click()
-      .type(password);
-    cy.dataTest("register-form--first")
-      .click()
-      .type(first);
-    cy.dataTest("register-form--last")
-      .click()
-      .type(last);
-
-    cy.dataTest("register-form").submit();
-
-    cy.location().should(loc => {
-      expect(loc.href).to.eq("http://localhost:3000/login");
-    });
+    cy.register({ email, first, last, password });
   });
 
   it("shows user is not active", () => {
@@ -47,9 +22,10 @@ describe("Register Page", () => {
   });
 
   it("validate user email", () => {
+    cy.log(Cypress.env());
+    cy.log(Cypress.env("MAILER_URL"));
+
     cy.getLastEmail(email).then(res => {
-      cy.log("HI JASON JASON 11111");
-      cy.log("SIMPLE PARSER");
       const parsedEmail = res.parsedBody.textAsHtml;
       const link = parsedEmail.match(/href="([^"]*)/)[1];
       cy.visit(link);
@@ -60,26 +36,18 @@ describe("Register Page", () => {
   });
 
   it("user can log in", () => {
-    cy.visit("/login?redirectTo=/dashboard");
-    cy.dataTest("login-form--email")
-      .click()
-      .type(email);
-    cy.dataTest("login-form--password")
-      .click()
-      .type(password);
-    cy.dataTest("login-form").submit();
-
-    cy.location().should(loc => {
-      expect(loc.href).to.eq("http://localhost:3000/dashboard");
-    });
-    cy.getCookie("jit").should("exist");
-    cy.getCookie("jid").should("exist");
+    cy.login(email, password);
   });
 
-  it("user can log in", () => {
-    cy.visit("/blank");
+  it("user can log out", () => {
+    cy.login(email, password);
 
-    cy.getCookie("jit").should("exist");
-    cy.getCookie("jid").should("exist");
+    cy.dataTest("logout-link").click();
+
+    cy.location().should(loc => {
+      expect(loc.href).to.eq("http://localhost:3000/login");
+    });
+    cy.getCookie("jit").should("not.exist");
+    cy.getCookie("jid").should("have.property", "value", "");
   });
 });

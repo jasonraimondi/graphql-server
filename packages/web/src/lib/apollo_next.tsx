@@ -20,7 +20,6 @@ const httpLink = new HttpLink({
 
 const authLink = setContext((_request, { headers }) => {
   return getAuth().then(token => {
-    console.log({ token });
     return {
       headers: {
         ...headers,

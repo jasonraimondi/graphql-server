@@ -29,7 +29,7 @@ const VerifyUser: NextPage<Props> = ({
       Redirect(`/login?message=${encodeURI(e.message)}`);
     });
     setStatus("Success! Redirecting to login...");
-    await sleep(3000);
+    await sleep(750);
     await Redirect("/login");
   };
 

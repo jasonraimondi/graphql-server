@@ -1,8 +1,4 @@
 describe("Forgot Password Page", () => {
-  // beforeEach(() => {
-  //   cy.request("DELETE", "http://localhost:8025/api/v1/messages");
-  // });
-
   it("forgot password", () => {
     cy.visit("/login");
     cy.dataTest("forgot-password-link").click();
@@ -21,8 +17,8 @@ describe("Forgot Password Page", () => {
       expect(loc.href).to.eq("http://localhost:3000/");
     });
 
-    cy.getLastEmail(email).then(res => {
-      console.log(res);
-    });
+    // cy.getLastEmail(email).then(res => {
+    //   console.log(res);
+    // });
   });
 });

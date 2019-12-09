@@ -30,16 +30,16 @@ export const Header: React.FC<Props> = ({ auth }) => {
         {auth && auth.email ? (
           <>
             <Link href="/logout">
-              <NavAnchor>Logout</NavAnchor>
+              <NavAnchor data-test="logout-link">Logout</NavAnchor>
             </Link>
           </>
         ) : (
           <>
             <Link href="/register">
-              <NavAnchor>Register</NavAnchor>
+              <NavAnchor data-test="register-link">Register</NavAnchor>
             </Link>
             <Link href="/login">
-              <NavAnchor>Login</NavAnchor>
+              <NavAnchor data-test="login-link">Login</NavAnchor>
             </Link>
           </>
         )}

@@ -23,7 +23,6 @@ export class ForgotPasswordResolver {
 
   @Mutation(() => Boolean!)
   async validateForgotPasswordToken(@Arg("token") token: string, @Arg("email") email: string) {
-    console.log("HERE HERE");
     const forgotPassword = await this.forgotPasswordRepository.findById(token);
     if (forgotPassword.user.email !== email.toLowerCase()) {
       throw new Error("invalid email or token");
