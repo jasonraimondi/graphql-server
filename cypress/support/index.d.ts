@@ -9,13 +9,27 @@ declare namespace Cypress {
     from: string;
   };
 
+  type RegisterData = {
+    email: string;
+    password: string;
+    first?: string;
+    last?: string;
+  }
+
+  type LoginData = {
+    email: string;
+    password: string;
+    redirectTo?: string;
+  }
+
   interface Chainable {
     faker: any;
 
     dataTest(value: string): Chainable<Element>;
 
-    login(email: string, password: string, redirectTo?: string): Chainable<void>;
-    register(email: string, password: string, redirectTo?: string): Chainable<void>;
+    login(data: LoginData): Chainable<void>;
+    register(data: RegisterData): Chainable<void>;
+    verifyUser(email: string): Chainable<void>;
 
     getLastEmail(value: string): Chainable<ParsedEmail>;
   }

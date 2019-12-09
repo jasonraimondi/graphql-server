@@ -34,8 +34,8 @@ export const ResetPasswordForm = ({ handleSubmit, token, email }: Props) => {
       onSubmit={handleSubmit}
     >
       {({ isSubmitting }) => (
-        <Form>
-          <Label>
+        <Form data-test="reset-password-form">
+          <Label data-test="reset-password-form--password">
             <span>Password</span>
             <Field type="password" name="password" placeholder="************" />
             <ErrorMessage name="email" component="div" />

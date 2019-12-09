@@ -1,6 +1,5 @@
 import { simpleParser } from "mailparser";
 
-// -- This is a parent command --
 Cypress.Commands.add("dataTest", tag => {
   return cy.get(`[data-test=${tag}]`);
 });
@@ -16,10 +15,10 @@ Cypress.Commands.add("register", ({ email, password, first, last }) => {
     .type(password);
   cy.dataTest("register-form--first")
     .click()
-    .type(first);
+    .type(first || cy.faker.name.firstName());
   cy.dataTest("register-form--last")
     .click()
-    .type(last);
+    .type(last || cy.faker.name.lastName());
 
   cy.dataTest("register-form").submit();
 
@@ -28,7 +27,7 @@ Cypress.Commands.add("register", ({ email, password, first, last }) => {
   });
 });
 
-Cypress.Commands.add("login", (email, password, redirectTo = "/dashboard") => {
+Cypress.Commands.add("login", ({ email, password, redirectTo = "/dashboard" }) => {
   cy.visit(`/login?redirectTo=${redirectTo}`);
   cy.dataTest("login-form--email")
     .click()
@@ -39,10 +38,21 @@ Cypress.Commands.add("login", (email, password, redirectTo = "/dashboard") => {
   cy.dataTest("login-form").submit();
 
   cy.location().should(loc => {
-    expect(loc.href).to.eq(redirectTo);
+    expect(loc.pathname).to.eq(redirectTo);
   });
   cy.getCookie("jit").should("exist");
   cy.getCookie("jid").should("exist");
+});
+
+Cypress.Commands.add("verifyUser", (email) => {
+  cy.getLastEmail(email).then(res => {
+    const parsedEmail = res.parsedBody.textAsHtml;
+    const link = parsedEmail.match(/href="([^"]*)/)[1];
+    cy.visit(link);
+    cy.location().should(loc => {
+      expect(loc.pathname).to.eq("/login");
+    });
+  });
 });
 
 Cypress.Commands.add("getLastEmail", email => {

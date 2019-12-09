@@ -22,23 +22,15 @@ describe("Register Page", () => {
   });
 
   it("validate user email", () => {
-    cy.getLastEmail(email).then(res => {
-      const parsedEmail = res.parsedBody.textAsHtml;
-      const link = parsedEmail.match(/href="([^"]*)/)[1];
-      cy.visit(link);
-      cy.location().should(loc => {
-        cy.log(log);
-        expect(loc.pathname).to.eq("/login");
-      });
-    });
+    cy.verifyUser(email)
   });
 
   it("user can log in", () => {
-    cy.login(email, password);
+    cy.login({ email, password });
   });
 
   it("user can log out", () => {
-    cy.login(email, password);
+    cy.login({ email, password });
 
     cy.dataTest("logout-link").click();
 

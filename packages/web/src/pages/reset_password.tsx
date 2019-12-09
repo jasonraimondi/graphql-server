@@ -24,6 +24,7 @@ const ResetPassword: NextPage<Props> = ({ token, email }) => {
     });
     await updatePasswordMutation({ variables: { data } });
     setSubmitting(false);
+    await redirectToLogin();
   };
 
   return (
