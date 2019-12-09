@@ -1,0 +1,46 @@
+name: integration tests
+
+on:
+  push:
+    paths:
+      - 'packages/graphql-api/*'
+      - '.github/workflows/nodejs.yml'
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    services:
+      mailhog:
+        image: mailhog/mailhog
+        ports:
+          - 8025:8025
+          - 1025:1025
+
+    strategy:
+      matrix:
+        node-version: [12.x]
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: npm install and test
+      run: |
+        npx lerna bootstrap
+    - name: Install dependencies
+      uses: cypress-io/github-action@v1
+      env:
+        ACCESS_TOKEN_SECRET: randomAccessToken
+        REFRESH_TOKEN_SECRET: randomRefreshToken
+        ENABLE_OUTPUT_SCHEMA: true
+        ENABLE_DEBUGGING: true
+        MAILER_URL: smtp://mailhog:1025
+        TYPEORM_SYNCHRONIZE: true
+        TYPEORM_LOGGING: true
+        TYPEORM_ENTITIES: src/entity/**/*_entity.ts
+        TYPEORM_CONNECTION: sqlite
+        TYPEORM_DATABASE: tmp/db.sqlite3

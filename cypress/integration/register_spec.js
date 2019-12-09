@@ -35,11 +35,15 @@ describe("Register Page", () => {
 
   it("shows user is not active", () => {
     cy.visit("/login?redirectTo=/dashboard");
-    cy.dataTest("login-form--email").click().type(email);
-    cy.dataTest("login-form--password").click().type(password);
+    cy.dataTest("login-form--email")
+      .click()
+      .type(email);
+    cy.dataTest("login-form--password")
+      .click()
+      .type(password);
     cy.dataTest("login-form").submit();
 
-    cy.contains("user is not active")
+    cy.contains("user is not active");
   });
 
   it("validate user email", () => {
@@ -57,8 +61,12 @@ describe("Register Page", () => {
 
   it("user can log in", () => {
     cy.visit("/login?redirectTo=/dashboard");
-    cy.dataTest("login-form--email").click().type(email);
-    cy.dataTest("login-form--password").click().type(password);
+    cy.dataTest("login-form--email")
+      .click()
+      .type(email);
+    cy.dataTest("login-form--password")
+      .click()
+      .type(password);
     cy.dataTest("login-form").submit();
 
     cy.location().should(loc => {
