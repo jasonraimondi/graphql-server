@@ -90,8 +90,7 @@ export class User extends BaseUuidEntity {
 
   async verify(password: string) {
     if (!this.password) throw new Error("user must create password");
-    // @todo we should verify if the user is active
-    // if (!this.isActive(this)) throw new Error("user is not active");
+    if (!this.isActive(this)) throw new Error("user is not active");
     if (!(await compare(password, this.password))) throw new Error("invalid password");
   }
 }

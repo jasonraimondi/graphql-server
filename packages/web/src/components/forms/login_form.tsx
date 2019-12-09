@@ -30,8 +30,9 @@ export const LoginForm = ({ handleSubmit }: Props) => {
       validate={handleValidate}
       onSubmit={handleSubmit}
     >
-      {({ isSubmitting }) => (
+      {({ isSubmitting, status }) => (
         <Form data-test="login-form">
+          <p>{status}</p>
           <Label data-test="login-form--email">
             <span>Email</span>
             <Field type="email" name="email" placeholder="john.doe@example.com" />

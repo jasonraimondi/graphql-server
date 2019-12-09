@@ -2,7 +2,7 @@
 import { withData } from "next-apollo";
 import getConfig from "next/config";
 import { ApolloLink } from "apollo-link";
-import { onError } from "apollo-link-error";
+// import { onError } from "apollo-link-error";
 import { setContext } from "apollo-link-context";
 import { HttpLink } from "apollo-boost";
 import fetch from "isomorphic-unfetch";
@@ -30,14 +30,14 @@ const authLink = setContext((_request, { headers }) => {
   });
 });
 
-const errorLink = onError(({ graphQLErrors, networkError }) => {
-  console.log("apollo next error");
-  console.log({ graphQLErrors, networkError });
-});
+// const errorLink = onError(({ graphQLErrors, networkError }) => {
+//   console.log("apollo next error");
+//   console.log({ graphQLErrors, networkError });
+// });
 
 // can also be a function that accepts a `context` object (SSR only) and returns a config
 const config = {
-  link: ApolloLink.from([refreshLink, authLink, errorLink, httpLink]),
+  link: ApolloLink.from([refreshLink, authLink, httpLink]),
 };
 
 export const withApollo = withData(config);

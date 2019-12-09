@@ -1,22 +1,40 @@
+import { simpleParser } from "mailparser";
+
 // -- This is a parent command --
 Cypress.Commands.add("dataTest", tag => {
   return cy.get(`[data-test=${tag}]`);
 });
 
 Cypress.Commands.add("getLastEmail", email => {
-  cy.wait(1500);
+  cy.log({ email });
+  const url = `http://localhost:8025/api/v2/search?kind=to&query=${decodeURIComponent(email)}`;
   return cy
-    .request("GET", `http://localhost:8025/api/v2/search?kind=to&query=${decodeURIComponent(email)}`)
-    .then(({ body: { items } }) => {
+    .request("GET", url)
+    .then(res => {
+      const {
+        body: { items },
+      } = res;
       const lastEmail = items[0];
-      if (lastEmail) {
-        const [to] = lastEmail.Content.Headers.To;
+
+      expect(lastEmail).not.to.be.undefined;
+
+      const [to] = lastEmail.Content.Headers.To;
+      const [from] = lastEmail.Content.Headers.From;
+      const [subject] = lastEmail.Content.Headers.Subject;
+      const body = lastEmail.Content.Body;
+
+      return { subject, body, to, from };
+    })
+    .then(({ subject, body, to, from }) => {
+      return simpleParser(body, {}).then(parsedBody => {
         return {
-          subject: "empty something",
-          body: lastEmail.Content.Body,
+          subject,
+          body,
+          parsedBody,
           to,
+          from,
         };
-      }
+      });
     });
 });
 
