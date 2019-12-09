@@ -2,35 +2,25 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="166bc532-c0ed-4e14-94b6-924e116089d0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/cypress.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cypress/integration/register_invalid_spec.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cypress/integration/register_spec.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/packages/web/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.dockerignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.github/workflows/integration-tests.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/delete-me" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cypress.json" beforeDir="false" afterPath="$PROJECT_DIR$/cypress.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cypress/integration/forgot_password_spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cypress/integration/forgot_password_spec.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cypress/integration/login_spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cypress/integration/register_spec.js" beforeDir="false" afterPath="$PROJECT_DIR$/cypress/integration/register_spec.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cypress/support/commands.js" beforeDir="false" afterPath="$PROJECT_DIR$/cypress/support/commands.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cypress/support/index.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cypress/support/index.d.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/graphql-api/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/packages/graphql-api/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/graphql-api/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/packages/graphql-api/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/graphql-api/src/lib/services/email/user/forgot_password_email.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/graphql-api/src/lib/services/email/user/forgot_password_email.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/web/cypress.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/web/cypress/fixtures/example.json" beforeDir="false" afterPath="$PROJECT_DIR$/cypress/fixtures/example.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/web/cypress/integration/forgot_password_spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cypress/integration/forgot_password_spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/web/cypress/integration/login_spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cypress/integration/login_spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/web/cypress/integration/register_spec.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/web/cypress/plugins/cy-ts-preprocessor.js" beforeDir="false" afterPath="$PROJECT_DIR$/cypress/plugins/cy-ts-preprocessor.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/web/cypress/plugins/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/cypress/plugins/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/web/cypress/support/commands.js" beforeDir="false" afterPath="$PROJECT_DIR$/cypress/support/commands.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/web/cypress/support/index.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cypress/support/index.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/web/cypress/support/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/cypress/support/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/web/cypress/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/cypress/tsconfig.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/web/cypress/videos/forgot_password_spec.ts.mp4" beforeDir="false" afterPath="$PROJECT_DIR$/cypress/videos/forgot_password_spec.ts.mp4" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/web/graphql/register.graphql" beforeDir="false" afterPath="$PROJECT_DIR$/packages/web/graphql/register.graphql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/web/graphql/verify_email_confirmation.graphql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/graphql-api/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/packages/graphql-api/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/graphql-api/src/entity/user/user_entity.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/graphql-api/src/entity/user/user_entity.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/packages/web/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/packages/web/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/packages/web/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/packages/web/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/web/src/components/forms/register_form.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/packages/web/src/components/forms/register_form.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/web/src/pages/register.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/packages/web/src/pages/register.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/web/src/components/forms/login_form.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/packages/web/src/components/forms/login_form.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/web/src/lib/apollo_next.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/packages/web/src/lib/apollo_next.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/web/src/pages/login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/packages/web/src/pages/login.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,7 +47,7 @@
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/packages/graphql-api/src/controllers" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/.github/workflows" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -72,12 +62,12 @@
     <property name="ts.external.directory.path" value="$PROJECT_DIR$/node_modules/typescript/lib" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$" />
-      <recent name="$PROJECT_DIR$/packages/graphql-api" />
-      <recent name="$PROJECT_DIR$/test" />
-      <recent name="$PROJECT_DIR$/src/entity/itinerary" />
-      <recent name="$PROJECT_DIR$/src/lib" />
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/.github/workflows" />
+      <recent name="$PROJECT_DIR$/packages/graphql-api/src/controllers" />
+      <recent name="$PROJECT_DIR$/packages/web/cypress/integration" />
+      <recent name="$PROJECT_DIR$/packages/web/src/components/forms" />
+      <recent name="$PROJECT_DIR$/packages/web/src/pages" />
     </key>
     <key name="es6.move.members.recent.items">
       <recent name="$PROJECT_DIR$/test/mock_application.ts" />
@@ -85,12 +75,12 @@
       <recent name="$PROJECT_DIR$/src/entity/uuid_entity.ts" />
       <recent name="$PROJECT_DIR$/src/app.ts" />
     </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/packages/graphql-api/src/controllers" />
-      <recent name="$PROJECT_DIR$/packages/web/cypress/integration" />
-      <recent name="$PROJECT_DIR$/packages/web/src/components/forms" />
-      <recent name="$PROJECT_DIR$/packages/web/src/pages" />
+    <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/packages/graphql-api" />
+      <recent name="$PROJECT_DIR$/test" />
+      <recent name="$PROJECT_DIR$/src/entity/itinerary" />
+      <recent name="$PROJECT_DIR$/src/lib" />
     </key>
   </component>
   <component name="RunManager" selected="npm.cypress:open">
@@ -214,7 +204,9 @@
       <workItem from="1575572583228" duration="939000" />
       <workItem from="1575581155915" duration="26000" />
       <workItem from="1575677415828" duration="1956000" />
-      <workItem from="1575682409398" duration="6822000" />
+      <workItem from="1575682409398" duration="7260000" />
+      <workItem from="1575763071528" duration="555000" />
+      <workItem from="1575783761465" duration="10411000" />
     </task>
     <servers />
   </component>
@@ -333,16 +325,16 @@
     </state>
     <state x="66" y="95" width="1549" height="883" key="VCS.FileHistoryDialog/0.23.1680.1027@0.23.1680.1027" timestamp="1575265921113" />
     <state x="100" y="123" width="2360" height="1217" key="VCS.FileHistoryDialog/0.23.2560.1417/2560.563.1440.877@0.23.2560.1417" timestamp="1574901939113" />
-    <state x="936" y="493" width="842" height="476" key="find.popup" timestamp="1575747593951">
-      <screen x="0" y="23" width="2560" height="1417" />
-    </state>
-    <state x="614" y="364" width="762" height="476" key="find.popup/0.23.1680.1027@0.23.1680.1027" timestamp="1575434368463" />
-    <state x="936" y="493" width="842" height="476" key="find.popup/0.23.2560.1417/2560.563.1440.877@0.23.2560.1417" timestamp="1575747593951" />
-    <state x="620" y="259" width="670" height="490" key="search.everywhere.popup" timestamp="1575703439975">
+    <state x="614" y="364" width="762" height="476" key="find.popup" timestamp="1575783968091">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
-    <state x="620" y="259" width="670" height="490" key="search.everywhere.popup/0.23.1680.1027@0.23.1680.1027" timestamp="1575703439975" />
-    <state x="945" y="348" width="670" height="676" key="search.everywhere.popup/0.23.2560.1417/2560.563.1440.877@0.23.2560.1417" timestamp="1574820809628" />
+    <state x="614" y="364" width="762" height="476" key="find.popup/0.23.1680.1027@0.23.1680.1027" timestamp="1575783968091" />
+    <state x="936" y="493" width="842" height="476" key="find.popup/0.23.2560.1417/2560.563.1440.877@0.23.2560.1417" timestamp="1575747593951" />
+    <state x="945" y="348" width="670" height="676" key="search.everywhere.popup" timestamp="1575842059488">
+      <screen x="0" y="23" width="2560" height="1417" />
+    </state>
+    <state x="620" y="259" width="670" height="490" key="search.everywhere.popup/0.23.1680.1027@0.23.1680.1027" timestamp="1575789769357" />
+    <state x="945" y="348" width="670" height="676" key="search.everywhere.popup/0.23.2560.1417/2560.563.1440.877@0.23.2560.1417" timestamp="1575842059488" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

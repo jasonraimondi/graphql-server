@@ -21,8 +21,6 @@ const LoginPage: NextPage<Props> = ({
   const [login] = useLoginMutation();
 
   const handleSubmit = async (data: LoginFormData, { setSubmitting, setStatus }: FormikHelpers<LoginFormData>) => {
-    console.log("hello jason");
-
     try {
       const response = await login({
         variables: { data },
