@@ -35,8 +35,8 @@ jobs:
         REFRESH_TOKEN_SECRET: randomRefreshToken
         ENABLE_OUTPUT_SCHEMA: true
         ENABLE_DEBUGGING: true
-        MAILER_URL: smtp://mailhog:1025
-        MAILER_HTTP_URL: http://mailhog:8025
+        MAILER_URL: smtp://localhost:1025
+        MAILER_HTTP_URL: http://localhost:8025
         TYPEORM_SYNCHRONIZE: true
         TYPEORM_LOGGING: true
         TYPEORM_ENTITIES: src/entity/**/*_entity.ts
