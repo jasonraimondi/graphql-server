@@ -24,11 +24,21 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - name: npm install and test
-      run: |
-        npx lerna bootstrap
-        npm install
-        npm run start-and-test
+    - name: Cache node modules
+      uses: actions/cache@v1
+      with:
+        path: ~/.npm # npm cache files are stored in `~/.npm` on Linux/macOS
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-build-${{ env.cache-name }}-
+          ${{ runner.os }}-build-
+          ${{ runner.os }}-
+    - name: Install Dependencies
+      run: npm ci
+    - name: Install recursive dependencies
+      run: npx lerna bootstrap
+    - name: Test
+      run: npm run start-and-test
       env:
         NODE_ENV: test
         ACCESS_TOKEN_SECRET: randomAccessToken
