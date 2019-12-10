@@ -57,7 +57,7 @@ describe("Forgot Password Page", () => {
     cy.contains("invalid password");
   });
 
-  it("fails using the old login", () => {
+  it("succeeds using the new login", () => {
     cy.login({ email, password: updatedPassword });
   })
 });
