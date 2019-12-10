@@ -4,6 +4,16 @@ Cypress.Commands.add("dataTest", tag => {
   return cy.get(`[data-test=${tag}]`);
 });
 
+Cypress.Commands.add("logout", () => {
+  cy.visit("/logout");
+
+  cy.location().should(loc => {
+    expect(loc.pathname).to.eq("/login");
+  });
+  cy.getCookie("jit").should("not.exist");
+  cy.getCookie("jid").should("have.property", "value", "");
+});
+
 Cypress.Commands.add("register", ({ email, password, first, last }) => {
   cy.visit("/register");
 

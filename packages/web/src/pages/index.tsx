@@ -9,22 +9,12 @@ const Index: NextPage<any> = () => {
   const { data } = useUsersQuery({ fetchPolicy: "network-only" });
   let body;
   if (!data) {
-    body = <>loading...</>;
+    body = <p>loading...</p>;
   } else {
-    body = (
-      <>
-        <p>users:</p>
-        <ul>
-          {data.users.map(x => {
-            return (
-              <li key={x.uuid}>
-                {x.email}, {x.uuid}
-              </li>
-            );
-          })}
-        </ul>
-      </>
-    );
+    body = <>
+      <p>users:</p>
+      <ul>{data.users.map(x => <li key={x.uuid}>{x.email}</li>)}</ul>
+    </>;
   }
 
   return <div>{body}</div>;
