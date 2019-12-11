@@ -9,8 +9,6 @@ const {
 } = getConfig();
 
 export const fetchAccessToken = () => {
-  console.log({ REFRESH_TOKEN_URL });
-
   return fetch(REFRESH_TOKEN_URL, {
     method: "POST",
     credentials: "include",
@@ -27,7 +25,6 @@ export const refreshLink = new TokenRefreshLink({
   fetchAccessToken: fetchAccessToken,
   handleFetch: accessToken => {
     console.log("handleFetch", accessToken);
-    alert("need to set access token!");
     // setAccessToken(accessToken);
   },
   handleError: err => {

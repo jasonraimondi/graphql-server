@@ -17,7 +17,7 @@ services:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
 
   api:
-    build: packages/graphql-api
+    build: packages/api
     image: jasonraimondi/full-stack-graphql-server:dev
     restart: unless-stopped
     environment:

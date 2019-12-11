@@ -1,0 +1,25 @@
+name: docker image nextjs
+
+on:
+  push:
+    paths:
+      - 'packages/web/*'
+      - '.github/workflows/docker-image-web.yml'
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Build nextjs docker image
+      run: |
+        cd packages/web
+        docker login --username $DOCKER_USERNAME --password $DOCKER_PASSWORD
+        docker build . --file Dockerfile --tag jasonraimondi/full-stack-graphql-nextjs:latest
+        docker push jasonraimondi/full-stack-graphql-nextjs:latest
+      env:
+        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}

@@ -10,8 +10,7 @@
     "test": "jest",
     "dev": "ts-node-dev --debounce --respawn --ignore-watch node_modules src/server.ts",
     "clean": "rm -rf dist",
-    "compile": "tsc",
-    "build": "run-s clean compile"
+    "build": "tsc"
   },
   "dependencies": {
     "apollo-server-express": "^2.9.13",
@@ -39,7 +38,25 @@
     "uuid": "^3.3.3"
   },
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.2",
+    "@types/cookie": "^0.3.3",
+    "@types/cookie-parser": "^1.4.2",
+    "@types/express": "^4.17.1",
+    "@types/jest": "^24.0.19",
+    "@types/jsonwebtoken": "^8.3.4",
+    "@types/jwt-decode": "^2.2.1",
+    "@types/node": "^12.12.11",
+    "@types/nodemailer": "^6.2.1",
+    "@types/supertest": "^2.0.8",
+    "@types/uuid": "^3.4.5",
+    "jest": "^24.9.0",
     "jwt-decode": "^2.2.0",
-    "supertest": "^4.0.2"
+    "nodemailer": "^6.4.0",
+    "sqlite3": "^4.1.1",
+    "supertest": "^4.0.2",
+    "ts-jest": "^24.2.0",
+    "ts-node": "^8.5.4",
+    "ts-node-dev": "^1.0.0-pre.44",
+    "typescript": "^3.7.3"
   }
 }

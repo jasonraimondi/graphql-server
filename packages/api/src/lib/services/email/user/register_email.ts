@@ -3,6 +3,7 @@ import { inject, injectable } from "inversify";
 import { IMailer } from "@/lib/services/email/mailer";
 import { SERVICE } from "@/lib/constants/inversify";
 import { EmailConfirmation } from "@/entity/user/email_confirmation_entity";
+import { API_ROUTES } from "@/lib/services/route_service";
 
 @injectable()
 export class RegisterEmail {
@@ -10,16 +11,18 @@ export class RegisterEmail {
 
   async send(userConfirmation: EmailConfirmation): Promise<any> {
     const user = userConfirmation.user;
-    const url = `http://localhost:3000/verify_email?e=${user.email}&u=${userConfirmation.uuid}`;
+    const url = API_ROUTES.verify_email.create({ email: user.email, uuid: userConfirmation.uuid });
+    const html = `<div>
+  <p>Verify user email</p>
+  <a href="${url}">${url}</a>
+</div>`;
+
     await this.emailService.send({
       to: user.email,
       from: "noreply@example.com",
-      subject: `Register User Email`,
+      subject: "Register User Email",
       text: url,
-      html: `
-            <a href="${url}">${url}</a>
-            verifyUserConfirmation(email:"${user.email}", uuid:"${userConfirmation.uuid}")
-            `,
+      html
     });
   }
 }

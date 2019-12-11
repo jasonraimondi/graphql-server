@@ -3,8 +3,8 @@ name: test server
 on:
   push:
     paths:
-      - 'packages/graphql-api/*'
-      - '.github/workflows/nodejs.yml'
+      - 'packages/api/*'
+      - '.github/workflows/unit-tests.yml'
 
 jobs:
   build:
@@ -23,7 +23,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - name: npm install and test
       run: |
-        cd packages/graphql-api
+        cd packages/api
         npm ci
         npm test
       env:
@@ -33,7 +33,7 @@ jobs:
         CI: true
     - name: report coverage to code climate
       run: |
-        cd packages/graphql-api
+        cd packages/api
         curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
         chmod +x ./cc-test-reporter
         ./cc-test-reporter format-coverage -t lcov coverage/lcov.info

@@ -4,7 +4,7 @@ Full stack GraphQL project
 
 ## Server
 
-[packages/graphql-api](packages/graphql-api)
+[packages/api](packages/api)
 
 GraphQL API using ApolloServer with TypeORM, with InversifyJS IoC container, JWT Authentication.
 

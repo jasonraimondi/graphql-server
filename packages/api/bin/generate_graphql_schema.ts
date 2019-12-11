@@ -6,7 +6,7 @@ import { buildSchema } from "type-graphql";
 import { join } from "path";
 
 const projectRoot = join(__dirname, "../../../");
-const resolvers = join(projectRoot, "packages/graphql-api/src/modules/**/*_resolver.ts");
+const resolvers = join(projectRoot, "packages/api/src/modules/**/*_resolver.ts");
 const outputSchema = join(projectRoot, "packages/web/.schema.graphql");
 
 console.log("source: ", resolvers);
