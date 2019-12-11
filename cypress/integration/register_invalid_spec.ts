@@ -14,7 +14,7 @@ describe("invalid emails", () => {
 
   invalidEmails.forEach(invalid => {
     it(`login page shows invalid message for email: (${invalid})`, () => {
-      cy.visit("/login?redirectTo=/dashboard");
+      cy.visit("/login");
       cy.dataTest("login-form--email")
         .click()
         .type(invalid)

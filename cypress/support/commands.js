@@ -20,15 +20,18 @@ Cypress.Commands.add("register", ({ email, password, first, last }) => {
   cy.dataTest("register-form--email")
     .click()
     .type(email);
-  cy.dataTest("register-form--password")
-    .click()
-    .type(password);
-  cy.dataTest("register-form--first")
-    .click()
-    .type(first || cy.faker.name.firstName());
-  cy.dataTest("register-form--last")
-    .click()
-    .type(last || cy.faker.name.lastName());
+  if (password)
+    cy.dataTest("register-form--password")
+      .click()
+      .type(password);
+  if (first)
+    cy.dataTest("register-form--first")
+      .click()
+      .type(first);
+  if (last)
+    cy.dataTest("register-form--last")
+      .click()
+      .type(last);
 
   cy.dataTest("register-form").submit();
 
@@ -54,7 +57,7 @@ Cypress.Commands.add("login", ({ email, password, redirectTo = "/dashboard" }) =
   cy.getCookie("jid").should("exist");
 });
 
-Cypress.Commands.add("verifyUser", (email) => {
+Cypress.Commands.add("verifyUser", email => {
   cy.getLastEmail(email).then(res => {
     const parsedEmail = res.parsedBody.textAsHtml;
     const link = parsedEmail.match(/href="([^"]*)/)[1];

@@ -11,10 +11,16 @@ const Index: NextPage<any> = () => {
   if (!data) {
     body = <p>loading...</p>;
   } else {
-    body = <>
-      <p>users:</p>
-      <ul>{data.users.map(x => <li key={x.uuid}>{x.email}</li>)}</ul>
-    </>;
+    body = (
+      <>
+        <p>users:</p>
+        <ul>
+          {data.users.map(x => (
+            <li key={x.uuid}>{x.email}</li>
+          ))}
+        </ul>
+      </>
+    );
   }
 
   return <div>{body}</div>;

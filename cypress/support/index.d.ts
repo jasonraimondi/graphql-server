@@ -1,9 +1,7 @@
 declare namespace Cypress {
   type ParsedEmail = {
     body: string;
-    parsedBody: {
-      textAsHtml: string;
-    }
+    parsedBody: { textAsHtml: string; }
     subject: string;
     to: string;
     from: string;
@@ -11,7 +9,7 @@ declare namespace Cypress {
 
   type RegisterData = {
     email: string;
-    password: string;
+    password?: string;
     first?: string;
     last?: string;
   }

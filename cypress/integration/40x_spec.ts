@@ -5,7 +5,7 @@ describe("40x errors", () => {
   const password = cy.faker.internet.password();
 
   it("404 not found", () => {
-    cy.visit("/foo_bar", {failOnStatusCode: false});
+    cy.visit("/foo_bar", { failOnStatusCode: false });
     cy.contains("404");
   });
 });
