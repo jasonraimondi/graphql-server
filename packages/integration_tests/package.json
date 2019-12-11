@@ -2,7 +2,7 @@
   "name": "integration_tests",
   "private": true,
   "scripts": {
-    "dev": "cypress open",
+    "start": "cypress open",
     "test": "cypress run"
   },
   "devDependencies": {

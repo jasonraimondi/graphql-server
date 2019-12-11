@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "dev": "lerna run --parallel dev",
-    "integration-tests": "npm run --prefix packages/integration_tests cypress:run",
+    "integration-tests": "npm run --prefix packages/integration_tests test",
     "start-and-test": "start-server-and-test dev http://localhost:8080 integration-tests",
     "pretty": "prettier --config prettier.config.js --write \"{packages}/**/*.{ts,tsx,js,graphql,css,scss,json}\""
   },
