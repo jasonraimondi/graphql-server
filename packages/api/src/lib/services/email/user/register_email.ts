@@ -22,7 +22,7 @@ export class RegisterEmail {
       from: "noreply@example.com",
       subject: "Register User Email",
       text: url,
-      html
+      html,
     });
   }
 }

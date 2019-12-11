@@ -24,7 +24,7 @@ describe("user registration flow", () => {
     cy.verifyUser(email);
   });
 
-  function assertUserIsNotVerified({ email, password }: { email: string; password: string}) {
+  function assertUserIsNotVerified({ email, password }: { email: string; password: string }) {
     cy.visit("/login?redirectTo=/dashboard");
     cy.dataTest("login-form--email")
       .click()
