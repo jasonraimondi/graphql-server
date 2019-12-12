@@ -2,8 +2,8 @@
   "name": "integration_tests",
   "private": true,
   "scripts": {
-    "start": "cypress open",
-    "test": "cypress run"
+    "cypress:start": "cypress open",
+    "cypress:run": "cypress run"
   },
   "devDependencies": {
     "@cypress/webpack-preprocessor": "^4.1.1",

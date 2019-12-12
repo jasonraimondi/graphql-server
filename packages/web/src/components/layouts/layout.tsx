@@ -68,6 +68,7 @@ export const withLayout = (WrappedComponent: NextPage<any>, settings?: Settings)
 
   Layout.getInitialProps = async (ctx: NextPageContext) => {
     const { accessToken } = await getAuth(ctx);
+    console.log(await getAuth(ctx));
     return {
       ...(WrappedComponent.getInitialProps && (await WrappedComponent.getInitialProps(ctx))),
       accessToken: accessToken.token,

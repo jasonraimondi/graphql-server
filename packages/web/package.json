@@ -4,7 +4,7 @@
     "postinstall": "npm run gen",
     "dev": "next -p 8080",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -p 8080",
     "gen": "graphql-codegen --config codegen.yml"
   },
   "author": "Jason Raimondi <jason@raimondi.us>",

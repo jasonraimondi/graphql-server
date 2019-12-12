@@ -3,6 +3,8 @@
   "private": true,
   "scripts": {
     "dev": "lerna run --parallel dev",
+    "build": "lerna run --parallel build",
+    "start": "lerna run --parallel start",
     "integration-tests": "npm run --prefix packages/integration_tests test",
     "start-and-test": "start-server-and-test dev http://localhost:8080 integration-tests",
     "pretty": "prettier --config prettier.config.js --write \"packages/**/*.{ts,tsx,js,graphql,css,scss,json}\""

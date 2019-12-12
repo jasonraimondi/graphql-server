@@ -10,12 +10,10 @@ type Auth = {
 };
 
 export const destroyAccessToken = (ctx?: NextPageContext) => {
-  console.log("DESTROY ACCESS TOKEN");
   destroyCookie(ctx, "jit");
 };
 
 export const setAccessToken = (token: string, ctx?: NextPageContext) => {
-  console.log("SET ACCESS TOKEN", token);
   setCookie(ctx, "jit", token, {
     maxAge: 60 * 60 * 24,
     path: "/",
@@ -28,6 +26,7 @@ export const getAuth = async (ctx?: NextPageContext): Promise<Auth> => {
     accessToken: new AccessToken(jit),
     refreshToken: new RefreshToken(jid),
   };
+  // console.log("getAuth auth", result, parseCookies(ctx));
 };
 
 // @ts-ignore

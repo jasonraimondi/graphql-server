@@ -6,11 +6,14 @@
   "license": "MIT",
   "private": true,
   "scripts": {
+    "postinstall": "npm run gen",
     "gen": "ts-node bin/generate_graphql_schema.ts",
     "test": "jest",
     "dev": "ts-node-dev --debounce --respawn --ignore-watch node_modules src/server.ts",
+    "start": "ts-node src/server.ts",
     "clean": "rm -rf dist",
-    "build": "tsc"
+    "pack": "tsc",
+    "build": "npm run clean && npm run pack"
   },
   "dependencies": {
     "apollo-server-express": "^2.9.13",

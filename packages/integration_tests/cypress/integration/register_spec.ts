@@ -24,6 +24,20 @@ describe("user registration flow", () => {
     cy.verifyUser(email);
   });
 
+  it.skip("user auth works good", () => {
+    const email = cy.faker.internet.email();
+    cy.register({ email, password });
+    cy.verifyUser(email);
+    cy.login({ email, password });
+    cy.reload(true);
+    cy.reload(true);
+    cy.wait(5000);
+    cy.reload(true);
+    cy.reload(true);
+    cy.getCookie("jit").should("exist");
+    cy.getCookie("jid").should("exist");
+  });
+
   function assertUserIsNotVerified({ email, password }: { email: string; password: string }) {
     cy.visit("/login?redirectTo=/dashboard");
     cy.dataTest("login-form--email")

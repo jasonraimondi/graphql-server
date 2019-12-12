@@ -30,6 +30,7 @@ export class AuthService {
     if (user.tokenVersion !== payload.tokenVersion) {
       throw new Error("invalid refresh token");
     }
+    console.log("UUPPPDATE ACCESS TOKEN");
 
     return {
       accessToken: this.createAccessToken(user),
@@ -37,28 +38,31 @@ export class AuthService {
     };
   }
 
-  createAccessToken(user: User) {
+  createAccessToken(user: User): string {
     const payload = {
       userId: user.uuid,
       email: user.email,
       isEmailConfirmed: user.isEmailConfirmed,
     };
     return sign(payload, ENV.accessTokenSecret, {
-      expiresIn: "1m",
+      expiresIn: "10s",
     });
   }
 
-  createRefreshToken(user: User) {
-    return sign({ userId: user.uuid, tokenVersion: user.tokenVersion }, ENV.refreshTokenSecret, {
-      expiresIn: "7d",
+  createRefreshToken(user: User): string {
+    const payload = {
+      userId: user.uuid,
+      tokenVersion: user.tokenVersion,
+    };
+    return sign(payload, ENV.refreshTokenSecret, {
+      expiresIn: "3m",
     });
   }
 
   sendRefreshToken(res: Response, user?: User) {
     let token = "";
-    if (user) token = this.createRefreshToken(user!);
-    // 7 days
-    const expiresAt = Date.now() + 60 * 60 * 24 * 7;
+    if (user) token = this.createRefreshToken(user);
+    const expiresAt = Date.now() + 60 * 60 * 24 * 7; // 7 days
     res.cookie("jid", token, {
       httpOnly: true,
       // domain: ".example.com"
