@@ -12,8 +12,8 @@
     "dev": "ts-node-dev --debounce --respawn --ignore-watch node_modules src/server.ts",
     "start": "ts-node src/server.ts",
     "clean": "rm -rf dist",
-    "pack": "tsc",
-    "build": "npm run clean && npm run pack"
+    "pack": "run-s clean build",
+    "build": "tsc"
   },
   "dependencies": {
     "apollo-server-express": "^2.9.13",
