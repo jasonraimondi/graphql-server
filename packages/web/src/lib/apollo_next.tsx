@@ -1,5 +1,7 @@
+import withNextApollo from "next-with-apollo";
+import { ApolloClient } from "apollo-client";
+import { InMemoryCache } from "apollo-cache-inmemory";
 // @ts-ignore
-import { withData } from "next-apollo";
 import getConfig from "next/config";
 import { ApolloLink } from "apollo-link";
 // import { onError } from "apollo-link-error";
@@ -34,9 +36,16 @@ const authLink = setContext((_request, { headers }) => {
 //   console.log({ graphQLErrors, networkError });
 // });
 
-// can also be a function that accepts a `context` object (SSR only) and returns a config
-const config = {
-  link: ApolloLink.from([refreshLink, authLink, httpLink]),
-};
-
-export const withApollo = withData(config);
+export const withApollo = withNextApollo(
+  ({ initialState }) =>
+    new ApolloClient({
+      ssrMode: true,
+      link: ApolloLink.from([
+        refreshLink,
+        authLink,
+        // errorLink,
+        httpLink,
+      ]),
+      cache: new InMemoryCache().restore(initialState || {}),
+    }),
+);

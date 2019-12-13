@@ -3,7 +3,6 @@ import { NextPage } from "next";
 import { withRouter } from "next/router";
 import React from "react";
 
-import { withApollo } from "@/app/lib/apollo_next";
 import { withLayout } from "@/app/components/layouts/layout";
 import { WithRouterProps } from "next/dist/client/with-router";
 import { ForgotPasswordForm, ForgotPasswordFormData } from "@/app/components/forms/forgot_password_form";
@@ -32,6 +31,6 @@ const ForgotPassword: NextPage<Props> = () => {
   );
 };
 
-export default withLayout(withApollo(withRouter(ForgotPassword)), {
+export default withLayout(withRouter(ForgotPassword), {
   title: "Login Page",
 });

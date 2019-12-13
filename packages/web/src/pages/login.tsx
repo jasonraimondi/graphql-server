@@ -3,7 +3,6 @@ import { withRouter } from "next/router";
 import React from "react";
 
 import { useLoginMutation } from "@/generated/graphql";
-import { withApollo } from "@/app/lib/apollo_next";
 import { setAccessToken } from "@/app/lib/auth";
 import { withLayout } from "@/app/components/layouts/layout";
 import { LoginForm, LoginFormData } from "@/app/components/forms/login_form";
@@ -46,6 +45,6 @@ const LoginPage: NextPage<Props> = ({
   );
 };
 
-export default withLayout(withApollo(withRouter(LoginPage)), {
+export default withLayout(withRouter(LoginPage), {
   title: "Login Page",
 });

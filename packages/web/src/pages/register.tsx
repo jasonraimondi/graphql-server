@@ -2,7 +2,6 @@ import { FormikHelpers } from "formik";
 import { NextPage } from "next";
 import React from "react";
 
-import { withApollo } from "@/app/lib/apollo_next";
 import { useRegisterMutation } from "@/generated/graphql";
 import { withLayout } from "@/app/components/layouts/layout";
 import { RegisterForm } from "@/app/components/forms/register_form";
@@ -42,6 +41,6 @@ const Register: NextPage<{}> = () => {
   );
 };
 
-export default withLayout(withApollo(Register), {
+export default withLayout(Register, {
   title: "Register Page",
 });

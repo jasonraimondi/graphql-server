@@ -2,7 +2,6 @@ import React from "react";
 import { NextPage } from "next";
 
 import { withLayout } from "@/app/components/layouts/layout";
-import { withApollo } from "@/app/lib/apollo_next";
 import { useMeQuery } from "@/generated/graphql";
 
 const Dashboard: NextPage = () => {
@@ -31,7 +30,7 @@ const Dashboard: NextPage = () => {
   return <div>Something went wrong!</div>;
 };
 
-export default withLayout(withApollo(Dashboard), {
+export default withLayout(Dashboard, {
   protectedRoute: true,
   title: "User profile",
 });

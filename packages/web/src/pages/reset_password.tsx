@@ -2,12 +2,10 @@ import { FormikHelpers } from "formik";
 import { NextPage } from "next";
 import React from "react";
 
-import { withApollo } from "@/app/lib/apollo_next";
 import { withLayout } from "@/app/components/layouts/layout";
 import { useUpdatePasswordFromTokenMutation, useValidateForgotPasswordTokenMutation } from "@/generated/graphql";
 import { ResetPasswordForm, ResetPasswordFormData } from "@/app/components/forms/reset_password_form";
 import { redirectToLogin } from "@/app/lib/auth";
-// import { redirectToLogin } from "@/app/lib/auth";
 
 type Props = {
   token: string;
@@ -47,6 +45,6 @@ ResetPassword.getInitialProps = async (ctx): Promise<Props> => {
   return { token, email };
 };
 
-export default withLayout(withApollo(ResetPassword), {
+export default withLayout(ResetPassword, {
   title: "Reset Password Page",
 });

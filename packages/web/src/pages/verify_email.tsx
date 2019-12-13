@@ -2,7 +2,6 @@ import { NextPage } from "next";
 import { withRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
-import { withApollo } from "@/app/lib/apollo_next";
 import { withLayout } from "@/app/components/layouts/layout";
 import { useVerifyEmailConfirmationMutation } from "@/generated/graphql";
 import { Redirect } from "@/app/lib/redirect";
@@ -40,6 +39,6 @@ const VerifyUser: NextPage<Props> = ({
   return <h1 className="h5">{status}</h1>;
 };
 
-export default withLayout(withApollo(withRouter(VerifyUser)), {
+export default withLayout(withRouter(VerifyUser), {
   title: "VerifyUser Page",
 });

@@ -3,7 +3,6 @@ import { NextPage } from "next";
 
 import { useUsersQuery } from "@/generated/graphql";
 import { withLayout } from "@/app/components/layouts/layout";
-import { withApollo } from "@/app/lib/apollo_next";
 
 const Index: NextPage<any> = () => {
   const { data } = useUsersQuery({ fetchPolicy: "network-only" });
@@ -26,6 +25,6 @@ const Index: NextPage<any> = () => {
   return <div>{body}</div>;
 };
 
-export default withLayout(withApollo(Index), {
+export default withLayout(Index, {
   title: "Hi ya slugger",
 });
