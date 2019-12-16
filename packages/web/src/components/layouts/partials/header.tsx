@@ -21,6 +21,9 @@ export const Header: React.FC<Props> = ({ auth }) => {
         <Link href="/">
           <NavAnchor>Home</NavAnchor>
         </Link>
+        <Link href="/profile">
+          <NavAnchor>Testing Profile</NavAnchor>
+        </Link>
         {auth && auth.email ? (
           <>
             <Link href="/dashboard">

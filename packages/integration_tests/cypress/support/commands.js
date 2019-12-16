@@ -10,7 +10,6 @@ Cypress.Commands.add("logout", () => {
   cy.location().should(loc => {
     expect(loc.pathname).to.eq("/login");
   });
-  cy.getCookie("jit").should("not.exist");
   cy.getCookie("jid").should("have.property", "value", "");
 });
 
@@ -53,7 +52,6 @@ Cypress.Commands.add("login", ({ email, password, redirectTo = "/dashboard" }) =
   cy.location().should(loc => {
     expect(loc.pathname).to.eq(redirectTo);
   });
-  cy.getCookie("jit").should("exist");
   cy.getCookie("jid").should("exist");
 });
 

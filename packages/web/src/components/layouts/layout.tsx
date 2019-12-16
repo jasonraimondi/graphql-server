@@ -55,10 +55,9 @@ export const withLayout = (WrappedComponent: NextPage<any>, settings?: Settings)
               background-color: ${colors.blue["300"]};
             `}
           >
-            {/* todo refactor optional chaining*/}
             <WrappedComponent {...props} className="blue" />
             <p>
-              Auth: {auth && auth.decoded && auth.decoded.email ? "true" : "false"} {JSON.stringify(auth)}
+              Auth: {auth?.decoded?.email ? "true" : "false"} {JSON.stringify(auth)}
             </p>
           </div>
         </main>
@@ -68,7 +67,6 @@ export const withLayout = (WrappedComponent: NextPage<any>, settings?: Settings)
 
   Layout.getInitialProps = async (ctx: NextPageContext) => {
     const { accessToken } = await getAuth(ctx);
-    console.log(await getAuth(ctx));
     return {
       ...(WrappedComponent.getInitialProps && (await WrappedComponent.getInitialProps(ctx))),
       accessToken: accessToken.token,

@@ -1,15 +1,12 @@
-import React from "react";
-
-import { destroyAccessToken, getAuth, setAccessToken } from "@/app/lib/auth";
+import React, { useEffect } from "react";
 import { NextPage, NextPageContext } from "next";
+
+import { getAuth, setAccessToken, redirectToLogin, setRefreshToken } from "@/app/lib/auth";
 import { fetchAccessToken } from "@/app/lib/token_refresh_link";
 
-export const COOKIES = {
-  accessToken: "jid",
-};
-
 type Props = {
-  accessToken?: string;
+  jit?: string;
+  jid?: string;
 };
 
 type RefreshTokenResponse = {
@@ -19,50 +16,46 @@ type RefreshTokenResponse = {
 
 export function privateRoute(WrappedComponent: NextPage<any>) {
   const AuthenticatedRoute: NextPage<Props> = (props: Props) => {
+    useEffect(() => {
+      setAccessToken(props.jit);
+      setRefreshToken(props.jid);
+    });
     return <WrappedComponent {...props} />;
   };
 
   AuthenticatedRoute.getInitialProps = async (ctx: NextPageContext) => {
-    console.log("private route initial props start", ctx.req?.headers);
-    const { accessToken, refreshToken } = await getAuth(ctx);
-    console.log("auth route private route");
-    console.log({ accessToken, refreshToken });
+    const auth = await getAuth(ctx);
 
-    if (accessToken.isExpired) {
-      destroyAccessToken(ctx);
+    if (auth.accessToken.isExpired) {
+      setAccessToken();
 
-      if (!refreshToken || refreshToken.token === "") {
-        console.log("REDIRECT TO LOGIN 1");
-        // await redirectToLogin(ctx);
-        // return {};
-      } else {
-        console.log("ELSE NO REFRESH");
+      if (auth.refreshToken.token === "") {
+        await redirectToLogin(ctx);
+        return {};
       }
 
       try {
-        const data = await fetchAccessToken();
+        const data = await fetchAccessToken(ctx);
         const tokenResponse: RefreshTokenResponse = await data.json();
 
-        console.log("jason", { data, tokenResponse });
-
         if (!tokenResponse.success) {
-          // await redirectToLogin(ctx);
-          console.log("REDIRECT TO LOGIN 2");
+          await redirectToLogin(ctx);
         }
 
-        setAccessToken(tokenResponse.accessToken, ctx);
-        console.log("WOW IT WORKED");
+        setAccessToken(tokenResponse.accessToken);
       } catch (e) {
-        console.log("CAUGHT EM");
-        // console.log(e);
+        await redirectToLogin(ctx);
+        return {};
       }
     }
 
     // Check if Page has a `getInitialProps`; if so, call it.
     const pageProps = WrappedComponent.getInitialProps && (await WrappedComponent.getInitialProps(ctx));
-
-    // Return props.
-    return { ...pageProps };
+    return {
+      ...pageProps,
+      jit: auth.accessToken.token,
+      jid: auth.refreshToken.token,
+    };
   };
 
   return AuthenticatedRoute;

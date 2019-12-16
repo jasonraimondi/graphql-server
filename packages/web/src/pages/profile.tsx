@@ -6,7 +6,7 @@ import { useMeQuery } from "@/generated/graphql";
 
 const Dashboard: NextPage = () => {
   const { data, loading, error } = useMeQuery({ fetchPolicy: "network-only" });
-  console.log({ data, loading, error });
+  // console.log({ data, loading, error });
 
   if (loading) {
     return <div>Loading...</div>;

@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 
 import { useLogoutMutation } from "@/generated/graphql";
 import { withLayout } from "@/app/components/layouts/layout";
-import { destroyAccessToken } from "@/app/lib/auth";
+import { setAccessToken } from "@/app/lib/auth";
 import { Redirect } from "@/app/lib/redirect";
 
 const Logout: NextPage = () => {
@@ -12,7 +12,7 @@ const Logout: NextPage = () => {
   const handleLogout = async () => {
     await logout();
     await client!.resetStore();
-    destroyAccessToken();
+    setAccessToken();
     await Redirect("/login");
   };
 

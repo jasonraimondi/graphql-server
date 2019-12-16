@@ -1,37 +1,43 @@
-import { destroyCookie, parseCookies, setCookie } from "nookies";
+import { parseCookies } from "nookies";
 import { NextPageContext } from "next";
+
 import { RefreshToken } from "@/app/lib/auth/refresh_token";
 import { AccessToken } from "@/app/lib/auth/access_token";
 import { Redirect } from "@/app/lib/redirect";
 
 type Auth = {
   accessToken: AccessToken;
-  refreshToken?: RefreshToken;
+  refreshToken: RefreshToken;
 };
 
-export const destroyAccessToken = (ctx?: NextPageContext) => {
-  destroyCookie(ctx, "jit");
+let inMemoryAccessToken = new AccessToken("");
+
+export const setAccessToken = (token?: string) => {
+  inMemoryAccessToken = new AccessToken(token ?? "");
 };
 
-export const setAccessToken = (token: string, ctx?: NextPageContext) => {
-  setCookie(ctx, "jit", token, {
-    maxAge: 60 * 60 * 24,
-    path: "/",
-  });
+let inMemoryRefreshToken = new RefreshToken("");
+
+export const setRefreshToken = (token?: string) => {
+  inMemoryRefreshToken = new RefreshToken(token ?? "");
 };
 
-export const getAuth = async (ctx?: NextPageContext): Promise<Auth> => {
-  const { jid, jit } = parseCookies(ctx);
+const isServer = () => typeof window === "undefined";
+
+export const getAuth = (ctx?: NextPageContext): Auth => {
+  const { jid } = parseCookies(ctx);
+  if (isServer()) {
+    console.log("IS SERVER JID");
+    setRefreshToken(jid);
+  }
   return {
-    accessToken: new AccessToken(jit),
-    refreshToken: new RefreshToken(jid),
+    accessToken: inMemoryAccessToken,
+    refreshToken: inMemoryRefreshToken,
   };
-  // console.log("getAuth auth", result, parseCookies(ctx));
 };
 
-// @ts-ignore
 export async function redirectToLogin(ctx?: NextPageContext, doNotRedirectBack = false) {
-  let redirectLink = ctx && ctx.pathname ? ctx.pathname : document.referrer;
+  let redirectLink = ctx?.pathname ?? document.referrer;
 
   if (redirectLink) {
     redirectLink = `?redirectTo=${encodeURI(redirectLink)}`;
@@ -44,6 +50,7 @@ export async function redirectToLogin(ctx?: NextPageContext, doNotRedirectBack =
   await Redirect(`/login${redirectLink}`, ctx);
 }
 
+/** @deprecated */
 export type DeprecatedAuth = {
   email?: string;
 };

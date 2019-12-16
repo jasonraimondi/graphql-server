@@ -1,17 +1,23 @@
 import { TokenRefreshLink } from "apollo-link-token-refresh";
 import fetch from "isomorphic-unfetch";
-
 import getConfig from "next/config";
-// import { setAccessToken } from "@/app/lib/auth";
+
+import { setAccessToken } from "@/app/lib/auth";
 
 const {
   publicRuntimeConfig: { REFRESH_TOKEN_URL },
 } = getConfig();
 
-export const fetchAccessToken = () => {
+export const fetchAccessToken = (ctx: any) => {
   return fetch(REFRESH_TOKEN_URL, {
     method: "POST",
     credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+      cookie: ctx?.req?.headers?.cookie ?? "",
+    },
+  }).then(res => {
+    return res;
   });
 };
 
@@ -25,7 +31,7 @@ export const refreshLink = new TokenRefreshLink({
   fetchAccessToken: fetchAccessToken,
   handleFetch: accessToken => {
     console.log("handleFetch", accessToken);
-    // setAccessToken(accessToken);
+    setAccessToken(accessToken);
   },
   handleError: err => {
     console.error("Your refresh token is invalid. Try to relogin");

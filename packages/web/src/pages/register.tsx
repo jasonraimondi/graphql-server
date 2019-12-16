@@ -24,10 +24,9 @@ const Register: NextPage<{}> = () => {
     { setSubmitting, setStatus }: FormikHelpers<RegisterFormData>
   ) => {
     try {
-      const res = await register({ variables: { data: registerFormData } });
-      console.log("register response page", res);
+      await register({ variables: { data: registerFormData } });
     } catch (e) {
-      setStatus(e.message.replace(/GraphQL error: /gi, ""));
+      setStatus(e.message);
     }
     setSubmitting(false);
     await redirectToLogin(undefined, true);

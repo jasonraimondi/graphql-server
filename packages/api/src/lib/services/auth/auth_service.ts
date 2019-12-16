@@ -22,15 +22,12 @@ export class AuthService {
       throw new Error("invalid refresh token");
     }
 
-    // refreshToken is valid and
-    // we can send back an access refreshToken
-    const uuid = payload && payload.userId ? payload.userId : "NOT_FOUND";
+    const uuid = payload?.userId ?? "NOT_FOUND";
     const user = await this.userRepository.findById(uuid);
 
     if (user.tokenVersion !== payload.tokenVersion) {
       throw new Error("invalid refresh token");
     }
-    console.log("UUPPPDATE ACCESS TOKEN");
 
     return {
       accessToken: this.createAccessToken(user),
@@ -45,7 +42,7 @@ export class AuthService {
       isEmailConfirmed: user.isEmailConfirmed,
     };
     return sign(payload, ENV.accessTokenSecret, {
-      expiresIn: "10s",
+      expiresIn: ENV.accessTokenTimeout,
     });
   }
 
@@ -55,19 +52,18 @@ export class AuthService {
       tokenVersion: user.tokenVersion,
     };
     return sign(payload, ENV.refreshTokenSecret, {
-      expiresIn: "3m",
+      expiresIn: ENV.refreshTokenTimeout,
     });
   }
 
   sendRefreshToken(res: Response, user?: User) {
     let token = "";
     if (user) token = this.createRefreshToken(user);
-    const expiresAt = Date.now() + 60 * 60 * 24 * 7; // 7 days
     res.cookie("jid", token, {
       httpOnly: true,
       // domain: ".example.com"
       domain: "localhost",
-      expires: new Date(expiresAt),
+      expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30),
     });
   }
 }
