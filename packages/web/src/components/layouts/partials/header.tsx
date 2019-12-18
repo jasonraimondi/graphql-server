@@ -1,16 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "@emotion/styled";
 import { css } from "@emotion/core";
 
 import { Link } from "@/app/components/hoc/nav_link";
 import { colors } from "@/styles/theme";
-import { DeprecatedAuth } from "@/app/lib/auth";
+import { getAuth } from "@/app/lib/auth";
 
-interface Props {
-  auth?: DeprecatedAuth;
-}
+interface Props {}
 
-export const Header: React.FC<Props> = ({ auth }) => {
+export const Header: React.FC<Props> = () => {
+  const [auth] = useState(getAuth());
+  console.log(auth);
   return (
     <header>
       <nav
@@ -24,7 +24,7 @@ export const Header: React.FC<Props> = ({ auth }) => {
         <Link href="/profile">
           <NavAnchor>Testing Profile</NavAnchor>
         </Link>
-        {auth && auth.email ? (
+        {auth.accessToken?.isValid ? (
           <>
             <Link href="/dashboard">
               <NavAnchor>Dashboard</NavAnchor>

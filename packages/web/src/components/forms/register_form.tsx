@@ -14,7 +14,7 @@ type Props = {
   handleSubmit: any;
 };
 
-export const RegisterForm = ({ handleSubmit }: Props) => {
+const RegisterForm = ({ handleSubmit }: Props) => {
   const initialFormValues: RegisterFormData = { email: "", password: "", firstName: "", lastName: "" };
 
   const handleValidate = (values: RegisterFormData) => {
@@ -60,3 +60,5 @@ export const RegisterForm = ({ handleSubmit }: Props) => {
     </Formik>
   );
 };
+
+export default RegisterForm;

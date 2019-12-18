@@ -2,10 +2,12 @@
   "name": "root",
   "private": true,
   "scripts": {
+    "clean": "lerna run --parallel clean",
     "dev": "lerna run --parallel dev",
     "build": "lerna run --parallel build",
     "start": "lerna run --parallel start",
-    "integration-tests": "npm run --prefix packages/integration_tests test",
+    "cypress": "npm run --prefix packages/integration_tests cypress:open",
+    "integration-tests": "npm run --prefix packages/integration_tests cypress:run",
     "start-and-test": "start-server-and-test dev http://localhost:8080 integration-tests",
     "pretty": "prettier --config prettier.config.js --write \"packages/**/*.{ts,tsx,js,graphql,css,scss,json}\""
   },

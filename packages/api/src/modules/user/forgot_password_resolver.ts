@@ -39,7 +39,7 @@ export class ForgotPasswordResolver {
       await this.forgotPasswordEmail.send(forgotPassword);
       return true;
     } catch (e) {
-      console.log(e);
+      console.error(e);
     }
     return false;
   }
@@ -57,7 +57,7 @@ export class ForgotPasswordResolver {
       await this.forgotPasswordRepository.delete(forgotPassword.uuid);
       return true;
     } catch (e) {
-      console.log(e);
+      console.error(e);
     }
     return false;
   }

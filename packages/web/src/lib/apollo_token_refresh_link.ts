@@ -1,31 +1,24 @@
 import { TokenRefreshLink } from "apollo-link-token-refresh";
-import fetch from "isomorphic-unfetch";
-import getConfig from "next/config";
 
-import { setAccessToken } from "@/app/lib/auth";
-
-const {
-  publicRuntimeConfig: { REFRESH_TOKEN_URL },
-} = getConfig();
+import { setAccessToken } from "@/app/lib/auth/in_memory_access_token";
+import { getAuth } from "@/app/lib/auth";
+import client from "@/app/lib/api_client";
 
 export const fetchAccessToken = (ctx: any) => {
-  return fetch(REFRESH_TOKEN_URL, {
+  return client("/auth/refresh_token", {
     method: "POST",
     credentials: "include",
     headers: {
       "Content-Type": "application/json",
       cookie: ctx?.req?.headers?.cookie ?? "",
     },
-  }).then(res => {
-    return res;
   });
 };
 
 export const refreshLink = new TokenRefreshLink({
   accessTokenField: "accessToken",
   isTokenValidOrUndefined: () => {
-    // const { accessToken: { isExpired } } = getAuth();
-    // @todo this is borked now
+    console.log(getAuth());
     return true;
   },
   fetchAccessToken: fetchAccessToken,

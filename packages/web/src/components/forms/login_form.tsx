@@ -13,7 +13,7 @@ type Props = {
   handleSubmit: any;
 };
 
-export const LoginForm = ({ handleSubmit }: Props) => {
+const LoginForm = ({ handleSubmit }: Props) => {
   const handleValidate = (values: LoginFormData) => {
     let errors: any = {};
     if (!values.email) {
@@ -57,3 +57,5 @@ export const LoginForm = ({ handleSubmit }: Props) => {
     </Formik>
   );
 };
+
+export default LoginForm;

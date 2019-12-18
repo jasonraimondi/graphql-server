@@ -12,7 +12,7 @@ type Props = {
   handleSubmit: any;
 };
 
-export const ForgotPasswordForm = ({ handleSubmit }: Props) => {
+const ForgotPasswordForm = ({ handleSubmit }: Props) => {
   const handleValidate = (values: ForgotPasswordFormData) => {
     let errors: any = {};
     if (!values.email) {
@@ -40,3 +40,5 @@ export const ForgotPasswordForm = ({ handleSubmit }: Props) => {
     </Formik>
   );
 };
+
+export default ForgotPasswordForm;

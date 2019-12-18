@@ -1,16 +1,19 @@
+import { FormikHelpers } from "formik";
 import { NextPage } from "next";
 import { withRouter } from "next/router";
+import dynamic from "next/dynamic";
+import { WithRouterProps } from "next/dist/client/with-router";
 import React from "react";
 
 import { useLoginMutation } from "@/generated/graphql";
-import { setAccessToken } from "@/app/lib/auth";
 import { withLayout } from "@/app/components/layouts/layout";
-import { LoginForm, LoginFormData } from "@/app/components/forms/login_form";
-import { WithRouterProps } from "next/dist/client/with-router";
+import { LoginFormData } from "@/app/components/forms/login_form";
 import { Redirect } from "@/app/lib/redirect";
-import { FormikHelpers } from "formik";
+import { setAccessToken } from "@/app/lib/auth/in_memory_access_token";
 
 type Props = WithRouterProps & {};
+
+const LoginForm = dynamic(() => import("@/app/components/forms/login_form"), { ssr: false });
 
 const LoginPage: NextPage<Props> = ({
   router: {

@@ -8,13 +8,13 @@ import { setContext } from "apollo-link-context";
 import { HttpLink } from "apollo-boost";
 import fetch from "isomorphic-unfetch";
 
-import { refreshLink } from "@/app/lib/token_refresh_link";
+import { refreshLink } from "@/app/lib/apollo_token_refresh_link";
 import { getAuth } from "@/app/lib/auth";
 
 const { publicRuntimeConfig } = getConfig();
 
 const httpLink = new HttpLink({
-  uri: publicRuntimeConfig.GRAPH_API_URL,
+  uri: `${publicRuntimeConfig.API_URL}/graphql`,
   credentials: "include",
   fetch,
 });

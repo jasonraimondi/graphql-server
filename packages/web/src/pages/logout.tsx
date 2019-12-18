@@ -3,8 +3,8 @@ import React, { useEffect } from "react";
 
 import { useLogoutMutation } from "@/generated/graphql";
 import { withLayout } from "@/app/components/layouts/layout";
-import { setAccessToken } from "@/app/lib/auth";
 import { Redirect } from "@/app/lib/redirect";
+import { setAccessToken } from "@/app/lib/auth/in_memory_access_token";
 
 const Logout: NextPage = () => {
   const [logout, { client }] = useLogoutMutation();

@@ -16,8 +16,6 @@ export class AuthController {
   async refreshToken(req: Request, res: Response) {
     const refreshToken = req.cookies?.jid;
 
-    console.log(refreshToken);
-
     if (!refreshToken) {
       res.status(STATUS_CODES.Unauthorized);
       res.json(this.FAILED_TO_REFRESH);
@@ -30,7 +28,7 @@ export class AuthController {
       res.json({ success: true, accessToken });
       return;
     } catch (e) {
-      console.log(e);
+      console.error(e);
     }
 
     res.status(STATUS_CODES.Unauthorized);

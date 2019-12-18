@@ -16,7 +16,7 @@ type Props = {
   email: string;
 };
 
-export const ResetPasswordForm = ({ handleSubmit, token, email }: Props) => {
+const ResetPasswordForm = ({ handleSubmit, token, email }: Props) => {
   const handleValidate = (values: ResetPasswordFormData) => {
     let errors: any = {};
     if (!values.email) {
@@ -48,3 +48,5 @@ export const ResetPasswordForm = ({ handleSubmit, token, email }: Props) => {
     </Formik>
   );
 };
+
+export default ResetPasswordForm;

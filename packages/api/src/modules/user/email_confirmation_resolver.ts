@@ -30,7 +30,7 @@ export class EmailConfirmationResolver {
       await this.userConfirmationRepository.delete(userConfirmation.uuid);
       return true;
     } catch (e) {
-      console.log(e);
+      console.error(e);
     }
     return false;
   }

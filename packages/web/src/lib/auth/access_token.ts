@@ -1,7 +1,6 @@
 import jwtDecode from "jwt-decode";
-import { DeprecatedAuth } from "@/app/lib/auth";
 
-export type DecodedAccessToken = DeprecatedAuth & {
+export type DecodedAccessToken = {
   readonly email?: string;
   readonly exp: number;
   readonly isEmailConfirmed?: boolean;

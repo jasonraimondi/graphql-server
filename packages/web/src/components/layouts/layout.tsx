@@ -1,3 +1,4 @@
+import { NextPage } from "next";
 import * as React from "react";
 import Head from "next/head";
 import { css } from "emotion";
@@ -5,14 +6,11 @@ import "normalize.css/normalize.css";
 
 import { Header } from "@/app/components/layouts/partials/header";
 import { colors } from "@/styles/theme";
-import { NextPage, NextPageContext } from "next";
-import { AccessToken } from "@/app/lib/auth/access_token";
-import { getAuth } from "@/app/lib/auth";
 import { privateRoute } from "@/app/components/hoc/private_route";
+import { getAuth } from "@/app/lib/auth";
+import { parseCookies } from "nookies";
 
-type Props = {
-  accessToken?: string;
-};
+type Props = {};
 
 type Settings = {
   protectedRoute?: boolean;
@@ -25,12 +23,10 @@ export const withLayout = (WrappedComponent: NextPage<any>, settings?: Settings)
     title: "Default Page Title",
     ...settings,
   };
-
+  const { accessToken } = getAuth();
   const { protectedRoute, title } = settings;
 
   const Layout: NextPage<Props> = props => {
-    const auth = new AccessToken(props.accessToken);
-
     return (
       <React.StrictMode>
         <Head>
@@ -47,7 +43,7 @@ export const withLayout = (WrappedComponent: NextPage<any>, settings?: Settings)
             background-color: ${colors.blue["500"]};
           `}
         >
-          <Header auth={auth.decoded} />
+          <Header />
           <div
             className={css`
               flex: 1;
@@ -57,7 +53,7 @@ export const withLayout = (WrappedComponent: NextPage<any>, settings?: Settings)
           >
             <WrappedComponent {...props} className="blue" />
             <p>
-              Auth: {auth?.decoded?.email ? "true" : "false"} {JSON.stringify(auth)}
+              Auth: {accessToken?.decoded?.email ? "true" : "false"} {JSON.stringify(accessToken)}
             </p>
           </div>
         </main>
@@ -65,11 +61,14 @@ export const withLayout = (WrappedComponent: NextPage<any>, settings?: Settings)
     );
   };
 
-  Layout.getInitialProps = async (ctx: NextPageContext) => {
-    const { accessToken } = await getAuth(ctx);
+  Layout.getInitialProps = async ctx => {
+    const { jid } = parseCookies(ctx);
+    const auth = getAuth(jid);
+
     return {
       ...(WrappedComponent.getInitialProps && (await WrappedComponent.getInitialProps(ctx))),
-      accessToken: accessToken.token,
+      jit: auth.accessToken.token,
+      jid: auth.refreshToken.token,
     };
   };
 

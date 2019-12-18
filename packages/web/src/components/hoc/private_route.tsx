@@ -1,8 +1,11 @@
 import React, { useEffect } from "react";
 import { NextPage, NextPageContext } from "next";
 
-import { getAuth, setAccessToken, redirectToLogin, setRefreshToken } from "@/app/lib/auth";
-import { fetchAccessToken } from "@/app/lib/token_refresh_link";
+import { getAuth } from "@/app/lib/auth";
+import { fetchAccessToken } from "@/app/lib/apollo_token_refresh_link";
+import { parseCookies } from "nookies";
+import { setRefreshToken } from "@/app/lib/auth/in_memory_refresh_token";
+import { setAccessToken } from "@/app/lib/auth/in_memory_access_token";
 
 type Props = {
   jit?: string;
@@ -12,6 +15,36 @@ type Props = {
 type RefreshTokenResponse = {
   success: boolean;
   accessToken: string;
+};
+
+const updateExpiredToken = async (ctx: NextPageContext) => {
+  const { jid = "" } = parseCookies(ctx);
+  const { accessToken, refreshToken } = getAuth(jid);
+
+  if (accessToken.isValid) {
+    return {
+      jit: accessToken.token,
+      jid: refreshToken.token,
+    };
+  }
+
+  setAccessToken("");
+
+  if (refreshToken.token === "") {
+    return {};
+  }
+  const updatedRefreshToken: RefreshTokenResponse = await fetchAccessToken(ctx);
+
+  if (!updatedRefreshToken.success) {
+    return {};
+  }
+
+  setAccessToken(updatedRefreshToken.accessToken);
+
+  return {
+    jit: updatedRefreshToken.accessToken,
+    jid,
+  };
 };
 
 export function privateRoute(WrappedComponent: NextPage<any>) {
@@ -24,37 +57,11 @@ export function privateRoute(WrappedComponent: NextPage<any>) {
   };
 
   AuthenticatedRoute.getInitialProps = async (ctx: NextPageContext) => {
-    const auth = await getAuth(ctx);
-
-    if (auth.accessToken.isExpired) {
-      setAccessToken();
-
-      if (auth.refreshToken.token === "") {
-        await redirectToLogin(ctx);
-        return {};
-      }
-
-      try {
-        const data = await fetchAccessToken(ctx);
-        const tokenResponse: RefreshTokenResponse = await data.json();
-
-        if (!tokenResponse.success) {
-          await redirectToLogin(ctx);
-        }
-
-        setAccessToken(tokenResponse.accessToken);
-      } catch (e) {
-        await redirectToLogin(ctx);
-        return {};
-      }
-    }
-
-    // Check if Page has a `getInitialProps`; if so, call it.
+    const result = await updateExpiredToken(ctx);
     const pageProps = WrappedComponent.getInitialProps && (await WrappedComponent.getInitialProps(ctx));
     return {
+      ...result,
       ...pageProps,
-      jit: auth.accessToken.token,
-      jid: auth.refreshToken.token,
     };
   };
 

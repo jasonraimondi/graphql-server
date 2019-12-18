@@ -4,8 +4,8 @@ import React from "react";
 
 import { useRegisterMutation } from "@/generated/graphql";
 import { withLayout } from "@/app/components/layouts/layout";
-import { RegisterForm } from "@/app/components/forms/register_form";
-import { redirectToLogin } from "@/app/lib/auth";
+import { redirectToLogin } from "@/app/lib/redirect";
+import dynamic from "next/dynamic";
 
 export const validEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 
@@ -15,6 +15,8 @@ type RegisterFormData = {
   firstName?: string;
   lastName?: string;
 };
+
+const RegisterForm = dynamic(() => import("@/app/components/forms/register_form"), { ssr: false });
 
 const Register: NextPage<{}> = () => {
   const [register] = useRegisterMutation();

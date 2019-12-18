@@ -12,3 +12,17 @@ export const Redirect = (target: string, context?: NextPageContext) => {
     Router.replace(target);
   }
 };
+
+export const redirectToLogin = async (ctx?: NextPageContext, doNotRedirectBack = false) => {
+  let redirectLink = ctx?.pathname ?? document.referrer;
+
+  if (redirectLink) {
+    redirectLink = `?redirectTo=${encodeURI(redirectLink)}`;
+  }
+
+  if (doNotRedirectBack) {
+    redirectLink = "";
+  }
+
+  await Redirect(`/login${redirectLink}`, ctx);
+};

@@ -29,7 +29,7 @@ export class RegisterResolver {
       await this.registerEmail.send(emailConfirmation);
       return true;
     } catch (e) {
-      console.log(e);
+      console.error(e);
     }
     return false;
   }
@@ -49,7 +49,7 @@ export class RegisterResolver {
       await this.registerEmail.send(emailConfirmation);
       return { user, emailConfirmation };
     } catch (e) {
-      console.log(e);
+      console.error(e);
     }
     return {};
   }
