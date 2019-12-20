@@ -6,11 +6,15 @@ import "normalize.css/normalize.css";
 
 import { Header } from "@/app/components/layouts/partials/header";
 import { colors } from "@/styles/theme";
-import { privateRoute } from "@/app/components/hoc/private_route";
-import { getAuth } from "@/app/lib/auth";
+import { withAuth } from "@/app/components/hoc/with_auth";
+import { getInMemoryTokens } from "@/app/lib/auth";
 import { parseCookies } from "nookies";
+import { useAuth } from "@/app/lib/hooks/use_auth";
 
-type Props = {};
+type Props = {
+  jit: string;
+  jid: string;
+};
 
 type Settings = {
   protectedRoute?: boolean;
@@ -23,10 +27,11 @@ export const withLayout = (WrappedComponent: NextPage<any>, settings?: Settings)
     title: "Default Page Title",
     ...settings,
   };
-  const { accessToken } = getAuth();
   const { protectedRoute, title } = settings;
 
-  const Layout: NextPage<Props> = props => {
+  const Layout: NextPage<Props> = (props) => {
+    const auth = useAuth(props);
+
     return (
       <React.StrictMode>
         <Head>
@@ -43,7 +48,7 @@ export const withLayout = (WrappedComponent: NextPage<any>, settings?: Settings)
             background-color: ${colors.blue["500"]};
           `}
         >
-          <Header />
+          <Header auth={auth} />
           <div
             className={css`
               flex: 1;
@@ -51,10 +56,8 @@ export const withLayout = (WrappedComponent: NextPage<any>, settings?: Settings)
               background-color: ${colors.blue["300"]};
             `}
           >
-            <WrappedComponent {...props} className="blue" />
-            <p>
-              Auth: {accessToken?.decoded?.email ? "true" : "false"} {JSON.stringify(accessToken)}
-            </p>
+            <WrappedComponent auth={auth} {...props} />
+            <p>Auth: {JSON.stringify("auth")}</p>
           </div>
         </main>
       </React.StrictMode>
@@ -63,7 +66,7 @@ export const withLayout = (WrappedComponent: NextPage<any>, settings?: Settings)
 
   Layout.getInitialProps = async ctx => {
     const { jid } = parseCookies(ctx);
-    const auth = getAuth(jid);
+    const auth = getInMemoryTokens(jid);
 
     return {
       ...(WrappedComponent.getInitialProps && (await WrappedComponent.getInitialProps(ctx))),
@@ -73,8 +76,8 @@ export const withLayout = (WrappedComponent: NextPage<any>, settings?: Settings)
   };
 
   if (protectedRoute) {
-    return privateRoute(Layout);
+    return withAuth(Layout, true);
   }
 
-  return Layout;
+  return withAuth(Layout);
 };

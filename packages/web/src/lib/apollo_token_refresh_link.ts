@@ -1,10 +1,11 @@
 import { TokenRefreshLink } from "apollo-link-token-refresh";
 
 import { setAccessToken } from "@/app/lib/auth/in_memory_access_token";
-import { getAuth } from "@/app/lib/auth";
+import { getInMemoryTokens } from "@/app/lib/auth";
 import client from "@/app/lib/api_client";
+import { NextPageContext } from "next";
 
-export const fetchAccessToken = (ctx: any) => {
+export const fetchAccessToken = (ctx: NextPageContext) => {
   return client("/auth/refresh_token", {
     method: "POST",
     credentials: "include",
@@ -18,7 +19,7 @@ export const fetchAccessToken = (ctx: any) => {
 export const refreshLink = new TokenRefreshLink({
   accessTokenField: "accessToken",
   isTokenValidOrUndefined: () => {
-    console.log(getAuth());
+    console.log(getInMemoryTokens());
     return true;
   },
   fetchAccessToken: fetchAccessToken,

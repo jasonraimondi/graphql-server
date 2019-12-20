@@ -3,14 +3,14 @@ import { AccessToken } from "@/app/lib/auth/access_token";
 import { getRefreshToken, setRefreshToken } from "@/app/lib/auth/in_memory_refresh_token";
 import { getAccessToken } from "@/app/lib/auth/in_memory_access_token";
 
-type Auth = {
+export type Auth = {
   accessToken: AccessToken;
   refreshToken: RefreshToken;
 };
 
 const isServer = () => typeof window === "undefined";
 
-export const getAuth = (jid = ""): Auth => {
+export const getInMemoryTokens = (jid = ""): Auth => {
   if (isServer()) {
     setRefreshToken(jid);
   }

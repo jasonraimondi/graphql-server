@@ -31,8 +31,11 @@ const LoginPage: NextPage<Props> = ({
         setAccessToken(response.data.login.accessToken);
       }
       setSubmitting(false);
-      if (!redirectTo || redirectTo.includes("/login")) redirectTo = "/dashboard";
-      if (Array.isArray(redirectTo)) redirectTo = redirectTo[0];
+      if (!redirectTo || redirectTo.includes("/login")) {
+        redirectTo = "/dashboard";
+      } else if (Array.isArray(redirectTo)) {
+        redirectTo = redirectTo[0];
+      }
       await Redirect(redirectTo);
     } catch (e) {
       setStatus(e.message);
