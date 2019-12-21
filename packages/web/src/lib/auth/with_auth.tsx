@@ -3,6 +3,7 @@ import { NextPage, NextPageContext } from "next";
 
 import { updateExpiredToken } from "@/app/lib/update_expired_token";
 import { redirectToLogin } from "@/app/lib/redirect";
+import { useAuth } from "@/app/lib/auth/use_auth";
 
 type Props = {
   jit?: string;
@@ -11,7 +12,8 @@ type Props = {
 
 export function withAuth(WrappedComponent: NextPage<any>, guarded = false) {
   const AuthenticatedRoute: NextPage<Props> = (props: Props) => {
-    return <WrappedComponent {...props} />;
+    const auth = useAuth(props);
+    return <WrappedComponent auth={auth} {...props} />;
   };
 
   AuthenticatedRoute.getInitialProps = async (ctx: NextPageContext) => {

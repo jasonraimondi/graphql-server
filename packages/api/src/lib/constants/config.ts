@@ -1,6 +1,6 @@
 export const ENV = {
-  accessTokenTimeout: "20s",
-  refreshTokenTimeout: "1m",
+  accessTokenTimeout: "5s",
+  refreshTokenTimeout: "5m",
   accessTokenSecret: process.env.ACCESS_TOKEN_SECRET ?? "",
   refreshTokenSecret: process.env.REFRESH_TOKEN_SECRET ?? "",
   enableDebugging: !!process.env.ENABLE_DEBUGGING,

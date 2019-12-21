@@ -9,7 +9,7 @@ export const Redirect = (target: string, context?: NextPageContext) => {
     context.res.end();
   } else {
     // In the browser, we just pretend like this never even happened ;)
-    Router.replace(target);
+    Router.push(target);
   }
 };
 

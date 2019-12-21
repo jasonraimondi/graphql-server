@@ -6,14 +6,11 @@ import "normalize.css/normalize.css";
 
 import { Header } from "@/app/components/layouts/partials/header";
 import { colors } from "@/styles/theme";
-import { withAuth } from "@/app/components/hoc/with_auth";
-import { getInMemoryTokens } from "@/app/lib/auth";
-import { parseCookies } from "nookies";
-import { useAuth } from "@/app/lib/hooks/use_auth";
+import { Auth } from "@/app/lib/auth";
+import { withAuth } from "@/app/lib/auth/with_auth";
 
 type Props = {
-  jit: string;
-  jid: string;
+  auth?: Auth;
 };
 
 type Settings = {
@@ -21,17 +18,11 @@ type Settings = {
   title?: string;
 };
 
-export const withLayout = (WrappedComponent: NextPage<any>, settings?: Settings) => {
-  settings = {
-    protectedRoute: false,
-    title: "Default Page Title",
-    ...settings,
-  };
-  const { protectedRoute, title } = settings;
-
-  const Layout: NextPage<Props> = (props) => {
-    const auth = useAuth(props);
-
+export const withLayout = (
+  WrappedComponent: NextPage<any>,
+  { title = "Default Page Title", protectedRoute = false }: Settings
+) => {
+  const Layout: NextPage<Props> = props => {
     return (
       <React.StrictMode>
         <Head>
@@ -48,7 +39,7 @@ export const withLayout = (WrappedComponent: NextPage<any>, settings?: Settings)
             background-color: ${colors.blue["500"]};
           `}
         >
-          <Header auth={auth} />
+          <Header auth={props.auth} />
           <div
             className={css`
               flex: 1;
@@ -56,24 +47,19 @@ export const withLayout = (WrappedComponent: NextPage<any>, settings?: Settings)
               background-color: ${colors.blue["300"]};
             `}
           >
-            <WrappedComponent auth={auth} {...props} />
-            <p>Auth: {JSON.stringify("auth")}</p>
+            <WrappedComponent {...props} />
+            <p>Auth: {JSON.stringify(props.auth)}</p>
           </div>
         </main>
       </React.StrictMode>
     );
   };
 
-  Layout.getInitialProps = async ctx => {
-    const { jid } = parseCookies(ctx);
-    const auth = getInMemoryTokens(jid);
-
-    return {
-      ...(WrappedComponent.getInitialProps && (await WrappedComponent.getInitialProps(ctx))),
-      jit: auth.accessToken.token,
-      jid: auth.refreshToken.token,
-    };
-  };
+  // Layout.getInitialProps = async ctx => {
+  //   return {
+  //     ...(WrappedComponent.getInitialProps && (await WrappedComponent.getInitialProps(ctx))),
+  //   };
+  // };
 
   if (protectedRoute) {
     return withAuth(Layout, true);
