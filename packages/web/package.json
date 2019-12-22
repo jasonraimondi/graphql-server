@@ -21,7 +21,7 @@
     "@emotion/core": "^10.0.22",
     "@emotion/styled": "^10.0.23",
     "@zeit/next-css": "^1.0.1",
-    "apollo-boost": "^0.4.4",
+    "apollo-boost": "^0.4.7",
     "apollo-link-context": "^1.0.19",
     "apollo-link-token-refresh": "^0.2.7",
     "cookie": "^0.4.0",
@@ -31,7 +31,7 @@
     "isomorphic-unfetch": "^3.0.0",
     "js-cookie": "^2.2.1",
     "jwt-decode": "^2.2.0",
-    "next": "^9.1.5-canary.16",
+    "next": "^9.1.6",
     "next-cookies": "^2.0.3",
     "next-with-apollo": "^4.3.0",
     "nookies": "^2.0.8",
@@ -46,10 +46,10 @@
     "@graphql-codegen/typescript-operations": "^1.9.1",
     "@graphql-codegen/typescript-react-apollo": "^1.9.1",
     "@types/jwt-decode": "^2.2.1",
-    "@types/node": "^12.12.17",
-    "@types/react": "^16.9.15",
+    "@types/node": "^12.12.21",
+    "@types/react": "^16.9.17",
     "@types/react-dom": "^16.9.4",
     "graphql-toolkit": "^0.7.4",
-    "typescript": "^3.7.3"
+    "typescript": "^3.7.4"
   }
 }
