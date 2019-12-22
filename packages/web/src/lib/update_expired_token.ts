@@ -45,7 +45,7 @@ export const updateExpiredToken = async (guarded: boolean, jid: string): Promise
     console.log("UPDATED REFRESH", updatedRefreshToken);
     return {
       jit: updatedRefreshToken.accessToken,
-      jid: refreshToken.token,
+      // jid: refreshToken.token,
     };
   }
 

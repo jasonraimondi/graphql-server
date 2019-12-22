@@ -8,9 +8,10 @@ import { Header } from "@/app/components/layouts/partials/header";
 import { colors } from "@/styles/theme";
 import { Auth } from "@/app/lib/auth";
 import { withAuth } from "@/app/lib/auth/with_auth";
+import { Token } from "@/app/components/layouts/token";
 
-type Props = {
-  auth?: Auth;
+type LayoutProps = {
+  auth: Auth;
 };
 
 type Settings = {
@@ -22,7 +23,7 @@ export const withLayout = (
   WrappedComponent: NextPage<any>,
   { title = "Default Page Title", protectedRoute = false }: Settings
 ) => {
-  const Layout: NextPage<Props> = props => {
+  const Layout: NextPage<LayoutProps> = props => {
     return (
       <React.StrictMode>
         <Head>
@@ -47,23 +48,13 @@ export const withLayout = (
               background-color: ${colors.blue["300"]};
             `}
           >
+            <Token accessToken={props.auth.accessToken} refreshToken={props.auth.refreshToken} />
             <WrappedComponent {...props} />
-            <p>Auth: {JSON.stringify(props.auth)}</p>
           </div>
         </main>
       </React.StrictMode>
     );
   };
 
-  // Layout.getInitialProps = async ctx => {
-  //   return {
-  //     ...(WrappedComponent.getInitialProps && (await WrappedComponent.getInitialProps(ctx))),
-  //   };
-  // };
-
-  if (protectedRoute) {
-    return withAuth(Layout, true);
-  }
-
-  return withAuth(Layout);
+  return withAuth(Layout, protectedRoute);
 };

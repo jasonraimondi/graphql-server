@@ -7,9 +7,9 @@ type Props = {
 };
 
 export const Link: React.FunctionComponent<Props> = props => {
-  const { children, href, replace = false } = props;
+  const { children, href } = props;
   return (
-    <NextLink href={href} passHref replace={replace}>
+    <NextLink href={href} passHref>
       {children}
     </NextLink>
   );

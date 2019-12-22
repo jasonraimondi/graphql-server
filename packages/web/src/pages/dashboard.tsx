@@ -3,11 +3,10 @@ import { NextPage } from "next";
 
 import { withLayout } from "@/app/components/layouts/layout";
 
-const Dashboard: NextPage = (props: any) => {
+const Dashboard: NextPage = () => {
   return (
     <>
       <div>HELLO DASHBOARD</div>
-      <div>decoded: {JSON.stringify(props)}</div>
     </>
   );
 };
