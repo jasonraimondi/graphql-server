@@ -1,17 +1,15 @@
 import { TokenRefreshLink } from "apollo-link-token-refresh";
 
 import { setAccessToken } from "@/app/lib/auth/in_memory_access_token";
-import { getInMemoryTokens } from "@/app/lib/auth";
 import client from "@/app/lib/api_client";
-import { NextPageContext } from "next";
 
-export const fetchAccessToken = (ctx: NextPageContext) => {
+export const fetchAccessToken = (cookie = "") => {
   return client("/auth/refresh_token", {
     method: "POST",
     credentials: "include",
     headers: {
       "Content-Type": "application/json",
-      cookie: ctx?.req?.headers?.cookie ?? "",
+      cookie,
     },
   });
 };
@@ -19,7 +17,7 @@ export const fetchAccessToken = (ctx: NextPageContext) => {
 export const refreshLink = new TokenRefreshLink({
   accessTokenField: "accessToken",
   isTokenValidOrUndefined: () => {
-    console.log(getInMemoryTokens());
+    console.log("isTokenValidOrUndefined");
     return true;
   },
   fetchAccessToken: fetchAccessToken,

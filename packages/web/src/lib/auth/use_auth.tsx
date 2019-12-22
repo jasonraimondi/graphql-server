@@ -8,10 +8,13 @@ export const useAuth = ({ jit = "", jid = "" }): Auth => {
   setAccessToken(jit);
   setRefreshToken(jid);
 
-  const [auth, setAuth] = useState(getInMemoryTokens(jid));
+  const [auth, setAuth] = useState(getInMemoryTokens());
 
   useEffect(() => {
-    setAuth(getInMemoryTokens(jid));
+    console.log("use auth has mounted", jid !== "", jid);
+    // setRefreshToken(jid);
+    setAuth(getInMemoryTokens());
+    console.log("i am auth", auth);
   }, []);
 
   return auth;

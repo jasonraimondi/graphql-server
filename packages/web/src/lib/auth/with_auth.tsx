@@ -2,8 +2,10 @@ import React from "react";
 import { NextPage, NextPageContext } from "next";
 
 import { updateExpiredToken } from "@/app/lib/update_expired_token";
-import { redirectToLogin } from "@/app/lib/redirect";
 import { useAuth } from "@/app/lib/auth/use_auth";
+import { parseCookies } from "nookies";
+import { getAccessToken } from "@/app/lib/auth/in_memory_access_token";
+// import { isServer } from "@/app/lib/auth";
 
 type Props = {
   jit?: string;
@@ -18,10 +20,15 @@ export function withAuth(WrappedComponent: NextPage<any>, guarded = false) {
 
   AuthenticatedRoute.getInitialProps = async (ctx: NextPageContext) => {
     console.log("authenticated get initial props start");
-    const { jit, jid } = await updateExpiredToken(ctx, guarded);
 
-    if (guarded && jit === "") {
-      await redirectToLogin(ctx);
+    // if (isServer()) {
+    const { jid = "" } = parseCookies(ctx);
+    const { jit } = await updateExpiredToken(guarded, jid);
+    // }
+
+    if (guarded && getAccessToken().isExpired) {
+      // await redirectToLogin(ctx);
+      console.log("REDIRECT TO LOGIN");
     }
 
     return {
