@@ -4,10 +4,10 @@ import { css } from "@emotion/core";
 
 import { Link } from "@/app/components/link";
 import { colors } from "@/styles/theme";
-import { Auth } from "@/app/lib/auth";
+import { AuthTokens } from "@/app/lib/auth/in_memory";
 
 interface Props {
-  auth?: Auth;
+  auth?: AuthTokens;
 }
 
 export const Header: React.FC<Props> = ({ auth }) => {

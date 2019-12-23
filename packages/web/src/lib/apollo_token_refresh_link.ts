@@ -1,7 +1,7 @@
 import { TokenRefreshLink } from "apollo-link-token-refresh";
 
 import { setAccessToken } from "@/app/lib/auth/in_memory_access_token";
-import client from "@/app/lib/api_client";
+import client from "@/app/lib/client";
 
 export const fetchAccessToken = (cookie = "") => {
   return client("/auth/refresh_token", {

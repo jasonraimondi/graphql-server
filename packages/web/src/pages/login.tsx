@@ -8,7 +8,6 @@ import React from "react";
 import { useLoginMutation } from "@/generated/graphql";
 import { withLayout } from "@/app/components/layouts/layout";
 import { LoginFormData } from "@/app/components/forms/login_form";
-import { Redirect } from "@/app/lib/redirect";
 import { setAccessToken } from "@/app/lib/auth/in_memory_access_token";
 
 type Props = WithRouterProps & {};
@@ -36,7 +35,8 @@ const LoginPage: NextPage<Props> = ({
       } else if (Array.isArray(redirectTo)) {
         redirectTo = redirectTo[0];
       }
-      await Redirect(redirectTo);
+
+      (window as any).location = redirectTo;
     } catch (e) {
       setStatus(e.message);
     }

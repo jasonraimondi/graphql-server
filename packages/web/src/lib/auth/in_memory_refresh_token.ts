@@ -1,9 +1,9 @@
-import { RefreshToken } from "@/app/lib/auth/refresh_token";
+import { RefreshToken } from "@/app/lib/auth/tokens/refresh_token";
 
 let inMemoryRefreshToken = "";
 
 export const setRefreshToken = (token = "") => {
-  console.log("setRefreshToken is active", token !== "", token);
+  // console.log("setRefreshToken is active", token !== "", token);
   inMemoryRefreshToken = token;
 };
 

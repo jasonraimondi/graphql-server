@@ -1,40 +1,51 @@
 import React from "react";
 import { NextPage, NextPageContext } from "next";
-
-import { updateExpiredToken } from "@/app/lib/update_expired_token";
-import { useAuth } from "@/app/lib/auth/use_auth";
 import { parseCookies } from "nookies";
-import { getAccessToken } from "@/app/lib/auth/in_memory_access_token";
-// import { isServer } from "@/app/lib/auth";
+
+import { updateExpiredToken } from "@/app/lib/auth/update_expired_token";
+import { useAuth } from "@/app/lib/auth/use_auth";
+import { setRefreshToken } from "@/app/lib/auth/in_memory_refresh_token";
+import { redirectToLogin } from "@/app/lib/redirect";
+import { getInMemoryTokens } from "@/app/lib/auth/in_memory";
+// import {getInMemoryTokens} from "@/app/lib/auth/in_memory";
 
 type Props = {
-  jit?: string;
-  jid?: string;
+  jit: string;
+  jid: string;
+  isServer: boolean;
 };
 
 export function withAuth(WrappedComponent: NextPage<any>, guarded = false) {
   const AuthenticatedRoute: NextPage<Props> = (props: Props) => {
-    const auth = useAuth(props);
-    return <WrappedComponent auth={auth} {...props} />;
+    const auth = useAuth(props); // USE AUTH NEEDS TO UPDATE AFTER TOKEN REFRESH
+
+    console.log("isServer", props.isServer);
+    console.log("AuthenticatedRoute", getInMemoryTokens());
+
+    return <WrappedComponent auth={auth.auth} {...props} />;
   };
 
   AuthenticatedRoute.getInitialProps = async (ctx: NextPageContext) => {
-    console.log("authenticated get initial props start");
+    const isServer = !!ctx.req;
 
-    // if (isServer()) {
-    const { jid = "" } = parseCookies(ctx);
-    const { jit } = await updateExpiredToken(guarded, jid);
-    // }
+    if (isServer) {
+      const { jid = "" } = parseCookies(ctx);
+      setRefreshToken(jid);
+      console.log("setRefreshToken", { isServer, jid });
+    }
 
-    if (guarded && getAccessToken().isExpired) {
-      // await redirectToLogin(ctx);
-      console.log("REDIRECT TO LOGIN");
+    const { accessToken, refreshToken } = await updateExpiredToken();
+
+    if (guarded && accessToken.isExpired) {
+      await redirectToLogin(ctx);
+      // console.log("REDIRECT TO LOGIN");
     }
 
     return {
       ...(WrappedComponent.getInitialProps && (await WrappedComponent.getInitialProps(ctx))),
-      jit,
-      jid,
+      jit: accessToken.token,
+      jid: refreshToken.token,
+      isServer,
     };
   };
 

@@ -6,12 +6,12 @@ import "normalize.css/normalize.css";
 
 import { Header } from "@/app/components/layouts/partials/header";
 import { colors } from "@/styles/theme";
-import { Auth } from "@/app/lib/auth";
+import { AuthTokens } from "@/app/lib/auth/in_memory";
 import { withAuth } from "@/app/lib/auth/with_auth";
-import { Token } from "@/app/components/layouts/token";
+import { Token } from "@/app/components/token";
 
 type LayoutProps = {
-  auth: Auth;
+  auth: AuthTokens;
 };
 
 type Settings = {
@@ -23,7 +23,7 @@ export const withLayout = (
   WrappedComponent: NextPage<any>,
   { title = "Default Page Title", protectedRoute = false }: Settings
 ) => {
-  const Layout: NextPage<LayoutProps> = props => {
+  const Layout: NextPage<LayoutProps> = (props: LayoutProps) => {
     return (
       <React.StrictMode>
         <Head>

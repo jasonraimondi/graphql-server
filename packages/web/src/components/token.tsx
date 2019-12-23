@@ -1,13 +1,14 @@
-import { Auth } from "@/app/lib/auth";
+import { AuthTokens } from "@/app/lib/auth/in_memory";
 import { css } from "emotion";
 import * as React from "react";
 
-export const Token = ({ accessToken, refreshToken }: Auth) => {
+export const Token = ({ accessToken, refreshToken }: AuthTokens) => {
   return (
     <div
       className={css`
-          font-size: 14px;
-        `}>
+        font-size: 14px;
+      `}
+    >
       <div
         className={css`
           background-color: ${accessToken.isExpired ? "tomato" : "lightseagreen"};

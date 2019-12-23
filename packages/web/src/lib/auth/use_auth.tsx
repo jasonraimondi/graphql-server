@@ -1,10 +1,15 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, SetStateAction } from "react";
 
-import { Auth, getInMemoryTokens } from "@/app/lib/auth";
+import { AuthTokens, getInMemoryTokens } from "@/app/lib/auth/in_memory";
 import { setAccessToken } from "@/app/lib/auth/in_memory_access_token";
 import { setRefreshToken } from "@/app/lib/auth/in_memory_refresh_token";
 
-export const useAuth = ({ jit = "", jid = "" }): Auth => {
+type AuthType = {
+  auth: AuthTokens;
+  setAuth: (auth: SetStateAction<AuthTokens>) => void;
+};
+
+export const useAuth = ({ jit = "", jid = "" }): AuthType => {
   setAccessToken(jit);
   setRefreshToken(jid);
 
@@ -12,10 +17,10 @@ export const useAuth = ({ jit = "", jid = "" }): Auth => {
 
   useEffect(() => {
     console.log("use auth has mounted", jid !== "", jid);
-    // setRefreshToken(jid);
+    setRefreshToken(jid);
     setAuth(getInMemoryTokens());
     console.log("i am auth", auth);
-  }, []);
+  }, [`${jit}${jid}`]);
 
-  return auth;
+  return { auth, setAuth };
 };

@@ -9,7 +9,7 @@ import { HttpLink } from "apollo-boost";
 import fetch from "isomorphic-unfetch";
 
 import { refreshLink } from "@/app/lib/apollo_token_refresh_link";
-import { getInMemoryTokens } from "@/app/lib/auth";
+import { getInMemoryTokens } from "@/app/lib/auth/in_memory";
 
 const { publicRuntimeConfig } = getConfig();
 
