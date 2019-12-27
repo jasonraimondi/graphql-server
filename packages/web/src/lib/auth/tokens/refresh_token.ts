@@ -8,7 +8,7 @@ export type DecodedRefreshToken = {
 export class RefreshToken {
   readonly decoded: DecodedRefreshToken;
 
-  constructor(public readonly token: string = "") {
+  constructor(public readonly token = "") {
     this.decoded = { exp: 0 };
 
     try {
@@ -22,9 +22,10 @@ export class RefreshToken {
 
   get almostExpires(): boolean {
     // ten minutes;
-    // const _result = this.expiresAt.getTime() - Date.now() + 1000 * 60 * 10;
-    const result2 = this.expiresAt.getTime() - Date.now() + 1000 * 30;
-    return new Date(result2) > this.expiresAt; // does token expire within 10 minutes?
+    // const addTenMinutes = this.expiresAt.getTime() - Date.now() + 1000 * 60 * 10;
+    const thirtySeconds = Date.now() + 1000 * 30;
+    const beforeExpiry = this.expiresAt.getTime() - thirtySeconds;
+    return new Date() > new Date(beforeExpiry); // does token expire within 10 minutes?
   }
 
   get isExpired(): boolean {

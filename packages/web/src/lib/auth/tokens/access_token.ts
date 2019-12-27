@@ -10,7 +10,7 @@ export type DecodedAccessToken = {
 export class AccessToken {
   readonly decoded: DecodedAccessToken;
 
-  constructor(public readonly token?: string) {
+  constructor(public readonly token = "") {
     this.decoded = { exp: 0 };
 
     try {

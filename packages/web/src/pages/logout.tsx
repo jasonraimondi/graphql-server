@@ -5,6 +5,7 @@ import { useLogoutMutation } from "@/generated/graphql";
 import { withLayout } from "@/app/components/layouts/layout";
 import { Redirect } from "@/app/lib/redirect";
 import { setAccessToken } from "@/app/lib/auth/in_memory_access_token";
+import { setRefreshToken } from "@/app/lib/auth/in_memory_refresh_token";
 
 const Logout: NextPage = () => {
   const [logout, { client }] = useLogoutMutation();
@@ -13,6 +14,7 @@ const Logout: NextPage = () => {
     await logout();
     await client!.resetStore();
     setAccessToken();
+    setRefreshToken();
     await Redirect("/login");
   };
 

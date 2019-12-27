@@ -4,7 +4,7 @@ import { NextPage } from "next";
 import { withLayout } from "@/app/components/layouts/layout";
 import { useMeQuery } from "@/generated/graphql";
 
-const Dashboard: NextPage = () => {
+const Profile: NextPage = () => {
   const { data, loading, error } = useMeQuery({ fetchPolicy: "network-only" });
   // console.log({ data, loading, error });
 
@@ -30,7 +30,12 @@ const Dashboard: NextPage = () => {
   return <div>Something went wrong!</div>;
 };
 
-export default withLayout(Dashboard, {
+Profile.getInitialProps = async () => {
+  console.log("profile get initial props");
+  return {};
+};
+
+export default withLayout(Profile, {
   protectedRoute: true,
   title: "User profile",
 });
