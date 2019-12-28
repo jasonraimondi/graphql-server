@@ -25,11 +25,6 @@ const Index: NextPage<any> = () => {
   return <div>{body}</div>;
 };
 
-Index.getInitialProps = async () => {
-  console.log("index get initial props");
-  return {};
-};
-
 export default withLayout(Index, {
   title: "Hi ya slugger",
 });

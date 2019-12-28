@@ -4,7 +4,7 @@ import * as React from "react";
 
 export const Token = ({ accessToken, refreshToken }: AuthTokens) => {
   const getTokenExp = (token: string) => {
-    return token.substr(0, 4) + "..." + token.substr(accessToken.token.length - 4, 4);
+    return token.substr(0, 4) + "..." + token.substr(token.length - 4, 4);
   };
 
   function getExpInSeconds(expires: number) {
@@ -28,7 +28,8 @@ export const Token = ({ accessToken, refreshToken }: AuthTokens) => {
         <p>isExpired: {accessToken.isExpired.toString()}</p>
         {accessToken.isExpired ? null : (
           <>
-            <p>Expires At: {accessToken.expiresAt.toString()}</p>
+            <p>Expires At: {accessToken.expiresAt.toLocaleString()}</p>
+            <p>Expires At: {accessToken.expiresAt.getTime()}</p>
             <p>Expires In: {getExpInSeconds(accessToken.expiresAt.getTime())}</p>
           </>
         )}
@@ -44,7 +45,8 @@ export const Token = ({ accessToken, refreshToken }: AuthTokens) => {
         </p>
         {refreshToken.isExpired ? null : (
           <>
-            <p>Expires At: {refreshToken.expiresAt.toString()}</p>
+            <p>Expires At: {refreshToken.expiresAt.toLocaleString()}</p>
+            <p>Expires At: {refreshToken.expiresAt.getTime()}</p>
             <p>Expires In: {getExpInSeconds(refreshToken.expiresAt.getTime())}</p>
           </>
         )}

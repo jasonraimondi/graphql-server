@@ -20,12 +20,8 @@ export class RefreshToken {
     return new Date(this.decoded.exp * 1000);
   }
 
-  get almostExpires(): boolean {
-    // ten minutes;
-    // const addTenMinutes = this.expiresAt.getTime() - Date.now() + 1000 * 60 * 10;
-    const thirtySeconds = Date.now() + 1000 * 30;
-    const beforeExpiry = this.expiresAt.getTime() - thirtySeconds;
-    return new Date() > new Date(beforeExpiry); // does token expire within 10 minutes?
+  get expiresToLocal(): string {
+    return this.expiresAt.toLocaleString();
   }
 
   get isExpired(): boolean {
