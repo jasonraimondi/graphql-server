@@ -18,12 +18,17 @@ export class AuthResolver {
   ) {}
 
   @Mutation(() => LoginResponse)
-  async login(@Arg("data") { email, password }: LoginInput, @Ctx() { res }: MyContext): Promise<LoginResponse> {
+  async login(
+    @Arg("data") { email, password, rememberMe }: LoginInput,
+    @Ctx() { res }: MyContext
+  ): Promise<LoginResponse> {
     const user = await this.userRepository.findByEmail(email);
+
+    console.log({ rememberMe });
 
     await user.verify(password);
 
-    this.authService.sendRefreshToken(res, user);
+    this.authService.sendRefreshToken(res, rememberMe, user);
 
     await this.userRepository.incrementLastLoginAt(user);
 
@@ -35,7 +40,7 @@ export class AuthResolver {
 
   @Mutation(() => Boolean)
   async logout(@Ctx() { res }: MyContext) {
-    this.authService.sendRefreshToken(res, undefined);
+    this.authService.sendRefreshToken(res, false, undefined);
     return true;
   }
 

@@ -1,4 +1,4 @@
-process.env.TZ = 'America/Denver';
+process.env.TZ = "America/Denver";
 
 import "reflect-metadata";
 import "source-map-support/register";

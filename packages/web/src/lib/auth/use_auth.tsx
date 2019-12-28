@@ -16,11 +16,9 @@ export const useAuth = ({ jit = "", jid = "" }): AuthType => {
   const [auth, setAuth] = useState(getInMemoryTokens());
 
   useEffect(() => {
-    console.log("use auth has mounted", jid !== "", jid);
     setRefreshToken(jid);
     setAuth(getInMemoryTokens());
-    console.log("i am auth", auth);
-  }, [`${jit}${jid}`]);
+  }, [`${jit}${jid}`]); // if either the jit or jid token changes, update the useAuth hook.
 
   return { auth, setAuth };
 };

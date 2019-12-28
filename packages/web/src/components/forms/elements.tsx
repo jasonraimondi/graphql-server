@@ -7,6 +7,11 @@ export const Label = styled.label`
     display: block;
     color: black;
     padding-bottom: 0.1rem;
+
+    &.inline {
+      display: inline;
+      padding: 0 0.5rem;
+    }
   }
 `;
 

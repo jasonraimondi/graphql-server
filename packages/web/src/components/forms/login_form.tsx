@@ -7,6 +7,7 @@ import { validEmail } from "@/app/pages/register";
 export type LoginFormData = {
   email: string;
   password: string;
+  rememberMe: boolean;
 };
 
 type Props = {
@@ -26,11 +27,11 @@ const LoginForm = ({ handleSubmit }: Props) => {
 
   return (
     <Formik<LoginFormData>
-      initialValues={{ email: "", password: "" }}
+      initialValues={{ email: "", password: "", rememberMe: false }}
       validate={handleValidate}
       onSubmit={handleSubmit}
     >
-      {({ isSubmitting, status }) => (
+      {({ isSubmitting, status, values }) => (
         <Form data-test="login-form">
           <p>{status}</p>
           <Label data-test="login-form--email">
@@ -49,6 +50,11 @@ const LoginForm = ({ handleSubmit }: Props) => {
             </Link>
             <ErrorMessage data-test="password-error" name="password" component="div" />
           </Label>
+          <Label data-test="login-form--remember-me">
+            <Field name="rememberMe" type="checkbox" checked={values.rememberMe} component={Checkbox} />
+            <span className="inline">Remember Me</span>
+            <ErrorMessage data-test="remember-me" name="remember-me" component="div" />
+          </Label>
           <Button type="submit" disabled={isSubmitting}>
             <span>Submit</span>
           </Button>
@@ -57,5 +63,9 @@ const LoginForm = ({ handleSubmit }: Props) => {
     </Formik>
   );
 };
+
+function Checkbox({ field, type, checked }: any) {
+  return <input {...field} type={type} checked={checked} />;
+}
 
 export default LoginForm;

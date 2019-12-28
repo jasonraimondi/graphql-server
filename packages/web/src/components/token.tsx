@@ -22,9 +22,7 @@ export const Token = ({ accessToken, refreshToken }: AuthTokens) => {
           background-color: ${accessToken.isExpired ? "tomato" : "lightseagreen"};
         `}
       >
-        <p>
-          accessToken: {getTokenExp(accessToken.token)}
-        </p>
+        <p>accessToken: {getTokenExp(accessToken.token)}</p>
         <p>isExpired: {accessToken.isExpired.toString()}</p>
         {accessToken.isExpired ? null : (
           <>
@@ -40,9 +38,7 @@ export const Token = ({ accessToken, refreshToken }: AuthTokens) => {
           background-color: ${refreshToken.isExpired ? "tomato" : "lightseagreen"};
         `}
       >
-        <p>
-          refreshToken: {getTokenExp(refreshToken.token)}
-        </p>
+        <p>refreshToken: {getTokenExp(refreshToken.token)}</p>
         {refreshToken.isExpired ? null : (
           <>
             <p>Expires At: {refreshToken.expiresAt.toLocaleString()}</p>

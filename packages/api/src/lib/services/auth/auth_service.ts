@@ -46,7 +46,7 @@ export class AuthService {
     });
   }
 
-  createRefreshToken(user: User): string {
+  createRefreshToken(user: User, _rememberMe = false): string {
     const payload = {
       userId: user.uuid,
       tokenVersion: user.tokenVersion,
@@ -56,9 +56,20 @@ export class AuthService {
     });
   }
 
-  sendRefreshToken(res: Response, user?: User) {
+  sendRefreshToken(res: Response, rememberMe: boolean, user?: User) {
     let token = "";
+
+    // @todo pass rememberMe to createRefreshToken
     if (user) token = this.createRefreshToken(user);
+
+    if (rememberMe) {
+      res.cookie("rememberMe", true, {
+        httpOnly: true,
+        domain: "localhost",
+        expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30),
+      });
+    }
+
     res.cookie("jid", token, {
       httpOnly: true,
       // domain: ".example.com"
