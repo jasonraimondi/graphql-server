@@ -3,6 +3,14 @@ import { css } from "emotion";
 import * as React from "react";
 
 export const Token = ({ accessToken, refreshToken }: AuthTokens) => {
+  const getTokenExp = (token: string) => {
+    return token.substr(0, 4) + "..." + token.substr(accessToken.token.length - 4, 4);
+  };
+
+  function getExpInSeconds(expires: number) {
+    return (expires - Date.now()) / 1000 + " seconds";
+  }
+
   return (
     <div
       className={css`
@@ -14,12 +22,14 @@ export const Token = ({ accessToken, refreshToken }: AuthTokens) => {
           background-color: ${accessToken.isExpired ? "tomato" : "lightseagreen"};
         `}
       >
-        <p>accessToken: {accessToken.token.substr(0, 4)}</p>
+        <p>
+          accessToken: {getTokenExp(accessToken.token)}
+        </p>
         <p>isExpired: {accessToken.isExpired.toString()}</p>
         {accessToken.isExpired ? null : (
           <>
             <p>Expires At: {accessToken.expiresAt.toString()}</p>
-            <p>Expires In: {(accessToken.expiresAt.getTime() - Date.now()) / 1000} seconds</p>
+            <p>Expires In: {getExpInSeconds(accessToken.expiresAt.getTime())}</p>
           </>
         )}
       </div>
@@ -29,11 +39,13 @@ export const Token = ({ accessToken, refreshToken }: AuthTokens) => {
           background-color: ${refreshToken.isExpired ? "tomato" : "lightseagreen"};
         `}
       >
-        <p>refreshToken: {refreshToken.token.substr(0, 4)}</p>
+        <p>
+          refreshToken: {getTokenExp(refreshToken.token)}
+        </p>
         {refreshToken.isExpired ? null : (
           <>
             <p>Expires At: {refreshToken.expiresAt.toString()}</p>
-            <p>Expires In: {(refreshToken.expiresAt.getTime() - Date.now()) / 1000} seconds</p>
+            <p>Expires In: {getExpInSeconds(refreshToken.expiresAt.getTime())}</p>
           </>
         )}
         <p>isExpired: {refreshToken.isExpired.toString()}</p>

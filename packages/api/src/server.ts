@@ -1,3 +1,5 @@
+process.env.TZ = 'America/Denver';
+
 import "reflect-metadata";
 import "source-map-support/register";
 import "tsconfig-paths/register";
