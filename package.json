@@ -13,7 +13,7 @@
   },
   "devDependencies": {
     "@types/node": "^12.12.22",
-    "lerna": "^3.19.0",
+    "lerna": "^3.20.0",
     "npm-run-all": "^4.1.5",
     "prettier": "1.19.1",
     "start-server-and-test": "^1.10.6"
