@@ -27,6 +27,8 @@ const ResetPasswordForm = ({ handleSubmit, token, email }: Props) => {
     return errors;
   };
 
+  console.log({ email });
+
   return (
     <Formik<ResetPasswordFormData>
       initialValues={{ email, token, password: "" }}
@@ -37,8 +39,8 @@ const ResetPasswordForm = ({ handleSubmit, token, email }: Props) => {
         <Form data-test="reset-password-form">
           <Label data-test="reset-password-form--password">
             <span>Password</span>
-            <Field type="password" name="password" placeholder="************" />
-            <ErrorMessage name="email" component="div" />
+            <Field type="password" name="password" placeholder="enter a secure password" />
+            <ErrorMessage name="password" component="div" />
           </Label>
           <Button type="submit" disabled={isSubmitting}>
             <span>Submit</span>

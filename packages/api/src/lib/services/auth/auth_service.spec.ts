@@ -24,11 +24,11 @@ describe("auth_resolver", () => {
   });
 
   describe("refreshToken", () => {
-    test("create refresh token is created with expected data", async () => {
+    test("create refresh token no remember me", async () => {
       // arrange
       const user = await User.create({ email: "jason@raimondi.us" });
       await userRepository.save(user);
-      const daysInFuture = (days: number) => Date.now() / 1000 + 60 * 60 * 24 * days;
+      const hoursInFuture = (hours: number) => Date.now() / 1000 + 60 * 60 * hours;
 
       // act
       const token = authService.createRefreshToken(user);
@@ -36,11 +36,30 @@ describe("auth_resolver", () => {
 
       // assert
       expect(decoded.userId).toBe(user.uuid);
-      expect(decoded.exp).toBeGreaterThan(daysInFuture(6));
-      expect(decoded.exp).toBeLessThan(daysInFuture(8));
+      expect(decoded.tokenVersion).toBe(user.tokenVersion);
+      expect(decoded.exp).toBeGreaterThan(hoursInFuture(1.9));
+      expect(decoded.exp).toBeLessThan(hoursInFuture(2.1));
     });
 
-    test.skip("create access token is created with expected data", async () => {
+    test("create refresh token with remember me", async () => {
+      // arrange
+      const rememberMe = true;
+      const user = await User.create({ email: "jason@raimondi.us" });
+      await userRepository.save(user);
+      const daysInFuture = (days: number) => Date.now() / 1000 + 60 * 60 * 24 * days;
+
+      // act
+      const token = authService.createRefreshToken(user, rememberMe);
+      const decoded: any = jwtDecode(token);
+
+      // assert
+      expect(decoded.userId).toBe(user.uuid);
+      expect(decoded.tokenVersion).toBe(user.tokenVersion);
+      expect(decoded.exp).toBeGreaterThan(daysInFuture(6.9));
+      expect(decoded.exp).toBeLessThan(daysInFuture(7.1));
+    });
+
+    test("create access token", async () => {
       // arrange
       const user = await User.create({ email: "jason@raimondi.us" });
       await userRepository.save(user);

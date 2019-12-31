@@ -8,7 +8,6 @@ const route = (path: string) => {
     if (!obj) return result;
     for (const key in obj) {
       if (obj.hasOwnProperty(key)) {
-        // @ts-ignore
         result = result.replace(`:${key}`, obj[key]);
       }
     }

@@ -1,6 +1,5 @@
 export const ENV = {
-  accessTokenTimeout: "15m",
-  refreshTokenTimeout: "7d",
+  cookieDomain: "localhost",
   accessTokenSecret: process.env.ACCESS_TOKEN_SECRET ?? "",
   refreshTokenSecret: process.env.REFRESH_TOKEN_SECRET ?? "",
   enableDebugging: !!process.env.ENABLE_DEBUGGING,

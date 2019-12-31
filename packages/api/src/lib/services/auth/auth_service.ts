@@ -1,4 +1,4 @@
-import { Response } from "express";
+import { CookieOptions, Response } from "express";
 import { sign, verify } from "jsonwebtoken";
 import { inject, injectable } from "inversify";
 
@@ -9,16 +9,17 @@ import { ENV } from "@/lib/constants/config";
 
 @injectable()
 export class AuthService {
-  constructor(
-    @inject(REPOSITORY.UserRepository)
-    private userRepository: IUserRepository
-  ) {}
+  private readonly accessTokenTimeout = "15m";
+  private readonly refreshTokenTimeout = "2h";
+  private readonly refreshTokenTimeoutRemember = "7d";
+
+  constructor(@inject(REPOSITORY.UserRepository) private userRepository: IUserRepository) {}
 
   async updateAccessToken(refreshToken: string) {
     let payload: any;
     try {
       payload = verify(refreshToken, ENV.refreshTokenSecret);
-    } catch (e) {
+    } catch (_) {
       throw new Error("invalid refresh token");
     }
 
@@ -42,39 +43,34 @@ export class AuthService {
       isEmailConfirmed: user.isEmailConfirmed,
     };
     return sign(payload, ENV.accessTokenSecret, {
-      expiresIn: ENV.accessTokenTimeout,
+      expiresIn: this.accessTokenTimeout,
     });
   }
 
-  createRefreshToken(user: User, _rememberMe = false): string {
+  createRefreshToken(user: User, rememberMe = false): string {
     const payload = {
       userId: user.uuid,
       tokenVersion: user.tokenVersion,
     };
     return sign(payload, ENV.refreshTokenSecret, {
-      expiresIn: ENV.refreshTokenTimeout,
+      expiresIn: rememberMe ? this.refreshTokenTimeoutRemember : this.refreshTokenTimeout,
     });
   }
 
   sendRefreshToken(res: Response, rememberMe: boolean, user?: User) {
     let token = "";
 
-    // @todo pass rememberMe to createRefreshToken
-    if (user) token = this.createRefreshToken(user);
-
-    if (rememberMe) {
-      res.cookie("rememberMe", true, {
-        httpOnly: true,
-        domain: "localhost",
-        expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30),
-      });
+    if (user) {
+      token = this.createRefreshToken(user, rememberMe);
     }
 
-    res.cookie("jid", token, {
+    const options: CookieOptions = {
       httpOnly: true,
-      // domain: ".example.com"
-      domain: "localhost",
-      expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30),
-    });
+      domain: ENV.cookieDomain,
+      expires: token === "" ? new Date() : new Date(Date.now() + 1000 * 60 * 60 * 24 * 30),
+    };
+
+    res.cookie("rememberMe", rememberMe, options);
+    res.cookie("jid", token, options);
   }
 }

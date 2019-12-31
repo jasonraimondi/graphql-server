@@ -11,11 +11,6 @@ const Dashboard: NextPage = () => {
   );
 };
 
-Dashboard.getInitialProps = async () => {
-  console.log("dashboard get initial props");
-  return {};
-};
-
 export default withLayout(Dashboard, {
   protectedRoute: true,
   title: "The Dashboard",

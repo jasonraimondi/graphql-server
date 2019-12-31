@@ -30,11 +30,6 @@ const Profile: NextPage = () => {
   return <div>Something went wrong!</div>;
 };
 
-Profile.getInitialProps = async () => {
-  console.log("profile get initial props");
-  return {};
-};
-
 export default withLayout(Profile, {
   protectedRoute: true,
   title: "User profile",

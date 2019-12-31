@@ -15,10 +15,8 @@ import { EmailConfirmation } from "@/entity/user/email_confirmation_entity";
 @Resolver()
 export class RegisterResolver {
   constructor(
-    @inject(REPOSITORY.UserRepository)
-    private userRepository: IUserRepository,
-    @inject(REPOSITORY.EmailConfirmationRepository)
-    private emailConfirmationRepository: IEmailConfirmationRepository,
+    @inject(REPOSITORY.UserRepository) private userRepository: IUserRepository,
+    @inject(REPOSITORY.EmailConfirmationRepository) private emailConfirmationRepository: IEmailConfirmationRepository,
     @inject(SERVICE.RegisterEmail) private registerEmail: RegisterEmail
   ) {}
 

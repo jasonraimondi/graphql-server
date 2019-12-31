@@ -12,8 +12,7 @@ import { LoginInput } from "@/modules/user/auth/login_input";
 @Resolver()
 export class AuthResolver {
   constructor(
-    @inject(REPOSITORY.UserRepository)
-    private userRepository: IUserRepository,
+    @inject(REPOSITORY.UserRepository) private userRepository: IUserRepository,
     @inject(SERVICE.AuthService) private authService: AuthService
   ) {}
 
@@ -23,8 +22,6 @@ export class AuthResolver {
     @Ctx() { res }: MyContext
   ): Promise<LoginResponse> {
     const user = await this.userRepository.findByEmail(email);
-
-    console.log({ rememberMe });
 
     await user.verify(password);
 

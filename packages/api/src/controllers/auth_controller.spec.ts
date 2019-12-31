@@ -38,17 +38,35 @@ describe("auth controller", () => {
     const response = await request(app)
       .post("/auth/refresh_token")
       .expect(200)
+      .set("Cookie", [`jid=${refreshToken}`, `rememberMe=true`])
+      .expect("Content-Type", /json/);
+
+    // assert
+    expect(response.header["set-cookie"].length).toBe(2);
+    expect(response.header["set-cookie"][0]).toMatch(/rememberMe=true*/);
+    const REFRESH_COOKIE = /jid=[a-zA-Z\d\-_]+.[a-zA-Z\d\-_]+.[a-zA-Z\d\-_]+; Domain=localhost; Path=\/;/;
+    expect(response.header["set-cookie"][1]).toMatch(REFRESH_COOKIE);
+    expect(response.body.success).toBe(true);
+    expect(response.body.accessToken).toMatch(/[a-zA-Z\d]+.[a-zA-Z\d]+.[a-zA-Z\d]+/);
+  });
+
+  test("refresh token no remember me", async () => {
+    // arrange
+    const app = await application(container);
+
+    const user = await User.create({ email: "jason@raimondi.us" });
+    await userRepository.save(user);
+    const refreshToken = authService.createRefreshToken(user);
+
+    // act
+    const response = await request(app)
+      .post("/auth/refresh_token")
+      .expect(200)
       .set("Cookie", [`jid=${refreshToken}`])
       .expect("Content-Type", /json/);
 
     // assert
-    expect(response.header["set-cookie"].length).toBe(1);
-    const JID_JWT_COOKIE = /jid=[a-zA-Z\d\-_]+.[a-zA-Z\d\-_]+.[a-zA-Z\d\-_]+; Domain=localhost; Path=\/; */;
-    expect(response.header["set-cookie"][0]).toMatch(JID_JWT_COOKIE);
-    // @todo should pass, I need to add this back...
-    // expect(response.header["set-cookie"][0].includes(refreshToken)).toBeFalsy();
-    expect(response.body.success).toBe(true);
-    expect(response.body.accessToken).toMatch(/[a-zA-Z\d]+.[a-zA-Z\d]+.[a-zA-Z\d]+/);
+    expect(response.header["set-cookie"][0]).toMatch(/rememberMe=false*/);
   });
 
   test("missing token (jid) fails", async () => {

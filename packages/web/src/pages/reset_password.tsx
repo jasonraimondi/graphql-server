@@ -1,4 +1,6 @@
 import { FormikHelpers } from "formik";
+import { WithRouterProps } from "next/dist/client/with-router";
+import { withRouter } from "next/router";
 import { NextPage } from "next";
 import dynamic from "next/dynamic";
 import React from "react";
@@ -8,14 +10,20 @@ import { useUpdatePasswordFromTokenMutation, useValidateForgotPasswordTokenMutat
 import { ResetPasswordFormData } from "@/app/components/forms/reset_password_form";
 import { redirectToLogin } from "@/app/lib/redirect";
 
-type Props = {
+type Props = WithRouterProps & {
   token: string;
   email: string;
 };
 
 const ResetPasswordForm = dynamic(() => import("@/app/components/forms/reset_password_form"), { ssr: false });
 
-const ResetPassword: NextPage<Props> = ({ token, email }) => {
+const ResetPassword: NextPage<Props> = ({
+  router: {
+    query: { e, u },
+  },
+}) => {
+  const email = Array.isArray(e) ? e[0] : e;
+  const token = Array.isArray(u) ? u[0] : u;
   const [updatePasswordMutation] = useUpdatePasswordFromTokenMutation();
   const [validateForgotPasswordTokenMutation] = useValidateForgotPasswordTokenMutation();
 
@@ -36,18 +44,6 @@ const ResetPassword: NextPage<Props> = ({ token, email }) => {
   );
 };
 
-ResetPassword.getInitialProps = async (ctx): Promise<Props> => {
-  const {
-    query: { e, u },
-  } = ctx;
-  const token = Array.isArray(u) ? u[0] : u;
-  const email = Array.isArray(e) ? e[0] : e;
-  if (!token || !email) {
-    await redirectToLogin(ctx, true);
-  }
-  return { token, email };
-};
-
-export default withLayout(ResetPassword, {
+export default withLayout(withRouter(ResetPassword), {
   title: "Reset Password Page",
 });

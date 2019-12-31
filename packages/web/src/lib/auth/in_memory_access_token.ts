@@ -6,6 +6,4 @@ export const setAccessToken = (token = "") => {
   inMemoryAccessToken = token;
 };
 
-export const getAccessToken = () => {
-  return new AccessToken(inMemoryAccessToken);
-};
+export const getAccessToken = () => new AccessToken(inMemoryAccessToken);

@@ -10,10 +10,8 @@ import { VerifyEmailInput } from "@/modules/user/auth/verify_email_input";
 @Resolver()
 export class EmailConfirmationResolver {
   constructor(
-    @inject(REPOSITORY.UserRepository)
-    private userRepository: IUserRepository,
-    @inject(REPOSITORY.EmailConfirmationRepository)
-    private userConfirmationRepository: IEmailConfirmationRepository
+    @inject(REPOSITORY.UserRepository) private userRepository: IUserRepository,
+    @inject(REPOSITORY.EmailConfirmationRepository) private userConfirmationRepository: IEmailConfirmationRepository
   ) {}
 
   @Mutation(() => Boolean!)

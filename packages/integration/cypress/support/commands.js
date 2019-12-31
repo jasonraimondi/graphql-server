@@ -10,7 +10,7 @@ Cypress.Commands.add("logout", () => {
   cy.location().should(loc => {
     expect(loc.pathname).to.eq("/login");
   });
-  cy.getCookie("jid").should("have.property", "value", "");
+  cy.getCookie("jid").should("not.exist");
 });
 
 Cypress.Commands.add("register", ({ email, password, first, last }) => {
@@ -47,12 +47,14 @@ Cypress.Commands.add("login", ({ email, password, redirectTo = "/dashboard" }) =
   cy.dataTest("login-form--password")
     .click()
     .type(password);
+  cy.dataTest("login-form--remember-me").click();
   cy.dataTest("login-form").submit();
 
   cy.location().should(loc => {
     expect(loc.pathname).to.eq(redirectTo);
   });
   cy.getCookie("jid").should("exist");
+  cy.getCookie("rememberMe").should("have.property", "value", "true");
 });
 
 Cypress.Commands.add("verifyUser", email => {

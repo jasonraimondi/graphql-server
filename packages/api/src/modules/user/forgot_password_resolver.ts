@@ -13,12 +13,9 @@ import { SendForgotPasswordInput, UpdatePasswordInput } from "@/modules/user/aut
 @Resolver()
 export class ForgotPasswordResolver {
   constructor(
-    @inject(REPOSITORY.UserRepository)
-    private userRepository: IUserRepository,
-    @inject(REPOSITORY.ForgotPasswordRepository)
-    private forgotPasswordRepository: IForgotPasswordRepository,
-    @inject(SERVICE.ForgotPasswordEmail)
-    private forgotPasswordEmail: ForgotPasswordEmail
+    @inject(REPOSITORY.UserRepository) private userRepository: IUserRepository,
+    @inject(REPOSITORY.ForgotPasswordRepository) private forgotPasswordRepository: IForgotPasswordRepository,
+    @inject(SERVICE.ForgotPasswordEmail) private forgotPasswordEmail: ForgotPasswordEmail
   ) {}
 
   @Mutation(() => Boolean!)

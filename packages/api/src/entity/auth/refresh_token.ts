@@ -20,10 +20,6 @@ export class RefreshToken {
     return new Date(this.decoded.exp * 1000);
   }
 
-  get expiresToLocal(): string {
-    return this.expiresAt.toLocaleString();
-  }
-
   get isExpired(): boolean {
     return new Date() > this.expiresAt;
   }
