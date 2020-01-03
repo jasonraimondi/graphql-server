@@ -43,12 +43,12 @@ jobs:
         NODE_ENV: test
         ACCESS_TOKEN_SECRET: randomAccessToken
         REFRESH_TOKEN_SECRET: randomRefreshToken
-        ENABLE_OUTPUT_SCHEMA: true
-        ENABLE_DEBUGGING: true
-        MAILER_URL: smtp://mailhog:${{ job.services.mailhog.ports[1025] }}
-        MAILER_HTTP_URL: http://mailhog:${{ job.services.mailhog.ports[8025] }}
+        ENABLE_OUTPUT_SCHEMA: false
+        ENABLE_DEBUGGING: false
+        MAILER_URL: smtp://localhost:${{ job.services.mailhog.ports[1025] }}
+        MAILER_HTTP_URL: http://localhost:${{ job.services.mailhog.ports[8025] }}
         TYPEORM_SYNCHRONIZE: true
-        TYPEORM_LOGGING: true
+        TYPEORM_LOGGING: false
         TYPEORM_ENTITIES: src/entity/**/*_entity.ts
         TYPEORM_CONNECTION: sqlite
         TYPEORM_DATABASE: tmp/db.sqlite3
