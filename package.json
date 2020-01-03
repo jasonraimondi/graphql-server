@@ -7,7 +7,7 @@
     "build": "lerna run --parallel build",
     "start": "lerna run --parallel start",
     "cypress": "npm run --prefix packages/integration_tests cypress:open",
-    "integration-tests": "npm run --prefix packages/integration_tests cypress:run",
+    "integration-tests": "npm run --prefix packages/integration cypress:run",
     "start-and-test": "start-server-and-test dev http://localhost:8080 integration-tests",
     "pretty": "prettier --config prettier.config.js --write \"packages/**/*.{ts,tsx,js,graphql,css,scss,json}\""
   },
