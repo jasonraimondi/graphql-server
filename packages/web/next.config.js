@@ -6,7 +6,6 @@ module.exports = withCSS({
   minify: false,
   distDir: "dist",
   publicRuntimeConfig: {
-    // API_URL: process.env.API_URL || "http://localhost:4000/auth/refresh_token",
     API_URL: process.env.API_URL || "http://localhost:4000",
   },
   serverRuntimeConfig: {

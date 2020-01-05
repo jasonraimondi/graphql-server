@@ -8,6 +8,9 @@ export type AuthTokens = {
   refreshToken: RefreshToken;
 };
 
+/**
+ * @deprecated
+ */
 export const getInMemoryTokens = (): AuthTokens => {
   return {
     accessToken: getAccessToken(),

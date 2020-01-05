@@ -3,8 +3,13 @@
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/node_modules" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/api/.idea" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/api/dist" />
       <excludeFolder url="file://$MODULE_DIR$/packages/api/node_modules" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/integration/.idea" />
       <excludeFolder url="file://$MODULE_DIR$/packages/integration_tests/node_modules" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/web/.idea" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/web/dist" />
       <excludeFolder url="file://$MODULE_DIR$/packages/web/node_modules" />
     </content>
     <content url="file://$MODULE_DIR$/node_modules" />

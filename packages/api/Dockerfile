@@ -12,7 +12,7 @@ RUN npm prune
 FROM node:12-alpine
 ENV NODE_ENV=production \
     TYPEORM_ENTITIES="src/entity/**/*_entity.js"
-WORKDIR /app/packages/api
+WORKDIR /app
 RUN mkdir -p /app/packages/api && chown node:node /app/packages/api
 USER node
 COPY --from=builder --chown=node:node /app/package* /app/

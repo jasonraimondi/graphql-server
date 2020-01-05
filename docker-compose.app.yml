@@ -2,7 +2,7 @@ version: "3.7"
 
 services:
   traefik:
-    image: "traefik:v2.0.0"
+    image: "traefik:v2.1"
     container_name: "traefik"
     command:
       - "--log.level=INFO"
@@ -21,36 +21,39 @@ services:
     image: jasonraimondi/full-stack-graphql-server:dev
     restart: unless-stopped
     environment:
+      DOMAIN: jr.localdomain
       ACCESS_TOKEN_SECRET: 6fbf61ea-5214-40d8-a08b-4846daf8280an
       REFRESH_TOKEN_SECRET: de92ec07-29fe-457b-b71c-3aaf88ce01cbn
       ENABLE_DEBUGGING: 1
-      MAILER: smtp://host.docker.internal:1025
+      MAILER: smtp://mailhog:1025
       TYPEORM_SYNCHRONIZE: 1
       TYPEORM_LOGGING: 1
-      TYPEORM_URL: postgres://typegraphql:secret@host.docker.internal:5432/typegraphql
+      TYPEORM_ENTITIES: src/entity/**/*_entity.js
+      TYPEORM_URL: postgres://typegraphql:secret@pg:5432/typegraphql
       TYPEORM_CONNECTION: postgres
-      CORS_URLS: "http://graphqapp.test"
+      CORS_URLS: "http://jr.localdomain"
     depends_on:
       - pg
       - mailhog
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.api.rule=Host(`graphqapp.test`) && PathPrefix(`/api`)"
+      - "traefik.http.routers.api.rule=Host(`jr.localdomain`) && PathPrefix(`/api`)"
       - "traefik.http.middlewares.api-stripprefix.stripprefix.prefixes=/api"
       - "traefik.http.routers.api.middlewares=api-stripprefix@docker"
       - "traefik.http.routers.api.entrypoints=web"
+      - "traefik.http.services.api.loadbalancer.server.port=4000"
 
   nextjs:
     build: packages/web
     image: jasonraimondi/full-stack-graphql-nextjs:dev
     restart: unless-stopped
     environment:
-      REFRESH_TOKEN_URL: "http://graphqapp.test/api/auth/refresh_token"
-      GRAPH_API_URL: "http://graphqapp.test/api/graphql"
+      API_URL: "http://jr.localdomain/api"
       NEXT_TELEMETRY_DISABLED: 1
     depends_on:
       - api
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.nextjs.rule=Host(`graphqapp.test`)"
+      - "traefik.http.routers.nextjs.rule=Host(`jr.localdomain`)"
       - "traefik.http.routers.nextjs.entrypoints=web"
+      - "traefik.http.services.nextjs.loadbalancer.server.port=3000"
