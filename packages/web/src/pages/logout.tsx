@@ -1,20 +1,15 @@
 import { NextPage } from "next";
 import React, { useEffect } from "react";
 
-import { useLogoutMutation } from "@/generated/graphql";
 import { withLayout } from "@/app/components/layouts/layout";
 import { Redirect } from "@/app/lib/redirect";
-import { setAccessToken } from "@/app/lib/auth/in_memory_access_token";
-import { setRefreshToken } from "@/app/lib/auth/in_memory_refresh_token";
+import { AuthType } from "@/app/lib/auth/use_auth";
 
-const Logout: NextPage = () => {
-  const [logout, { client }] = useLogoutMutation();
+type LogoutProps = AuthType & {};
 
+const Logout: NextPage<LogoutProps> = ({ logout }) => {
   const handleLogout = async () => {
     await logout();
-    await client!.resetStore();
-    setAccessToken();
-    setRefreshToken();
     await Redirect("/login");
   };
 

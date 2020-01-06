@@ -4,13 +4,11 @@ import { css } from "@emotion/core";
 
 import { Link } from "@/app/components/link";
 import { colors } from "@/styles/theme";
-import { AuthTokens } from "@/app/lib/auth/in_memory";
+import {AuthType} from "@/app/lib/auth/use_auth";
 
-interface Props {
-  auth?: AuthTokens;
-}
+type Props = AuthType & {};
 
-export const Header: React.FC<Props> = ({ auth }) => {
+export const Header: React.FC<Props> = ({ accessToken }) => {
   return (
     <header>
       <nav
@@ -24,7 +22,7 @@ export const Header: React.FC<Props> = ({ auth }) => {
         <Link href="/profile">
           <NavAnchor>Testing Profile</NavAnchor>
         </Link>
-        {auth?.accessToken?.isValid ? (
+        {accessToken?.isValid ? (
           <>
             <Link href="/dashboard">
               <NavAnchor>Dashboard</NavAnchor>

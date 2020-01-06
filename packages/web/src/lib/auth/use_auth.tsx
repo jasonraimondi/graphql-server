@@ -1,24 +1,57 @@
-import { useState, useEffect, SetStateAction } from "react";
+import { useState } from "react";
 
-import { AuthTokens, getInMemoryTokens } from "@/app/lib/auth/in_memory";
-import { setAccessToken } from "@/app/lib/auth/in_memory_access_token";
-import { setRefreshToken } from "@/app/lib/auth/in_memory_refresh_token";
+import { AccessToken } from "@/app/lib/auth/tokens/access_token";
+import { RefreshToken } from "@/app/lib/auth/tokens/refresh_token";
+import { useLoginMutation, useLogoutMutation, useRevokeRefreshTokensForUserMutation } from "@/generated/graphql";
+import { LoginFormData } from "@/app/components/forms/login_form";
 
-type AuthType = {
-  auth: AuthTokens;
-  setAuth: (auth: SetStateAction<AuthTokens>) => void;
+export type AuthType = {
+  login(data: LoginFormData): Promise<void>;
+  logout(): Promise<void>;
+  accessToken: AccessToken;
+  refreshToken: RefreshToken;
+  setAuth({ jit, jid }: { jit: string; jid: string }): void;
 };
 
-export const useAuth = ({ jit = "", jid = "" }): AuthType => {
-  setAccessToken(jit);
-  setRefreshToken(jid);
+export const useAuth = (): AuthType | any => {
+  const [accessToken, setAccessToken] = useState();
+  const [refreshToken, setRefreshToken] = useState();
 
-  const [auth, setAuth] = useState(getInMemoryTokens());
+  const [loginMutation] = useLoginMutation();
+  const [logoutMutation, { client }] = useLogoutMutation();
+  const [revokeTokenMutation] = useRevokeRefreshTokensForUserMutation();
 
-  useEffect(() => {
+  const login = async (data: LoginFormData) => {
+    const response = await loginMutation({ variables: { data } });
+    if (response.data) {
+      setAccessToken(response.data.login.accessToken);
+    }
+  };
+
+  const revokeTokens = async (userId: string) => {
+    await revokeTokenMutation({ variables: { userId } });
+    await logout();
+  };
+
+  const logout = async () => {
+    await logoutMutation();
+    await client!.resetStore();
+    setAccessToken("");
+    setRefreshToken("");
+  };
+
+  const setAuth = ({ jit, jid }: { jit: string; jid: string }) => {
+    console.log("set auth", jit, jid);
+    setAccessToken(jit);
     setRefreshToken(jid);
-    setAuth(getInMemoryTokens());
-  }, [`${jit}${jid}`]); // if either the jit or jid token changes, update the useAuth hook.
+  };
 
-  return { auth, setAuth };
+  return {
+    login,
+    logout,
+    revokeTokens,
+    setAuth,
+    accessToken: new AccessToken(accessToken),
+    refreshToken: new RefreshToken(refreshToken),
+  };
 };

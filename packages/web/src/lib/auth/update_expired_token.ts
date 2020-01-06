@@ -1,32 +1,29 @@
-import { setAccessToken } from "@/app/lib/auth/in_memory_access_token";
 import { refreshAccessToken } from "@/app/lib/apollo_token_refresh_link";
-import { AuthTokens, getInMemoryTokens } from "@/app/lib/auth/in_memory";
+import { AccessToken } from "@/app/lib/auth/tokens/access_token";
+import { RefreshToken } from "@/app/lib/auth/tokens/refresh_token";
 
 type RefreshTokenResponse = {
   success: boolean;
   accessToken: string;
 };
 
-export const updateExpiredToken = async (): Promise<AuthTokens> => {
-  const { accessToken, refreshToken } = getInMemoryTokens();
+export const updateExpiredToken = async (jid = "", jit = ""): Promise<string> => {
+  let accessToken = new AccessToken(jit);
+  let refreshToken = new RefreshToken(jid);
 
   if (accessToken.isValid) {
-    return { accessToken, refreshToken };
+    return "";
   }
 
-  setAccessToken();
-
   if (refreshToken.isExpired) {
-    return getInMemoryTokens();
+    return "";
   }
 
   const updatedAccessToken: RefreshTokenResponse = await refreshAccessToken(`jid=${refreshToken.token}`);
 
   if (!updatedAccessToken.success) {
-    return getInMemoryTokens();
+    return "";
   }
 
-  setAccessToken(updatedAccessToken.accessToken);
-
-  return getInMemoryTokens();
+  return updatedAccessToken.accessToken;
 };

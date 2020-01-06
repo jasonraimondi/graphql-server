@@ -1,8 +1,12 @@
-import { AuthTokens } from "@/app/lib/auth/in_memory";
 import { css } from "emotion";
 import * as React from "react";
+import {FunctionComponent} from "react";
 
-export const Token = ({ accessToken, refreshToken }: AuthTokens) => {
+import {AuthType} from "@/app/lib/auth/use_auth";
+
+type Prop = AuthType & {}
+
+export const Token: FunctionComponent<Prop> = ({ accessToken, refreshToken }) => {
   const getTokenExp = (token: string) => {
     return token.substr(0, 4) + "..." + token.substr(token.length - 4, 4);
   };

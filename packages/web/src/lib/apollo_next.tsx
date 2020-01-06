@@ -9,7 +9,6 @@ import { HttpLink } from "apollo-boost";
 import fetch from "isomorphic-unfetch";
 
 import { refreshLink } from "@/app/lib/apollo_token_refresh_link";
-import { getInMemoryTokens } from "@/app/lib/auth/in_memory";
 
 const { publicRuntimeConfig } = getConfig();
 
@@ -20,11 +19,10 @@ const httpLink = new HttpLink({
 });
 
 const authLink = setContext((_request, { headers }) => {
-  const token = getInMemoryTokens();
   return {
     headers: {
       ...headers,
-      authorization: token.accessToken?.authorizationString,
+      // authorization: accessToken.authorizationString,
     },
   };
 });

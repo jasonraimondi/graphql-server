@@ -5,37 +5,29 @@ import dynamic from "next/dynamic";
 import { WithRouterProps } from "next/dist/client/with-router";
 import React from "react";
 
-import { useLoginMutation } from "@/generated/graphql";
 import { withLayout } from "@/app/components/layouts/layout";
 import { LoginFormData } from "@/app/components/forms/login_form";
-import { setAccessToken } from "@/app/lib/auth/in_memory_access_token";
+import { AuthType } from "@/app/lib/auth/use_auth";
 
-type Props = WithRouterProps & {};
+type Props = AuthType & WithRouterProps & {};
 
 const LoginForm = dynamic(() => import("@/app/components/forms/login_form"), { ssr: false });
 
 const LoginPage: NextPage<Props> = ({
+  login,
   router: {
-    query: { redirectTo, message },
+    query: { redirectTo },
   },
 }) => {
-  const [login] = useLoginMutation();
-
   const handleSubmit = async (data: LoginFormData, { setSubmitting, setStatus }: FormikHelpers<LoginFormData>) => {
     try {
-      const response = await login({
-        variables: { data },
-      });
-      if (response && response.data) {
-        setAccessToken(response.data.login.accessToken);
-      }
+      await login(data);
       setSubmitting(false);
       if (!redirectTo || redirectTo.includes("/login")) {
         redirectTo = "/dashboard";
       } else if (Array.isArray(redirectTo)) {
         redirectTo = redirectTo[0];
       }
-
       (window as any).location = redirectTo;
     } catch (e) {
       setStatus(e.message);
@@ -45,7 +37,6 @@ const LoginPage: NextPage<Props> = ({
   return (
     <>
       <h1 className="h5">Login Page</h1>
-      {message ? <p>{message}</p> : null}
       <LoginForm handleSubmit={handleSubmit} />
     </>
   );

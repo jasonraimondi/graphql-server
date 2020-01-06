@@ -6,13 +6,11 @@ import "normalize.css/normalize.css";
 
 import { Header } from "@/app/components/layouts/partials/header";
 import { colors } from "@/styles/theme";
-import { AuthTokens } from "@/app/lib/auth/in_memory";
 import { withAuth } from "@/app/lib/auth/with_auth";
 import { Token } from "@/app/components/token";
+import {AuthType} from "@/app/lib/auth/use_auth";
 
-type LayoutProps = {
-  auth: AuthTokens;
-};
+type LayoutProps = AuthType & {};
 
 type Settings = {
   protectedRoute?: boolean;
@@ -44,7 +42,7 @@ export const withLayout = (
             background-color: ${colors.blue["500"]};
           `}
         >
-          <Header auth={props.auth} />
+          <Header {...props} />
           <div
             className={css`
               flex: 1;
@@ -52,7 +50,7 @@ export const withLayout = (
               background-color: ${colors.blue["300"]};
             `}
           >
-            <Token accessToken={props.auth.accessToken} refreshToken={props.auth.refreshToken} />
+            <Token accessToken={props.accessToken} refreshToken={props.refreshToken} />
             <WrappedComponent {...props} />
           </div>
         </main>

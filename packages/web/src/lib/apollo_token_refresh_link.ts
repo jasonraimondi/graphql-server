@@ -1,6 +1,5 @@
 import { TokenRefreshLink } from "apollo-link-token-refresh";
 
-import { setAccessToken } from "@/app/lib/auth/in_memory_access_token";
 import client from "@/app/lib/client";
 
 export const refreshAccessToken = (cookie = "") => {
@@ -23,7 +22,6 @@ export const refreshLink = new TokenRefreshLink({
   fetchAccessToken: refreshAccessToken,
   handleFetch: accessToken => {
     console.log("handleFetch", accessToken);
-    setAccessToken(accessToken);
   },
   handleError: err => {
     console.error("Your refresh token is invalid. Try to re-login");

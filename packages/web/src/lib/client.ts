@@ -1,18 +1,17 @@
 import getConfig from "next/config";
 import fetch from "isomorphic-unfetch";
 
-import { getAccessToken } from "@/app/lib/auth/in_memory_access_token";
-
 const { publicRuntimeConfig } = getConfig();
 
 const client = async (url: string, { body, ...customConfig }: RequestInit = {}) => {
-  const token = getAccessToken();
+  // const token = getAccessToken();
   const headers: HeadersInit = {
     "content-type": "application/json",
   };
-  if (token) {
-    headers.Authorization = token.authorizationString;
-  }
+  // @TODO add back token header to client
+  // if (token) {
+  //   headers.Authorization = token.authorizationString;
+  // }
   const config: RequestInit = {
     method: body ? "POST" : "GET",
     ...customConfig,
