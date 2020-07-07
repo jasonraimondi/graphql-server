@@ -6,14 +6,10 @@
     "cypress:run": "cypress run"
   },
   "devDependencies": {
-    "@cypress/webpack-preprocessor": "^4.1.1",
-    "@types/faker": "^4.1.8",
-    "cypress": "^3.8.1",
+    "@types/faker": "^4.1.12",
+    "cypress": "^4.9.0",
     "faker": "^4.1.0",
     "mailparser": "^2.7.7",
-    "ts-loader": "^6.2.1",
-    "typescript": "^3.7.4",
-    "webpack": "^4.41.5",
-    "webpack-cli": "^3.3.10"
+    "typescript": "^3.9.6"
   }
 }
