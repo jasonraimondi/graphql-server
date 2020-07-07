@@ -6,7 +6,9 @@ import { User } from "@/entity/user/user_entity";
 
 export interface IUserRepository extends IBaseRepository<User> {
   findByEmail(email: string): Promise<User>;
+
   incrementLastLoginAt(user: User): Promise<void>;
+
   incrementToken(uuid: string): Promise<void>;
 }
 

@@ -4,25 +4,25 @@
 # -----------------------------------------------
 
 type AppInfoResponse {
-  name: String!
-  version: String!
   author: String!
   license: String!
+  name: String!
+  version: String!
 }
 
 # The javascript `Date` as string. Type represents date and time as the ISO Date string.
 scalar DateTime
 
 type EmailConfirmation {
-  uuid: ID!
-  user: User!
   expiresAt: DateTime!
+  user: User!
+  uuid: ID!
 }
 
 type ForgotPassword {
-  uuid: ID!
-  user: User!
   expiresAt: DateTime!
+  user: User!
+  uuid: ID!
 }
 
 input LoginInput {
@@ -37,15 +37,15 @@ type LoginResponse {
 }
 
 type Mutation {
-  validateForgotPasswordToken(email: String!, token: String!): Boolean!
-  sendForgotPasswordEmail(data: SendForgotPasswordInput!): Boolean!
-  updatePasswordFromToken(data: UpdatePasswordInput!): Boolean!
-  verifyEmailConfirmation(data: VerifyEmailInput!): Boolean!
-  resentConfirmEmail(email: String!): Boolean!
-  register(data: RegisterInput!): RegisterResponse!
   login(data: LoginInput!): LoginResponse!
   logout: Boolean!
+  register(data: RegisterInput!): RegisterResponse!
+  resentConfirmEmail(email: String!): Boolean!
   revokeRefreshToken(userId: String!): Boolean!
+  sendForgotPasswordEmail(data: SendForgotPasswordInput!): Boolean!
+  updatePasswordFromToken(data: UpdatePasswordInput!): Boolean!
+  validateForgotPasswordToken(email: String!, token: String!): Boolean!
+  verifyEmailConfirmation(data: VerifyEmailInput!): Boolean!
 }
 
 type Permission {
@@ -61,16 +61,16 @@ type Query {
 }
 
 input RegisterInput {
-  uuid: String
+  email: String!
   firstName: String
   lastName: String
-  email: String!
   password: String!
+  uuid: String
 }
 
 type RegisterResponse {
-  user: User
   emailConfirmation: EmailConfirmation
+  user: User
 }
 
 type Role {
@@ -83,20 +83,20 @@ input SendForgotPasswordInput {
 }
 
 input UpdatePasswordInput {
+  email: String!
   password: String!
   token: String!
-  email: String!
 }
 
 type User {
-  uuid: ID!
   email: String!
   firstName: String
-  lastName: String
+  isActive: Boolean!
   isEmailConfirmed: Boolean!
   lastLoginAt: DateTime
-  isActive: Boolean!
+  lastName: String
   name: String
+  uuid: ID!
 }
 
 input VerifyEmailInput {

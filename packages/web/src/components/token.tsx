@@ -1,10 +1,10 @@
 import { css } from "emotion";
 import * as React from "react";
-import {FunctionComponent} from "react";
+import { FunctionComponent } from "react";
 
-import {AuthType} from "@/app/lib/auth/use_auth";
+import { AuthType } from "@/app/lib/auth/use_auth";
 
-type Prop = AuthType & {}
+type Prop = {};
 
 export const Token: FunctionComponent<Prop> = ({ accessToken, refreshToken }) => {
   const getTokenExp = (token: string) => {

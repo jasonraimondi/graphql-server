@@ -4,7 +4,7 @@ import { css } from "@emotion/core";
 
 import { Link } from "@/app/components/link";
 import { colors } from "@/styles/theme";
-import {AuthType} from "@/app/lib/auth/use_auth";
+import { AuthType } from "@/app/lib/auth/use_auth";
 
 type Props = AuthType & {};
 
