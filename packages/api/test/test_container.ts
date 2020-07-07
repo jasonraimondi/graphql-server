@@ -1,6 +1,6 @@
 import { createConnection } from "typeorm";
 import { interfaces } from "inversify";
-import v4 from "uuid/v4";
+import { v4 } from "uuid";
 
 import { Container } from "../src/lib/inversify_container";
 import { ServiceFactory } from "../src/lib/services/service_factory";

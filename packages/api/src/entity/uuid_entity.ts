@@ -1,4 +1,4 @@
-import v4 from "uuid/v4";
+import { v4 } from "uuid";
 
 export abstract class BaseUuidEntity {
   uuid: string;
