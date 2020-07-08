@@ -6,9 +6,9 @@ import dynamic from "next/dynamic";
 import React from "react";
 
 import { withLayout } from "@/app/components/layouts/layout";
-import { useUpdatePasswordFromTokenMutation, useValidateForgotPasswordTokenMutation } from "@/generated/graphql";
 import { ResetPasswordFormData } from "@/app/components/forms/reset_password_form";
 import { redirectToLogin } from "@/app/lib/redirect";
+import { apiSDK } from "@/app/lib/api_sdk";
 
 type Props = WithRouterProps & {
   token: string;
@@ -24,14 +24,10 @@ const ResetPassword: NextPage<Props> = ({
 }) => {
   const email = Array.isArray(e) ? e[0] : e;
   const token = Array.isArray(u) ? u[0] : u;
-  const [updatePasswordMutation] = useUpdatePasswordFromTokenMutation();
-  const [validateForgotPasswordTokenMutation] = useValidateForgotPasswordTokenMutation();
 
   const handleSubmit = async (data: ResetPasswordFormData, { setSubmitting }: FormikHelpers<ResetPasswordFormData>) => {
-    await validateForgotPasswordTokenMutation({
-      variables: { email, token },
-    });
-    await updatePasswordMutation({ variables: { data } });
+    await apiSDK.ValidateForgotPasswordToken({ email, token });
+    await apiSDK.UpdatePasswordFromToken({ data });
     setSubmitting(false);
     await redirectToLogin();
   };

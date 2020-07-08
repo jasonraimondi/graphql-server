@@ -1,10 +1,22 @@
-import { refreshAccessToken } from "@/app/lib/apollo_token_refresh_link";
+import client from "@/app/lib/client";
+
 import { AccessToken } from "@/app/lib/auth/tokens/access_token";
 import { RefreshToken } from "@/app/lib/auth/tokens/refresh_token";
 
 type RefreshTokenResponse = {
   success: boolean;
   accessToken: string;
+};
+
+const refreshAccessToken = (cookie = "") => {
+  return client("/auth/refresh_token", {
+    method: "POST",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+      cookie,
+    },
+  });
 };
 
 export const updateExpiredToken = async (jid = "", jit = ""): Promise<string> => {

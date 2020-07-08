@@ -2,10 +2,10 @@ import { FormikHelpers } from "formik";
 import { NextPage } from "next";
 import React from "react";
 
-import { useRegisterMutation } from "@/generated/graphql";
 import { withLayout } from "@/app/components/layouts/layout";
 import { redirectToLogin } from "@/app/lib/redirect";
 import dynamic from "next/dynamic";
+import { apiSDK } from "@/app/lib/api_sdk";
 
 export const validEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 
@@ -19,14 +19,12 @@ type RegisterFormData = {
 const RegisterForm = dynamic(() => import("@/app/components/forms/register_form"), { ssr: false });
 
 const Register: NextPage<{}> = () => {
-  const [register] = useRegisterMutation();
-
   const handleSubmit = async (
     registerFormData: RegisterFormData,
     { setSubmitting, setStatus }: FormikHelpers<RegisterFormData>
   ) => {
     try {
-      await register({ variables: { data: registerFormData } });
+      await apiSDK.Register({ data: registerFormData });
     } catch (e) {
       setStatus(e.message);
     }

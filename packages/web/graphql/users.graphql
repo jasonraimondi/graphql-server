@@ -4,3 +4,10 @@ query Users {
     email
   }
 }
+
+query User($userId: String!) {
+  user(uuid: $userId) {
+    uuid
+    email
+  }
+}
