@@ -9,7 +9,11 @@
     "cypress": "npm run --prefix packages/integration_tests cypress:open",
     "integration-tests": "npm run --prefix packages/integration cypress:run",
     "start-and-test": "start-server-and-test dev http://localhost:8080 integration-tests",
-    "pretty": "prettier --config prettier.config.js --write \"packages/**/*.{ts,tsx,js,graphql,css,scss,json}\""
+    "pretty": "prettier --config prettier.config.js --write \"packages/**/*.{ts,tsx,js,graphql,css,scss,json}\"",
+    "install": "run-p install:api install:integration install:web",
+    "install:api": "npm ci --prefix packages/api",
+    "install:integration": "npm ci --prefix packages/integration",
+    "install:web": "npm ci --prefix packages/web"
   },
   "devDependencies": {
     "@types/node": "^12.12.48",
