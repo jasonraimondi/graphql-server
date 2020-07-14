@@ -56,3 +56,5 @@ const Index: NextPage<any> = () => {
 export default withLayout(Index, {
   title: "Hi ya slugger",
 });
+
+export { getServerSideProps } from "../lib/auth/with_auth";

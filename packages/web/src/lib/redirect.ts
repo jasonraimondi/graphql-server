@@ -1,5 +1,5 @@
 import Router from "next/router";
-import { NextPageContext } from "next";
+import { NextPageContext, GetServerSidePropsContext } from "next";
 
 export const Redirect = (target: string, context?: NextPageContext) => {
   if (context?.res) {
@@ -12,6 +12,16 @@ export const Redirect = (target: string, context?: NextPageContext) => {
     Router.push(target);
   }
 };
+
+export const redirectServerToLogin = async (ctx: GetServerSidePropsContext, doNotRedirectBack = false) => {
+  let redirectLink = ctx.res.path;
+
+  if (doNotRedirectBack) {
+    redirectLink = "";
+  }
+
+  await Redirect(`/login${redirectLink}`, ctx);
+}
 
 export const redirectToLogin = async (ctx?: NextPageContext, doNotRedirectBack = false) => {
   let redirectLink = ctx?.pathname ?? document.referrer;

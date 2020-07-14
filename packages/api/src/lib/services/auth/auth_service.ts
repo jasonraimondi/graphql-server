@@ -20,14 +20,14 @@ export class AuthService {
     try {
       payload = verify(refreshToken, ENV.refreshTokenSecret);
     } catch (_) {
-      throw new Error("invalid refresh token");
+      throw new Error("invalid refresh token 1");
     }
 
     const uuid = payload?.userId ?? "NOT_FOUND";
     const user = await this.userRepository.findById(uuid);
 
     if (user.tokenVersion !== payload.tokenVersion) {
-      throw new Error("invalid refresh token");
+      throw new Error("invalid refresh token 2");
     }
 
     return {
