@@ -51,7 +51,7 @@ export class ForgotPasswordResolver {
     await user.setPassword(password);
     try {
       await this.userRepository.save(user);
-      await this.forgotPasswordRepository.delete(forgotPassword.uuid);
+      await this.forgotPasswordRepository.delete(forgotPassword.id);
       return true;
     } catch (e) {
       console.error(e);
@@ -61,7 +61,7 @@ export class ForgotPasswordResolver {
 
   private async getForgotPasswordForUser(user: User) {
     try {
-      return await this.forgotPasswordRepository.findForUser(user.uuid);
+      return await this.forgotPasswordRepository.findForUser(user.id);
     } catch (e) {}
     const forgotPassword = new ForgotPassword();
     forgotPassword.user = user;

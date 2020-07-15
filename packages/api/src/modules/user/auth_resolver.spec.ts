@@ -47,8 +47,8 @@ describe("auth_resolver", () => {
 
       // assert
       const decode = jwtDecode<any>(result.accessToken);
-      expect(decode.userId).toBe(user.uuid);
-      expect(result.user.uuid).toBe(user.uuid);
+      expect(decode.userId).toBe(user.id);
+      expect(result.user.id).toBe(user.id);
       expect(result.user.email).toBe(user.email);
     });
 
@@ -88,7 +88,7 @@ describe("auth_resolver", () => {
       });
 
       // act
-      const result = await resolver.revokeRefreshToken(unsavedUser.uuid);
+      const result = await resolver.revokeRefreshToken(unsavedUser.id);
 
       // assert
       expect(result).toBeFalsy();
@@ -101,7 +101,7 @@ describe("auth_resolver", () => {
       await userRepository.save(user);
 
       // act
-      const result = await resolver.revokeRefreshToken(user.uuid);
+      const result = await resolver.revokeRefreshToken(user.id);
 
       // assert
       const updatedUser = await userRepository.findByEmail(user.email);

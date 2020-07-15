@@ -4,7 +4,7 @@ import { compare, hash } from "bcryptjs";
 
 import { Role } from "../role/role_entity";
 import { Permission } from "../role/permission_entity";
-import { BaseUuidEntity } from "../uuid_entity";
+import { BaseEntity } from "../entity";
 
 export interface ICreateUser {
   email: string;
@@ -16,7 +16,7 @@ export interface ICreateUser {
 
 @ObjectType()
 @Entity()
-export class User extends BaseUuidEntity {
+export class User extends BaseEntity {
   static async create({ uuid, email, firstName, lastName, password }: ICreateUser) {
     const user = new User(uuid);
     user.email = email.toLowerCase();
@@ -26,15 +26,15 @@ export class User extends BaseUuidEntity {
     return user;
   }
 
-  private constructor(uuid?: string) {
-    super(uuid);
+  private constructor(id?: string) {
+    super(id);
     this.tokenVersion = 0;
     this.isEmailConfirmed = false;
   }
 
   @Field(() => ID)
   @PrimaryColumn("uuid")
-  uuid: string;
+  id: string;
 
   @Field()
   @Column("text", { unique: true })

@@ -35,7 +35,7 @@ describe("email confirmation resolver", () => {
 
       // act
       const input = new VerifyEmailInput();
-      input.uuid = emailConfirmation.uuid;
+      input.uuid = emailConfirmation.id;
       input.email = user.email;
       await resolver.verifyEmailConfirmation(input);
       const result = emailConfirmationRepository.findByEmail(user.email);

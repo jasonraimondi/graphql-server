@@ -2,22 +2,22 @@ import { Column, Entity, JoinColumn, OneToOne, PrimaryColumn } from "typeorm";
 import { Field, ID, ObjectType } from "type-graphql";
 
 import { User } from "./user_entity";
-import { BaseUuidEntity } from "../uuid_entity";
+import { BaseEntity } from "../entity";
+import { addDays } from "@/entity/oauth/authorization_code_entity";
 
 @ObjectType()
 @Entity()
-export class ForgotPassword extends BaseUuidEntity {
-  private readonly oneDay = 60 * 60 * 24 * 1 * 1000; // 1 day
+export class ForgotPassword extends BaseEntity {
 
-  constructor(user?: User, uuid?: string) {
-    super(uuid);
+  constructor(user?: User, id?: string) {
+    super(id);
     if (user) this.user = user;
-    this.expiresAt = new Date(Date.now() + this.oneDay);
+    this.expiresAt = addDays(new Date(), 1);
   }
 
   @Field(() => ID)
   @PrimaryColumn("uuid")
-  uuid: string;
+  id: string;
 
   @Field(() => User)
   @OneToOne(() => User)

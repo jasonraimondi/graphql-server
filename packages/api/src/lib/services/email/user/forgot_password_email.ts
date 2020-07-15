@@ -10,12 +10,12 @@ export class ForgotPasswordEmail {
   constructor(@inject(SERVICE.Mailer) private readonly mailer: IMailer) {}
 
   async send(forgotPassword: ForgotPassword): Promise<any> {
-    const { uuid, user } = forgotPassword;
-    const url = API_ROUTES.forgot_password.create({ email: user.email, uuid });
+    const { id, user } = forgotPassword;
+    const url = API_ROUTES.forgot_password.create({ email: user.email, id: id });
     const text = url;
     const html = `<div>
   <p>Forgot your password?</p>
-  <p>I'll Help you find a new one ${uuid} ${user.email} ${forgotPassword.expiresAt}</p>
+  <p>I'll Help you find a new one ${id} ${user.email} ${forgotPassword.expiresAt}</p>
   <a href="${url}">${url}</a>
 </div>`;
 

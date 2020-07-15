@@ -38,7 +38,7 @@ export class AuthService {
 
   createAccessToken(user: User): string {
     const payload = {
-      userId: user.uuid,
+      userId: user.id,
       email: user.email,
       isEmailConfirmed: user.isEmailConfirmed,
     };
@@ -49,7 +49,7 @@ export class AuthService {
 
   createRefreshToken(user: User, rememberMe = false): string {
     const payload = {
-      userId: user.uuid,
+      userId: user.id,
       tokenVersion: user.tokenVersion,
     };
     return sign(payload, ENV.refreshTokenSecret, {

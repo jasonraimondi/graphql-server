@@ -38,7 +38,7 @@ describe("forgot password resolver", () => {
       await resolver.sendForgotPasswordEmail(input);
 
       // assert
-      const updatedForgotPassword = await forgotPasswordRepository.findForUser(user.uuid);
+      const updatedForgotPassword = await forgotPasswordRepository.findForUser(user.id);
       expect(updatedForgotPassword.expiresAt.getTime()).toBeGreaterThan(Date.now());
     });
   });
@@ -54,15 +54,15 @@ describe("forgot password resolver", () => {
 
       // act
       const input = new UpdatePasswordInput();
-      input.token = forgotPassword.uuid;
+      input.token = forgotPassword.id;
       input.email = user.email;
       input.password = "my-new-password";
       await resolver.updatePasswordFromToken(input);
 
       // assert
-      const updatedUser = await userRepository.findById(user.uuid);
+      const updatedUser = await userRepository.findById(user.id);
       await expect(updatedUser.verify("my-new-password")).resolves.toBeUndefined();
-      await expect(forgotPasswordRepository.findForUser(forgotPassword.uuid)).rejects.toThrowError(
+      await expect(forgotPasswordRepository.findForUser(forgotPassword.id)).rejects.toThrowError(
         'Could not find any entity of type "ForgotPassword"'
       );
     });

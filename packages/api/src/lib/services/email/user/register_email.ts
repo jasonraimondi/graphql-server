@@ -11,7 +11,7 @@ export class RegisterEmail {
 
   async send(userConfirmation: EmailConfirmation): Promise<any> {
     const user = userConfirmation.user;
-    const url = API_ROUTES.verify_email.create({ email: user.email, uuid: userConfirmation.uuid });
+    const url = API_ROUTES.verify_email.create({ email: user.email, uuid: userConfirmation.id });
     const html = `<div>
   <p>Verify user email</p>
   <a href="${url}">${url}</a>

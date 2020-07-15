@@ -37,7 +37,7 @@ describe("me resolver", () => {
       res: mockResponse(),
       container,
       auth: {
-        userId: user.uuid,
+        userId: user.id,
         email: user.email,
         isEmailConfirmed: user.isEmailConfirmed,
       },
@@ -48,7 +48,7 @@ describe("me resolver", () => {
 
     // assert
     expect(result).toBeTruthy();
-    expect(result!.uuid).toBe(user.uuid);
+    expect(result!.id).toBe(user.id);
     expect(result!.email).toBe(user.email);
     expect(result!.isEmailConfirmed).toBe(user.isEmailConfirmed);
   });

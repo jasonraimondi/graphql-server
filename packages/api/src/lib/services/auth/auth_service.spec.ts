@@ -35,7 +35,7 @@ describe("auth_resolver", () => {
       const decoded: any = jwtDecode(token);
 
       // assert
-      expect(decoded.userId).toBe(user.uuid);
+      expect(decoded.userId).toBe(user.id);
       expect(decoded.tokenVersion).toBe(user.tokenVersion);
       expect(decoded.exp).toBeGreaterThan(hoursInFuture(1.9));
       expect(decoded.exp).toBeLessThan(hoursInFuture(2.1));
@@ -53,7 +53,7 @@ describe("auth_resolver", () => {
       const decoded: any = jwtDecode(token);
 
       // assert
-      expect(decoded.userId).toBe(user.uuid);
+      expect(decoded.userId).toBe(user.id);
       expect(decoded.tokenVersion).toBe(user.tokenVersion);
       expect(decoded.exp).toBeGreaterThan(daysInFuture(6.9));
       expect(decoded.exp).toBeLessThan(daysInFuture(7.1));
@@ -70,7 +70,7 @@ describe("auth_resolver", () => {
       const decoded: any = jwtDecode(token);
 
       // assert
-      expect(decoded.userId).toBe(user.uuid);
+      expect(decoded.userId).toBe(user.id);
       expect(decoded.exp).toBeGreaterThan(minutesInFuture(14));
       expect(decoded.exp).toBeLessThan(minutesInFuture(16));
     });

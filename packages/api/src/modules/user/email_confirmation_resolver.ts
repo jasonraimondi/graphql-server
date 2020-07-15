@@ -25,7 +25,7 @@ export class EmailConfirmationResolver {
       const { user } = userConfirmation;
       user.isEmailConfirmed = true;
       await this.userRepository.save(user);
-      await this.userConfirmationRepository.delete(userConfirmation.uuid);
+      await this.userConfirmationRepository.delete(userConfirmation.id);
       return true;
     } catch (e) {
       console.error(e);

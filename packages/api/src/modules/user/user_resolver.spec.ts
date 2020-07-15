@@ -27,10 +27,10 @@ describe("register_resolver", () => {
       await userRepository.save(user);
 
       // act
-      const result = await resolver.user(user.uuid);
+      const result = await resolver.user(user.id);
 
       // assert
-      expect(result.uuid).toBe(user.uuid);
+      expect(result.id).toBe(user.id);
       expect(result.email).toBe(user.email);
       expect(result.firstName).toBe(user.firstName);
     });

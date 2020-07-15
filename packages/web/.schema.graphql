@@ -15,14 +15,14 @@ scalar DateTime
 
 type EmailConfirmation {
   expiresAt: DateTime!
+  id: ID!
   user: User!
-  uuid: ID!
 }
 
 type ForgotPassword {
   expiresAt: DateTime!
+  id: ID!
   user: User!
-  uuid: ID!
 }
 
 input LoginInput {
@@ -91,12 +91,12 @@ input UpdatePasswordInput {
 type User {
   email: String!
   firstName: String
+  id: ID!
   isActive: Boolean!
   isEmailConfirmed: Boolean!
   lastLoginAt: DateTime
   lastName: String
   name: String
-  uuid: ID!
 }
 
 input VerifyEmailInput {
