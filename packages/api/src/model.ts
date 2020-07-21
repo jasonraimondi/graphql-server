@@ -8,9 +8,7 @@ import { AuthorizationCode } from "@/entity/oauth/authorization_code_entity";
 import { RefreshToken } from "@/entity/oauth/refresh_token_entity";
 import { IAuthorizationCodeRepository } from "@/lib/repository/oauth/authorization_code_repository";
 import { AccessToken } from "@/entity/oauth/access_token_entity";
-import { Debugger } from "inspector";
-import Scope = module
-// import { IAuthorizationCodeRepository } from "@/lib/repository/oauth/authorization_code_repository";
+import { Scopes } from "@/entity/oauth/scope";
 
 type AuthorizationCodeParams = {
   authorizationCode: string;
@@ -104,7 +102,7 @@ export default class ModelService {
     await this.authorizationCodeRepository.save(code);
   }
 
-  async validateScope(user: User, client: Client, scope: Scope) {
+  async validateScope(user: User, client: Client, scope: Scopes) {
     console.log('validate scope', user, client, scope)
     return true;
   }
