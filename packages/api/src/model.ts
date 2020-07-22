@@ -1,3 +1,6 @@
+import * as OAuth2Server from "oauth2-server";
+import { v4 } from "uuid";
+
 import { IUserRepository } from "@/lib/repository/user/user_repository";
 import type { User } from "@/entity/user/user_entity";
 import { IAccessTokenRepository } from "@/lib/repository/oauth/access_token_repository";
@@ -8,22 +11,6 @@ import { AuthorizationCode } from "@/entity/oauth/authorization_code_entity";
 import { RefreshToken } from "@/entity/oauth/refresh_token_entity";
 import { IAuthorizationCodeRepository } from "@/lib/repository/oauth/authorization_code_repository";
 import { AccessToken } from "@/entity/oauth/access_token_entity";
-import { Scopes } from "@/entity/oauth/scope";
-
-type AuthorizationCodeParams = {
-  authorizationCode: string;
-  expiresAt: Date;
-  redirectUri: string;
-  scope?: string;
-};
-
-type AccessTokenParams = {
-  accessToken: string;
-  accessTokenExpiresAt: Date;
-  refreshToken?: string;
-  refreshTokenExpiresAt?: Date;
-  scope?: string;
-};
 
 export default class ModelService {
   constructor(
@@ -35,19 +22,19 @@ export default class ModelService {
   ) {
   }
 
-  generateAccessToken(client: Client, user: User, scope?: string): string {
+  generateAccessToken(client: OAuth2Server.Client, user: OAuth2Server.User, scope?: string): string {
     console.log(client, user, scope);
-    return "";
+    return v4();
   }
 
-  generateRefreshToken(client: Client, user: User, scope?: string): string {
+  generateRefreshToken(client: OAuth2Server.Client, user: OAuth2Server.User, scope?: string): string {
     console.log(client, user, scope);
-    return "";
+    return v4();
   }
 
-  generateAuthorizationCode(client: Client, user: User, scope?: string): string {
+  generateAuthorizationCode(client: OAuth2Server.Client, user: OAuth2Server.User, scope?: string): string {
     console.log(client, user, scope);
-    return "";
+    return v4();
   }
 
   async getUser(username: string, password: string): Promise<User> {
@@ -76,33 +63,42 @@ export default class ModelService {
     return client;
   }
 
-  async saveToken(token: AccessTokenParams, client: Client, user: User) {
-    const accessToken = new AccessToken(client, user, token.accessToken);
-    accessToken.expiresAt = token.accessTokenExpiresAt;
+  async saveToken(token: OAuth2Server.Token, client: OAuth2Server.Client, user: OAuth2Server.User) {
+    const oauthClient = await this.clientRepository.findById(client.id);
+    const oauthUser = await this.userRepository.findByEmail(user.email);
+    const accessToken = new AccessToken(oauthClient, oauthUser, token.accessToken);
     await this.accessTokenRepository.save(accessToken);
 
     if (token.refreshToken) {
-      const refreshToken = new RefreshToken(client, user, token.refreshToken);
-      if (token.refreshTokenExpiresAt) refreshToken.expiresAt = token.refreshTokenExpiresAt;
+      const refreshToken = new RefreshToken(oauthClient, oauthUser, token.refreshToken);
       await this.refreshTokenRepository.save(refreshToken)
     }
   }
 
-  async saveAuthorizationCode(code: AuthorizationCodeParams, client: Client, user: User) {
-    const authorizationCode = new AuthorizationCode(client, user, code.authorizationCode);
+  async saveAuthorizationCode(code: OAuth2Server.AuthorizationCode, client: OAuth2Server.Client, user: OAuth2Server.User) {
+    const oauthClient = await this.clientRepository.findById(client.id);
+    const oauthUser = await this.userRepository.findByEmail(user.email)
+    const authorizationCode = new AuthorizationCode(oauthClient, oauthUser, code.authorizationCode);
     authorizationCode.expiresAt = code.expiresAt;
     authorizationCode.redirectUris = [code.redirectUri];
     await this.authorizationCodeRepository.save(authorizationCode)
   }
 
-  // async revokeToken(token: {  })
-
-  async revokeAuthorizationCode(code: AuthorizationCode) {
-    code.expiresAt = new Date(0);
-    await this.authorizationCodeRepository.save(code);
+  async redirectUrievokeToken(t: OAuth2Server.Token) {
+    if (t.refreshToken) {
+      const token = await this.refreshTokenRepository.findById(t.refreshToken)
+      token.revoke();
+      await this.refreshTokenRepository.save(token);
+    }
   }
 
-  async validateScope(user: User, client: Client, scope: Scopes) {
+  async revokeAuthorizationCode(code: OAuth2Server.AuthorizationCode) {
+    const authorizationCode = await this.authorizationCodeRepository.findById(code.authorizationCode)
+    authorizationCode.revoke();
+    await this.authorizationCodeRepository.save(authorizationCode);
+  }
+
+  async validateScope(user: OAuth2Server.User, client: OAuth2Server.Client, scope: string) {
     console.log('validate scope', user, client, scope)
     return true;
   }

@@ -5,6 +5,7 @@ import {
   IEmailConfirmationRepository,
 } from "@/lib/repository/user/email_confirmation_repository";
 import { IUserRepository, UserRepository } from "@/lib/repository/user/user_repository";
+import { IClientRepository, ClientRepository } from "@/lib/repository/oauth/client_repository";
 
 export class RepositoryFactory {
   constructor(private readonly connection: Connection) {}
@@ -19,5 +20,9 @@ export class RepositoryFactory {
 
   get emailConfirmation(): IEmailConfirmationRepository {
     return this.connection.getCustomRepository<EmailConfirmationRepository>(EmailConfirmationRepository);
+  }
+
+  get oauthClient(): IClientRepository {
+    return this.connection.getCustomRepository<ClientRepository>(ClientRepository)
   }
 }

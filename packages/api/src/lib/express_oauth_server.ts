@@ -6,11 +6,11 @@ import * as OAuth2Server from "oauth2-server";
 export class ExpressOAuthServer {
   private readonly eos: EOS;
 
-  constructor() {
-    this.eos = new EOS({
-      model: require("@/model"),
-      // grants: ["authorization_code", "refresh_token"],
-    });
+  constructor(eos = new EOS({
+    model: require("@/model"),
+    // grants: ["authorization_code", "refresh_token"],
+  })) {
+    this.eos = eos;
     console.log(this.eos);
   }
 
@@ -23,9 +23,6 @@ export class ExpressOAuthServer {
   }
 
   token(options?: OAuth2Server.TokenOptions) {
-    return this.eos.token(options);
+    return (req, res, next) => this.eos.token(options)(req, res, next);
   }
-
-  // authorize = this.eos.server.authorize;
-  // token = this.eos.server.token;
 }

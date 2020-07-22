@@ -25,6 +25,10 @@ export class AuthorizationCode {
   @Column("simple-array")
   scopes: Scopes;
 
+  revoke() {
+    this.expiresAt = new Date(0);
+  }
+
   constructor(client: Client, user: User, code?: string) {
     this.client = client;
     this.user = user;

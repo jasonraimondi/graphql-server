@@ -27,4 +27,12 @@ export class RefreshToken {
     this.user = user;
     this.token = token ?? v4();
   }
+  
+  get isExpired(): boolean {
+    return new Date() > this.expiresAt;
+  }
+
+  revoke() {
+    this.expiresAt = new Date(0);
+  }
 }

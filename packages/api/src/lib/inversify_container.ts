@@ -18,6 +18,7 @@ import { IForgotPasswordRepository } from "@/lib/repository/user/forgot_password
 import { UserResolver } from "@/modules/user/user_resolver";
 import { RepositoryFactory } from "@/lib/repository/repository_factory";
 import { ExpressOAuthServer } from "@/lib/express_oauth_server";
+import { IClientRepository } from "@/lib/repository/oauth/client_repository";
 
 export class Container extends InversifyContainer {
   public constructor(
@@ -57,6 +58,9 @@ export class Container extends InversifyContainer {
     this.bind<IUserRepository>(REPOSITORY.UserRepository).toConstantValue(this.repositoryFactory.user);
     this.bind<IEmailConfirmationRepository>(REPOSITORY.EmailConfirmationRepository).toConstantValue(
       this.repositoryFactory.emailConfirmation
+    );
+    this.bind<IClientRepository>(REPOSITORY.ClientRepository).toConstantValue(
+      this.repositoryFactory.oauthClient
     );
 
   }

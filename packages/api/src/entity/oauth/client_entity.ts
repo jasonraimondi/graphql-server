@@ -11,7 +11,7 @@ export class Client {
   @Column()
   secret: string;
 
-  @Column()
+  @Column({ unique: true })
   name: string;
 
   @Column("simple-array")
@@ -24,10 +24,11 @@ export class Client {
     return this.secret === s;
   }
 
-  constructor(name: string, identifier?: string, secret?: string, redirectUris?: string[]) {
+  constructor(name: string, secret?: string, identifier?: string) {
     this.name = name;
     this.identifier = identifier ?? v4();
     this.secret = secret ?? v4();
-    this.redirectUris = redirectUris ?? [];
+    this.redirectUris = [];
+    this.scopes = [];
   }
 }

@@ -2,6 +2,7 @@ export const REPOSITORY = {
   UserRepository: Symbol("UserRepository"),
   EmailConfirmationRepository: Symbol("EmailConfirmationRepository"),
   ForgotPasswordRepository: Symbol("ForgotPasswordRepository"),
+  ClientRepository: Symbol("ClientRepository"),
 };
 
 export const SERVICE = {
