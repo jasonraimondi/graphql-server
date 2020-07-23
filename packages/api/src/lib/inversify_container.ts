@@ -41,7 +41,7 @@ export class Container extends InversifyContainer {
     this.bind(UserResolver).toSelf();
 
     // express server
-    this.bind(ExpressOAuthServer).toSelf();
+    this.bind<ExpressOAuthServer>(SERVICE.OAuthServerService).toConstantValue(this.serviceFactory.oauthService);
 
     // services
     this.bind<IMailer>(SERVICE.Mailer).toConstantValue(this.serviceFactory.emailService);

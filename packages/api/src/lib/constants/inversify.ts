@@ -10,4 +10,5 @@ export const SERVICE = {
   ForgotPasswordEmail: Symbol("ForgotPasswordEmail"),
   RegisterEmail: Symbol("RegisterEmail"),
   AuthService: Symbol("AuthService"),
+  OAuthServerService: Symbol("OAuthServerService"),
 };
